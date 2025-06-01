@@ -17,6 +17,7 @@ namespace Managers
         [SerializeField] private float panelDuration;
         
         [SerializeField] private StringEventChannelSO onLoadScene;
+        [SerializeField] private string levelScene;
         
         void OnEnable()
         {
@@ -44,7 +45,7 @@ namespace Managers
 
         public void RestartScene()
         {
-            onLoadScene?.RaiseEvent(SceneManager.GetActiveScene().name);
+            onLoadScene?.RaiseEvent(levelScene);
         }
     }
 }

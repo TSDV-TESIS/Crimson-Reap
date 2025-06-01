@@ -5,6 +5,7 @@ using Player.Controllers;
 using Player.Properties;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
