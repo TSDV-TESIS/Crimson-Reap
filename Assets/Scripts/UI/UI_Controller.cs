@@ -4,15 +4,15 @@ using Events;
 using Events.Scriptables;
 using Managers;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace UI
 {
     public class UIController : MonoBehaviour
     {
         [SerializeField] private GameObject gameOverPanel;
-        [SerializeField] private float panelDuration;
-        [SerializeField] private Loader loader;
         [SerializeField] private VoidEventChannelSO onPlayerDeath;
+        [SerializeField] private VoidEventChannelSO onRestart;
         [SerializeField] private Vector3ChannelSO onDoorPosition;
         [SerializeField] private RectTransform goObject;
         
@@ -26,14 +26,21 @@ namespace UI
         {
             onPlayerDeath.onEvent.AddListener(HandlePlayerDeath);
             onDoorPosition.onTypedEvent.AddListener(HandleDoorPosition);
+            onRestart.onEvent.AddListener(HandleRestart);
         }
 
         private void OnDisable()
         {
             onPlayerDeath?.onEvent.RemoveListener(HandlePlayerDeath);
             onDoorPosition.onTypedEvent.RemoveListener(HandleDoorPosition);
+            onRestart.onEvent.RemoveListener(HandleRestart);
         }
 
+        private void HandleRestart()
+        {
+            gameOverPanel.SetActive(false);
+        }
+        
         private void HandleDoorPosition(Vector3 position)
         {
             if (DoorIsInScreen(position))
@@ -60,14 +67,7 @@ namespace UI
 
         private void HandlePlayerDeath()
         {
-            StartCoroutine(GameOverScreen());
-        }
-
-        private IEnumerator GameOverScreen()
-        {
             gameOverPanel.SetActive(true);
-            yield return new WaitForSeconds(panelDuration);
-            loader.RestartScene();
         }
     }
 }
