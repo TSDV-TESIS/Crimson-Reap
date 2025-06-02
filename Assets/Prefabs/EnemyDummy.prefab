@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 7090663827376669088}
   - component: {fileID: 1961683120119573904}
   - component: {fileID: 4074296848691201418}
+  - component: {fileID: 6036697470451232645}
   m_Layer: 7
   m_Name: EnemyDummy
   m_TagString: Untagged
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807858569939740197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a92f57f202324f41b705d2bbc884450, type: 3}
   m_Name: 
@@ -340,7 +341,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807858569939740197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efeb36d7c3c90494392a684052efa89e, type: 3}
   m_Name: 
@@ -357,7 +358,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807858569939740197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd0cdaec04ba4234da3346093844a4cc, type: 3}
   m_Name: 
@@ -373,7 +374,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807858569939740197}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 502b6f3ede8b9ee488d1a3c3d0fb1745, type: 3}
   m_Name: 
@@ -525,7 +526,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1280
   minAnglePerRaycast: 5
-  shouldDrawGizmos: 0
+  shouldDrawGizmos: 1
 --- !u!195 &7090663827376669088
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -584,6 +585,43 @@ MonoBehaviour:
   onBloodlustEnd: {fileID: 11400000, guid: 9af1ae5dcd881ea4da96db96896b02c9, type: 2}
   onHeartbeatStart: {fileID: 11400000, guid: 792599aec4b441a49aa52840199da3e8, type: 2}
   onHeartbeatEnd: {fileID: 11400000, guid: c81a90a07e2a3fc4e88ca50daac4d6c9, type: 2}
+--- !u!114 &6036697470451232645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807858569939740197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: 1656195158148303973, guid: 86fdf09cd5f4a364ab9ae71907cf39fe, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4203723288770249627
+  - rid: 4203723288770249628
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4203723288770249627
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 807858569939740197}
+    - rid: 4203723288770249628
+      type: {class: 'BlackboardVariable`1[[Enemy.VisionHandler, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 137137586794916739
+          m_Value1: 1237643789759084221
+        Name: VisionHandler
+        m_Value: {fileID: 1117833222909342987}
 --- !u!1 &1218343086946313865
 GameObject:
   m_ObjectHideFlags: 0

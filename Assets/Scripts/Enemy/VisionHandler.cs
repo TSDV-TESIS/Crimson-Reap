@@ -14,6 +14,8 @@ namespace Enemy
         [SerializeField] private LayerMask whatIsObstruction;
         [ReadOnly] [SerializeField] private float minAnglePerRaycast = 5f;
         [SerializeField] private bool shouldDrawGizmos = false;
+
+        private RaycastHit _playerHit;
         
         public bool CanSeeObjective()
         {
@@ -30,12 +32,24 @@ namespace Enemy
                     angleToUse += anglePerRaycastToUse;
                     continue;
                 };
-                if (Physics.Raycast(pivot.position, raycastDirection, visionLength, whatIsObjective))
+                if (Physics.Raycast(pivot.position, raycastDirection, out _playerHit, visionLength, whatIsObjective))
                 {
                     return true;
                 }
     
                 angleToUse += anglePerRaycastToUse;
+            }
+
+            return false;
+        }
+
+        public bool CanSeeObjective(out GameObject objectiveObject)
+        {
+            objectiveObject = null;
+            if (CanSeeObjective())
+            {
+                objectiveObject = _playerHit.transform.gameObject;
+                return true;
             }
 
             return false;
