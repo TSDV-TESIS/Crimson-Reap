@@ -2,11 +2,9 @@ using System;
 using System.Collections;
 using Events.Scriptables;
 using Player.Properties;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace Player.Controllers
+namespace Player.Checks
 {
     public class PlayerMovementChecks : MonoBehaviour
     {
@@ -158,13 +156,13 @@ namespace Player.Controllers
         public bool IsNearCeiling()
         {
             if (_shouldCheckCeiling && Physics.Raycast(headPivot.position, Vector3.up, out _ceilingHit,
-                    playerMovementProperties.checkDistance, playerMovementProperties.whatIsWall | playerMovementProperties.whatIsGround))
+                playerMovementProperties.checkDistance, playerMovementProperties.whatIsWall | playerMovementProperties.whatIsGround))
 
             {
                 Debug.Log($"Normal: {_ceilingHit.normal} is equal to V3.Down {_ceilingHit.normal == Vector3.down}");
-                
-                if(_shouldCheckCeilingCoroutine != null) StopCoroutine(_shouldCheckCeilingCoroutine);
-                _shouldCheckCeilingCoroutine =  StartCoroutine(ShouldCheckCeilingCoroutine());
+
+                if (_shouldCheckCeilingCoroutine != null) StopCoroutine(_shouldCheckCeilingCoroutine);
+                _shouldCheckCeilingCoroutine = StartCoroutine(ShouldCheckCeilingCoroutine());
                 return _ceilingHit.normal == Vector3.down;
             }
 
@@ -192,7 +190,7 @@ namespace Player.Controllers
 
                 if (_rightCornerHit.normal == Vector3.down)
                 {
-                    cornerDisplace =transform.position.x -  _rightCornerHit.point.x;
+                    cornerDisplace = transform.position.x - _rightCornerHit.point.x;
                     return true;
                 }
             }
@@ -221,7 +219,9 @@ namespace Player.Controllers
             {
                 signThatHits = -1;
                 return true;
-            } if (WallRaycast(1))
+            }
+
+            if (WallRaycast(1))
             {
                 signThatHits = 1;
                 return true;
@@ -243,6 +243,12 @@ namespace Player.Controllers
         public Vector3 GetSlopeMovementDirection(Vector3 moveDirection)
         {
             return Vector3.ProjectOnPlane(moveDirection, _groundHit.normal).normalized;
+        }
+
+        public Vector3 GetGroundHitPoint()
+        {
+            IsGrounded();
+            return _groundHit.point;
         }
 
         public void StopCheckingWall()
@@ -269,7 +275,7 @@ namespace Player.Controllers
                 Gizmos.DrawLine(feetPivot.position,
                 feetPivot.position + Vector3.down * playerMovementProperties.checkDistance);
                 Gizmos.DrawLine(headPivot.position, headPivot.position + Vector3.up * playerMovementProperties.checkDistance);
-                
+
                 // Wall raycast
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(feetPivot.position,
@@ -286,7 +292,7 @@ namespace Player.Controllers
 
         public void SetShadowstepOnCooldown()
         {
-            if(_shadowstepCooldownCoroutine != null) StopCoroutine(_shadowstepCooldownCoroutine);
+            if (_shadowstepCooldownCoroutine != null) StopCoroutine(_shadowstepCooldownCoroutine);
             _shadowstepCooldownCoroutine = StartCoroutine(ShadowStepOnCooldown());
         }
 

@@ -10,7 +10,7 @@ namespace Player.Properties
         public float friction;
         public float maxSpeed;
 
-        [Header("Frenzied movement")] 
+        [Header("Frenzied movement")]
         public float frenziedAcceleration;
         public float frenziedMaxSpeed;
 
@@ -20,9 +20,10 @@ namespace Player.Properties
         public float maxGravityVelocity;
         public float maxJumpVelocity;
         public float cornerCorrectionMaxDistance;
-        
+
         [Header("Grounding properties")]
         [Tooltip("Distance from where it should start checking that player is grounded")]
+        public float distanceFromGround = 2;
         public float checkDistance;
         public LayerMask whatIsGround;
 

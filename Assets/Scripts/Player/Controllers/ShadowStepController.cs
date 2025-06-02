@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using Events;
 using FSM;
 using Health;
 using Player.Properties;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player.Controllers
 {
@@ -85,7 +83,7 @@ namespace Player.Controllers
             
             while (timer < timeToUse)
             {
-                if (agent.Checks.IsNearCeiling())
+                if (agent.MovementChecks.IsNearCeiling())
                 {
                     _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
                     break;
@@ -104,10 +102,10 @@ namespace Player.Controllers
             _healthPoints.SetCanTakeDamage(true);
             _characterController.excludeLayers ^= shadowStepProperties.avoidableObjects;
 
-            if (agent.Checks.IsNearWall())
+            if (agent.MovementChecks.IsNearWall())
             {
                 changedToWallslide = true;
-                agent.Checks.SetShadowstepOnCooldown();
+                agent.MovementChecks.SetShadowstepOnCooldown();
                 agent.ChangeStateToWallSlide();
             }
 
@@ -117,11 +115,11 @@ namespace Player.Controllers
 
         private void ExitShadowstep()
         {
-            agent.Checks.SetShadowstepOnCooldown();
+            agent.MovementChecks.SetShadowstepOnCooldown();
 
-            if (agent.Checks.IsNearWall())
+            if (agent.MovementChecks.IsNearWall())
                 agent.ChangeStateToWallSlide();
-            else if (!agent.Checks.IsGrounded())
+            else if (!agent.MovementChecks.IsGrounded())
                 agent.ChangeStateToFalling();
             else
                 agent.ChangeStateToGrounded();

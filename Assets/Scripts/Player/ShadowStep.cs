@@ -24,7 +24,7 @@ namespace Player
         private List<GameObject> _shadows;
         private Coroutine _spawnShadows;
         private bool _isShadow;
-        
+
         void OnEnable()
         {
             _shadows ??= new List<GameObject>();
@@ -78,6 +78,9 @@ namespace Player
 
         private void ClearShadows()
         {
+            if (_shadows == null)
+                return;
+
             for (int i = 0; i < _shadows.Count; i++)
             {
                 Destroy(_shadows[i]);
