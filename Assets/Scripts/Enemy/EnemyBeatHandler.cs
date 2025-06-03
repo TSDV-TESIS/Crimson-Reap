@@ -1,7 +1,5 @@
 using Events;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemy
 {
