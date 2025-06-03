@@ -247,7 +247,7 @@ namespace Player
         public void Grounded(float groundY)
         {
             Velocity.y = 0;
-            transform.position = new Vector3(transform.position.x, groundY + playerMovementProperties.distanceFromGround, transform.position.z);
+            transform.position = new Vector3(transform.position.x, groundY, transform.position.z);
         }
 
         public int GetMoveDirectionSign()

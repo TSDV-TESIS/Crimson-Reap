@@ -245,6 +245,12 @@ namespace Player.Checks
             return Vector3.ProjectOnPlane(moveDirection, _groundHit.normal).normalized;
         }
 
+        public float GetGroundClearance()
+        {
+            float groundY = GetGroundHitPoint().y;
+            return Mathf.Abs(feetPivot.localPosition.y) + groundY + playerMovementProperties.feetOffset;
+        }
+
         public Vector3 GetGroundHitPoint()
         {
             IsGrounded();

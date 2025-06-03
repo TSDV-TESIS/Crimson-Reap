@@ -19,7 +19,7 @@ namespace Player.Controllers
             inputHandler.OnPlayerAttack.AddListener(OnAttack);
 
             if (_playerMovement.Velocity.y < 0)
-                _playerMovement.Grounded(agent.MovementChecks.GetGroundHitPoint().y);
+                _playerMovement.Grounded(agent.MovementChecks.GetGroundClearance());
         }
 
         private void OnDisable()

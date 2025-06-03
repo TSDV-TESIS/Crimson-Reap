@@ -23,9 +23,9 @@ namespace Player.Properties
 
         [Header("Grounding properties")]
         [Tooltip("Distance from where it should start checking that player is grounded")]
-        public float distanceFromGround = 2;
         public float checkDistance;
         public LayerMask whatIsGround;
+        public float feetOffset;
 
         [Header("Wall Slide properties")]
         public float wallCheckDistance;
