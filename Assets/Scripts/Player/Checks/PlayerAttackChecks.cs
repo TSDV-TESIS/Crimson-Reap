@@ -39,7 +39,17 @@ namespace Player.Checks
 
         public bool IsNearGround()
         {
-            return Physics.Raycast(attackObject.transform.position, attackObject.transform.forward, out RaycastHit _groundHit, movementProperties.checkDistance, movementProperties.whatIsGround);
+            return Physics.Raycast(transform.position, attackObject.transform.forward, out RaycastHit _groundHit, attackProperties.checkDistance, movementProperties.whatIsGround);
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (attackProperties.shouldDrawGizmos && attackObject.activeInHierarchy)
+            {
+                // Draw Attack raycast
+                Gizmos.color = Color.red;
+                Gizmos.DrawLine(transform.position, transform.position + attackObject.transform.forward * attackProperties.checkDistance);
+            }
         }
     }
 }
