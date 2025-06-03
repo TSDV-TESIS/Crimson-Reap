@@ -11,6 +11,7 @@ namespace Player.Controllers
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private float unboundWallBufferSeconds = 0.75f;
 
+        
         private void OnEnable()
         {
             _playerMovement ??= GetComponent<PlayerMovement>();
@@ -18,8 +19,11 @@ namespace Player.Controllers
             inputHandler.OnPlayerShadowStep.AddListener(OnShadowstep);
             inputHandler.OnPlayerAttack.AddListener(OnAttack);
 
-            if (_playerMovement.Velocity.y < 0)
-                _playerMovement.Grounded(agent.MovementChecks.GetGroundClearance());
+            float clearance = agent.MovementChecks.GetGroundClearance();
+            Debug.Log("CLEARANCE: " + clearance);
+            if (clearance == 0) return;
+
+            _playerMovement.Grounded(clearance);
         }
 
         private void OnDisable()

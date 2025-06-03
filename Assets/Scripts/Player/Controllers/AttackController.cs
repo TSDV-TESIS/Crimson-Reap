@@ -47,13 +47,15 @@ namespace Player.Controllers
             float timer = 0;
             float startTime = Time.time;
 
+            bool stopped = false;
             _shadows.InitShadowStepShadows();
+            _playerMovement.Velocity = _mouseLook.CursorDir * attackProperties.displacementForce;
+            if (agent.AttackChecks.IsNearGround() && _playerMovement.Velocity.y < 0)
+            {
+                _playerMovement.Velocity = new Vector2(_playerMovement.Velocity.x, 0);
+            }
             while (timer < attackProperties.duration)
             {
-                _playerMovement.Velocity = _mouseLook.CursorDir * attackProperties.displacementForce;
-                if (agent.AttackChecks.IsNearGround())
-                    StopAttack();
-
                 _playerMovement.Move(_playerMovement.Velocity * Time.deltaTime);
                 timer = Time.time - startTime;
                 yield return null;
@@ -70,7 +72,9 @@ namespace Player.Controllers
             agent.AttackChecks.IsAttacking = false;
 
             if (agent.AttackChecks.IsNearGround())
+            {
                 agent.ChangeStateToGrounded();
+            }
             else
                 agent.ChangeStateToFalling();
         }

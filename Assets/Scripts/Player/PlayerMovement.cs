@@ -246,8 +246,11 @@ namespace Player
 
         public void Grounded(float groundY)
         {
+            Debug.Log("SETTING CLEARANCE" + new Vector3(transform.position.x, groundY, transform.position.z));
             Velocity.y = 0;
+            _characterController.enabled = false;
             transform.position = new Vector3(transform.position.x, groundY, transform.position.z);
+            _characterController.enabled = true;
         }
 
         public int GetMoveDirectionSign()
