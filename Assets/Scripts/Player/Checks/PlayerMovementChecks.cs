@@ -247,6 +247,7 @@ namespace Player.Checks
 
         public float GetGroundClearance()
         {
+            if (!IsGrounded()) return 0;
             float groundY = GetGroundHitPoint().y;
             return Mathf.Abs(feetPivot.localPosition.y) + groundY + playerMovementProperties.feetOffset;
         }

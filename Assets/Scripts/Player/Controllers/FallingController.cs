@@ -54,7 +54,6 @@ namespace Player.Controllers
 
             if (agent.MovementChecks.IsGrounded())
             {
-                _playerMovement.Grounded(agent.MovementChecks.GetGroundClearance());
                 agent.ChangeStateToGrounded();
             }
 
