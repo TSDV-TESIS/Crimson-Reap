@@ -14,8 +14,7 @@ namespace Player
         [SerializeField] private bool logChanges;
         [SerializeField] private bool canWallSlide;
         [SerializeField] private HealthPoints healthPoints;
-        [FormerlySerializedAs("playerMovementChecks")]
-        [SerializeField] private PlayerMovementChecks playerMovementMovementChecks;
+        [SerializeField] private PlayerMovementChecks playerMovementChecks;
         [SerializeField] private PlayerAttackChecks playerAttackChecks;
 
         [Header("Internal Events")]
@@ -35,7 +34,7 @@ namespace Player
 
         public PlayerMovementChecks MovementChecks
         {
-            get => playerMovementMovementChecks;
+            get => playerMovementChecks;
         }
 
         public PlayerAttackChecks AttackChecks
