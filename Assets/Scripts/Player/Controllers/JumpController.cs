@@ -16,18 +16,21 @@ namespace Player.Controllers
         {
             _playerMovement ??= GetComponent<PlayerMovement>();
             inputHandler?.OnPlayerShadowStep.AddListener(HandleShadowstep);
+            inputHandler?.OnPlayerAttack.AddListener(OnAttack);
         }
 
         private void Start()
         {
             inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
+            inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
         }
 
         private void OnDisable()
         {
             inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
+            inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
         }
-        
+
         private void Jump()
         {
             _playerMovement.Jump();
@@ -38,36 +41,41 @@ namespace Player.Controllers
             agent.ChangeStateToShadowStep();
         }
 
+        private void OnAttack()
+        {
+            agent.ChangeStateToAttack();
+        }
+
         public override void OnUpdate()
         {
             _playerMovement.HandleWalk();
             _playerMovement.FreeFall();
 
-            if (agent.Checks.IsFalling(_playerMovement.Velocity))
+            if (agent.MovementChecks.IsFalling(_playerMovement.Velocity))
                 agent.ChangeStateToFalling();
 
             float cornerDisplace = 0;
 
-            if (agent.Checks.IsNearCorner(out cornerDisplace))
+            if (agent.MovementChecks.IsNearCorner(out cornerDisplace))
             {
                 _playerMovement.Move(new Vector3(cornerDisplace, 0, 0));
             }
             else
             {
-                if (agent.Checks.IsNearCeiling())
+                if (agent.MovementChecks.IsNearCeiling())
                 {
                     _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
                     agent.ChangeStateToFalling();
                 }
             }
 
-            if (agent.Checks.IsGrounded())
+            if (agent.MovementChecks.IsGrounded())
             {
-                _playerMovement.Grounded();
+                _playerMovement.Grounded(agent.MovementChecks.GetGroundClearance());
                 agent.ChangeStateToGrounded();
             }
 
-            if (agent.Checks.ShouldWallSlide(_playerMovement.MoveDirection, _playerMovement.Velocity))
+            if (agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection, _playerMovement.Velocity))
                 agent.ChangeStateToWallSlide();
         }
     }

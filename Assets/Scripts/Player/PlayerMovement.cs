@@ -14,7 +14,7 @@ namespace Player
     public class PlayerMovement : MonoBehaviour
     {
         [SerializeField] private PlayerAnimationController animationController;
-        
+
         [Header("Input Handler")]
         [SerializeField] private InputHandler input;
 
@@ -26,7 +26,7 @@ namespace Player
         [SerializeField] private VoidEventChannelSO onPlayerRevive;
         [SerializeField] private VoidEventChannelSO onFrenziedStart;
         [SerializeField] private VoidEventChannelSO onFrenziedStop;
-        
+
         [Header("Save properties")]
         [SerializeField] private PlayerTransform playerTransform;
 
@@ -51,11 +51,8 @@ namespace Player
             set => playerMovementProperties.maxSpeed = value;
         }
 
-        public bool IsAttacking;
-
         void OnEnable()
         {
-            IsAttacking = false;
             _canWalk = true;
             _characterController ??= GetComponent<CharacterController>();
             _moveDirection = Vector3.zero;
@@ -77,7 +74,7 @@ namespace Player
 
             onPlayerDeath.onEvent.RemoveListener(HandleDeath);
             onPlayerRevive.onEvent.RemoveListener(HandleRevive);
-            
+
             onFrenziedStart.onEvent.RemoveListener(HandleIsFrenzied);
             onFrenziedStop.onEvent.RemoveListener(HandleStopFrenzy);
         }
@@ -99,9 +96,8 @@ namespace Player
 
         public void HandleWalk(Vector3 moveDirection)
         {
-            if (IsAttacking) return;
             _moveDirection = moveDirection;
-            
+
             if (_moveDirection != Vector3.zero)
             {
                 animationController.HandleWalk();
@@ -110,7 +106,7 @@ namespace Player
             {
                 animationController.HandleIdle();
             }
-            
+
             Vector3 prevPos = transform.position;
 
             if (_canWalk)
@@ -124,18 +120,17 @@ namespace Player
                     : playerMovementProperties.maxSpeed;
 
                 Velocity.x = Mathf.Clamp(
-                    Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
-                    -maxSpeed, maxSpeed
+                Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
+                -maxSpeed, maxSpeed
                 );
             }
 
             Move(Velocity * Time.deltaTime);
             SetZPosition(prevPos);
         }
-        
+
         public void HandleGroundedWalk(Vector3 moveDirection)
         {
-            if (IsAttacking) return;
             _moveDirection = moveDirection;
             Vector3 prevPos = transform.position;
 
@@ -150,8 +145,8 @@ namespace Player
                     : playerMovementProperties.maxSpeed;
 
                 float velocityToUse = Mathf.Clamp(
-                    Velocity.magnitude + (_moveDirection.magnitude) * acceleration * Time.deltaTime,
-                    -maxSpeed, maxSpeed
+                Velocity.magnitude + (_moveDirection.magnitude) * acceleration * Time.deltaTime,
+                -maxSpeed, maxSpeed
                 );
 
                 Velocity = _moveDirection * velocityToUse;
@@ -249,9 +244,10 @@ namespace Player
             _canWalk = true;
         }
 
-        public void Grounded()
+        public void Grounded(float groundY)
         {
             Velocity.y = 0;
+            transform.position = new Vector3(transform.position.x, groundY, transform.position.z);
         }
 
         public int GetMoveDirectionSign()
