@@ -8639,22 +8639,54 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyDummy
       objectReference: {fileID: 0}
+    - target: {fileID: 941483721342945062, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 941483721342945062, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586134685408757019, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586134685408757019, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: 'managedReferences[4203723288770249633]'
       value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject,
         UnityEngine.CoreModule]], mscorlib]]'
       objectReference: {fileID: 0}
     - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: 'managedReferences[4203723334190629278]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[IdleType, Assembly-CSharp]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: managedReferences[4203723288770249633].Name
       value: PatrolPoints
       objectReference: {fileID: 0}
     - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: managedReferences[4203723334190629278].Name
+      value: EnemyIdleType
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: m_BlackboardVariableOverridesList.Array.size
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: managedReferences[4203723334190629278].m_Value
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: 'm_BlackboardVariableOverridesList.Array.data[2]'
       value: 4203723288770249633
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[3]'
+      value: 4203723334190629278
       objectReference: {fileID: 0}
     - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: managedReferences[4203723288770249633].GUID.m_Value0
@@ -8663,6 +8695,14 @@ PrefabInstance:
     - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: managedReferences[4203723288770249633].GUID.m_Value1
       value: 14076438351561728677
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: managedReferences[4203723334190629278].GUID.m_Value0
+      value: 16438379904449211165
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
+      propertyPath: managedReferences[4203723334190629278].GUID.m_Value1
+      value: 1880204574266637425
       objectReference: {fileID: 0}
     - target: {fileID: 6036697470451232645, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: managedReferences[4203723288770249633].m_Value.Array.size
@@ -8690,7 +8730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7836265501952539627, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7836265501952539627, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: m_LocalRotation.x
@@ -8698,7 +8738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7836265501952539627, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7836265501952539627, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: m_LocalRotation.z
@@ -8710,7 +8750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7836265501952539627, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7836265501952539627, guid: b61219ef6c0b6c947957b8ebe76daf49, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
