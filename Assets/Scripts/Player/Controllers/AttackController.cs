@@ -1,16 +1,16 @@
+using System;
 using System.Collections;
-using Player.Controllers;
+using FSM;
 using Player.Properties;
 using UnityEngine;
 
-namespace Player
+namespace Player.Controllers
 {
-    public class Attack : MonoBehaviour
+    public class AttackController : Controller<PlayerAgent>
     {
         [SerializeField] private PlayerAnimationController animationController;
 
         [SerializeField] private GameObject attackObject;
-        [SerializeField] private InputHandler handler;
 
         [Header("Attack properties")]
         [SerializeField] private PlayerAttackProperties attackProperties;
@@ -19,29 +19,21 @@ namespace Player
         private PlayerMovement _playerMovement;
         private MouseLook _mouseLook;
         private Coroutine _attackCoroutine;
-        private bool _isAttacking;
 
-        private void Start()
+        private void OnEnable()
         {
             _playerMovement ??= GetComponent<PlayerMovement>();
             _mouseLook ??= GetComponent<MouseLook>();
             _shadows ??= GetComponent<ShadowStep>();
+            HandleAttack();
         }
 
-        void OnEnable()
+        public override void OnUpdate()
         {
-            handler.OnPlayerAttack.AddListener(HandleAttack);
-        }
-
-        private void OnDisable()
-        {
-            handler.OnPlayerAttack.RemoveListener(HandleAttack);
         }
 
         private void HandleAttack()
         {
-            if (_isAttacking) return;
-
             if (_attackCoroutine != null) StopCoroutine(_attackCoroutine);
 
             _attackCoroutine = StartCoroutine(HandleAttackCoroutine());
@@ -50,27 +42,41 @@ namespace Player
         private IEnumerator HandleAttackCoroutine()
         {
             animationController.HandleAttack();
-            _isAttacking = true;
+            agent.AttackChecks.IsAttacking = true;
             attackObject.SetActive(true);
             float timer = 0;
             float startTime = Time.time;
 
+            bool stopped = false;
             _shadows.InitShadowStepShadows();
-            _playerMovement.IsAttacking = true;
+            _playerMovement.Velocity = _mouseLook.CursorDir * attackProperties.displacementForce;
+            if (agent.AttackChecks.IsNearGround() && _playerMovement.Velocity.y < 0)
+            {
+                _playerMovement.Velocity = new Vector2(_playerMovement.Velocity.x, 0);
+            }
             while (timer < attackProperties.duration)
             {
-                _playerMovement.Velocity = _mouseLook.CursorDir * attackProperties.displacementForce;
                 _playerMovement.Move(_playerMovement.Velocity * Time.deltaTime);
                 timer = Time.time - startTime;
                 yield return null;
             }
+
+            StopAttack();
+        }
+
+        private void StopAttack()
+        {
             animationController.HandleStopAttack();
-            _playerMovement.IsAttacking = false;
-            
             _shadows.StopShadows();
             attackObject.SetActive(false);
-            yield return new WaitForSeconds(attackProperties.coolDownDuration);
-            _isAttacking = false;
+            agent.AttackChecks.IsAttacking = false;
+
+            if (agent.AttackChecks.IsNearGround())
+            {
+                agent.ChangeStateToGrounded();
+            }
+            else
+                agent.ChangeStateToFalling();
         }
     }
 }
