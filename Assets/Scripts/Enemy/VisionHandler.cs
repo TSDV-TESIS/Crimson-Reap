@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.Collections;
 using UnityEngine;
 
@@ -6,34 +7,37 @@ namespace Enemy
 {
     public class VisionHandler : MonoBehaviour
     {
+        [SerializeField] private EnemyVisionProperties enemyVisionProperties;
         [SerializeField] private Transform pivot;
-        [SerializeField] private float visionLength = 2f;
-        [SerializeField] private float visionAngle = 70f;
-        [SerializeField] private float anglePerRaycast = 5f;
-        [SerializeField] private LayerMask whatIsObjective;
-        [SerializeField] private LayerMask whatIsObstruction;
-        [ReadOnly] [SerializeField] private float minAnglePerRaycast = 5f;
-        [SerializeField] private bool shouldDrawGizmos = false;
 
         private RaycastHit _playerHit;
+        private bool _stillSeesPlayer = false;
+        private Coroutine _stillSeeingPlayerCoroutine;
         
         public bool CanSeeObjective()
         {
-            Vector3 forward = pivot.forward;
-
-            float angleToUse = -visionAngle / 2;
-            float anglePerRaycastToUse = Mathf.Max(anglePerRaycast, minAnglePerRaycast);
+            RaycastHit lastHit = _playerHit;
             
-            while (angleToUse <= visionAngle / 2)
+            float angleToUse = -enemyVisionProperties.visionAngle / 2;
+            float anglePerRaycastToUse = Mathf.Max(enemyVisionProperties.anglePerRaycast, enemyVisionProperties.minAnglePerRaycast);
+            
+            while (angleToUse <= enemyVisionProperties.visionAngle / 2)
             {
                 Vector3 raycastDirection = Quaternion.AngleAxis(angleToUse, pivot.right) * pivot.forward;
-                if (Physics.Raycast(pivot.position, raycastDirection, visionLength, whatIsObstruction))
+                if (Physics.Raycast(pivot.position, raycastDirection, enemyVisionProperties.visionLength, enemyVisionProperties.whatIsObstruction))
                 {
                     angleToUse += anglePerRaycastToUse;
                     continue;
                 };
-                if (Physics.Raycast(pivot.position, raycastDirection, out _playerHit, visionLength, whatIsObjective))
+                if (Physics.Raycast(pivot.position, raycastDirection, out _playerHit, enemyVisionProperties.visionLength, enemyVisionProperties.whatIsObjective))
                 {
+                    if(_stillSeeingPlayerCoroutine != null) StopCoroutine(_stillSeeingPlayerCoroutine);
+                    _stillSeeingPlayerCoroutine = StartCoroutine(StillSeeingPlayerCoroutine());
+                    return true;
+                } 
+                if (_stillSeesPlayer)
+                {
+                    _playerHit = lastHit;
                     return true;
                 }
     
@@ -43,12 +47,19 @@ namespace Enemy
             return false;
         }
 
+        private IEnumerator StillSeeingPlayerCoroutine()
+        {
+            _stillSeesPlayer = true;
+            yield return new WaitForSeconds(enemyVisionProperties.stillSeeingPlayerSeconds);
+            _stillSeesPlayer = false;
+        }
+
         public bool CanSeeObjective(out GameObject objectiveObject)
         {
             objectiveObject = null;
             if (CanSeeObjective())
             {
-                objectiveObject = _playerHit.transform.gameObject;
+                objectiveObject = _playerHit.transform?.gameObject;
                 return true;
             }
 
@@ -57,17 +68,17 @@ namespace Enemy
 
         private void OnDrawGizmos()
         {
-            if (!shouldDrawGizmos) return;
+            if (!enemyVisionProperties.shouldDrawGizmos) return;
             
             Gizmos.color = Color.red;
             
-            float angleToUse = -visionAngle / 2;
-            float anglePerRaycastToUse = Mathf.Max(anglePerRaycast, minAnglePerRaycast);
+            float angleToUse = -enemyVisionProperties.visionAngle / 2;
+            float anglePerRaycastToUse = Mathf.Max(enemyVisionProperties.anglePerRaycast, enemyVisionProperties.minAnglePerRaycast);
 
-            while (angleToUse <= visionAngle / 2)
+            while (angleToUse <= enemyVisionProperties.visionAngle / 2)
             {
                 Vector3 raycastDirection = Quaternion.AngleAxis(angleToUse, pivot.right) * pivot.forward;
-                Gizmos.DrawLine(pivot.position, pivot.position + raycastDirection * visionLength);
+                Gizmos.DrawLine(pivot.position, pivot.position + raycastDirection * enemyVisionProperties.visionLength);
                 angleToUse += anglePerRaycastToUse;
             }
         }
