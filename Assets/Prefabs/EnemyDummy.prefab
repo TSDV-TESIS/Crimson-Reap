@@ -131,10 +131,7 @@ GameObject:
   - component: {fileID: 7836265501952539627}
   - component: {fileID: 5523861852413993682}
   - component: {fileID: 1021959409291245028}
-  - component: {fileID: 7767555495250617212}
-  - component: {fileID: 7886428500063382133}
   - component: {fileID: 7032751070964552849}
-  - component: {fileID: 3000092959294845897}
   - component: {fileID: 3848838115853542127}
   - component: {fileID: 6192338590914362991}
   - component: {fileID: 294149342326178854}
@@ -220,137 +217,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &7767555495250617212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 807858569939740197}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a92f57f202324f41b705d2bbc884450, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolEvents:
-    onEnter:
-      m_PersistentCalls:
-        m_Calls: []
-    onUpdate:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3000092959294845897}
-          m_TargetAssemblyTypeName: Enemy.EnemyPatrolController, Assembly-CSharp
-          m_MethodName: HandleUpdate
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    onExit:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3000092959294845897}
-          m_TargetAssemblyTypeName: Enemy.EnemyPatrolController, Assembly-CSharp
-          m_MethodName: HandleExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  chaseEvents:
-    onEnter:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7886428500063382133}
-          m_TargetAssemblyTypeName: Enemy.EnemyChaseController, Assembly-CSharp
-          m_MethodName: HandleEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    onUpdate:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7886428500063382133}
-          m_TargetAssemblyTypeName: Enemy.EnemyChaseController, Assembly-CSharp
-          m_MethodName: HandleUpdate
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    onExit:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7886428500063382133}
-          m_TargetAssemblyTypeName: Enemy.EnemyChaseController, Assembly-CSharp
-          m_MethodName: HandleExit
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  attackEvents:
-    onEnter:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7032751070964552849}
-          m_TargetAssemblyTypeName: Enemy.EnemyAttackController, Assembly-CSharp
-          m_MethodName: HandleEnter
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-    onUpdate:
-      m_PersistentCalls:
-        m_Calls: []
-    onExit:
-      m_PersistentCalls:
-        m_Calls: []
---- !u!114 &7886428500063382133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 807858569939740197}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efeb36d7c3c90494392a684052efa89e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 11400000, guid: 33cff94758fa9be458f6c60e98048cb4, type: 2}
-  chaseSpeed: 7
-  maxChaseSeconds: 3
-  questionMarkUi: {fileID: 7076740764383295965}
-  secondsQuestionMark: 0.75
 --- !u!114 &7032751070964552849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +224,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807858569939740197}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd0cdaec04ba4234da3346093844a4cc, type: 3}
   m_Name: 
@@ -367,24 +233,6 @@ MonoBehaviour:
   playerTransform: {fileID: 11400000, guid: 33cff94758fa9be458f6c60e98048cb4, type: 2}
   enemySpeedInAttack: 4
   secondsInAttack: 1
---- !u!114 &3000092959294845897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 807858569939740197}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 502b6f3ede8b9ee488d1a3c3d0fb1745, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolPoints:
-  - {fileID: 941483721342945062}
-  - {fileID: 4586134685408757019}
-  properties: {fileID: 11400000, guid: 26b5d71e2e1c07b428c790c21f0c656a, type: 2}
-  seenUiObject: {fileID: 1439093941168637635}
-  seenExclamationSeconds: 0.5
 --- !u!114 &3848838115853542127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,7 +925,7 @@ MonoBehaviour:
   onAttackPerimeterTriggered:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7886428500063382133}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Enemy.EnemyChaseController, Assembly-CSharp
         m_MethodName: HandleStartAttack
         m_Mode: 1

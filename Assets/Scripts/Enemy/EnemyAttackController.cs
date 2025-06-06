@@ -8,7 +8,6 @@ using UnityEngine.AI;
 namespace Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(EnemyAgent))]
     public class EnemyAttackController : MonoBehaviour
     {
         [SerializeField] private GameObject attackObject;
