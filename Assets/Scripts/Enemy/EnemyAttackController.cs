@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Player.Properties;
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,34 +20,34 @@ namespace Enemy
 
         private NavMeshAgent _navMeshAgent;
         private EnemyAgent _enemyAgent;
+
+        private float _timeDiff = 0f;
         private void OnEnable()
         {
             _navMeshAgent ??= GetComponent<NavMeshAgent>();
             _enemyAgent ??= GetComponent<EnemyAgent>();
         }
 
-        public void HandleEnter()
+        public void StartAttack()
         {
-            if(_attackCoroutine != null) StopCoroutine(_attackCoroutine);
-            StartCoroutine(AttackCoroutine());
+            _timeDiff = 0f;
         }
-
-        private IEnumerator AttackCoroutine()
+        
+        public Node.Status Attack()
         {
             attackObject.SetActive(true);
             _navMeshAgent.destination = playerTransform.playerTransform.position;
             _navMeshAgent.speed = enemySpeedInAttack;
 
-            float timeDiff = 0;
-            while (timeDiff < secondsInAttack)
+            
+            while (_timeDiff < secondsInAttack)
             {
-                _navMeshAgent.destination = playerTransform.playerTransform.position;
-                timeDiff += Time.deltaTime;
-                yield return null;
+                _timeDiff += Time.deltaTime;
+                return Node.Status.Running;
             }
             
             attackObject.SetActive(false);
-            _enemyAgent.ChangeStateToChase();
+            return Node.Status.Success;
         }
     }
 }
