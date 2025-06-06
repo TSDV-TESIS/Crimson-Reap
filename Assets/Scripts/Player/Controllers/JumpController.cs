@@ -1,5 +1,6 @@
 using System;
 using FSM;
+using Player.Properties;
 using UnityEngine;
 
 namespace Player.Controllers
@@ -8,30 +9,73 @@ namespace Player.Controllers
     public class JumpController : Controller<PlayerAgent>
     {
         private PlayerMovement _playerMovement;
+        [SerializeField] private PlayerMovementProperties playerMovementProperties;
+        [SerializeField] private InputHandler inputHandler;
 
         private void OnEnable()
         {
             _playerMovement ??= GetComponent<PlayerMovement>();
+            inputHandler?.OnPlayerShadowStep.AddListener(HandleShadowstep);
+            inputHandler?.OnPlayerAttack.AddListener(OnAttack);
+        }
+
+        private void Start()
+        {
+            inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
+            inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
+        }
+
+        private void OnDisable()
+        {
+            inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
+            inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
+        }
+
+        private void Jump()
+        {
+            _playerMovement.Jump();
+        }
+
+        private void HandleShadowstep()
+        {
+            agent.ChangeStateToShadowStep();
+        }
+
+        private void OnAttack()
+        {
+            agent.ChangeStateToAttack();
         }
 
         public override void OnUpdate()
         {
-            _playerMovement.OnUpdate();
+            _playerMovement.HandleWalk();
             _playerMovement.FreeFall();
 
-            if (agent.Checks.IsFalling(_playerMovement.MoveDirection))
+            if (agent.MovementChecks.IsFalling(_playerMovement.Velocity))
                 agent.ChangeStateToFalling();
 
-            if (agent.Checks.IsGrounded())
+            float cornerDisplace = 0;
+
+            if (agent.MovementChecks.IsNearCorner(out cornerDisplace))
+            {
+                _playerMovement.Move(new Vector3(cornerDisplace, 0, 0));
+            }
+            else
+            {
+                if (agent.MovementChecks.IsNearCeiling())
+                {
+                    _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
+                    agent.ChangeStateToFalling();
+                }
+            }
+
+            if (agent.MovementChecks.IsGrounded())
+            {
                 agent.ChangeStateToGrounded();
+            }
 
-            if (agent.Checks.ShouldWallSlide(_playerMovement.MoveDirection))
+            if (agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection, _playerMovement.Velocity))
                 agent.ChangeStateToWallSlide();
-        }
-
-        public void Jump()
-        {
-            _playerMovement.Jump();
         }
     }
 }

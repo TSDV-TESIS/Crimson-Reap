@@ -1,37 +1,54 @@
-using System;
 using System.Collections;
+using Events;
 using Health;
+using Player.Properties;
 using UnityEngine;
 
-[RequireComponent(typeof(HealthPoints))]
-public class HealthTick : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private int healthTakenPerTick = 15;
-    [SerializeField] private float secondsPerTick = 2f;
-    [SerializeField] private bool shouldTick = true;
-    
-    private HealthPoints _healthPoints;
-    private Coroutine _tickCoroutine;
-    void OnEnable()
+    [RequireComponent(typeof(HealthPoints))]
+    public class HealthTick : MonoBehaviour
     {
-        _healthPoints ??= GetComponent<HealthPoints>();
-        
-        if(_tickCoroutine != null) StopCoroutine(_tickCoroutine);
-        StartCoroutine(Tick());
-    }
+        [SerializeField] private HealthTickProperties healthTickProperties;
 
-    private void OnDisable()
-    {
-        if(_tickCoroutine != null) StopCoroutine(_tickCoroutine);
+        [SerializeField] private VoidEventChannelSO onEnemiesDisabled;
 
-    }
+        private HealthPoints _healthPoints;
+        private Coroutine _tickCoroutine;
 
-    private IEnumerator Tick()
-    {
-        while (shouldTick)
+        private bool _shouldTick;
+
+        void OnEnable()
         {
-            yield return new WaitForSeconds(secondsPerTick);
-            _healthPoints.TryTakeDamage(healthTakenPerTick);
+            _healthPoints ??= GetComponent<HealthPoints>();
+            onEnemiesDisabled.onEvent.AddListener(DisableTick);
+
+            _shouldTick = healthTickProperties.shouldTick;
+            if (_tickCoroutine != null) StopCoroutine(_tickCoroutine);
+            StartCoroutine(Tick());
+        }
+
+        private void OnDisable()
+        {
+            if (_tickCoroutine != null) StopCoroutine(_tickCoroutine);
+        }
+
+        private IEnumerator Tick()
+        {
+            while (_shouldTick)
+            {
+                yield return new WaitForSeconds(healthTickProperties.secondsPerTick);
+                if (_shouldTick)
+                    _healthPoints.TryTakeDamage(healthTickProperties.healthTakenPerTick);
+            }
+        }
+
+        private void DisableTick()
+        {
+            Debug.Log("DISABLE TICK");
+            _shouldTick = false;
+            if (_tickCoroutine != null)
+                StopCoroutine(_tickCoroutine);
         }
     }
 }

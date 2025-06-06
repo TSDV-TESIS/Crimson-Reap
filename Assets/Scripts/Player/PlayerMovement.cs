@@ -4,7 +4,8 @@ using Events;
 using Player.Controllers;
 using Player.Properties;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -12,6 +13,8 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
+        [SerializeField] private PlayerAnimationController animationController;
+
         [Header("Input Handler")]
         [SerializeField] private InputHandler input;
 
@@ -21,21 +24,26 @@ namespace Player
         [Header("Events")]
         [SerializeField] private VoidEventChannelSO onPlayerDeath;
         [SerializeField] private VoidEventChannelSO onPlayerRevive;
+        [SerializeField] private VoidEventChannelSO onFrenziedStart;
+        [SerializeField] private VoidEventChannelSO onFrenziedStop;
 
         [Header("Save properties")]
         [SerializeField] private PlayerTransform playerTransform;
 
-        [Header("Movement Checks")]
-        [SerializeField] private PlayerMovementChecks playerMovementChecks;
+        [Header("Events")]
+        [SerializeField] private UnityEvent<float> onWalk;
+        [SerializeField] private UnityEvent onStop;
 
         private CharacterController _characterController;
         private bool _canWalk;
-        private Vector2 _velocity;
+        [NonSerialized] public Vector2 Velocity;
         private Coroutine _velocityLock;
 
-        private Vector3 moveDirection;
+        private Vector3 _moveDirection;
 
-        public Vector3 MoveDirection => moveDirection;
+        public Vector3 MoveDirection => _moveDirection;
+
+        private bool _isFrenzied;
 
         public float MaxSpeed
         {
@@ -47,7 +55,7 @@ namespace Player
         {
             _canWalk = true;
             _characterController ??= GetComponent<CharacterController>();
-            moveDirection = Vector3.zero;
+            _moveDirection = Vector3.zero;
 
             if (playerTransform != null) playerTransform.playerTransform = transform;
 
@@ -55,7 +63,9 @@ namespace Player
 
             onPlayerDeath.onEvent.AddListener(HandleDeath);
             onPlayerRevive.onEvent.AddListener(HandleRevive);
-            _velocity = new Vector2(playerMovementProperties.maxSpeed, 0);
+            onFrenziedStart.onEvent.AddListener(HandleIsFrenzied);
+            onFrenziedStop.onEvent.AddListener(HandleStopFrenzy);
+            Velocity = new Vector2(playerMovementProperties.maxSpeed, 0);
         }
 
         private void OnDisable()
@@ -64,80 +74,155 @@ namespace Player
 
             onPlayerDeath.onEvent.RemoveListener(HandleDeath);
             onPlayerRevive.onEvent.RemoveListener(HandleRevive);
+
+            onFrenziedStart.onEvent.RemoveListener(HandleIsFrenzied);
+            onFrenziedStop.onEvent.RemoveListener(HandleStopFrenzy);
         }
 
-        public void OnUpdate()
+        private void HandleStopFrenzy()
         {
-            Vector3 prevPos = transform.position;
-            HandleWalk();
+            _isFrenzied = false;
+        }
 
-            _characterController.Move(_velocity * Time.deltaTime);
-
-            SetZPosition(prevPos);
+        private void HandleIsFrenzied()
+        {
+            _isFrenzied = true;
         }
 
         public void HandleWalk()
         {
-            moveDirection = playerMovementChecks.GetSlopeMovementDirection(moveDirection);
+            HandleWalk(_moveDirection);
+        }
+
+        public void HandleWalk(Vector3 moveDirection)
+        {
+            _moveDirection = moveDirection;
+
+            if (_moveDirection != Vector3.zero)
+            {
+                animationController.HandleWalk();
+            }
+            else
+            {
+                animationController.HandleIdle();
+            }
+
+            Vector3 prevPos = transform.position;
 
             if (_canWalk)
             {
-                _velocity.x =
-                    Mathf.Clamp(
-                    _velocity.x + (moveDirection.x * playerMovementProperties.acceleration * Time.deltaTime),
-                    -playerMovementProperties.maxSpeed, playerMovementProperties.maxSpeed);
+                float acceleration = _isFrenzied
+                    ? playerMovementProperties.frenziedAcceleration
+                    : playerMovementProperties.acceleration;
+
+                float maxSpeed = _isFrenzied
+                    ? playerMovementProperties.frenziedMaxSpeed
+                    : playerMovementProperties.maxSpeed;
+
+                Velocity.x = Mathf.Clamp(
+                Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
+                -maxSpeed, maxSpeed
+                );
             }
-            if(playerMovementChecks.IsGrounded())
-                _velocity.x = Mathf.Sign(_velocity.x) * Mathf.Clamp(Mathf.Abs(_velocity.x) - playerMovementProperties.friction * Time.deltaTime, 0, playerMovementProperties.maxSpeed);
+
+            Move(Velocity * Time.deltaTime);
+            SetZPosition(prevPos);
+        }
+
+        public void HandleGroundedWalk(Vector3 moveDirection)
+        {
+            _moveDirection = moveDirection;
+            Vector3 prevPos = transform.position;
+
+            if (_canWalk)
+            {
+                float acceleration = _isFrenzied
+                    ? playerMovementProperties.frenziedAcceleration
+                    : playerMovementProperties.acceleration;
+
+                float maxSpeed = _isFrenzied
+                    ? playerMovementProperties.frenziedMaxSpeed
+                    : playerMovementProperties.maxSpeed;
+
+                float velocityToUse = Mathf.Clamp(
+                Velocity.magnitude + (_moveDirection.magnitude) * acceleration * Time.deltaTime,
+                -maxSpeed, maxSpeed
+                );
+
+                Velocity = _moveDirection * velocityToUse;
+            }
+
+            Move(Velocity * Time.deltaTime);
+            SetZPosition(prevPos);
+        }
+
+        public void HandleDeceleration()
+        {
+            float maxSpeed = _isFrenzied
+                ? playerMovementProperties.frenziedMaxSpeed
+                : playerMovementProperties.maxSpeed;
+            Velocity.x = Mathf.Sign(Velocity.x) * Mathf.Clamp(Mathf.Abs(Velocity.x) - playerMovementProperties.friction * Time.deltaTime, 0, maxSpeed);
+            if (Velocity.x != 0)
+                onWalk?.Invoke(Mathf.Sign(Velocity.x));
+            else
+                onStop?.Invoke();
         }
 
         public void FreeFall()
         {
-            _velocity.y = Mathf.Clamp(_velocity.y - playerMovementProperties.gravity * Time.deltaTime, -playerMovementProperties.maxGravityVelocity, playerMovementProperties.maxJumpVelocity);
-
-            if (playerMovementChecks.IsGrounded() && _velocity.y < 0)
-                _velocity.y = 0;
+            Velocity.y = Mathf.Clamp(Velocity.y - playerMovementProperties.gravity * Time.deltaTime, -playerMovementProperties.maxGravityVelocity, playerMovementProperties.maxJumpVelocity);
         }
 
         public void WallSlide()
         {
-            _velocity.x = 0;
-            _velocity.y = Mathf.Clamp(_velocity.y - playerMovementProperties.wallSlideGravity * Time.deltaTime, -playerMovementProperties.maxWallSlideVerticalVelocity, 0);
+            Velocity.x = 0;
+            Velocity.y = Mathf.Clamp(Velocity.y - playerMovementProperties.wallSlideGravity * Time.deltaTime, -playerMovementProperties.maxWallSlideVerticalVelocity, Velocity.y);
 
-            if (playerMovementChecks.IsGrounded() && _velocity.y < 0)
-                _velocity.y = 0;
+            _characterController.Move(Velocity * Time.deltaTime);
+        }
 
-            _characterController.Move(_velocity * Time.deltaTime);
+        public void Move(Vector3 displacement)
+        {
+            _characterController.Move(displacement);
         }
 
         private void SetZPosition(Vector3 prevPos)
         {
             if (transform.position.z != 0)
-                transform.position = prevPos;
+            {
+                var vector3 = transform.position;
+                vector3.z = 0;
+                transform.position = vector3;
+            }
+        }
+
+        public void SetVerticalVelocity(float value)
+        {
+            Velocity.y = value;
         }
 
         private void HandleMove(Vector2 movement)
         {
-            moveDirection = new Vector3(movement.x, 0, 0);
+            _moveDirection = new Vector3(movement.x, 0, 0);
         }
 
         public void Jump()
         {
-            _velocity.y = playerMovementProperties.jumpForce;
+            Velocity.y = playerMovementProperties.jumpForce;
         }
 
-        public void WallJump()
+        public void WallJump(float checksWallSlideDirection)
         {
-            _velocity.y = playerMovementProperties.wallJumpForce.y;
-            _velocity.x = playerMovementProperties.wallJumpForce.x * Mathf.Sign(moveDirection.x) * -1;
-            Debug.Log(_velocity.x);
+            Velocity.y = playerMovementProperties.wallJumpForce.y;
+            Velocity.x = playerMovementProperties.wallJumpForce.x * Mathf.Sign(checksWallSlideDirection) * -1;
+            Debug.Log(Velocity.x);
             if (_velocityLock != null)
                 StopCoroutine(_velocityLock);
 
             _velocityLock = StartCoroutine(LockAfterWallJump());
         }
 
-        public void SetCanWalk(bool canWalk)
+        private void SetCanWalk(bool canWalk)
         {
             _canWalk = canWalk;
         }
@@ -159,9 +244,32 @@ namespace Player
             _canWalk = true;
         }
 
-        public void StopWallSlide()
+        public void Grounded(float groundY)
         {
-            _velocity.y = 0;
+            Debug.Log("SETTING CLEARANCE" + new Vector3(transform.position.x, groundY, transform.position.z));
+            Velocity.y = 0;
+            _characterController.enabled = false;
+            transform.position = new Vector3(transform.position.x, groundY, transform.position.z);
+            _characterController.enabled = true;
+        }
+
+        public int GetMoveDirectionSign()
+        {
+            return (int)Mathf.Sign(_moveDirection.x);
+        }
+
+        public void Shadowstep(Vector2 direction, bool isBloodstep)
+        {
+            float velocityToUse = isBloodstep ? playerMovementProperties.bloodStepVelocity : playerMovementProperties.shadowStepVelocity;
+            Velocity.x = velocityToUse * direction.x;
+            Velocity.y = velocityToUse * direction.y;
+
+            Move(Velocity * Time.deltaTime);
+        }
+
+        public void OnDrawGizmos()
+        {
+            Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + _moveDirection * 10f);
         }
     }
 }
