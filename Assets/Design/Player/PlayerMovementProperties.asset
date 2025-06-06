@@ -15,21 +15,34 @@ MonoBehaviour:
   acceleration: 150
   friction: 100
   maxSpeed: 15
-  gravity: 75
+  frenziedAcceleration: 250
+  frenziedMaxSpeed: 30
+  gravity: 60
   jumpForce: 30
   maxGravityVelocity: 30
   maxJumpVelocity: 40
-  checkDistance: 0.61
+  cornerCorrectionMaxDistance: 0.5
+  checkDistance: 0.68
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 768
+  feetOffset: 0.665
   wallCheckDistance: 0.83
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 1792
-  lockDuration: 0.2
-  wallSlideGravity: 15
+    m_Bits: 1536
+  lockDuration: 0.5
+  wallSlideGravity: 65
   maxWallSlideVerticalVelocity: 5
   wallJumpForce: {x: 20, y: 30}
-  maxSlopeAngle: 45
+  unboundTime: 0.5
+  wallVelocityCheck: 5
+  wallRideMaxCoyoteSeconds: 0.61
+  maxSlopeAngle: 50
   shouldDrawGizmos: 1
+  shadowStepTime: 0.2
+  shadowStepVelocity: 50
+  shadowStepCooldown: 1
+  bloodStepVelocity: 60
+  bloodStepTime: 0.4
+  ceilingCheckWaitTime: 0.5

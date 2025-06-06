@@ -1,4 +1,6 @@
+using System;
 using FSM;
+using Player.Properties;
 using UnityEngine;
 
 namespace Player.Controllers
@@ -7,20 +9,55 @@ namespace Player.Controllers
     public class FallingController : Controller<PlayerAgent>
     {
         private PlayerMovement _playerMovement;
+        [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private PlayerMovementProperties playerMovementProperties;
+
 
         private void OnEnable()
         {
             _playerMovement ??= GetComponent<PlayerMovement>();
+            inputHandler?.OnPlayerShadowStep.AddListener(HandleShadowstep);
+            inputHandler?.OnPlayerAttack.AddListener(OnAttack);
         }
+
+        private void Start()
+        {
+            inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
+            inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
+        }
+
+        private void OnDisable()
+        {
+            inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
+            inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
+        }
+
+        private void HandleShadowstep()
+        {
+            agent.ChangeStateToShadowStep();
+        }
+
+        private void OnAttack()
+        {
+            agent.ChangeStateToAttack();
+        }
+
         public override void OnUpdate()
         {
-            _playerMovement.OnUpdate();
+            _playerMovement.HandleWalk();
             _playerMovement.FreeFall();
 
-            if (agent.Checks.IsGrounded())
+            if (agent.MovementChecks.IsNearCeiling())
+            {
+                _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
+            }
+
+            if (agent.MovementChecks.IsGrounded())
+            {
                 agent.ChangeStateToGrounded();
-            
-            if (agent.Checks.ShouldWallSlide(_playerMovement.MoveDirection))
+            }
+
+            if (agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection, _playerMovement.Velocity))
                 agent.ChangeStateToWallSlide();
         }
     }

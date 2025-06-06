@@ -1,6 +1,7 @@
 using System;
 using FSM;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace Player.Controllers
@@ -10,6 +11,9 @@ namespace Player.Controllers
     {
         [SerializeField] private InputHandler input;
         private PlayerMovement _movement;
+
+        [Header("Events")] 
+        [SerializeField] private UnityEvent<Vector3, int> onWallHitEnter;
 
         private bool _isActive;
         private void OnEnable()
@@ -28,19 +32,21 @@ namespace Player.Controllers
         {
             _isActive = true;
             input.OnPlayerJump.AddListener(OnJump);
+            input.OnPlayerShadowStep.AddListener(OnShadowstep);
+            input.OnPlayerAttack.AddListener(OnAttack);
+            onWallHitEnter.Invoke(agent.MovementChecks.WallrideHitPosition, agent.MovementChecks.WallSlideDirection);
         }
 
         public override void OnUpdate()
         {
             _movement.WallSlide();
 
-            if (agent.Checks.IsGrounded())
+            if (agent.MovementChecks.IsGrounded())
             {
-                _movement.StopWallSlide();
                 agent.ChangeStateToGrounded();
             }
 
-            if (!agent.Checks.ShouldWallSlide(_movement.MoveDirection))
+            if (agent.MovementChecks.ShouldUnboundWallslide(_movement.MoveDirection, _movement.Velocity))
                 agent.ChangeStateToFalling();
         }
 
@@ -48,13 +54,24 @@ namespace Player.Controllers
         {
             _isActive = false;
             input.OnPlayerJump.RemoveListener(OnJump);
+            input.OnPlayerShadowStep.RemoveListener(OnShadowstep);
+            input.OnPlayerAttack.RemoveListener(OnAttack);
         }
 
         private void OnJump()
         {
-            _movement.WallJump();
-            agent.Checks.StopCheckingWall();
+            _movement.WallJump(agent.MovementChecks.WallSlideDirection);
+            agent.MovementChecks.StopCheckingWall();
             agent.ChangeStateToJumping();
+        }
+        
+        private void OnShadowstep()
+        {
+            agent.ChangeStateToShadowStep();
+        }
+        private void OnAttack()
+        {
+            agent.ChangeStateToAttack();
         }
     }
 }

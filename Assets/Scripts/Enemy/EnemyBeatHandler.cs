@@ -1,7 +1,5 @@
 using Events;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Enemy
 {
@@ -33,13 +31,11 @@ namespace Enemy
         }
         private void HandleHeartbeatOff()
         {
-            Debug.Log("Heartbeat OFF");
             IsInHeartBeat = false;
         }
 
         private void HandleHeartbeatOn()
         {
-            Debug.Log("Heartbeat ON");
             IsInHeartBeat = true;
         }
 
