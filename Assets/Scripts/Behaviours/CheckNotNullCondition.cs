@@ -10,6 +10,11 @@ public partial class CheckNotNullCondition : Condition
 
     public override bool IsTrue()
     {
+        if (Variable.ObjectValue is GameObject)
+        {
+            return (GameObject)Variable.ObjectValue;
+        }
+
         return Variable.ObjectValue != null;
     }
 
