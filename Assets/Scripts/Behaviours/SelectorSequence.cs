@@ -10,11 +10,10 @@ using UnityEngine.UIElements;
 public partial class SelectorSequence : Composite
 {
     [CreateProperty] int m_CurrentChild;
-
+    
     protected override Status OnStart()
     {
-        m_CurrentChild = 0;
-        return StartChild(m_CurrentChild);
+        return StartSequence();
     }
 
     protected override Status OnUpdate()
@@ -29,18 +28,14 @@ public partial class SelectorSequence : Composite
 
         if (childStatus == Status.Success)
         {
+            Debug.Log(currentChild);
+            Debug.Log(currentChild.CurrentStatus);
             ResetStatus();
             CurrentStatus = Status.Running;
-            m_CurrentChild = 0;
-            return Status.Running;
+            return StartSequence();
         }
         
-        return childStatus switch
-        {
-            Status.Running => Status.Waiting,
-            Status.Failure => Status.Running,
-            _ => childStatus
-        };
+        return Status.Running;
     }
 
     protected override void OnEnd()
@@ -62,6 +57,12 @@ public partial class SelectorSequence : Composite
             Status.Failure => Status.Running,
             _ => childStatus
         };
+    }
+
+    private Status StartSequence()
+    {
+        m_CurrentChild = 0;
+        return StartChild(m_CurrentChild);
     }
 }
 
