@@ -31,17 +31,18 @@ namespace Enemy
                 };
                 if (Physics.Raycast(pivot.position, raycastDirection, out _playerHit, enemyVisionProperties.visionLength, enemyVisionProperties.whatIsObjective))
                 {
+                    Debug.Log("SEEING PLAYER FROM RAYCAST!");
                     if(_stillSeeingPlayerCoroutine != null) StopCoroutine(_stillSeeingPlayerCoroutine);
                     _stillSeeingPlayerCoroutine = StartCoroutine(StillSeeingPlayerCoroutine());
                     return true;
                 } 
-                if (_stillSeesPlayer)
-                {
-                    _playerHit = lastHit;
-                    return true;
-                }
     
                 angleToUse += anglePerRaycastToUse;
+            }
+            if (_stillSeesPlayer)
+            {
+                _playerHit = lastHit;
+                return true;
             }
 
             return false;

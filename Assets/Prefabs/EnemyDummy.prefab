@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd0cdaec04ba4234da3346093844a4cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackObject: {fileID: 0}
+  attackObject: {fileID: 8399344020244761674}
   windUpAttackAreaObject: {fileID: 7618206189464768513}
   playerTransform: {fileID: 11400000, guid: 33cff94758fa9be458f6c60e98048cb4, type: 2}
   enemyAttackProperties: {fileID: 11400000, guid: 6d821f14d68232a458b70301b8bcef6b, type: 2}
@@ -252,6 +252,7 @@ MonoBehaviour:
   - {fileID: 1311188963650251079}
   - {fileID: 2103776553090905920}
   - {fileID: 3090096397659781288}
+  - {fileID: 3074131815486568208}
   disableSeconds: 0.5
   onEnemyEnabled: {fileID: 11400000, guid: 2afde693373712a459fd5bba221fdfa8, type: 2}
   onEnemyDeath: {fileID: 11400000, guid: 9ab2348d68fe8e041bcd88bda4b0dc54, type: 2}
@@ -349,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyVisionProperties: {fileID: 11400000, guid: cf9d891ba935a4c498ef309320590dda, type: 2}
-  pivot: {fileID: 0}
+  pivot: {fileID: 5292768973315129652}
 --- !u!195 &7090663827376669088
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -424,7 +425,8 @@ MonoBehaviour:
   m_BlackboardVariableOverridesList:
   - rid: 4203723288770249627
   - rid: 4203723288770249628
-  - rid: 4203723334190629277
+  - rid: 4203723288770249633
+  - rid: 4203723334190629278
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -446,7 +448,17 @@ MonoBehaviour:
           m_Value1: 1237643789759084221
         Name: VisionHandler
         m_Value: {fileID: 1117833222909342987}
-    - rid: 4203723334190629277
+    - rid: 4203723288770249633
+      type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 11200392193749043582
+          m_Value1: 14076438351561728677
+        Name: PatrolPoints
+        m_Value:
+        - {fileID: 1218343086946313865}
+        - {fileID: 3264509032415187889}
+    - rid: 4203723334190629278
       type: {class: 'BlackboardVariable`1[[IdleType, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -480,7 +492,7 @@ Transform:
   m_GameObject: {fileID: 1218343086946313865}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -981,7 +993,7 @@ Transform:
   m_GameObject: {fileID: 3264509032415187889}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1288,6 +1300,7 @@ GameObject:
   - component: {fileID: 4510329659969551529}
   - component: {fileID: 1036263930689777832}
   - component: {fileID: 8899464222291219874}
+  - component: {fileID: 5873065157624231711}
   m_Layer: 7
   m_Name: AttackArea
   m_TagString: Untagged
@@ -1384,6 +1397,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5873065157624231711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8399344020244761674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc0490e5e8b9cf146b93ed6a5460959d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1000
 --- !u!1001 &250498500871250274
 PrefabInstance:
   m_ObjectHideFlags: 0
