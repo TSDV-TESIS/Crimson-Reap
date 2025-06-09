@@ -20,7 +20,6 @@ namespace Player.Controllers
             inputHandler.OnPlayerAttack.AddListener(OnAttack);
 
             float clearance = agent.MovementChecks.GetGroundClearance();
-            Debug.Log("CLEARANCE: " + clearance);
             if (clearance == 0) return;
 
             _playerMovement.Grounded(clearance);
