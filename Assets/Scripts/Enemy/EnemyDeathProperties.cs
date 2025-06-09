@@ -9,6 +9,7 @@ namespace Enemy
         public float disableSeconds = 0.5f;
         public float screamingRadius = 10f;
 
+        public LayerMask screamingOcclussionMask;
         public bool shouldDrawGizmos = false;
     }
 }
