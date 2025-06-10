@@ -33,20 +33,20 @@ namespace Player.Controllers
             _isActive = true;
             input.OnPlayerJump.AddListener(OnJump);
             input.OnPlayerShadowStep.AddListener(OnShadowstep);
-            onWallHitEnter.Invoke(agent.Checks.WallrideHitPosition, agent.Checks.WallSlideDirection);
+            input.OnPlayerAttack.AddListener(OnAttack);
+            onWallHitEnter.Invoke(agent.MovementChecks.WallrideHitPosition, agent.MovementChecks.WallSlideDirection);
         }
 
         public override void OnUpdate()
         {
             _movement.WallSlide();
 
-            if (agent.Checks.IsGrounded())
+            if (agent.MovementChecks.IsGrounded())
             {
-                _movement.Grounded();
                 agent.ChangeStateToGrounded();
             }
 
-            if (agent.Checks.ShouldUnboundWallslide(_movement.MoveDirection, _movement.Velocity))
+            if (agent.MovementChecks.ShouldUnboundWallslide(_movement.MoveDirection, _movement.Velocity))
                 agent.ChangeStateToFalling();
         }
 
@@ -55,18 +55,23 @@ namespace Player.Controllers
             _isActive = false;
             input.OnPlayerJump.RemoveListener(OnJump);
             input.OnPlayerShadowStep.RemoveListener(OnShadowstep);
+            input.OnPlayerAttack.RemoveListener(OnAttack);
         }
 
         private void OnJump()
         {
-            _movement.WallJump(agent.Checks.WallSlideDirection);
-            agent.Checks.StopCheckingWall();
+            _movement.WallJump(agent.MovementChecks.WallSlideDirection);
+            agent.MovementChecks.StopCheckingWall();
             agent.ChangeStateToJumping();
         }
         
         private void OnShadowstep()
         {
             agent.ChangeStateToShadowStep();
+        }
+        private void OnAttack()
+        {
+            agent.ChangeStateToAttack();
         }
     }
 }

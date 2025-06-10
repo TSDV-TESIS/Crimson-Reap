@@ -14,12 +14,17 @@ namespace Enemy
             _position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
 
+        private void Update()
+        {
+            transform.position = _position;
+        }
+
         private void OnDrawGizmos()
         {
             #if UNITY_EDITOR
             if (!Application.isPlaying) _position = transform.position;
             #endif
-
+            
             Gizmos.color = color;
         
             Gizmos.DrawSphere(_position, radius);

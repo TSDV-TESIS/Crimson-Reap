@@ -13,5 +13,11 @@ namespace Player.Properties
         [Tooltip("Damage has to be setted even if it is only one attack")]
         public int damage = 150;
         public float hitStopSeconds = 0.1f;
+
+        [Header("Check Fields")]
+        public float checkDistance = 1f;
+
+        [Header("Gizmos")]
+        public bool shouldDrawGizmos = false;
     }
 }
