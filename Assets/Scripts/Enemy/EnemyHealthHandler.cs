@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Events;
 using Events.Scriptables;
+using Sounds;
 using UI.Bars;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,11 +11,12 @@ namespace Enemy
 {
     public class EnemyHealthHandler : MonoBehaviour
     {
-        [SerializeField] private int healthRewardOnDeath = 15;
-        [SerializeField] private ParticleSystem splashBloodParticles;
-        [SerializeField] private GameObject[] objectsToDisable;
-        [SerializeField] private float disableSeconds;
+        [SerializeField] private EnemyDeathProperties enemyDeathProperties;
 
+        [SerializeField] private ParticleSystem splashBloodParticles;
+        [SerializeField] private SoundCollisionHandler screamSoundCollisionHandler;
+        [SerializeField] private GameObject[] objectsToDisable;
+        
         [Header("Events")] 
         [SerializeField] private GameObjectEventChannelSO onEnemyEnabled;
         [SerializeField] private IntEventChannelSO onEnemyDeath;
@@ -29,6 +31,7 @@ namespace Enemy
             _isInBloodlust = false;
             onBloodlustStart?.onEvent.AddListener(HandleFrenzyStart);
             onBloodlustEnd?.onEvent.AddListener(HandleFrenzyEnd);
+            screamSoundCollisionHandler.SoundRadius = enemyDeathProperties.screamingRadius;
         }
 
         private void Start()
@@ -63,7 +66,8 @@ namespace Enemy
 
         public void OnDeath()
         {
-            onEnemyDeath?.RaiseEvent(healthRewardOnDeath);
+            onEnemyDeath?.RaiseEvent(enemyDeathProperties.healthRewardOnDeath);
+            screamSoundCollisionHandler.EnableSound(enemyDeathProperties.shouldDrawGizmos);
             
            if(_isInBloodlust)
                 splashBloodParticles.Play();
@@ -81,7 +85,7 @@ namespace Enemy
         private IEnumerator DisableCoroutine()
         {
             float timer = 0;
-            while (timer < disableSeconds)
+            while (timer < enemyDeathProperties.disableSeconds)
             {
                 timer += Time.deltaTime;
                 yield return null;
