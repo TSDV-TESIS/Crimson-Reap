@@ -11,5 +11,6 @@ namespace Enemy
 
         public LayerMask screamingOcclussionMask;
         public bool shouldDrawGizmos = false;
+        public float hitStopTimeSeconds = 0.1f;
     }
 }

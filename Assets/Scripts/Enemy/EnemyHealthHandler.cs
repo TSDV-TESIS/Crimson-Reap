@@ -23,6 +23,7 @@ namespace Enemy
         [SerializeField] private VoidEventChannelSO onBloodlustStart;
         [SerializeField] private VoidEventChannelSO onBloodlustEnd;
         [SerializeField] private GameObjectEventChannelSO onEnemyDisabled;
+        [SerializeField] private FloatEventChannel onHitStop;
         
         private Coroutine _disableCoroutine;
         private bool _isInBloodlust;
@@ -69,8 +70,8 @@ namespace Enemy
             onEnemyDeath?.RaiseEvent(enemyDeathProperties.healthRewardOnDeath);
             screamSoundCollisionHandler.EnableSound(enemyDeathProperties.shouldDrawGizmos);
             
-           if(_isInBloodlust)
-                splashBloodParticles.Play();
+            splashBloodParticles.Play();
+            onHitStop?.RaiseEvent(enemyDeathProperties.hitStopTimeSeconds);
             
             foreach (GameObject obj in objectsToDisable)
             {
