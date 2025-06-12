@@ -5,9 +5,9 @@ namespace Enemy.Properties
     [CreateAssetMenu(menuName = "Scriptable Objects/Enemy General Properties", fileName = "EnemyGeneralProperties")]
     public class EnemyGeneralProperties : ScriptableObject
     {
-        [Header("General Properties")] 
-        public float attackRange;
+        [Header("Hearing Properties")] 
         public float hearingRadius;
+        public LayerMask hearingOcclussionMask;
 
         [Header("Scanning Properties")] 
         public float minRotationTime;
@@ -27,6 +27,7 @@ namespace Enemy.Properties
         public float patrolPointWaitTimeSeconds;
 
         [Header("Attack properties")] 
+        public float attackRange;
         public float enemySpeedAttacking;
         public float attackNoiseLevel;
         public float attackDuration;

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafcb01abfb601c48a7b320e3e7082df, type: 3}
   m_Name: EnemyGeneralProperties
   m_EditorClassIdentifier: 
-  attackRange: 2
   hearingRadius: 3
+  hearingOcclussionMask:
+    serializedVersion: 2
+    m_Bits: 1024
   minRotationTime: 0.5
   maxRotationTime: 1
   investigationTime: 2
@@ -33,6 +35,7 @@ MonoBehaviour:
     AngularVelocity: 360
     SlowdownDistance: 0.5
   patrolPointWaitTimeSeconds: 1
+  attackRange: 2
   enemySpeedAttacking: 2
   attackNoiseLevel: 8.57
   attackDuration: 1.2
