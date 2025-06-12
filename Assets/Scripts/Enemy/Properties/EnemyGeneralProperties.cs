@@ -27,10 +27,12 @@ namespace Enemy.Properties
         public float patrolPointWaitTimeSeconds;
 
         [Header("Attack properties")] 
+        public float enemySpeedAttacking;
         public float attackNoiseLevel;
         public float attackDuration;
         public float attackStartTime;
         public float attackIframesDuration;
+        public bool shouldShowAreaDebug;
 
         [Header("Debug")] 
         public bool shouldDrawGizmos;

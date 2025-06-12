@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fafcb01abfb601c48a7b320e3e7082df, type: 3}
   m_Name: EnemyGeneralProperties
   m_EditorClassIdentifier: 
-  attackRange: 3
-  screamRadius: 3
-  hearingRadius: 0
+  attackRange: 5.86
+  hearingRadius: 3
   minRotationTime: 0.5
   maxRotationTime: 1
   investigationTime: 2
@@ -34,8 +33,10 @@ MonoBehaviour:
     AngularVelocity: 360
     SlowdownDistance: 0.5
   patrolPointWaitTimeSeconds: 1
+  enemySpeedAttacking: 2
   attackNoiseLevel: 0
-  attackDuration: 0
-  attackStartTime: 0
-  attackIframesDuration: 0
+  attackDuration: 1.2
+  attackStartTime: 0.34
+  attackIframesDuration: 0.44
+  shouldShowAreaDebug: 1
   shouldDrawGizmos: 1
