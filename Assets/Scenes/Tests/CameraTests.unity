@@ -841,6 +841,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1573534099933732517, guid: 957aaa6857830af43b9c4bdce9732348, type: 3}
   m_PrefabInstance: {fileID: 63022}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &242354737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 797502615222402642, guid: e9b981ee3ff7ffb4395fe4e508bc11b6, type: 3}
+  m_PrefabInstance: {fileID: 4565582708584468412}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &242354747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242354737}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 1
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 400.0754, y: 87.53479, z: 258.02826}
 --- !u!1001 &250575881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5151,6 +5173,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1573534099933732517, guid: 957aaa6857830af43b9c4bdce9732348, type: 3}
   m_PrefabInstance: {fileID: 1095940724}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1106671219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1106671221}
+  - component: {fileID: 1106671220}
+  m_Layer: 0
+  m_Name: ShakeTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1106671220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106671219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c483fb3457c8e5044976f99d0f430f23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeProfile: {fileID: 11400000, guid: 3d911ec588244f5449b4c33436f1c8b4, type: 2}
+  cameraShakeEventChannel: {fileID: 11400000, guid: e0d6c8c1282a08643984e3b80dc9bf17, type: 2}
+--- !u!4 &1106671221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1106671219}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1114303504
 GameObject:
   m_ObjectHideFlags: 0
@@ -9439,6 +9507,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 682023752696851805, guid: e9b981ee3ff7ffb4395fe4e508bc11b6, type: 3}
+      propertyPath: shakeSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 446ab664b7d8edd49a948520f2a5a464, type: 2}
+    - target: {fileID: 682023752696851805, guid: e9b981ee3ff7ffb4395fe4e508bc11b6, type: 3}
+      propertyPath: shakeController
+      value: 
+      objectReference: {fileID: 242354747}
+    - target: {fileID: 682023752696851805, guid: e9b981ee3ff7ffb4395fe4e508bc11b6, type: 3}
+      propertyPath: onCameraShakeEventChannelSo
+      value: 
+      objectReference: {fileID: 11400000, guid: e0d6c8c1282a08643984e3b80dc9bf17, type: 2}
     - target: {fileID: 2194785179866982604, guid: e9b981ee3ff7ffb4395fe4e508bc11b6, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
@@ -9450,7 +9530,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 797502615222402642, guid: e9b981ee3ff7ffb4395fe4e508bc11b6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 242354747}
   m_SourcePrefab: {fileID: 100100000, guid: e9b981ee3ff7ffb4395fe4e508bc11b6, type: 3}
 --- !u!1001 &4643663538166829167
 PrefabInstance:
@@ -9627,3 +9710,4 @@ SceneRoots:
   - {fileID: 1494181028}
   - {fileID: 1795257001}
   - {fileID: 1707023607}
+  - {fileID: 1106671221}
