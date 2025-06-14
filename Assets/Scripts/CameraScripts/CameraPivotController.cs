@@ -15,6 +15,7 @@ namespace CameraScripts
         private bool _isTracking = false;
 
         private Vector2 _cursorPosition;
+        private Vector2 _cursorOffset;
         private const float DIST_TOLERANCE = 0.1f;
 
         private Vector2 _prevCursorPosition;
@@ -53,11 +54,13 @@ namespace CameraScripts
 
         private Vector2 GetTargetPosition()
         {
-            Vector2 pos = target.transform.position;
+            Vector2 targetPos = target.transform.position;
             if (cameraProperties.shouldInfluence)
-                pos = Vector2.Lerp(pos, _cursorPosition, cameraProperties.cursorInfluence);
+            {
+                targetPos = Vector2.Lerp(targetPos, targetPos + _cursorOffset, cameraProperties.cursorInfluence);
+            }
 
-            return pos;
+            return targetPos;
         }
 
         private Vector2 GetDir()
@@ -70,6 +73,8 @@ namespace CameraScripts
         {
             float cameraZ = -Camera.main.transform.position.z;
             _cursorPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cameraZ));
+            _cursorOffset = _cursorPosition - new Vector2(target.transform.position.x, target.transform.position.y);
+
             if (cameraProperties.freeCamera)
                 return;
 
@@ -81,6 +86,7 @@ namespace CameraScripts
             float xPos = Mathf.Clamp(_cursorPosition.x, target.transform.position.x - halfScreenWidth, target.transform.position.x + halfScreenWidth);
             float yPos = Mathf.Clamp(_cursorPosition.y, target.transform.position.y - halfScreenHeight, target.transform.position.y + halfScreenHeight);
             _cursorPosition = new Vector2(xPos, yPos);
+            _cursorOffset = _cursorPosition - new Vector2(target.transform.position.x, target.transform.position.y);
         }
 
         private void OnDrawGizmos()
@@ -93,7 +99,8 @@ namespace CameraScripts
             Gizmos.DrawCube(transform.position, new Vector3(0.5f, 0.5f, 0.5f));
 
             Gizmos.color = Color.green;
-            Gizmos.DrawCube(_cursorPosition, new Vector3(0.5f, 0.5f, 0.5f));
+            Vector2 targetPos = target.transform.position;
+            Gizmos.DrawCube(targetPos + _cursorOffset, new Vector3(0.5f, 0.5f, 0.5f));
             Gizmos.color = prevGizmosColor;
         }
     }
