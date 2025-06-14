@@ -1,5 +1,6 @@
 using System;
 using Enemy;
+using Enemy.Properties;
 using Unity.Behavior;
 using UnityEngine;
 
@@ -23,10 +24,10 @@ public partial class SelfCanHearTheScreamCondition : Condition
     public override void OnStart()
     {
         _agent ??= Self.Value.GetComponent<BehaviorGraphAgent>();
-        _agent.GetVariable("EnemyDeathProperties", out BlackboardVariable enemyDeathProperties);
-        if (enemyDeathProperties?.ObjectValue == null) return;
+        _agent.GetVariable("EnemyGeneralProperties", out BlackboardVariable enemyGeneralProperties);
+        if (enemyGeneralProperties?.ObjectValue == null) return;
 
-        _screamingOcclussionMask = ((EnemyDeathProperties)enemyDeathProperties.ObjectValue).screamingOcclussionMask;
+        _screamingOcclussionMask = ((EnemyGeneralProperties)enemyGeneralProperties.ObjectValue).hearingOcclussionMask;
     }
 
     public override void OnEnd()

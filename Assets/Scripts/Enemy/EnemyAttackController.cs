@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Enemy.Properties;
 using Events;
 using Player.Properties;
 using Unity.Behavior;
@@ -14,7 +15,7 @@ namespace Enemy
         [SerializeField] private GameObject attackObject;
         [SerializeField] private GameObject windUpAttackAreaObject;
         [SerializeField] private PlayerTransform playerTransform;
-        [SerializeField] private EnemyAttackProperties enemyAttackProperties;
+        [SerializeField] private EnemyGeneralProperties enemyProperties;
 
         private Coroutine _attackCoroutine;
 
@@ -38,25 +39,32 @@ namespace Enemy
 
         public Node.Status Attack()
         {
-            if (_attackRenderer) _attackRenderer.enabled = enemyAttackProperties.shouldShowAttackAreaDebug;
-            if (_windUpRenderer) _windUpRenderer.enabled = enemyAttackProperties.shouldShowAttackAreaDebug;
+            if (enemyProperties.attackStartTime + enemyProperties.attackIframesDuration >
+                enemyProperties.attackDuration)
+            {
+                Debug.LogError("Enemy attack duration is less than attack start time + attack Iframes duration");
+
+                return Node.Status.Failure;
+            }
+            
+            if (_attackRenderer) _attackRenderer.enabled = enemyProperties.shouldShowAreaDebug;
+            if (_windUpRenderer) _windUpRenderer.enabled = enemyProperties.shouldShowAreaDebug;
 
             _navMeshAgent.destination = playerTransform.playerTransform.position;
-            _navMeshAgent.speed = enemyAttackProperties.enemySpeedInAttack;
+            _navMeshAgent.speed = enemyProperties.enemySpeedAttacking;
             windUpAttackAreaObject.SetActive(true);
-
-            if (IsRunning(enemyAttackProperties.attackWindupSeconds)) return Node.Status.Running;
+            
+            if (IsRunning(enemyProperties.attackStartTime)) return Node.Status.Running;
             windUpAttackAreaObject.SetActive(false);
             attackObject.SetActive(true);
 
-            if (IsRunning(enemyAttackProperties.attackWindupSeconds + enemyAttackProperties.attackIFrameSeconds))
+            if (IsRunning(enemyProperties.attackStartTime + enemyProperties.attackIframesDuration))
                 return Node.Status.Running;
 
             attackObject.SetActive(false);
             windUpAttackAreaObject.SetActive(true);
 
-            if (IsRunning(enemyAttackProperties.attackWindupSeconds + enemyAttackProperties.attackIFrameSeconds +
-                          enemyAttackProperties.attackWindoffSeconds))
+            if (IsRunning(enemyProperties.attackDuration))
                 return Node.Status.Running;
 
             windUpAttackAreaObject.SetActive(false);

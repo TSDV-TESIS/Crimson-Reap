@@ -1,5 +1,6 @@
 using System;
 using Enemy;
+using Enemy.Properties;
 using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
@@ -11,12 +12,12 @@ public partial class CheckIfSelfCanHearTheScreamAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Self;
     [SerializeReference] public BlackboardVariable<GameObject> Scream;
-    [SerializeReference] public BlackboardVariable<EnemyDeathProperties> enemyDeathProperties;
+    [SerializeReference] public BlackboardVariable<EnemyGeneralProperties> enemyProperties;
     
     protected override Status OnStart()
     {
-        if (!Self.Value || !Scream.Value || enemyDeathProperties.ObjectValue == null) return Status.Failure;
-        if (Physics.Linecast(Self.Value.transform.position, Scream.Value.transform.position, enemyDeathProperties.Value.screamingOcclussionMask))
+        if (!Self.Value || !Scream.Value || !enemyProperties.Value) return Status.Failure;
+        if (Physics.Linecast(Self.Value.transform.position, Scream.Value.transform.position, enemyProperties.Value.hearingOcclussionMask))
             return Status.Failure;
         
         return Status.Success;
