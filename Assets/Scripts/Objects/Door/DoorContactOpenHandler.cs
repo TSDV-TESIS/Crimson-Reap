@@ -20,7 +20,7 @@ namespace Objects.Door
         {
             if (other.CompareTag("Player") && !_hasBeenTriggered)
             {
-                handler.OnInteract();
+                handler.Open();
                 _hasBeenTriggered = true;
             }
         }
