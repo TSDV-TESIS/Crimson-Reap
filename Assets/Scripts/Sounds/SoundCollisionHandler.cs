@@ -8,6 +8,7 @@ namespace Sounds
     public class SoundCollisionHandler : MonoBehaviour
     {
         [SerializeField] private GameObject screamingPoint;
+        [SerializeField] private bool enableOnAwake = false;
         
         private float _soundRadius;
         private bool _shouldShowMesh;
@@ -23,6 +24,11 @@ namespace Sounds
         public void EnableSound()
         {
             _collider.enabled = true;
+        }
+
+        public void DisableSound()
+        {
+            _collider.enabled = false;
         }
 
         public void EnableSound(bool debug)
@@ -45,7 +51,7 @@ namespace Sounds
         private void Awake()
         {
             _collider ??= GetComponent<SphereCollider>();
-            _collider.enabled = false;
+            _collider.enabled = enableOnAwake;
 
             _meshRenderer ??= GetComponent<MeshRenderer>();
         }
