@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3293087587073084945}
   - component: {fileID: 3816274951006333571}
   - component: {fileID: 2040980753783285908}
+  - component: {fileID: 7614435106831715451}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 797502615222402642}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.221207, y: 3.5854187, z: -11.392041}
+  m_LocalPosition: {x: -32.94581, y: -2.63278, z: -11.392041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93,21 +94,21 @@ MonoBehaviour:
   CameraDistance: 11.46
   DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0, y: 0.16}
+    ScreenPosition: {x: -0.000000029802322, y: 0.16000009}
     DeadZone:
       Enabled: 1
-      Size: {x: 0.265135, y: 0.33}
+      Size: {x: 0, y: 0}
     HardLimits:
       Enabled: 0
-      Size: {x: 0.6319977, y: 0.8}
+      Size: {x: 0.6319977, y: 0.8296296}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 0
   TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 1.5, y: 1, z: 1}
   Lookahead:
-    Enabled: 1
+    Enabled: 0
     Time: 0.5
-    Smoothing: 1.2
+    Smoothing: 5.2
     IgnoreY: 0
 --- !u!114 &3816274951006333571
 MonoBehaviour:
@@ -143,6 +144,23 @@ MonoBehaviour:
     MaxWindowSize: 0
     Padding: 0
   m_LegacyMaxWindowSize: -2
+--- !u!114 &7614435106831715451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797502615222402642}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 1
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 400.0754, y: 87.53479, z: 258.02826}
 --- !u!1 &2459574222428994903
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +191,7 @@ Transform:
   m_GameObject: {fileID: 2459574222428994903}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.225403, y: 5.6124973, z: -11.392041}
+  m_LocalPosition: {x: -32.914986, y: 1.4882679, z: -11.392041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -424,10 +442,8 @@ PolygonCollider2D:
       - {x: 41.159447, y: 24.385824}
       - {x: -38.978893, y: 24.749168}
       - {x: -39.00367, y: -3.5794516}
-      - {x: 40.94583, y: -3.4806933}
-      - {x: 41.03113, y: 0.4594381}
-      - {x: 46.54799, y: 0.45616198}
-      - {x: 131.21709, y: 0.40072918}
+      - {x: 46.232586, y: -3.7812142}
+      - {x: 131.61667, y: -3.107759}
   m_UseDelaunayMesh: 0
 --- !u!1 &9041736024612758590
 GameObject:
@@ -478,3 +494,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _properties: {fileID: 11400000, guid: 7b65555b26e931442b0a16564bef0fbb, type: 2}
   composer: {fileID: 3293087587073084945}
+  shakeController: {fileID: 7614435106831715451}
+  shakeSettings: {fileID: 11400000, guid: 446ab664b7d8edd49a948520f2a5a464, type: 2}
+  onCameraShakeEventChannelSo: {fileID: 11400000, guid: e0d6c8c1282a08643984e3b80dc9bf17, type: 2}
