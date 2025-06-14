@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Objects
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class DoorHandler : MonoBehaviour, IOpenable, IInteractable
+    public class DoorHandler : MonoBehaviour, IOpenable
 
     {
         private static readonly int OpenParameter = Animator.StringToHash("Open");
@@ -58,19 +58,19 @@ namespace Objects
         {
             if (_isAttacked && (doorProperties.enemyLayer & (1 << other.gameObject.layer)) != 0)
             {
-                other.GetComponent<ITakeDamage>().TryTakeDamage(doorProperties.openDamage);
+                other?.GetComponent<ITakeDamage>()?.TryTakeDamage(doorProperties.openDamage);
             }
+        }
+
+        public void OnCollisionEnter(Collision other)
+        {
+            Debug.Log(other.gameObject.tag);
         }
 
         public void OnInteract()
         {
             if(_doorOpenCoroutine != null) StopCoroutine(_doorOpenCoroutine);
             _doorOpenCoroutine = StartCoroutine(DoorOpen());
-        }
-
-        public void Highlight(bool shouldHighlight)
-        {
-            // TODO highlight
         }
     }
 }
