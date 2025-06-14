@@ -31,6 +31,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4411427292011723826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4916345923301472481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2941707395371329299}
+  - component: {fileID: 6370190575711946894}
+  - component: {fileID: 4675796913471173748}
+  m_Layer: 0
+  m_Name: ManuallyOpenDoorCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2941707395371329299
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916345923301472481}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4411427292011723826}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6370190575711946894
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916345923301472481}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.7258625, y: 2.9689827, z: 1}
+  m_Center: {x: 0.36293125, y: -0.4619503, z: 0}
+--- !u!114 &4675796913471173748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4916345923301472481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1f7f0a189d4c1f408f12970d0db3eba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handler: {fileID: 194185200497059027}
 --- !u!1 &5947823158263098227
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +284,7 @@ Transform:
   - {fileID: 8170626203649844859}
   - {fileID: 1580091054809510349}
   - {fileID: 407691465517844330}
+  - {fileID: 2941707395371329299}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4967303350134826961
@@ -255,6 +323,11 @@ MonoBehaviour:
   doorProperties: {fileID: 11400000, guid: 693e68c688612d346b9accdd898bd75b, type: 2}
   soundCollisionHandler: {fileID: 658096148556460994}
   doorModel: {fileID: 3776326556190000463}
+  onPlayEvent: {fileID: 11400000, guid: d81697f8835a04c42aa91bb535d74400, type: 2}
+  openDoorEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 79ba7602a7e321542a58c0f340242f4a, type: 2}
 --- !u!54 &563939544430457155
 Rigidbody:
   m_ObjectHideFlags: 0

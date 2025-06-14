@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Events.Scriptables;
 using Health;
 using Sounds;
 using UnityEditor;
@@ -18,7 +19,11 @@ namespace Objects
         [SerializeField] private DoorProperties doorProperties;
         [SerializeField] private SoundCollisionHandler soundCollisionHandler;
         [SerializeField] private GameObject doorModel;
-
+        
+        [Header("Sounds")]
+        [SerializeField] private AkWwiseEventChannelSO onPlayEvent;
+        [SerializeField] private AK.Wwise.Event openDoorEvent;
+        
         private BoxCollider _boxCollider;
         private Coroutine _doorOpenCoroutine;
         private bool _isAttacked;
@@ -38,13 +43,15 @@ namespace Objects
 
         private IEnumerator DoorOpen()
         {
+            onPlayEvent.onTypedEvent.Invoke(openDoorEvent);
+            
             Animator doorAnim = doorModel.GetComponent<Animator>();
             doorAnim.SetFloat(DoorOpenSpeed, doorProperties.doorOpenTime);
             doorAnim.SetBool(OpenParameter, true);
             _boxCollider.isTrigger = true;
             gameObject.layer = LayerMask.NameToLayer("OpenedDoor");
             doorModel.layer = LayerMask.NameToLayer("OpenedDoor");
-            
+
             soundCollisionHandler.SoundRadius = doorProperties.doorSoundRadius;
             soundCollisionHandler.EnableSound();
 
