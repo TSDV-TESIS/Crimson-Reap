@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Objects
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class DoorHandler : MonoBehaviour, IOpenable
+    public class DoorHandler : MonoBehaviour, IOpenable, IInteractable
 
     {
         private static readonly int OpenParameter = Animator.StringToHash("Open");
@@ -33,8 +33,7 @@ namespace Objects
         public void Open()
         {
             _isAttacked = true;
-            if(_doorOpenCoroutine != null) StopCoroutine(_doorOpenCoroutine);
-            _doorOpenCoroutine = StartCoroutine(DoorOpen());
+            OnInteract();
         }
 
         private IEnumerator DoorOpen()
@@ -43,10 +42,13 @@ namespace Objects
             doorAnim.SetFloat(DoorOpenSpeed, doorProperties.doorOpenTime);
             doorAnim.SetBool(OpenParameter, true);
             _boxCollider.isTrigger = true;
+            gameObject.layer = LayerMask.NameToLayer("OpenedDoor");
+            doorModel.layer = LayerMask.NameToLayer("OpenedDoor");
             
+            soundCollisionHandler.SoundRadius = doorProperties.doorSoundRadius;
             soundCollisionHandler.EnableSound();
 
-            yield return new WaitForSeconds(doorProperties.doorOpenTime);
+            yield return new WaitForSeconds(1 / doorProperties.doorOpenTime);
             
             soundCollisionHandler.DisableSound();
             _boxCollider.enabled = false;
@@ -58,6 +60,17 @@ namespace Objects
             {
                 other.GetComponent<ITakeDamage>().TryTakeDamage(doorProperties.openDamage);
             }
+        }
+
+        public void OnInteract()
+        {
+            if(_doorOpenCoroutine != null) StopCoroutine(_doorOpenCoroutine);
+            _doorOpenCoroutine = StartCoroutine(DoorOpen());
+        }
+
+        public void Highlight(bool shouldHighlight)
+        {
+            // TODO highlight
         }
     }
 }

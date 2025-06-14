@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1450904984055707401}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -191,9 +191,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4411427292011723826}
-  - component: {fileID: 1281589082671315507}
-  - component: {fileID: 6346070868643919114}
-  - component: {fileID: 2883952200302037064}
+  - component: {fileID: 4967303350134826961}
+  - component: {fileID: 194185200497059027}
+  - component: {fileID: 563939544430457155}
   m_Layer: 13
   m_Name: Door
   m_TagString: Untagged
@@ -219,7 +219,7 @@ Transform:
   - {fileID: 407691465517844330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1281589082671315507
+--- !u!65 &4967303350134826961
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,7 +240,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 4, z: 3}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6346070868643919114
+--- !u!114 &194185200497059027
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,7 +255,7 @@ MonoBehaviour:
   doorProperties: {fileID: 11400000, guid: 693e68c688612d346b9accdd898bd75b, type: 2}
   soundCollisionHandler: {fileID: 658096148556460994}
   doorModel: {fileID: 3776326556190000463}
---- !u!54 &2883952200302037064
+--- !u!54 &563939544430457155
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
