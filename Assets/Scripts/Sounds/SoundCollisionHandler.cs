@@ -5,6 +5,7 @@ namespace Sounds
 {
     [RequireComponent(typeof(SphereCollider))]
     [RequireComponent(typeof(MeshRenderer))]
+    [RequireComponent(typeof(MeshFilter))]
     public class SoundCollisionHandler : MonoBehaviour
     {
         [SerializeField] private GameObject screamingPoint;

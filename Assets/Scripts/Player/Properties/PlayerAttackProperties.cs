@@ -19,5 +19,7 @@ namespace Player.Properties
 
         [Header("Gizmos")]
         public bool shouldDrawGizmos = false;
+
+        public LayerMask attackOcclussion;
     }
 }

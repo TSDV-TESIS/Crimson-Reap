@@ -9,16 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4445b4679d3aa134fa9d2b313986b3e6, type: 3}
-  m_Name: Slash Properties
+  m_Script: {fileID: 11500000, guid: 8b3ab8640a1e47538830d17f03ce362f, type: 3}
+  m_Name: DoorProperties
   m_EditorClassIdentifier: 
-  duration: 0.2
-  coolDownDuration: 0.2
-  displacementForce: 13
-  damage: 150
-  hitStopSeconds: 0.1
-  checkDistance: 3
-  shouldDrawGizmos: 1
-  attackOcclussion:
+  doorSoundRadius: 11.92
+  doorOpenTime: 2
+  enemyLayer:
     serializedVersion: 2
-    m_Bits: 42240
+    m_Bits: 128
+  openDamage: 1000

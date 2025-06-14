@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using Enemy;
 using Events;
 using Events.Scriptables;
 using Health;
+using Objects;
 using Player.Properties;
 using UnityEngine;
 
@@ -10,6 +12,9 @@ namespace Player.Attacks
 {
     public class MeleeWeapon : MonoBehaviour
     {
+        [Header("Position properties")] 
+        [SerializeField] private GameObject pivot;
+        
         [Header("Damage properties")] 
         [SerializeField] private PlayerAttackProperties playerAttackProperties;
 
@@ -21,6 +26,9 @@ namespace Player.Attacks
         
         private readonly List<Collider> _hittedEnemies = new List<Collider>();
 
+        private Vector3 testPosition;
+        private Vector3 test2Position;
+        
         private void OnDisable()
         {
             ResetHittedEnemiesBuffer();
@@ -28,10 +36,17 @@ namespace Player.Attacks
 
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log(other.gameObject);
             if (!this.enabled || _hittedEnemies.Contains(other) || other.CompareTag("Player"))
                 return;
-            
-            if (other.transform.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageInterface))
+
+            testPosition = pivot.transform.position;
+            test2Position = other.transform.position;
+            if (other.transform.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageInterface) && 
+                !Physics.Linecast(
+                    pivot.transform.position, 
+                    other.transform.position, 
+                    playerAttackProperties.attackOcclussion))
             {
                 takeDamageInterface.TryTakeDamage(playerAttackProperties.damage);
                 _hittedEnemies.Add(other);
@@ -42,6 +57,11 @@ namespace Player.Attacks
                     onHitStop?.RaiseEvent(playerAttackProperties.hitStopSeconds);
                     onFrenziedEvent?.RaiseEvent();
                 }
+            }
+
+            if (other.gameObject.TryGetComponent<IOpenable>(out IOpenable openable))
+            {
+                openable.Open();
             }
         }
 
