@@ -19,5 +19,11 @@ namespace CameraScripts
         public float pivotSpeed;
         [Range(0, 10)]
         public float pivotMinDistance;
+
+        [Header("Cursor Influence Over Pivot")]
+        public bool shouldInfluence;
+        [Range(0, 1)]
+        public float cursorInfluence;
+        public bool freeCamera;
     }
 }

@@ -13,7 +13,6 @@ namespace Player
         private Vector2 _viewPortPos;
         private Vector2 cursorDir;
         public Vector2 CursorDir => cursorDir.normalized;
-
         void OnEnable()
         {
             handler.OnPlayerLook.AddListener(HandleLookDir);
