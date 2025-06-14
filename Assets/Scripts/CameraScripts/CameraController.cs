@@ -41,11 +41,6 @@ namespace CameraScripts
 
             composer.TargetOffset = _properties.targetOffset;
             composer.Damping = _properties.damping;
-
-            composer.Lookahead.Enabled = _properties.lookAhead;
-            composer.Lookahead.Time = _properties.lookAheadTime;
-            composer.Lookahead.Smoothing = _properties.lookAheadSmoothing;
-            composer.Lookahead.IgnoreY = _properties.ignoreY;
         }
 
         private void HandleCameraShake(CameraShakeProfile shakeProfile)

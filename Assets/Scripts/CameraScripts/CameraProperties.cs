@@ -13,11 +13,11 @@ namespace CameraScripts
         public Vector3 targetOffset;
         public Vector3 damping;
 
-        public bool lookAhead;
-        [Range(0, 1)]
-        public float lookAheadTime;
-        [Range(0, 30)]
-        public float lookAheadSmoothing;
-        public bool ignoreY;
+        [Header("Pivot Follow")]
+        public bool drawPivotGizmos;
+        [Range(0, 100)]
+        public float pivotSpeed;
+        [Range(0, 10)]
+        public float pivotMinDistance;
     }
 }
