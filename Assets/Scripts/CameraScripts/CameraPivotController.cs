@@ -15,6 +15,9 @@ namespace CameraScripts
         private bool _isTracking = false;
 
         private Vector2 _cursorPosition;
+        private const float DIST_TOLERANCE = 0.1f;
+
+        private Vector2 _prevCursorPosition;
 
         private void Start()
         {
@@ -24,15 +27,16 @@ namespace CameraScripts
 
         void Update()
         {
-            if (GetDistance() >= cameraProperties.pivotMinDistance && !_isTracking)
+            if ((GetDistance() >= cameraProperties.pivotMinDistance && !_isTracking) || (cameraProperties.shouldInfluence && _cursorPosition != _prevCursorPosition))
             {
                 _isTracking = true;
             }
 
             if (_isTracking)
             {
-                MoveTowardsTarget();
-                if (GetDistance() < Single.Epsilon)
+                if (GetDistance() > DIST_TOLERANCE)
+                    MoveTowardsTarget();
+                else
                     _isTracking = false;
             }
         }
