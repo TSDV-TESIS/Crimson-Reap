@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Events.Scriptables;
+using Objects;
 using Player.Properties;
 using UnityEngine;
 
@@ -50,8 +51,15 @@ namespace Player.Checks
 
         public bool IsGrounded()
         {
-            return Physics.Raycast(feetPivot.position, Vector3.down, out _groundHit,
-            playerMovementProperties.checkDistance, playerMovementProperties.whatIsGround);
+            if (Physics.Raycast(feetPivot.position, Vector3.down, out _groundHit, playerMovementProperties.checkDistance, playerMovementProperties.whatIsGround))
+            {
+                if (_groundHit.transform.TryGetComponent(out IOpenable openable))
+                    openable.Open();
+
+                return true;
+            }
+
+            return false;
         }
 
         public bool IsOnPlatform()

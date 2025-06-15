@@ -1,26 +1,38 @@
 using System.Collections;
 using Events.Scriptables;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Event = AK.Wwise.Event;
 
 namespace Objects.HatchDoor
 {
+    [RequireComponent(typeof(Collider))]
     public class HatchController : MonoBehaviour, IOpenable
     {
         [SerializeField] private float hatchTimeUntilOpening;
         [SerializeField] private float hatchTimeUntilClosing;
 
         [SerializeField] private float openCloseAnimDuration;
-        [SerializeField] private HatchContactHandler hatchContactHandler;
 
         [Header("Sounds")]
         [SerializeField] private AkWwiseEventChannelSO onPlayEvent;
-        [SerializeField] private AK.Wwise.Event openHatchEvent;
+        [SerializeField] private Event openHatchEvent;
 
         private Coroutine _hatchCoroutine;
+        private Collider _collider;
+        private bool _isMoving;
+
+        private void OnEnable()
+        {
+            _collider ??= GetComponent<Collider>();
+        }
 
         public void Open()
         {
+            if (_isMoving)
+                return;
+
+            _isMoving = true;
+
             if (_hatchCoroutine != null)
                 StopCoroutine(_hatchCoroutine);
 
@@ -30,12 +42,13 @@ namespace Objects.HatchDoor
         private IEnumerator HatchOpenCloseCoroutine()
         {
             yield return new WaitForSeconds(hatchTimeUntilOpening);
-            hatchContactHandler.enabled = false;
+            _collider.enabled = false;
             yield return HatchRotationAnim(Quaternion.Euler(-90, 0, 0));
 
             yield return new WaitForSeconds(hatchTimeUntilClosing);
             yield return HatchRotationAnim(Quaternion.Euler(0, 0, 0));
-            hatchContactHandler.enabled = true;
+            _collider.enabled = true;
+            _isMoving = false;
         }
 
         private IEnumerator HatchRotationAnim(Quaternion targetRotation)
