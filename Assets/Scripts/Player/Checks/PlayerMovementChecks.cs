@@ -54,6 +54,12 @@ namespace Player.Checks
             playerMovementProperties.checkDistance, playerMovementProperties.whatIsGround);
         }
 
+        public bool IsOnPlatform()
+        {
+            return Physics.Raycast(feetPivot.position, Vector3.down, out _groundHit,
+            playerMovementProperties.checkDistance, playerMovementProperties.whatIsPlatform);
+        }
+
         public bool IsFalling(Vector3 moveDirection)
         {
             return moveDirection.y < 0;
@@ -156,8 +162,7 @@ namespace Player.Checks
         public bool IsNearCeiling()
         {
             if (_shouldCheckCeiling && Physics.Raycast(headPivot.position, Vector3.up, out _ceilingHit,
-                playerMovementProperties.checkDistance, playerMovementProperties.whatIsWall | playerMovementProperties.whatIsGround))
-
+                playerMovementProperties.checkDistance, playerMovementProperties.whatIsCeiling))
             {
                 Debug.Log($"Normal: {_ceilingHit.normal} is equal to V3.Down {_ceilingHit.normal == Vector3.down}");
 
