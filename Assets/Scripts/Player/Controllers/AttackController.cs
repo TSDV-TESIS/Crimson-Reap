@@ -14,7 +14,7 @@ namespace Player.Controllers
 
         [Header("Attack properties")]
         [SerializeField] private PlayerAttackProperties attackProperties;
-
+        
         private ShadowStep _shadows;
         private PlayerMovement _playerMovement;
         private MouseLook _mouseLook;
@@ -50,12 +50,16 @@ namespace Player.Controllers
             bool stopped = false;
             _shadows.InitShadowStepShadows();
             _playerMovement.Velocity = _mouseLook.CursorDir * attackProperties.displacementForce;
-            if (agent.AttackChecks.IsNearGround() && _playerMovement.Velocity.y < 0)
+            if ((agent.AttackChecks.IsNearGround() && _playerMovement.Velocity.y < 0) || !agent.AttackChecks.CanMoveOnYOnAttack())
             {
                 _playerMovement.Velocity = new Vector2(_playerMovement.Velocity.x, 0);
             }
             while (timer < attackProperties.duration)
             {
+                if (!agent.AttackChecks.CanMoveOnYOnAttack())
+                {
+                    _playerMovement.FreeFall();
+                }
                 _playerMovement.Move(_playerMovement.Velocity * Time.deltaTime);
                 timer = Time.time - startTime;
                 yield return null;
@@ -66,6 +70,7 @@ namespace Player.Controllers
 
         private void StopAttack()
         {
+            agent.AttackChecks.SetAttackOnCoolDown();
             animationController.HandleStopAttack();
             _shadows.StopShadows();
             attackObject.SetActive(false);
@@ -76,7 +81,11 @@ namespace Player.Controllers
                 agent.ChangeStateToGrounded();
             }
             else
+            {
+                Debug.Log("HERE");
+                agent.AttackChecks.SetAttackJumpDone();
                 agent.ChangeStateToFalling();
+            }
         }
     }
 }

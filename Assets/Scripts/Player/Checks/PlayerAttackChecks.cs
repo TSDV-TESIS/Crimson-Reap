@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Player.Properties;
 using UnityEngine;
@@ -17,6 +18,28 @@ namespace Player.Checks
 
         private Coroutine _attackCoolDown;
 
+        private int _attacksOnJump;
+
+        private void OnEnable()
+        {
+            ResetAttacksOnJump();
+        }
+
+        public bool CanMoveOnYOnAttack()
+        {
+            return _attacksOnJump >= 0;
+        }
+        
+        public void SetAttackJumpDone()
+        {
+            _attacksOnJump--;
+        }
+        
+        public void ResetAttacksOnJump()
+        {
+            _attacksOnJump = attackProperties.maxAttacksOnJumpYMovement;
+        }
+        
         public bool CanAttack()
         {
             return !IsAttacking && !IsAttackInCoolDown;

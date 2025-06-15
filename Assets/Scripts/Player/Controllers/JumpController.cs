@@ -32,6 +32,8 @@ namespace Player.Controllers
 
         private void HandleShadowstep()
         {
+            if (!agent.MovementChecks.CanShadowStepOnAir()) return;
+            
             agent.ChangeStateToShadowStep();
         }
 

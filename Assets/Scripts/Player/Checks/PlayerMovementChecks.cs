@@ -33,21 +33,42 @@ namespace Player.Checks
         private bool _shouldCheckWall;
         private bool _shouldCheckCeiling;
         private bool _shouldUnboundWall;
+        
         private float _wallRideInCoyoteSeconds;
         private bool _inWallrideCoyoteTime;
+
+        
         private Coroutine _shouldCheckWallCoroutine;
         private Coroutine _unboundWallCoroutine;
         private Coroutine _shadowstepCooldownCoroutine;
         private Coroutine _shouldCheckCeilingCoroutine;
 
+        private int _shadowstepsOnAirLeft;
         private void OnEnable()
         {
             _shouldCheckCeiling = true;
             _shouldCheckWall = true;
             _shouldUnboundWall = false;
             _inWallrideCoyoteTime = false;
+            
+            ResetShadowStepsOnAir();
         }
 
+        public bool CanShadowStepOnAir()
+        {
+            return _shadowstepsOnAirLeft > 0;
+        }
+
+        public void SetShadowStepOnAirUsed()
+        {
+            _shadowstepsOnAirLeft--;
+        }
+
+        public void ResetShadowStepsOnAir()
+        {
+            _shadowstepsOnAirLeft = playerMovementProperties.maxShadowStepsOnAir;
+        }
+        
         public bool IsGrounded()
         {
             return Physics.Raycast(feetPivot.position, Vector3.down, out _groundHit,
@@ -308,6 +329,7 @@ namespace Player.Checks
         {
             float timer = 0;
             IsShadowStepOnCooldown = true;
+            
             while (timer < playerMovementProperties.shadowStepCooldown)
             {
                 onShadowstepCooldownValueEvent?.RaiseEvent((float)(timer / playerMovementProperties.shadowStepCooldown));

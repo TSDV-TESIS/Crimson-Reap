@@ -53,11 +53,12 @@ namespace Player.Properties
 
         [Header("ShadowStep")]
         public float shadowStepTime = 0.5f;
-
         public float shadowStepVelocity = 10f;
         public double shadowStepCooldown = 1f;
         public float bloodStepVelocity;
         public float bloodStepTime;
         public float ceilingCheckWaitTime = 0.5f;
+        public int maxShadowStepsOnAir = 1;
+        public Vector2 exitShadowstepMomentumMantained;
     }
 }

@@ -270,11 +270,6 @@ namespace Player
             _characterController.enabled = true;
         }
 
-        public int GetMoveDirectionSign()
-        {
-            return (int)Mathf.Sign(_moveDirection.x);
-        }
-
         public void Shadowstep(Vector2 direction, bool isBloodstep)
         {
             float velocityToUse = isBloodstep ? playerMovementProperties.bloodStepVelocity : playerMovementProperties.shadowStepVelocity;
@@ -287,6 +282,12 @@ namespace Player
         public void OnDrawGizmos()
         {
             Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + _moveDirection * 10f);
+        }
+
+        public void ExitShadowstep()
+        {
+            Velocity.y *= playerMovementProperties.exitShadowstepMomentumMantained.y;
+            Velocity.x = _moveDirection.x != 0 ? Velocity.x : Velocity.x * playerMovementProperties.exitShadowstepMomentumMantained.x;
         }
     }
 }
