@@ -43,8 +43,33 @@ MonoBehaviour:
   maxWallSlideVerticalVelocity: 6
   wallJumpForce: {x: 20, y: 30}
   unboundTime: 0.5
-  wallVelocityCheck: 5
+  wallVelocityCheck: 1
   wallRideMaxCoyoteSeconds: 0.25
+  wallSlideMomentum: 23.6
+  wallSlideMomentumAngleInfluence:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   maxSlopeAngle: 50
   shouldDrawGizmos: 1
   shadowStepTime: 0.2
@@ -53,3 +78,5 @@ MonoBehaviour:
   bloodStepVelocity: 40
   bloodStepTime: 0.4
   ceilingCheckWaitTime: 0.5
+  maxShadowStepsOnAir: 1
+  exitShadowstepMomentumMantained: {x: 0.5, y: 0.3}

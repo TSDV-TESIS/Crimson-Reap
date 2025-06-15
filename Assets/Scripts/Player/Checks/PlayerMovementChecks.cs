@@ -34,21 +34,42 @@ namespace Player.Checks
         private bool _shouldCheckWall;
         private bool _shouldCheckCeiling;
         private bool _shouldUnboundWall;
+        
         private float _wallRideInCoyoteSeconds;
         private bool _inWallrideCoyoteTime;
+
+        
         private Coroutine _shouldCheckWallCoroutine;
         private Coroutine _unboundWallCoroutine;
         private Coroutine _shadowstepCooldownCoroutine;
         private Coroutine _shouldCheckCeilingCoroutine;
 
+        private int _shadowstepsOnAirLeft;
         private void OnEnable()
         {
             _shouldCheckCeiling = true;
             _shouldCheckWall = true;
             _shouldUnboundWall = false;
             _inWallrideCoyoteTime = false;
+            
+            ResetShadowStepsOnAir();
         }
 
+        public bool CanShadowStepOnAir()
+        {
+            return _shadowstepsOnAirLeft > 0;
+        }
+
+        public void SetShadowStepOnAirUsed()
+        {
+            _shadowstepsOnAirLeft--;
+        }
+
+        public void ResetShadowStepsOnAir()
+        {
+            _shadowstepsOnAirLeft = playerMovementProperties.maxShadowStepsOnAir;
+        }
+        
         public bool IsGrounded()
         {
             if (Physics.Raycast(feetPivot.position, Vector3.down, out _groundHit, playerMovementProperties.checkDistance, playerMovementProperties.whatIsGround))
@@ -161,7 +182,8 @@ namespace Player.Checks
             int signToCheck = Math.Sign(Math.Abs(velocity.x) > playerMovementProperties.wallVelocityCheck
                 ? velocity.x
                 : moveDirection.x);
-            _isWallSliding = moveDirection.x != 0 && WallRaycast(signToCheck);
+            
+            _isWallSliding = WallRaycast(signToCheck);
 
             WallSlideDirection = _isWallSliding ? signToCheck : 0;
             return _isWallSliding;
@@ -320,6 +342,7 @@ namespace Player.Checks
         {
             float timer = 0;
             IsShadowStepOnCooldown = true;
+            
             while (timer < playerMovementProperties.shadowStepCooldown)
             {
                 onShadowstepCooldownValueEvent?.RaiseEvent((float)(timer / playerMovementProperties.shadowStepCooldown));

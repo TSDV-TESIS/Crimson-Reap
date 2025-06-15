@@ -25,9 +25,6 @@ namespace Player.Attacks
         [SerializeField] private AK.Wwise.Event decapitationEvent;    
         
         private readonly List<Collider> _hittedEnemies = new List<Collider>();
-
-        private Vector3 testPosition;
-        private Vector3 test2Position;
         
         private void OnDisable()
         {
@@ -39,9 +36,7 @@ namespace Player.Attacks
             Debug.Log(other.gameObject);
             if (!this.enabled || _hittedEnemies.Contains(other) || other.CompareTag("Player"))
                 return;
-
-            testPosition = pivot.transform.position;
-            test2Position = other.transform.position;
+            
             if (other.transform.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageInterface) && 
                 !Physics.Linecast(
                     pivot.transform.position, 

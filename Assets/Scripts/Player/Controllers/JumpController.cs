@@ -19,12 +19,6 @@ namespace Player.Controllers
             inputHandler?.OnPlayerAttack.AddListener(OnAttack);
         }
 
-        private void Start()
-        {
-            inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
-            inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
-        }
-
         private void OnDisable()
         {
             inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
@@ -38,6 +32,8 @@ namespace Player.Controllers
 
         private void HandleShadowstep()
         {
+            if (!agent.MovementChecks.CanShadowStepOnAir()) return;
+            
             agent.ChangeStateToShadowStep();
         }
 

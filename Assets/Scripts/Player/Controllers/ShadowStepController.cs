@@ -116,11 +116,15 @@ namespace Player.Controllers
         private void ExitShadowstep()
         {
             agent.MovementChecks.SetShadowstepOnCooldown();
+            _playerMovement.ExitShadowstep();
 
             if (agent.MovementChecks.IsNearWall())
                 agent.ChangeStateToWallSlide();
             else if (!agent.MovementChecks.IsGrounded())
+            {
+                agent.MovementChecks.SetShadowStepOnAirUsed();
                 agent.ChangeStateToFalling();
+            }
             else
                 agent.ChangeStateToGrounded();
         }

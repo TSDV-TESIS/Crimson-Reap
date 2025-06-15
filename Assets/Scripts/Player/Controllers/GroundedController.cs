@@ -21,8 +21,11 @@ namespace Player.Controllers
 
             float clearance = agent.MovementChecks.GetGroundClearance();
             if (clearance == 0) return;
-
+            
             _playerMovement.Grounded(clearance);
+            
+            agent.MovementChecks.ResetShadowStepsOnAir();
+            agent.AttackChecks.ResetAttacksOnJump();
         }
 
         private void OnDisable()

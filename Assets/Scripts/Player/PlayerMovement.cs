@@ -180,6 +180,24 @@ namespace Player
 
             _characterController.Move(Velocity * Time.deltaTime);
         }
+        
+        public void AddWallslideMomentum()
+        {
+            if (Velocity.y <= 0) return;
+            
+            Vector3 velocityDirection = Velocity.normalized;
+
+            float angle = Vector3.Angle(
+                transform.up,
+                velocityDirection
+            ) * Mathf.Deg2Rad;
+
+            float cosValue = Mathf.Cos(angle);
+            float influence = playerMovementProperties.wallSlideMomentumAngleInfluence.Evaluate(cosValue);
+            
+            Velocity.x = 0;
+            Velocity.y = playerMovementProperties.wallSlideMomentum * influence;
+        }
 
         public void Move(Vector3 displacement)
         {
@@ -252,11 +270,6 @@ namespace Player
             _characterController.enabled = true;
         }
 
-        public int GetMoveDirectionSign()
-        {
-            return (int)Mathf.Sign(_moveDirection.x);
-        }
-
         public void Shadowstep(Vector2 direction, bool isBloodstep)
         {
             float velocityToUse = isBloodstep ? playerMovementProperties.bloodStepVelocity : playerMovementProperties.shadowStepVelocity;
@@ -274,6 +287,12 @@ namespace Player
         public void OnDrawGizmos()
         {
             Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + _moveDirection * 10f);
+        }
+
+        public void ExitShadowstep()
+        {
+            Velocity.y *= playerMovementProperties.exitShadowstepMomentumMantained.y;
+            Velocity.x = _moveDirection.x != 0 ? Velocity.x : Velocity.x * playerMovementProperties.exitShadowstepMomentumMantained.x;
         }
     }
 }

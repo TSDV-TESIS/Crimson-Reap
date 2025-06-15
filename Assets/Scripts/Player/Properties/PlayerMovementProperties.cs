@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.Properties
 {
@@ -44,6 +45,10 @@ namespace Player.Properties
         [Tooltip("Min velocity with which it automatically checks for wallslide")]
         public float wallVelocityCheck = 20f;
         public float wallRideMaxCoyoteSeconds = 0.5f;
+        [Tooltip("Wallslide momentum force on enter wallslide")]
+        public float wallSlideMomentum;
+        [Tooltip("Wallslide momentum influence per angle on hit")]
+        public AnimationCurve wallSlideMomentumAngleInfluence;
 
         [Header("Slope properties")]
         public float maxSlopeAngle = 45f;
@@ -53,11 +58,12 @@ namespace Player.Properties
 
         [Header("ShadowStep")]
         public float shadowStepTime = 0.5f;
-
         public float shadowStepVelocity = 10f;
         public double shadowStepCooldown = 1f;
         public float bloodStepVelocity;
         public float bloodStepTime;
         public float ceilingCheckWaitTime = 0.5f;
+        public int maxShadowStepsOnAir = 1;
+        public Vector2 exitShadowstepMomentumMantained;
     }
 }

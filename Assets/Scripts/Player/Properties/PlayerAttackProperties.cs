@@ -21,5 +21,7 @@ namespace Player.Properties
         public bool shouldDrawGizmos = false;
 
         public LayerMask attackOcclussion;
+        
+        public int maxAttacksOnJumpYMovement = 1;
     }
 }
