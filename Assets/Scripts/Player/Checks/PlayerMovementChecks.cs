@@ -147,7 +147,9 @@ namespace Player.Checks
             int signToCheck = Math.Sign(Math.Abs(velocity.x) > playerMovementProperties.wallVelocityCheck
                 ? velocity.x
                 : moveDirection.x);
-            _isWallSliding = moveDirection.x != 0 && WallRaycast(signToCheck);
+            
+            Debug.Log($"SIGN TO CHECK: {signToCheck}, CALCULATION: {Math.Abs(velocity.x) > playerMovementProperties.wallVelocityCheck}, ABS: {Math.Abs(velocity.x)}, VELOCITY: {playerMovementProperties.wallVelocityCheck}, value: {velocity.x}");
+            _isWallSliding = WallRaycast(signToCheck);
 
             WallSlideDirection = _isWallSliding ? signToCheck : 0;
             return _isWallSliding;

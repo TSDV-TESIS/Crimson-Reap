@@ -195,9 +195,6 @@ namespace Player
             float cosValue = Mathf.Cos(angle);
             float influence = playerMovementProperties.wallSlideMomentumAngleInfluence.Evaluate(cosValue);
             
-            Debug.Log($"VELOCITY: {velocityDirection} RIGHT: {transform.up} ANGLE: ${angle}, SIN: {cosValue} INFLUENCE: {influence}");
-
-            
             Velocity.x = 0;
             Velocity.y = playerMovementProperties.wallSlideMomentum * influence;
         }
