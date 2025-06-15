@@ -10,12 +10,13 @@ namespace Objects.HatchDoor
         [SerializeField] private float hatchTimeUntilOpening;
         [SerializeField] private float hatchTimeUntilClosing;
 
-        [SerializeField] private GameObject model;
-        
+        [SerializeField] private float openCloseAnimDuration;
+        [SerializeField] private HatchContactHandler hatchContactHandler;
+
         [Header("Sounds")]
         [SerializeField] private AkWwiseEventChannelSO onPlayEvent;
         [SerializeField] private AK.Wwise.Event openHatchEvent;
-        
+
         private Coroutine _hatchCoroutine;
 
         public void Open()
@@ -29,11 +30,25 @@ namespace Objects.HatchDoor
         private IEnumerator HatchOpenCloseCoroutine()
         {
             yield return new WaitForSeconds(hatchTimeUntilOpening);
-            model.SetActive(false);
-            onPlayEvent.onTypedEvent.Invoke(openHatchEvent);
+            hatchContactHandler.enabled = false;
+            yield return HatchRotationAnim(Quaternion.Euler(-90, 0, 0));
+
             yield return new WaitForSeconds(hatchTimeUntilClosing);
+            yield return HatchRotationAnim(Quaternion.Euler(0, 0, 0));
+            hatchContactHandler.enabled = true;
+        }
+
+        private IEnumerator HatchRotationAnim(Quaternion targetRotation)
+        {
             onPlayEvent.onTypedEvent.Invoke(openHatchEvent);
-            model.SetActive(true);
+            float startTime = Time.time;
+            float timer = 0;
+            while (timer < openCloseAnimDuration)
+            {
+                timer = Time.time - startTime;
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, timer / openCloseAnimDuration);
+                yield return null;
+            }
         }
     }
 }
