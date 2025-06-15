@@ -18,6 +18,7 @@ namespace Player
         public UnityEvent<bool> OnZoomIn;
         public UnityEvent<bool> OnZoomOut;
         public UnityEvent OnInteract;
+        public UnityEvent OnDropDown;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -87,6 +88,11 @@ namespace Player
         {
             if (context.performed)
                 OnInteract.Invoke();
+        }
+        public void OnDropDownEvent(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+                OnDropDown.Invoke();
         }
     }
 }

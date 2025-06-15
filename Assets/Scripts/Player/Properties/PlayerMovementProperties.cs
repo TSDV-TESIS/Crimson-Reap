@@ -20,6 +20,7 @@ namespace Player.Properties
         public float maxGravityVelocity;
         public float maxJumpVelocity;
         public float cornerCorrectionMaxDistance;
+        public LayerMask whatIsCeiling;
 
         [Header("Grounding properties")]
         [Tooltip("Distance from where it should start checking that player is grounded")]
@@ -27,6 +28,10 @@ namespace Player.Properties
         public LayerMask whatIsGround;
         public float feetOffset;
 
+        [Header("DropDown properties")]
+        public LayerMask whatIsPlatform;
+        public Vector3 dropDownDisplacement;
+        
         [Header("Wall Slide properties")]
         public float wallCheckDistance;
         public LayerMask whatIsWall;

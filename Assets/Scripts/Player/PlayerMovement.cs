@@ -266,6 +266,11 @@ namespace Player
             Move(Velocity * Time.deltaTime);
         }
 
+        public void DropDown()
+        {
+            Move(playerMovementProperties.dropDownDisplacement);
+        }
+
         public void OnDrawGizmos()
         {
             Gizmos.DrawLine(gameObject.transform.position, gameObject.transform.position + _moveDirection * 10f);
