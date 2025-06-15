@@ -34,6 +34,7 @@ namespace Player.Controllers
             input.OnPlayerJump.AddListener(OnJump);
             input.OnPlayerShadowStep.AddListener(OnShadowstep);
             input.OnPlayerAttack.AddListener(OnAttack);
+            _movement.AddWallslideMomentum();
             onWallHitEnter.Invoke(agent.MovementChecks.WallrideHitPosition, agent.MovementChecks.WallSlideDirection);
         }
 

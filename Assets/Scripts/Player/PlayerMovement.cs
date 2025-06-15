@@ -180,6 +180,27 @@ namespace Player
 
             _characterController.Move(Velocity * Time.deltaTime);
         }
+        
+        public void AddWallslideMomentum()
+        {
+            if (Velocity.y <= 0) return;
+            
+            Vector3 velocityDirection = Velocity.normalized;
+
+            float angle = Vector3.Angle(
+                transform.up,
+                velocityDirection
+            ) * Mathf.Deg2Rad;
+
+            float cosValue = Mathf.Cos(angle);
+            float influence = playerMovementProperties.wallSlideMomentumAngleInfluence.Evaluate(cosValue);
+            
+            Debug.Log($"VELOCITY: {velocityDirection} RIGHT: {transform.up} ANGLE: ${angle}, SIN: {cosValue} INFLUENCE: {influence}");
+
+            
+            Velocity.x = 0;
+            Velocity.y = playerMovementProperties.wallSlideMomentum * influence;
+        }
 
         public void Move(Vector3 displacement)
         {

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Player.Properties
 {
@@ -39,6 +40,10 @@ namespace Player.Properties
         [Tooltip("Min velocity with which it automatically checks for wallslide")]
         public float wallVelocityCheck = 20f;
         public float wallRideMaxCoyoteSeconds = 0.5f;
+        [Tooltip("Wallslide momentum force on enter wallslide")]
+        public float wallSlideMomentum;
+        [Tooltip("Wallslide momentum influence per angle on hit")]
+        public AnimationCurve wallSlideMomentumAngleInfluence;
 
         [Header("Slope properties")]
         public float maxSlopeAngle = 45f;
