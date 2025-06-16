@@ -20,9 +20,13 @@ namespace Managers
         [SerializeField] private StringEventChannelSO onLoadScene;
         
         private bool _canWin;
-
+        private BoxCollider _collider;
+        
         private void OnEnable()
         {
+            _collider ??= GetComponent<BoxCollider>();
+            _collider.isTrigger = false;
+            gameObject.layer = LayerMask.NameToLayer("Wall");
             _canWin = false;
             onEnemiesDisabled?.onEvent.AddListener(HandleCanWin);
         }
@@ -40,6 +44,8 @@ namespace Managers
 
         private void HandleCanWin()
         {
+            _collider.isTrigger = true;
+            gameObject.layer = LayerMask.NameToLayer("WinDoor");
             closedDoor.SetActive(false);
             openDoor.SetActive(true);
             _canWin = true;
