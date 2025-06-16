@@ -62,12 +62,12 @@ namespace Health
         private void OnEnable()
         {
             _hasBeenDead = false;
-            receiveLethalDamageEvent.onEvent.AddListener(TakeLethalDamage);
+            receiveLethalDamageEvent?.onEvent.AddListener(TakeLethalDamage);
         }
 
         private void OnDisable()
         {
-            receiveLethalDamageEvent.onEvent.RemoveListener(TakeLethalDamage);
+            receiveLethalDamageEvent?.onEvent.RemoveListener(TakeLethalDamage);
         }
 
         private void OnDestroy()
