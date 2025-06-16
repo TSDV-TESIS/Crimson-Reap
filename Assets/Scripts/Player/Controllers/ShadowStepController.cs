@@ -83,15 +83,9 @@ namespace Player.Controllers
             while (timer < duration)
             {
                 if (timer >= playerMovementProperties.shadowStepIframes.x && timer <= playerMovementProperties.shadowStepIframes.y)
-                {
                     _healthPoints.SetCanTakeDamage(false);
-                    Debug.Log($"IFRAME");
-                }
                 else
-                {
-                    Debug.Log($"NO IFRAME");
                     _healthPoints.SetCanTakeDamage(true);
-                }
 
                 if (agent.MovementChecks.IsNearCeiling())
                 {
