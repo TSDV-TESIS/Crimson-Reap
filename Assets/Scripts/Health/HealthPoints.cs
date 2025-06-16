@@ -4,6 +4,7 @@ using Events;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace Health
 {
@@ -26,6 +27,7 @@ namespace Health
         [SerializeField] private IntEventChannelSO onInitializeHealthEvent;
         [SerializeField] private IntEventChannelSO onInitializeMaxHealthEvent;
         [SerializeField] private VoidEventChannelSO onDamageAvoidedEvent;
+        [SerializeField] private VoidEventChannelSO receiveLethalDamageEvent;
 
         [Header("Internal events")]
         [SerializeField] private UnityEvent onHit;
@@ -60,6 +62,12 @@ namespace Health
         private void OnEnable()
         {
             _hasBeenDead = false;
+            receiveLethalDamageEvent?.onEvent.AddListener(TakeLethalDamage);
+        }
+
+        private void OnDisable()
+        {
+            receiveLethalDamageEvent?.onEvent.RemoveListener(TakeLethalDamage);
         }
 
         private void OnDestroy()
@@ -88,6 +96,11 @@ namespace Health
             onResetPointsEvent?.RaiseEvent(CurrentHp);
             onInternalResetEvent?.Invoke(CurrentHp);
             RaiseInitMaxHpEvent();
+        }
+
+        private void TakeLethalDamage()
+        {
+            TryTakeDamage(maxHealth);
         }
 
         public bool TryTakeDamage(int damage)
