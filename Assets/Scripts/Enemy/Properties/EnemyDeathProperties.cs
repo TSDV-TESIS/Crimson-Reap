@@ -1,3 +1,4 @@
+using TimeScripts;
 using UnityEngine;
 
 namespace Enemy
@@ -9,6 +10,6 @@ namespace Enemy
         public float disableSeconds = 0.5f;
         public float screamingRadius = 10f;
         public bool shouldDrawGizmos = false;
-        public float hitStopTimeSeconds = 0.1f;
+        public TimeFreezeProperties hitstopProperties;
     }
 }

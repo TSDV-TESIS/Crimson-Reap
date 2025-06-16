@@ -16,17 +16,18 @@ namespace Enemy
         [SerializeField] private ParticleSystem splashBloodParticles;
         [SerializeField] private SoundCollisionHandler screamSoundCollisionHandler;
         [SerializeField] private GameObject[] objectsToDisable;
-        
-        [Header("Events")] 
+
+        [Header("Events")]
         [SerializeField] private GameObjectEventChannelSO onEnemyEnabled;
         [SerializeField] private IntEventChannelSO onEnemyDeath;
         [SerializeField] private VoidEventChannelSO onBloodlustStart;
         [SerializeField] private VoidEventChannelSO onBloodlustEnd;
         [SerializeField] private GameObjectEventChannelSO onEnemyDisabled;
-        [SerializeField] private FloatEventChannel onHitStop;
-        
+        [SerializeField] private TimeStopEventChannelSO onHitStop;
+
         private Coroutine _disableCoroutine;
         private bool _isInBloodlust;
+
         private void OnEnable()
         {
             _isInBloodlust = false;
@@ -56,7 +57,7 @@ namespace Enemy
             Debug.Log("FRENZY START ON ENEMY");
             _isInBloodlust = true;
         }
-        
+
         public void HandleInitMaxHealth(int maxHealth)
         {
         }
@@ -69,17 +70,18 @@ namespace Enemy
         {
             onEnemyDeath?.RaiseEvent(enemyDeathProperties.healthRewardOnDeath);
             screamSoundCollisionHandler.EnableSound(enemyDeathProperties.shouldDrawGizmos);
-            
+
             splashBloodParticles.Play();
-            onHitStop?.RaiseEvent(enemyDeathProperties.hitStopTimeSeconds);
-            
+            onHitStop?.RaiseEvent(enemyDeathProperties.hitstopProperties);
+
             foreach (GameObject obj in objectsToDisable)
             {
                 obj.SetActive(false);
             }
+
             onEnemyDisabled?.RaiseEvent(gameObject);
-            
-            if(_disableCoroutine != null) StopCoroutine(_disableCoroutine);
+
+            if (_disableCoroutine != null) StopCoroutine(_disableCoroutine);
             _disableCoroutine = StartCoroutine(DisableCoroutine());
         }
 
@@ -91,10 +93,12 @@ namespace Enemy
                 timer += Time.deltaTime;
                 yield return null;
             }
+
             foreach (GameObject obj in objectsToDisable)
             {
                 obj.SetActive(true);
             }
+
             gameObject.SetActive(false);
         }
     }

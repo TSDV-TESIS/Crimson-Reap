@@ -7,34 +7,31 @@ namespace TimeScripts
     public class HitStop : MonoBehaviour
     {
         [Header("Events")]
-        
-        [SerializeField] private FloatEventChannel onHitStop;
+        [SerializeField] private TimeStopEventChannelSO onHitStop;
 
-        [SerializeField] private float reducedTimeInHit = 0.1f;
-        
         private Coroutine _hitStopCoroutine;
-        
+
         private void OnEnable()
         {
-            onHitStop?.onFloatEvent.AddListener(HandleHitStop);
+            onHitStop?.onTypedEvent.AddListener(HandleHitStop);
         }
 
         private void OnDisable()
         {
-            onHitStop?.onFloatEvent.RemoveListener(HandleHitStop);
+            onHitStop?.onTypedEvent.RemoveListener(HandleHitStop);
         }
 
-        private void HandleHitStop(float hitStopTime)
+        private void HandleHitStop(TimeFreezeProperties properties)
         {
-            if(_hitStopCoroutine != null) StopCoroutine(_hitStopCoroutine);
-            StartCoroutine(HitStopCoroutine(hitStopTime));
+            if (_hitStopCoroutine != null) StopCoroutine(_hitStopCoroutine);
+            StartCoroutine(HitStopCoroutine(properties));
         }
-        
-        private IEnumerator HitStopCoroutine(float hitStopTime)
+
+        private IEnumerator HitStopCoroutine(TimeFreezeProperties properties)
         {
             float timer = 0;
-            Time.timeScale = reducedTimeInHit;
-            while (timer < hitStopTime)
+            Time.timeScale = properties.slowDown;
+            while (timer < properties.duration)
             {
                 timer += Time.unscaledDeltaTime;
                 yield return null;
