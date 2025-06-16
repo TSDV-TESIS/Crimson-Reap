@@ -7,11 +7,16 @@ namespace Events
     public class VoidEventChannelSO : ScriptableObject
     {
         public UnityEvent onEvent;
+        public bool shouldLog = false;
 
         public void RaiseEvent()
         {
             if (onEvent != null)
             {
+                if (shouldLog)
+                {
+                    Debug.Log($"{this.name} CALLED!");
+                }
                 onEvent.Invoke();
             }
             else

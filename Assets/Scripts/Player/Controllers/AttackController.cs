@@ -82,7 +82,6 @@ namespace Player.Controllers
             }
             else
             {
-                Debug.Log("HERE");
                 agent.AttackChecks.SetAttackJumpDone();
                 agent.ChangeStateToFalling();
             }

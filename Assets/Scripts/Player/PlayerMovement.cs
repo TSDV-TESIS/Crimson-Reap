@@ -13,8 +13,6 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private PlayerAnimationController animationController;
-
         [Header("Input Handler")]
         [SerializeField] private InputHandler input;
 
@@ -98,15 +96,6 @@ namespace Player
         {
             _moveDirection = moveDirection;
 
-            if (_moveDirection != Vector3.zero)
-            {
-                animationController.HandleWalk();
-            }
-            else
-            {
-                animationController.HandleIdle();
-            }
-
             Vector3 prevPos = transform.position;
 
             if (_canWalk)
@@ -162,10 +151,14 @@ namespace Player
                 ? playerMovementProperties.frenziedMaxSpeed
                 : playerMovementProperties.maxSpeed;
             Velocity.x = Mathf.Sign(Velocity.x) * Mathf.Clamp(Mathf.Abs(Velocity.x) - playerMovementProperties.friction * Time.deltaTime, 0, maxSpeed);
-            if (Velocity.x != 0)
+            if (Mathf.Abs(Velocity.x) >= playerMovementProperties.maxSpeedIdle)
+            {
                 onWalk?.Invoke(Mathf.Sign(Velocity.x));
+            }
             else
+            {
                 onStop?.Invoke();
+            }
         }
 
         public void FreeFall()

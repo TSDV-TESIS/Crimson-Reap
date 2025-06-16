@@ -12,20 +12,19 @@ namespace Player.Attacks
 {
     public class MeleeWeapon : MonoBehaviour
     {
-        [Header("Position properties")] 
-        [SerializeField] private GameObject pivot;
-        
-        [Header("Damage properties")] 
-        [SerializeField] private PlayerAttackProperties playerAttackProperties;
+        [Header("Position properties")] [SerializeField]
+        private GameObject pivot;
 
-        [Header("Events")] 
-        [SerializeField] private VoidEventChannelSO onFrenziedEvent;
+        [Header("Damage properties")] [SerializeField]
+        private PlayerAttackProperties playerAttackProperties;
+
+        [Header("Events")] [SerializeField] private VoidEventChannelSO onFrenziedEvent;
         [SerializeField] private FloatEventChannel onHitStop;
         [SerializeField] private AkWwiseEventChannelSO onPlayEvent;
-        [SerializeField] private AK.Wwise.Event decapitationEvent;    
-        
+        [SerializeField] private AK.Wwise.Event decapitationEvent;
+
         private readonly List<Collider> _hittedEnemies = new List<Collider>();
-        
+
         private void OnDisable()
         {
             ResetHittedEnemiesBuffer();
@@ -39,14 +38,15 @@ namespace Player.Attacks
             
             if (other.transform.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageInterface) && 
                 !Physics.Linecast(
-                    pivot.transform.position, 
-                    other.transform.position, 
+                    pivot.transform.position,
+                    other.transform.position,
                     playerAttackProperties.attackOcclussion))
             {
                 takeDamageInterface.TryTakeDamage(playerAttackProperties.damage);
                 _hittedEnemies.Add(other);
 
-                if (other.gameObject.TryGetComponent<EnemyBeatHandler>(out EnemyBeatHandler enemyBeatHandler) && enemyBeatHandler.IsInHeartBeat && enemyBeatHandler.IsInBloodlust)
+                if (other.gameObject.TryGetComponent<EnemyBeatHandler>(out EnemyBeatHandler enemyBeatHandler) &&
+                    enemyBeatHandler.IsInHeartBeat && enemyBeatHandler.IsInBloodlust)
                 {
                     onPlayEvent?.RaiseEvent(decapitationEvent);
                     onHitStop?.RaiseEvent(playerAttackProperties.hitStopSeconds);

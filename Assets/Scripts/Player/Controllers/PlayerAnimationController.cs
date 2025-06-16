@@ -6,7 +6,9 @@ namespace Player.Controllers
     {
         [SerializeField] private Animator playerAnimator;
         private static readonly int Walking = Animator.StringToHash("Walking");
-        private static readonly int Attack1 = Animator.StringToHash("Attack");
+        private static readonly int Attack1 = Animator.StringToHash("AttackTrigger");
+        private static readonly int Falling = Animator.StringToHash("Falling");
+        private static readonly int Jump = Animator.StringToHash("Jump");
 
         public void HandleWalk()
         {
@@ -20,12 +22,34 @@ namespace Player.Controllers
 
         public void HandleAttack()
         {
-            playerAnimator.SetBool(Attack1, true);
+            Debug.LogWarning("ATTACK TRIGGER SET!");
+            playerAnimator.SetTrigger(Attack1);
         }
 
         public void HandleStopAttack()
         {
-            playerAnimator.SetBool(Attack1, false);
+        }
+
+        public void HandleJump()
+        {
+            playerAnimator.SetBool(Jump, true);
+            playerAnimator.SetBool(Falling, true);
+        }
+
+        public void HandleFalling()
+        {
+            playerAnimator.SetBool(Falling, true);
+            playerAnimator.SetBool(Jump, false);
+        }
+
+        public void HandleOffJump()
+        {
+            playerAnimator.SetBool(Jump, false);
+        }
+
+        public void HandleGrounded()
+        {
+            playerAnimator.SetBool(Falling, false);
         }
     }
 }
