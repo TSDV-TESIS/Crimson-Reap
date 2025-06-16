@@ -1,22 +1,22 @@
 using System;
 using Events;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Objects.Traps
 {
     public class BaseTrap : MonoBehaviour
     {
-        [SerializeField] private VoidEventChannelSO onTrapContact;
         [SerializeField] private VoidEventChannelSO instaKill;
-
+        public UnityEvent onTrapContact;
         protected virtual void OnEnable()
         {
-            onTrapContact.onEvent.AddListener(KillPlayer);
+            onTrapContact.AddListener(KillPlayer);
         }
 
         protected virtual void OnDisable()
         {
-            onTrapContact.onEvent.RemoveListener(KillPlayer);
+            onTrapContact.RemoveListener(KillPlayer);
         }
 
         protected virtual void KillPlayer()

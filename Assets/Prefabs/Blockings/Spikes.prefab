@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4331091813956913700}
   - component: {fileID: 445309804673895176}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e79bc00894058146a54a39669a40e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onTrapContact: {fileID: 11400000, guid: f7a7a04a6f68bc942b3c7abfe6509a28, type: 2}
   instaKill: {fileID: 11400000, guid: 5623fb62f8bf4b841b86bb8c9a902b25, type: 2}
+  onTrapContact:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9118578504792404358
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +62,7 @@ GameObject:
   - component: {fileID: 6625810038824607580}
   - component: {fileID: 8190164946393729193}
   - component: {fileID: 8225473531922466832}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: SpikesModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,4 +170,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a189575014e35d945a134672483bcdd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onTrapContact: {fileID: 11400000, guid: f7a7a04a6f68bc942b3c7abfe6509a28, type: 2}
+  baseTrap: {fileID: 445309804673895176}

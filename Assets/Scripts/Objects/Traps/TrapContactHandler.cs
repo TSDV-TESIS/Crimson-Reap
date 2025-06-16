@@ -7,11 +7,11 @@ namespace Objects.Traps
 {
     public class TrapContactHandler : MonoBehaviour
     {
-        [SerializeField] private VoidEventChannelSO onTrapContact;
+        [SerializeField] private BaseTrap baseTrap;
 
         private void OnTriggerEnter(Collider other)
         {
-            onTrapContact.RaiseEvent();
+            baseTrap.onTrapContact?.Invoke();
         }
     }
 }
