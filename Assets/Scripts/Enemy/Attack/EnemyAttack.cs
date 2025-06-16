@@ -16,13 +16,20 @@ namespace Enemy.Attack
         private void OnEnable()
         {
             _handler ??= attackSoundObject.GetComponent<SoundCollisionHandler>();
+            _handler.gameObject.SetActive(true);
             _handler.SoundRadius = properties.attackNoiseLevel;
+        }
+
+        private void OnDisable()
+        {
+            _handler.gameObject.SetActive(false);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player") && other.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageObject))
             {
+                Debug.Log("HERE????");
                 takeDamageObject.TryTakeDamage(damage);
             }
         }
