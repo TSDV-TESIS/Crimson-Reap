@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -58,6 +59,8 @@ namespace Player.Properties
 
         [Header("ShadowStep")]
         public float shadowStepTime = 0.5f;
+        [MinMaxRangeSlider(0,1)]
+        public Vector2 shadowStepIframes;
         public float shadowStepVelocity = 10f;
         public double shadowStepCooldown = 1f;
         public float bloodStepVelocity;

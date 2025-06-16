@@ -13,13 +13,13 @@ namespace Player.Controllers
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private ShadowStepProperties shadowStepProperties;
         [SerializeField] private GameObject bloodStepCollider;
-        
-        [Header("Events")] 
+
+        [Header("Events")]
         [SerializeField] private VoidEventChannelSO onFrenzyEnable;
         [SerializeField] private VoidEventChannelSO onFrenzyDisable;
 
         private bool _isFrenzied;
-        
+
         private PlayerMovement _playerMovement;
         private MouseLook _mouseLook;
         private CharacterController _characterController;
@@ -32,7 +32,7 @@ namespace Player.Controllers
             _mouseLook ??= GetComponent<MouseLook>();
             _characterController ??= GetComponent<CharacterController>();
             _healthPoints ??= GetComponent<HealthPoints>();
-            
+
             onFrenzyEnable?.onEvent.AddListener(HandleOnFrenzyEnabled);
             onFrenzyDisable?.onEvent.AddListener(HandleOnFrenzyDisabled);
         }
@@ -72,34 +72,38 @@ namespace Player.Controllers
             bool changedToWallslide = false;
 
             _characterController.excludeLayers |= shadowStepProperties.avoidableObjects;
-            _healthPoints.SetCanTakeDamage(false);
 
-            float timeToUse = playerMovementProperties.shadowStepTime;
+            float duration = playerMovementProperties.shadowStepTime;
             if (isBloodstep)
             {
                 bloodStepCollider?.SetActive(true);
-                timeToUse = playerMovementProperties.bloodStepTime;
+                duration = playerMovementProperties.bloodStepTime;
             }
-            
-            while (timer < timeToUse)
+
+            while (timer < duration)
             {
+                if (timer >= playerMovementProperties.shadowStepIframes.x && timer <= playerMovementProperties.shadowStepIframes.y)
+                    _healthPoints.SetCanTakeDamage(false);
+                else
+                    _healthPoints.SetCanTakeDamage(true);
+
                 if (agent.MovementChecks.IsNearCeiling())
                 {
                     _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
                     break;
                 }
+
                 _playerMovement.Shadowstep(direction, isBloodstep);
                 timer += Time.deltaTime;
                 yield return null;
             }
 
             if (isBloodstep)
-            { 
+            {
                 bloodStepCollider?.SetActive(false);
                 onFrenzyDisable.RaiseEvent();
             }
-            
-            _healthPoints.SetCanTakeDamage(true);
+
             _characterController.excludeLayers ^= shadowStepProperties.avoidableObjects;
 
             if (agent.MovementChecks.IsNearWall())
