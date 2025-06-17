@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Player;
+using Player.Properties;
 using UnityEngine;
 
 namespace CameraScripts
@@ -10,7 +11,8 @@ namespace CameraScripts
         [SerializeField] private CameraProperties cameraProperties;
         [SerializeField] private GameObject target;
         [SerializeField] private InputHandler inputHandler;
-
+        [SerializeField] private PlayerMovementProperties movementProperties;
+        
         private Vector2 _dirTowardsTarget;
         private bool _isTracking = false;
 
@@ -44,7 +46,7 @@ namespace CameraScripts
 
         private void MoveTowardsTarget()
         {
-            transform.Translate(GetDir() * (cameraProperties.pivotSpeed * Time.deltaTime));
+            transform.Translate(GetDir() * (GetDistance() >= cameraProperties.pivotMaxDistance ? movementProperties.maxSpeed  * Time.deltaTime : cameraProperties.pivotSpeed * Time.deltaTime));
         }
 
         private float GetDistance()
