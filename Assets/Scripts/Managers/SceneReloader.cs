@@ -18,6 +18,8 @@ namespace Managers
         
         [SerializeField] private StringEventChannelSO onLoadScene;
         [SerializeField] private string levelScene;
+
+        private Coroutine _handleRestartSceneCoroutine;
         
         void OnEnable()
         {
@@ -33,7 +35,8 @@ namespace Managers
 
         private void HandleRestartScene()
         {
-            StartCoroutine(GameOverCoroutine());
+            if (_handleRestartSceneCoroutine != null) StopCoroutine(_handleRestartSceneCoroutine);
+            _handleRestartSceneCoroutine = StartCoroutine(GameOverCoroutine());
         }
 
         private IEnumerator GameOverCoroutine()
