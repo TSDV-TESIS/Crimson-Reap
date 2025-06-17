@@ -11,6 +11,8 @@ namespace Player.Properties
         public float acceleration;
         public float friction;
         public float maxSpeed;
+        [Tooltip("(USED FOR ANIMATION) max speed with which the idle anim will be playing")]
+        public float maxSpeedIdle = 0.04f;
 
         [Header("Frenzied movement")]
         public float frenziedAcceleration;
