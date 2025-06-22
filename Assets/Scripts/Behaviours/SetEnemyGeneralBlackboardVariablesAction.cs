@@ -1,4 +1,5 @@
 using System;
+using Enemy.Attack;
 using Enemy.Properties;
 using Unity.Behavior;
 using Unity.Properties;
@@ -13,6 +14,8 @@ namespace Behaviours
     {
         [SerializeReference] public BlackboardVariable<GameObject> Self;
         [SerializeReference] public BlackboardVariable<EnemyGeneralProperties> EnemyProperties;
+        [SerializeReference] public BlackboardVariable<ArrowAttackProperties> ArrowProperties;
+        
         private BehaviorGraphAgent _agent;
         
         private readonly String _attackDistanceParameterName = "AttackDistance";
@@ -21,9 +24,10 @@ namespace Behaviours
         private readonly String _investigationWaitTimeSecondsParameterName = "InvestigationWaitTimeSeconds";
         private readonly String _patrolPointWaitTimeParameterName = "PatrolPointWaitTime";
         private readonly String _attackNoiseLevelParameterName = "AttackNoiseLevel";
-        private readonly String _attackDurationParameterName = "AttackDuration";
+        private readonly String _attackDurationParameterName = "AttackCooldown";
         private readonly String _attackStartTimeParameterName = "AttackStartTime";
         private readonly String _attackIframesDurationParameterName = "AttackIframesDuration";
+        private readonly String _arrowVelocityParameterName = "ArrowVelocity";
         
         protected override Status OnStart()
         {
@@ -33,6 +37,7 @@ namespace Behaviours
             if (
                 !(
                     _agent.GetVariable(_attackDistanceParameterName, out BlackboardVariable attackDistance) &&
+                    
                     _agent.GetVariable(_minRotationTimeParameterName, out BlackboardVariable minRotationTime) &&
                     _agent.GetVariable(_maxRotationTimeParameterName, out BlackboardVariable maxRotationTime) &&
                     _agent.GetVariable(_investigationWaitTimeSecondsParameterName,
@@ -41,7 +46,8 @@ namespace Behaviours
                     _agent.GetVariable(_attackNoiseLevelParameterName, out BlackboardVariable attackNoiseLevel) &&
                     _agent.GetVariable(_attackDurationParameterName, out BlackboardVariable attackDuration) &&
                     _agent.GetVariable(_attackStartTimeParameterName, out BlackboardVariable attackStartTime) &&
-                    _agent.GetVariable(_attackIframesDurationParameterName, out BlackboardVariable attackIframes)
+                    _agent.GetVariable(_attackIframesDurationParameterName, out BlackboardVariable attackIframes) &&
+                    _agent.GetVariable(_arrowVelocityParameterName, out BlackboardVariable arrowVelocity)
                 )
             )
             {
@@ -56,9 +62,10 @@ namespace Behaviours
             investigationSeconds.ObjectValue = properties.investigationTime;
             patrolPointWaitTime.ObjectValue = properties.patrolPointWaitTimeSeconds;
             attackNoiseLevel.ObjectValue = properties.attackNoiseLevel;
-            attackDuration.ObjectValue = properties.attackDuration;
+            attackDuration.ObjectValue = properties.attackCooldown;
             attackStartTime.ObjectValue = properties.attackStartTime;
             attackIframes.ObjectValue = properties.attackIframesDuration;
+            arrowVelocity.ObjectValue = ArrowProperties.Value.velocity;
             
             return Status.Success;
         }

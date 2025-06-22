@@ -10,7 +10,7 @@ using UnityEngine.AI;
 namespace Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class EnemyAttackController : MonoBehaviour
+    public abstract class EnemyAttackController : MonoBehaviour
     {
         [SerializeField] private GameObject attackObject;
         [SerializeField] private GameObject windUpAttackAreaObject;
@@ -39,13 +39,6 @@ namespace Enemy
 
         public Node.Status Attack()
         {
-            if (enemyProperties.attackStartTime + enemyProperties.attackIframesDuration >
-                enemyProperties.attackDuration)
-            {
-                Debug.LogError("Enemy attack duration is less than attack start time + attack Iframes duration");
-
-                return Node.Status.Failure;
-            }
             
             if (_attackRenderer) _attackRenderer.enabled = enemyProperties.shouldShowAreaDebug;
             if (_windUpRenderer) _windUpRenderer.enabled = enemyProperties.shouldShowAreaDebug;
@@ -63,9 +56,6 @@ namespace Enemy
 
             attackObject.SetActive(false);
             windUpAttackAreaObject.SetActive(true);
-
-            if (IsRunning(enemyProperties.attackDuration))
-                return Node.Status.Running;
 
             windUpAttackAreaObject.SetActive(false);
             return Node.Status.Success;
