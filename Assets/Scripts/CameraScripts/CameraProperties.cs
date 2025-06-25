@@ -25,5 +25,6 @@ namespace CameraScripts
         [Range(0, 1)]
         public float cursorInfluence;
         public bool freeCamera;
+        public float pivotMaxDistance = 5;
     }
 }
