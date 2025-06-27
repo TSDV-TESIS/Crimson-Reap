@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Objects.Traps.Saw;
 using UnityEngine;
@@ -9,11 +10,14 @@ namespace Objects.Traps
     {
         [SerializeField] private SawProperties _properties;
         [SerializeField] private GameObject saw;
+        [SerializeField] private GameObject model;
         [SerializeField] private GameObject WaypointsParent;
 
         private List<Vector3> _waypoints = new List<Vector3>();
         private int _targetIndex = 0;
         private bool _isAscending = true;
+
+        private float sawRotationSpeed = 100000;
 
         private void Start()
         {
@@ -24,6 +28,8 @@ namespace Objects.Traps
 
         private void Update()
         {
+            SpinSawAnim();
+            
             if (_waypoints.Count <= 1)
                 return;
 
@@ -72,6 +78,12 @@ namespace Objects.Traps
             {
                 _waypoints.Add(WaypointsParent.transform.GetChild(i).position);
             }
+        }
+
+        //Should have an animation
+        private void SpinSawAnim()
+        {
+            model.transform.Rotate(Vector3.forward, sawRotationSpeed * Time.deltaTime);
         }
     }
 }
