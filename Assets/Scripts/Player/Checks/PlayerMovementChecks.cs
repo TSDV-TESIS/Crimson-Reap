@@ -9,8 +9,6 @@ namespace Player.Checks
 {
     public class PlayerMovementChecks : MonoBehaviour
     {
-        [SerializeField] private float stopCheckWallSeconds = 0.5f;
-
         [Header("Movement Properties")] [SerializeField]
         private PlayerMovementProperties playerMovementProperties;
 
@@ -304,7 +302,7 @@ namespace Player.Checks
         {
             _shouldCheckWall = false;
             _isWallSliding = false;
-            yield return new WaitForSeconds(stopCheckWallSeconds);
+            yield return new WaitForSeconds(playerMovementProperties.stopCheckWallSeconds);
             _shouldCheckWall = true;
         }
 

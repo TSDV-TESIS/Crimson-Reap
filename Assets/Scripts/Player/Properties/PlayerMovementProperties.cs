@@ -52,6 +52,7 @@ namespace Player.Properties
         public float wallSlideMomentum;
         [Tooltip("Wallslide momentum influence per angle on hit")]
         public AnimationCurve wallSlideMomentumAngleInfluence;
+        public float stopCheckWallSeconds;
 
         [Header("Slope properties")]
         public float maxSlopeAngle = 45f;
