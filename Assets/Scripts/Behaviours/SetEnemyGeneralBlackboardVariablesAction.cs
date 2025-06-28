@@ -1,4 +1,5 @@
 using System;
+using Enemy;
 using Enemy.Attack;
 using Enemy.Properties;
 using Unity.Behavior;
@@ -9,15 +10,16 @@ using Action = Unity.Behavior.Action;
 namespace Behaviours
 {
     [Serializable, GeneratePropertyBag]
-    [NodeDescription(name: "Set Enemy General Blackboard Variables", story: "Set Enemy Blackboard Variables", category: "Action", id: "5c76a840a604c3fcd214922d8a1d0231")]
+    [NodeDescription(name: "Set Enemy General Blackboard Variables", story: "Set Enemy Blackboard Variables",
+        category: "Action", id: "5c76a840a604c3fcd214922d8a1d0231")]
     public partial class SetEnemyGeneralBlackboardVariablesAction : Action
     {
         [SerializeReference] public BlackboardVariable<GameObject> Self;
         [SerializeReference] public BlackboardVariable<EnemyGeneralProperties> EnemyProperties;
         [SerializeReference] public BlackboardVariable<ArrowAttackProperties> ArrowProperties;
-        
+
         private BehaviorGraphAgent _agent;
-        
+
         private readonly String _attackDistanceParameterName = "AttackDistance";
         private readonly String _minRotationTimeParameterName = "MinRotationTime";
         private readonly String _maxRotationTimeParameterName = "MaxRotationTime";
@@ -28,25 +30,34 @@ namespace Behaviours
         private readonly String _attackStartTimeParameterName = "AttackStartTime";
         private readonly String _attackIframesDurationParameterName = "AttackIframesDuration";
         private readonly String _arrowVelocityParameterName = "ArrowVelocity";
-        
+        private readonly String _knightAttackObjectParameterName = "KnightAttackObject";
+        private readonly String _knightWindupObjectParameterName = "KnightWindupObject";
+        private readonly String _visionHandlerParameterName = "VisionHandler";
+        private readonly String _listeningGameObjectParameterName = "ListeningGameObject";
+        private readonly String _archerBowParameterName = "ArcherBow";
+
         protected override Status OnStart()
         {
             _agent ??= Self.Value.GetComponent<BehaviorGraphAgent>();
             EnemyGeneralProperties properties = EnemyProperties.Value;
-            
+
             if (
                 !(
                     _agent.GetVariable(_attackDistanceParameterName, out BlackboardVariable attackDistance) &&
-                    
                     _agent.GetVariable(_minRotationTimeParameterName, out BlackboardVariable minRotationTime) &&
                     _agent.GetVariable(_maxRotationTimeParameterName, out BlackboardVariable maxRotationTime) &&
                     _agent.GetVariable(_investigationWaitTimeSecondsParameterName,
                         out BlackboardVariable investigationSeconds) &&
                     _agent.GetVariable(_patrolPointWaitTimeParameterName, out BlackboardVariable patrolPointWaitTime) &&
                     _agent.GetVariable(_attackNoiseLevelParameterName, out BlackboardVariable attackNoiseLevel) &&
+                    _agent.GetVariable(_knightAttackObjectParameterName, out BlackboardVariable knightAttackObject) &&
                     _agent.GetVariable(_attackDurationParameterName, out BlackboardVariable attackDuration) &&
+                    _agent.GetVariable(_knightWindupObjectParameterName, out BlackboardVariable knightWindupObject) &&
                     _agent.GetVariable(_attackStartTimeParameterName, out BlackboardVariable attackStartTime) &&
+                    _agent.GetVariable(_visionHandlerParameterName, out BlackboardVariable visionHandler) &&
                     _agent.GetVariable(_attackIframesDurationParameterName, out BlackboardVariable attackIframes) &&
+                    _agent.GetVariable(_listeningGameObjectParameterName, out BlackboardVariable listeningGameObject) &&
+                    _agent.GetVariable(_archerBowParameterName, out BlackboardVariable archerBow) &&
                     _agent.GetVariable(_arrowVelocityParameterName, out BlackboardVariable arrowVelocity)
                 )
             )
@@ -66,7 +77,15 @@ namespace Behaviours
             attackStartTime.ObjectValue = properties.attackStartTime;
             attackIframes.ObjectValue = properties.attackIframesDuration;
             arrowVelocity.ObjectValue = ArrowProperties.Value.velocity;
-            
+
+            visionHandler.ObjectValue = Self.Value.GetComponent<VisionHandler>();
+
+            EnemyObjectsHandler enemyObjects = Self.Value.GetComponent<EnemyObjectsHandler>();
+            knightAttackObject.ObjectValue = enemyObjects.GetKnightAttackObject();
+            knightWindupObject.ObjectValue = enemyObjects.GetKnightWindupObject();
+            listeningGameObject.ObjectValue = enemyObjects.GetListeningObject();
+            archerBow.ObjectValue = enemyObjects.GetArcherBowObject();
+
             return Status.Success;
         }
 
@@ -80,4 +99,3 @@ namespace Behaviours
         }
     }
 }
-
