@@ -26,16 +26,16 @@ MonoBehaviour:
   whatIsCeiling:
     serializedVersion: 2
     m_Bits: 1792
-  checkDistance: 0.68
+  checkDistance: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 131840
-  feetOffset: 0.665
+  feetOffset: 0.5
   whatIsPlatform:
     serializedVersion: 2
     m_Bits: 131072
   dropDownDisplacement: {x: 0, y: -1, z: 0}
-  wallCheckDistance: 0.83
+  wallCheckDistance: 0.55
   whatIsWall:
     serializedVersion: 2
     m_Bits: 140800
@@ -71,6 +71,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  stopCheckWallSeconds: 0
   maxSlopeAngle: 50
   shouldDrawGizmos: 1
   shadowStepTime: 0.2
