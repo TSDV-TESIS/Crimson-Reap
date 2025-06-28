@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fafcb01abfb601c48a7b320e3e7082df, type: 3}
-  m_Name: EnemyGeneralProperties
+  m_Name: ArcherGeneralProperties
   m_EditorClassIdentifier: 
   hearingRadius: 3
   hearingOcclussionMask:
@@ -35,10 +35,11 @@ MonoBehaviour:
     AngularVelocity: 360
     SlowdownDistance: 0.5
   patrolPointWaitTimeSeconds: 1
-  attackRange: 2
+  attackSubgraph: {fileID: 492733440258064727, guid: 5a1f774b466b2694eaa056132c379b02, type: 2}
+  attackRange: 20
   enemySpeedAttacking: 2
   attackNoiseLevel: 8.57
-  attackDuration: 1.2
+  attackCooldown: 2
   attackStartTime: 0.34
   attackIframesDuration: 0.44
   shouldShowAreaDebug: 1

@@ -29,7 +29,6 @@ namespace Enemy.Attack
         {
             if (other.CompareTag("Player") && other.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageObject))
             {
-                Debug.Log("HERE????");
                 takeDamageObject.TryTakeDamage(damage);
             }
         }
