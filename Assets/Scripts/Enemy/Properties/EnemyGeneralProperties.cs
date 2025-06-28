@@ -1,3 +1,4 @@
+using Unity.Behavior;
 using UnityEngine;
 
 namespace Enemy.Properties
@@ -27,15 +28,17 @@ namespace Enemy.Properties
         public float patrolPointWaitTimeSeconds;
 
         [Header("Attack properties")] 
+        public BehaviorGraph attackSubgraph;
         public float attackRange;
         public float enemySpeedAttacking;
         public float attackNoiseLevel;
-        public float attackDuration;
+        public float attackCooldown;
         public float attackStartTime;
         public float attackIframesDuration;
         public bool shouldShowAreaDebug;
 
         [Header("Debug")] 
         public bool shouldDrawGizmos;
+
     }
 }
