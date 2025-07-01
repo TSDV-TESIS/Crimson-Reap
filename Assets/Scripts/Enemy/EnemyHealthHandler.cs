@@ -84,7 +84,7 @@ namespace Enemy
             if (_disableCoroutine != null) StopCoroutine(_disableCoroutine);
             _disableCoroutine = StartCoroutine(DisableCoroutine());
         }
-
+        
         private IEnumerator DisableCoroutine()
         {
             float timer = 0;

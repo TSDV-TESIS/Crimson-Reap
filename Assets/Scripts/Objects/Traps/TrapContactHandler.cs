@@ -11,7 +11,8 @@ namespace Objects.Traps
 
         private void OnTriggerEnter(Collider other)
         {
-            baseTrap.onTrapContact?.Invoke();
+            if(other.CompareTag("Player"))
+                baseTrap.onTrapContact?.Invoke();
         }
     }
 }
