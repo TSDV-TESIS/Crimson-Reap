@@ -18,15 +18,16 @@ namespace TestRoom
         private Transform _selectedPosition;
         private GameObject _actualEnemyInstance;
         private GameObject _actualDoorInstance;
+        
         public void OnEnable()
         {
             _selectedPosition = farPosition;
             Reset();
         }
 
-        public void SetNewPosition(bool isNear)
+        public void SetNewPosition(bool isFar)
         {
-            _selectedPosition = isNear ? nearPosition : farPosition;
+            _selectedPosition = isFar ? farPosition : nearPosition;
         }
 
         public void Reset()
