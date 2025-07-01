@@ -11,13 +11,13 @@ namespace TestRoom.UI
         {
             if (value)
             {
-                offText.SetActive(false);
-                onText.SetActive(true);
+                offText?.SetActive(false);
+                onText?.SetActive(true);
             }
             else
             {
-                offText.SetActive(true);
-                onText.SetActive(false);
+                offText?.SetActive(true);
+                onText?.SetActive(false);
             }
         }
     }

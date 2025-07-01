@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Player.Controllers
@@ -9,16 +10,21 @@ namespace Player.Controllers
         [SerializeField] private InputHandler _inputHandler;
         private List<IInteractable> _interactableObjects;
 
-        private void Start()
+        private void OnEnable()
         {
             _inputHandler.OnInteract.AddListener(TryInteract);
             _interactableObjects = new List<IInteractable>();
         }
 
+        private void OnDisable()
+        {
+            _inputHandler.OnInteract.RemoveListener(TryInteract);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             IInteractable interactable = other.GetComponent<IInteractable>();
-            if (interactable != null)
+            if (interactable != null && !_interactableObjects.Contains(interactable))
             {
                 _interactableObjects.Add(other.GetComponent<IInteractable>());
                 interactable.Highlight(true);
@@ -38,8 +44,10 @@ namespace Player.Controllers
 
         private void TryInteract()
         {
+            Debug.Log($"COUNT {_interactableObjects.Count}");
             foreach (IInteractable interactableObject in _interactableObjects)
             {
+                Debug.Log($"Interacting with {interactableObject}");
                 interactableObject.OnInteract();
             }
         }
