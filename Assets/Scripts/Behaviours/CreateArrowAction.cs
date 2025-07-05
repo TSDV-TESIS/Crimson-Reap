@@ -14,11 +14,13 @@ public partial class CreateArrowAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Player;
     [SerializeReference] public BlackboardVariable<GameObject> ArrowPrefab;
     [SerializeReference] public BlackboardVariable<float> Velocity;
+    [SerializeReference] public BlackboardVariable<Vector3> offset;
     
     protected override Status OnStart()
     {
         Debug.Log($"TEST {ArrowPrefab.Value} {Self.Value}");
         GameObject arrowObject = Object.Instantiate(ArrowPrefab.Value, Self.Value.transform);
+        arrowObject.transform.position = Self.Value.transform.position + offset;
         arrowObject.GetComponent<ArrowAttack>().SetVelocityAndDirection(Velocity, Player.Value.transform.position);
         
         return Status.Success;
