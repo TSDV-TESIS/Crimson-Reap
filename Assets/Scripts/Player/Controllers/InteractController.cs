@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player.Controllers
 {
     public class InteractController : MonoBehaviour
     {
         [SerializeField] private InputHandler _inputHandler;
+        [SerializeField] private UnityEvent onInteractEvent;
+        
         private List<IInteractable> _interactableObjects;
-
+        
         private void OnEnable()
         {
             _inputHandler.OnInteract.AddListener(TryInteract);
@@ -44,7 +47,11 @@ namespace Player.Controllers
 
         private void TryInteract()
         {
-            Debug.Log($"COUNT {_interactableObjects.Count}");
+            if (_interactableObjects.Count > 0)
+            {
+                onInteractEvent.Invoke();
+            }
+            
             foreach (IInteractable interactableObject in _interactableObjects)
             {
                 Debug.Log($"Interacting with {interactableObject}");

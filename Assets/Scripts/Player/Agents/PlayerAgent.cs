@@ -203,5 +203,10 @@ namespace Player
         {
             Fsm.Disable();
         }
+
+        public bool IsGrounded()
+        {
+            return Fsm.GetCurrentState() == _groundedState;
+        }
     }
 }

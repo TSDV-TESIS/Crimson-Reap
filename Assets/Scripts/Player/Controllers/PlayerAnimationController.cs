@@ -1,20 +1,35 @@
+using System;
 using System.Collections;
 using Player.Properties;
 using UnityEngine;
 
 namespace Player.Controllers
 {
+    [RequireComponent(typeof(PlayerAgent))]
     public class PlayerAnimationController : MonoBehaviour
     {
         [SerializeField] private Animator playerAnimator;
         [SerializeField] private PlayerMovementProperties properties;
+        
         private static readonly int Walking = Animator.StringToHash("Velocity");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
         private static readonly int Falling = Animator.StringToHash("Falling");
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Dead = Animator.StringToHash("Dead");
-        
-        private Coroutine _jumpSetValuesCoroutine;
+        private static readonly int Interact = Animator.StringToHash("Interact");
+
+        private PlayerAgent _agent;
+
+        private void OnEnable()
+        {
+            _agent ??= GetComponent<PlayerAgent>();
+        }
+
+        public void HandleInteract()
+        {
+            if(_agent.IsGrounded())
+                playerAnimator.SetTrigger(Interact);
+        }
         
         public void HandleDeath()
         {
@@ -34,16 +49,7 @@ namespace Player.Controllers
 
         public void HandleJump()
         {
-            if(_jumpSetValuesCoroutine != null) StopCoroutine(_jumpSetValuesCoroutine);
-            _jumpSetValuesCoroutine = StartCoroutine(JumpSetValues());
-        }
-
-        private IEnumerator JumpSetValues()
-        {
-            // Animator needs to read the trigger first then set the boolean, if not falling transition
-            // occurs before jump
             playerAnimator.SetTrigger(Jump);
-            yield return null;
             playerAnimator.SetBool(Falling, true);
         }
 
