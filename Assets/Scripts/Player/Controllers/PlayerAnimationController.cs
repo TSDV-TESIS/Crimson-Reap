@@ -13,11 +13,12 @@ namespace Player.Controllers
         
         private static readonly int Walking = Animator.StringToHash("Velocity");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
-        private static readonly int Falling = Animator.StringToHash("Falling");
+        private static readonly int Falling = Animator.StringToHash("IsFalling");
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Dead = Animator.StringToHash("Dead");
         private static readonly int Interact = Animator.StringToHash("Interact");
-
+        private static readonly int IsWallSliding = Animator.StringToHash("IsWallSliding");
+        
         private PlayerAgent _agent;
 
         private void OnEnable()
@@ -25,6 +26,12 @@ namespace Player.Controllers
             _agent ??= GetComponent<PlayerAgent>();
         }
 
+        public void HandleWallsliding(bool value)
+        {
+            playerAnimator.SetBool(IsWallSliding, value);
+            if(!value) playerAnimator.ResetTrigger(Jump);
+        }
+        
         public void HandleInteract()
         {
             if(_agent.IsGrounded())
