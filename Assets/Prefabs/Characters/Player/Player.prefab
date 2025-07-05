@@ -634,19 +634,6 @@ MonoBehaviour:
     onExit:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 7419154463842292251}
-          m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController,
-            Assembly-CSharp
-          m_MethodName: HandleOffJump
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
         - m_Target: {fileID: 6927853401671723050}
           m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
           m_MethodName: set_enabled
@@ -1060,7 +1047,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ba84bd083780445972c24cc5792c03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopCheckWallSeconds: 0.5
   playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
   feetPivot: {fileID: 8911859625685359466}
   headPivot: {fileID: 8887755361584241778}
@@ -1131,7 +1117,7 @@ MonoBehaviour:
       - m_Target: {fileID: 7419154463842292251}
         m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController, Assembly-CSharp
         m_MethodName: HandleWalk
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1157,8 +1143,8 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 7419154463842292251}
         m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController, Assembly-CSharp
-        m_MethodName: HandleIdle
-        m_Mode: 1
+        m_MethodName: HandleWalk
+        m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1277,6 +1263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 464815956518199404}
+  properties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
 --- !u!114 &3229360985905636374
 MonoBehaviour:
   m_ObjectHideFlags: 0

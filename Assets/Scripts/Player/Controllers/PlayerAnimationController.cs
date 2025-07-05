@@ -1,3 +1,4 @@
+using Player.Properties;
 using UnityEngine;
 
 namespace Player.Controllers
@@ -5,46 +6,32 @@ namespace Player.Controllers
     public class PlayerAnimationController : MonoBehaviour
     {
         [SerializeField] private Animator playerAnimator;
-        private static readonly int Walking = Animator.StringToHash("Walking");
-        private static readonly int Attack1 = Animator.StringToHash("AttackTrigger");
+        [SerializeField] private PlayerMovementProperties properties;
+        private static readonly int Walking = Animator.StringToHash("Velocity");
+        private static readonly int Attack1 = Animator.StringToHash("Attack");
         private static readonly int Falling = Animator.StringToHash("Falling");
         private static readonly int Jump = Animator.StringToHash("Jump");
 
-        public void HandleWalk()
+        public void HandleWalk(float velocity)
         {
-            playerAnimator.SetBool(Walking, true);
-        }
-
-        public void HandleIdle()
-        {
-            playerAnimator.SetBool(Walking, false);
+            float velocityToUse = Mathf.Abs(velocity);
+            playerAnimator.SetFloat(Walking, velocityToUse / properties.maxSpeed);
         }
 
         public void HandleAttack()
         {
-            Debug.LogWarning("ATTACK TRIGGER SET!");
             playerAnimator.SetTrigger(Attack1);
-        }
-
-        public void HandleStopAttack()
-        {
         }
 
         public void HandleJump()
         {
-            playerAnimator.SetBool(Jump, true);
+            playerAnimator.SetTrigger(Jump);
             playerAnimator.SetBool(Falling, true);
         }
 
         public void HandleFalling()
         {
             playerAnimator.SetBool(Falling, true);
-            playerAnimator.SetBool(Jump, false);
-        }
-
-        public void HandleOffJump()
-        {
-            playerAnimator.SetBool(Jump, false);
         }
 
         public void HandleGrounded()
