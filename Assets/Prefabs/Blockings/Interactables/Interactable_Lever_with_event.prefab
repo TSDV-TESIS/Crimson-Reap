@@ -124,9 +124,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   highlightMaterial: {fileID: 2100000, guid: f1e38594f14520c48bc546f3a41f4f56, type: 2}
   handleAnimationSpeed: 2
-  handleAnimator: {fileID: 8247003149317918557}
-  modelMesh: {fileID: 2226933212805473223}
+  handleAnimator: {fileID: 5617315794879801065}
+  modelMesh: {fileID: 398340837241188258}
   canInteractAgain: 1
+  initStatus: 0
   onButtonInteracted:
     m_PersistentCalls:
       m_Calls: []
@@ -138,6 +139,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7717207936954042221}
     m_Modifications:
+    - target: {fileID: 893843234695182897, guid: 2d38b138d75e45444810df18111e1abd, type: 3}
+      propertyPath: m_Name
+      value: Lever
+      objectReference: {fileID: 0}
     - target: {fileID: 3312866533413220094, guid: 2d38b138d75e45444810df18111e1abd, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -183,7 +188,8 @@ PrefabInstance:
       value: Model_Lever
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 30613542912257393, guid: 2d38b138d75e45444810df18111e1abd, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d38b138d75e45444810df18111e1abd, type: 3}
@@ -192,13 +198,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3312866533413220094, guid: 2d38b138d75e45444810df18111e1abd, type: 3}
   m_PrefabInstance: {fileID: 3184233318965851109}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &2226933212805473223 stripped
+--- !u!23 &398340837241188258 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3663410705323135010, guid: 2d38b138d75e45444810df18111e1abd, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3006042476737125447, guid: 2d38b138d75e45444810df18111e1abd, type: 3}
   m_PrefabInstance: {fileID: 3184233318965851109}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &8247003149317918557 stripped
+--- !u!95 &5617315794879801065 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 6792438681919782072, guid: 2d38b138d75e45444810df18111e1abd, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7044788294775493900, guid: 2d38b138d75e45444810df18111e1abd, type: 3}
   m_PrefabInstance: {fileID: 3184233318965851109}
   m_PrefabAsset: {fileID: 0}
