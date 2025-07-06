@@ -35,6 +35,8 @@ namespace Behaviours
         private readonly String _visionHandlerParameterName = "VisionHandler";
         private readonly String _listeningGameObjectParameterName = "ListeningGameObject";
         private readonly String _archerBowParameterName = "ArcherBow";
+        private readonly String _attackVfxObjectParameterName = "AttackVfxObject";
+        private readonly String _knightAnimatorParameterName = "Animator";
 
         protected override Status OnStart()
         {
@@ -57,7 +59,9 @@ namespace Behaviours
                     _agent.GetVariable(_visionHandlerParameterName, out BlackboardVariable visionHandler) &&
                     _agent.GetVariable(_attackIframesDurationParameterName, out BlackboardVariable attackIframes) &&
                     _agent.GetVariable(_listeningGameObjectParameterName, out BlackboardVariable listeningGameObject) &&
+                    _agent.GetVariable(_attackVfxObjectParameterName, out BlackboardVariable attackVfxObject) && 
                     _agent.GetVariable(_archerBowParameterName, out BlackboardVariable archerBow) &&
+                    _agent.GetVariable(_knightAnimatorParameterName, out BlackboardVariable knightAnimator) && 
                     _agent.GetVariable(_arrowVelocityParameterName, out BlackboardVariable arrowVelocity)
                 )
             )
@@ -85,7 +89,9 @@ namespace Behaviours
             knightWindupObject.ObjectValue = enemyObjects.GetKnightWindupObject();
             listeningGameObject.ObjectValue = enemyObjects.GetListeningObject();
             archerBow.ObjectValue = enemyObjects.GetArcherBowObject();
-
+            attackVfxObject.ObjectValue = enemyObjects.GetAttackVfxObject();
+            knightAnimator.ObjectValue = enemyObjects.GetKnightAnimator();
+            
             return Status.Success;
         }
 
