@@ -18,6 +18,8 @@ namespace Player.Controllers
         private static readonly int Dead = Animator.StringToHash("Dead");
         private static readonly int Interact = Animator.StringToHash("Interact");
         private static readonly int IsWallSliding = Animator.StringToHash("IsWallSliding");
+        private static readonly int IsInShadowstep = Animator.StringToHash("IsInShadowstep");
+        private static readonly int Step = Animator.StringToHash("ShadowStep");
         
         private PlayerAgent _agent;
 
@@ -26,6 +28,12 @@ namespace Player.Controllers
             _agent ??= GetComponent<PlayerAgent>();
         }
 
+        public void HandleShadowstep(bool value)
+        {
+            playerAnimator.SetBool(IsInShadowstep, value);
+            if(value) playerAnimator.SetTrigger(Step);
+        }
+        
         public void HandleWallsliding(bool value)
         {
             playerAnimator.SetBool(IsWallSliding, value);

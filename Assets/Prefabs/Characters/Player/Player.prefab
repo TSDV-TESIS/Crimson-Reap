@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bloodStepProperties: {fileID: 11400000, guid: ecbb133bb56f9a741a6ac00584f966a3, type: 2}
-  onHitStop: {fileID: 11400000, guid: a8a8fb92168bc264495a0d271290d556, type: 2}
+  onHitStop: {fileID: 0}
 --- !u!1 &7736462112751391781
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +833,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 7419154463842292251}
+          m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController,
+            Assembly-CSharp
+          m_MethodName: HandleShadowstep
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
     onUpdate:
       m_PersistentCalls:
         m_Calls: []
@@ -843,6 +856,19 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: Player.ShadowStep, Assembly-CSharp
           m_MethodName: StopShadows
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7419154463842292251}
+          m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController,
+            Assembly-CSharp
+          m_MethodName: HandleShadowstep
+          m_Mode: 6
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -957,9 +983,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shadowPrefab: {fileID: 6694883190123719090, guid: ad926b3022d419c43b7ed2bdaf27363b, type: 3}
   spawnRate: 0.01
-  shadowDecayDelay: 0.005
-  playerRenderer: {fileID: 0}
-  shadowMat: {fileID: 2100000, guid: 2c6e1b277d39d7c48a2200c9a0e4a16a, type: 2}
+  fadeOutSeconds: 0.2
+  materialToUse: {fileID: 2100000, guid: 2c6e1b277d39d7c48a2200c9a0e4a16a, type: 2}
+  deformationSystem: {fileID: 884053421606803635}
+  model: {fileID: 7838729848613971127}
 --- !u!114 &9113800065695346700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1469,9 +1496,17 @@ PrefabInstance:
       propertyPath: pivot
       value: 
       objectReference: {fileID: 238100018967637552}
+    - target: {fileID: 226669416570003544, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
+      propertyPath: onHitStop
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1350218433908930684, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2805158011694044095, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 3034874305352012224, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
       propertyPath: m_Enabled
@@ -1533,6 +1568,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4330865518323730444, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 4330865518323730444, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 4739745452865382066, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
       propertyPath: m_Name
       value: Model
@@ -1554,6 +1597,11 @@ GameObject:
 --- !u!95 &464815956518199404 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3133781324205138537, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
+  m_PrefabInstance: {fileID: 3246591912298365445}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &884053421606803635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2399010967504870070, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
   m_PrefabInstance: {fileID: 3246591912298365445}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1793660363553960741 stripped

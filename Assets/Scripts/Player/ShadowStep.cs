@@ -15,12 +15,11 @@ namespace Player
         [Header("Shadow")]
         [SerializeField] private GameObject shadowPrefab;
         [SerializeField] private float spawnRate;
-        [SerializeField] private float shadowDecayDelay;
-
-        [Header("Visuals")]
-        [SerializeField] private MeshRenderer playerRenderer;
-        [SerializeField] private Material shadowMat;
-
+        [SerializeField] private float fadeOutSeconds = 0.2f;
+        [SerializeField] private Material materialToUse;
+        [SerializeField] private GameObject deformationSystem;
+        [SerializeField] private GameObject model;
+        
         private List<GameObject> _shadows;
         private Coroutine _spawnShadows;
         private bool _isShadow;
@@ -43,37 +42,89 @@ namespace Player
             _isShadow = false;
         }
 
+        private int CompareName(Transform a, Transform b)
+        {
+            return String.Compare(a.name, b.name, StringComparison.Ordinal);
+        }
+
         private IEnumerator SpawnShadows()
         {
             ClearShadows();
-            float timer = spawnRate;
-            float startTime = Time.time;
-            _shadows.Add(Instantiate(shadowPrefab, transform.position, quaternion.identity));
-
             while (_isShadow)
             {
-                timer = Time.time - startTime;
-                if (timer > spawnRate)
+                yield return new WaitForSeconds(spawnRate);
+
+                GameObject shadow = Instantiate(shadowPrefab, transform.position, transform.rotation);
+                SetRotationToModel(shadow);
+                foreach (SkinnedMeshRenderer meshRenderer in shadow.GetComponentsInChildren<SkinnedMeshRenderer>())
                 {
-                    startTime = Time.time;
-                    _shadows.Add(Instantiate(shadowPrefab, transform.position, quaternion.identity));
+                    meshRenderer.material = materialToUse;
+                }
+                _shadows.Add(shadow);
+                StartCoroutine(FadeOut(shadow));
+            }
+        }
+
+        private void SetRotationToModel(GameObject shadow)
+        {
+            Vector3 angles = shadow.transform.rotation.eulerAngles;
+            angles.y = model.transform.rotation.eulerAngles.y;
+            Quaternion rotation = shadow.transform.rotation;
+            rotation.eulerAngles = angles;
+            shadow.transform.rotation = rotation;
+        }
+
+        private IEnumerator FadeOut(GameObject afterImage)
+        {
+            CopyBones(afterImage);
+            Material oldMat = afterImage.GetComponentInChildren<SkinnedMeshRenderer>().material;
+            Material diffuseMaterial = Instantiate(oldMat);
+            float elapsedTime = 0f;
+            Color initialColor = diffuseMaterial.color;
+            SkinnedMeshRenderer[] meshRenderers = afterImage.GetComponentsInChildren<SkinnedMeshRenderer>();
+            while (elapsedTime < fadeOutSeconds)
+            {
+                elapsedTime += Time.deltaTime;
+                float alpha = Mathf.Lerp(initialColor.a, 0f, elapsedTime / fadeOutSeconds);
+                diffuseMaterial.color = new Color(initialColor.r, initialColor.g, initialColor.b, alpha);
+                foreach (SkinnedMeshRenderer meshRenderer in meshRenderers)
+                {
+                    meshRenderer.material = diffuseMaterial;
                 }
 
                 yield return null;
             }
 
-            yield return CollapseShadows();
-        }
-
-        private IEnumerator CollapseShadows()
-        {
-            for (int i = 0; i < _shadows.Count; i++)
+            foreach (SkinnedMeshRenderer meshRenderer in meshRenderers)
             {
-                _shadows[i].GetComponent<ShadowExplosion>().Explode();
-                yield return new WaitForSeconds(shadowDecayDelay);
+                meshRenderer.material = oldMat;
             }
 
-            _shadows.Clear();
+            _shadows.Remove(afterImage);
+            Destroy(afterImage);
+            Destroy(diffuseMaterial);
+        }
+
+        private void CopyBones(GameObject afterImage)
+        {
+            ShadowObjects objects = afterImage.GetComponent<ShadowObjects>();
+            GameObject shadowBonesRoot = objects.GetDeformationSystem();
+
+            Transform[] shadowBones = shadowBonesRoot.GetComponentsInChildren<Transform>();
+            Transform[] actualBones = deformationSystem.GetComponentsInChildren<Transform>();
+            
+            Debug.Log(shadowBones.Length);
+            
+            Array.Sort(shadowBones, CompareName);
+            Array.Sort(actualBones, CompareName);
+
+            for (int i = 0; i < shadowBones.Length; i++)
+            {
+                Debug.Log($"Copy bone {i}");
+                shadowBones[i].localPosition = actualBones[i].localPosition;
+                shadowBones[i].localRotation = actualBones[i].localRotation;
+                shadowBones[i].localScale = actualBones[i].localScale;
+            }
         }
 
         private void ClearShadows()
