@@ -34,6 +34,7 @@ namespace Player
         private void HandleDeath()
         {
             _healthPoints.ResetHitPoints();
+            _healthPoints.SetCanTakeDamage(false);
             _agent.StopFsm();
             _controller.HandleDeath();
         }
