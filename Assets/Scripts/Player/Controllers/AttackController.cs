@@ -71,7 +71,6 @@ namespace Player.Controllers
         private void StopAttack()
         {
             agent.AttackChecks.SetAttackOnCoolDown();
-            animationController.HandleStopAttack();
             _shadows.StopShadows();
             attackObject.SetActive(false);
             agent.AttackChecks.IsAttacking = false;

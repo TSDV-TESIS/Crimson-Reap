@@ -1,50 +1,68 @@
+using System;
+using System.Collections;
+using Player.Properties;
 using UnityEngine;
 
 namespace Player.Controllers
 {
+    [RequireComponent(typeof(PlayerAgent))]
     public class PlayerAnimationController : MonoBehaviour
     {
         [SerializeField] private Animator playerAnimator;
-        private static readonly int Walking = Animator.StringToHash("Walking");
-        private static readonly int Attack1 = Animator.StringToHash("AttackTrigger");
-        private static readonly int Falling = Animator.StringToHash("Falling");
+        [SerializeField] private PlayerMovementProperties properties;
+        
+        private static readonly int Walking = Animator.StringToHash("Velocity");
+        private static readonly int Attack1 = Animator.StringToHash("Attack");
+        private static readonly int Falling = Animator.StringToHash("IsFalling");
         private static readonly int Jump = Animator.StringToHash("Jump");
+        private static readonly int Dead = Animator.StringToHash("Dead");
+        private static readonly int Interact = Animator.StringToHash("Interact");
+        private static readonly int IsWallSliding = Animator.StringToHash("IsWallSliding");
+        
+        private PlayerAgent _agent;
 
-        public void HandleWalk()
+        private void OnEnable()
         {
-            playerAnimator.SetBool(Walking, true);
+            _agent ??= GetComponent<PlayerAgent>();
         }
 
-        public void HandleIdle()
+        public void HandleWallsliding(bool value)
         {
-            playerAnimator.SetBool(Walking, false);
+            playerAnimator.SetBool(IsWallSliding, value);
+            if(!value) playerAnimator.ResetTrigger(Jump);
+        }
+        
+        public void HandleInteract()
+        {
+            if(_agent.IsGrounded())
+                playerAnimator.SetTrigger(Interact);
+        }
+        
+        public void HandleDeath()
+        {
+            playerAnimator.SetTrigger(Dead);
+        }
+        
+        public void HandleWalk(float velocity)
+        {
+            float velocityToUse = Mathf.Abs(velocity);
+            playerAnimator.SetFloat(Walking, velocityToUse / properties.maxSpeed);
         }
 
         public void HandleAttack()
         {
-            Debug.LogWarning("ATTACK TRIGGER SET!");
             playerAnimator.SetTrigger(Attack1);
-        }
-
-        public void HandleStopAttack()
-        {
         }
 
         public void HandleJump()
         {
-            playerAnimator.SetBool(Jump, true);
+            playerAnimator.SetTrigger(Jump);
             playerAnimator.SetBool(Falling, true);
         }
 
         public void HandleFalling()
         {
             playerAnimator.SetBool(Falling, true);
-            playerAnimator.SetBool(Jump, false);
-        }
-
-        public void HandleOffJump()
-        {
-            playerAnimator.SetBool(Jump, false);
         }
 
         public void HandleGrounded()

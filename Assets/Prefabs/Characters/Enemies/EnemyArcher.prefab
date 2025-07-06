@@ -1033,7 +1033,7 @@ NavMeshAgent:
   m_Height: 1.87
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 0
 --- !u!114 &2899276800007189105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,7 +1069,9 @@ MonoBehaviour:
   listeningObject: {fileID: 0}
   knightAttackObject: {fileID: 0}
   knightWindupObject: {fileID: 0}
+  attackVfxObject: {fileID: 0}
   archerBowObject: {fileID: 2545689722650669462}
+  knightAnimator: {fileID: 7889977402706224509}
 --- !u!114 &6972602299936960612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1091,6 +1093,7 @@ MonoBehaviour:
   - rid: 4203723495621263574
   - rid: 4203723741480616649
   - rid: 4203723742633001360
+  - rid: 9222008794035257493
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
@@ -1154,6 +1157,14 @@ MonoBehaviour:
           m_Value1: 1168589924938263366
         Name: AttackType
         m_Value: 1
+    - rid: 9222008794035257493
+      type: {class: 'BlackboardVariable`1[[UnityEngine.Animator, UnityEngine.AnimationModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 4439878429484773897
+          m_Value1: 13584661603401326576
+        Name: Animator
+        m_Value: {fileID: 7889977402706224509}
 --- !u!1 &5062257244889901477
 GameObject:
   m_ObjectHideFlags: 0
@@ -1977,5 +1988,10 @@ Transform:
 --- !u!1 &2393460817227413158 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5540907365660016783, guid: 46c66b41be35b2f47a35a92b1f74b617, type: 3}
+  m_PrefabInstance: {fileID: 7913394139509896745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7889977402706224509 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 48645348998828884, guid: 46c66b41be35b2f47a35a92b1f74b617, type: 3}
   m_PrefabInstance: {fileID: 7913394139509896745}
   m_PrefabAsset: {fileID: 0}
