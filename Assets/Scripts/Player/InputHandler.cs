@@ -19,6 +19,7 @@ namespace Player
         public UnityEvent<bool> OnZoomOut;
         public UnityEvent OnInteract;
         public UnityEvent OnDropDown;
+        public UnityEvent onInvincible;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -93,6 +94,14 @@ namespace Player
         {
             if (context.performed)
                 OnDropDown.Invoke();
+        }
+        
+        public void HandleInvincible(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                onInvincible?.Invoke();
+            }
         }
     }
 }

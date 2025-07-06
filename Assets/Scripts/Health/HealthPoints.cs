@@ -82,8 +82,8 @@ namespace Health
         }
 
         // Is invincible =/= can take damage.
-        // isInvincible is used for attacks That can be avoidable.
-        // canTakeDamage is used if the entity just cant take damage in any way.
+        // isInvincible is used for cheats.
+        // canTakeDamage is used if the entity just cant take damage in any way programatically.
         public void SetIsInvincible(bool value)
         {
             _isInvincible = value;
@@ -105,6 +105,8 @@ namespace Health
 
         public bool TryTakeDamage(int damage)
         {
+            if (_isInvincible) return false;
+            
             if (!canTakeDamage)
             {
                 onDamageAvoidedEvent?.RaiseEvent();
@@ -145,12 +147,6 @@ namespace Health
         public bool IsDead()
         {
             return CurrentHp <= 0;
-        }
-
-        public void TryTakeAvoidableDamage(int damage)
-        {
-            if (_isInvincible) return;
-            TryTakeDamage(damage);
         }
 
         public void RaiseInitMaxHpEvent()

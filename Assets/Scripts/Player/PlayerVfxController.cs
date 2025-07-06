@@ -10,8 +10,10 @@ namespace Player
         
         private float _lastSign;
         private Vector3 _lastWallridePosition;
-        public void OnWalking(float sign)
+        public void OnWalking(float velocity)
         {
+            float sign = Mathf.Sign(velocity);
+            
             if (walkingParticles.isStopped || !Mathf.Approximately(_lastSign, sign))
             {
                 walkingParticles.Stop();

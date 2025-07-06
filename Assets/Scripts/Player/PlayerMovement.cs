@@ -153,7 +153,7 @@ namespace Player
             Velocity.x = Mathf.Sign(Velocity.x) * Mathf.Clamp(Mathf.Abs(Velocity.x) - playerMovementProperties.friction * Time.deltaTime, 0, maxSpeed);
             if (Mathf.Abs(Velocity.x) >= playerMovementProperties.maxSpeedIdle)
             {
-                onWalk?.Invoke(Mathf.Sign(Velocity.x));
+                onWalk?.Invoke(Velocity.x);
             }
             else
             {

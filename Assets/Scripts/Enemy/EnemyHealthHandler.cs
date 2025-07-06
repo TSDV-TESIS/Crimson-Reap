@@ -4,15 +4,17 @@ using Events;
 using Events.Scriptables;
 using Sounds;
 using UI.Bars;
+using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Enemy
 {
+    [RequireComponent(typeof(BehaviorGraphAgent))]
     public class EnemyHealthHandler : MonoBehaviour
     {
         [SerializeField] private EnemyDeathProperties enemyDeathProperties;
-
+        [SerializeField] private String isDeadVariableName = "IsDead";
         [SerializeField] private ParticleSystem splashBloodParticles;
         [SerializeField] private SoundCollisionHandler screamSoundCollisionHandler;
         [SerializeField] private GameObject[] objectsToDisable;
@@ -27,6 +29,7 @@ namespace Enemy
 
         private Coroutine _disableCoroutine;
         private bool _isInBloodlust;
+        private BehaviorGraphAgent _behaviorAgent;
 
         private void OnEnable()
         {
@@ -34,6 +37,7 @@ namespace Enemy
             onBloodlustStart?.onEvent.AddListener(HandleFrenzyStart);
             onBloodlustEnd?.onEvent.AddListener(HandleFrenzyEnd);
             screamSoundCollisionHandler.SoundRadius = enemyDeathProperties.screamingRadius;
+            _behaviorAgent ??= GetComponent<BehaviorGraphAgent>();
         }
 
         private void Start()
@@ -68,6 +72,9 @@ namespace Enemy
 
         public void OnDeath()
         {
+            _behaviorAgent.GetVariable(isDeadVariableName, out BlackboardVariable isDeadVariable);
+            isDeadVariable.ObjectValue = true;
+            
             onEnemyDeath?.RaiseEvent(enemyDeathProperties.healthRewardOnDeath);
             screamSoundCollisionHandler.EnableSound(enemyDeathProperties.shouldDrawGizmos);
 
