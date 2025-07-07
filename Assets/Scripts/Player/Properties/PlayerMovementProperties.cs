@@ -32,6 +32,7 @@ namespace Player.Properties
         public float checkDistance;
         public LayerMask whatIsGround;
         public float feetOffset;
+        public float offGroundMaxGraceTimeSeconds;
 
         [Header("DropDown properties")]
         public LayerMask whatIsPlatform;
