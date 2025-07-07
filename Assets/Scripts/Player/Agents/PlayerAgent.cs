@@ -5,6 +5,7 @@ using Health;
 using Player.Checks;
 using Player.Controllers;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace Player
@@ -24,7 +25,8 @@ namespace Player
         [SerializeField] private ActionEventsWrapper wallSlidingEvents;
         [SerializeField] private ActionEventsWrapper shadowStepEvents;
         [SerializeField] private ActionEventsWrapper attackEvents;
-
+        [SerializeField] private UnityEvent onGroundToFallTransition;
+        
         private State _groundedState;
         private State _jumpingState;
         private State _fallingState;
@@ -78,7 +80,9 @@ namespace Player
             Transition groundedToJumping = new Transition(_groundedState, _jumpingState);
             _groundedState.AddTransition(groundedToJumping);
             Transition groundedToFalling = new Transition(_groundedState, _fallingState);
+            groundedToFalling.AddTransitionAction(onGroundToFallTransition.Invoke);
             _groundedState.AddTransition(groundedToFalling);
+
             Transition groundedToShadowStep = new Transition(_groundedState, _shadowStepState);
             _groundedState.AddTransition(groundedToShadowStep);
             Transition groundedToAttack = new Transition(_groundedState, _attackState);
@@ -95,6 +99,8 @@ namespace Player
             Transition jumpingToAttack = new Transition(_jumpingState, _attackState);
             _jumpingState.AddTransition(jumpingToAttack);
 
+            Transition fallingToJumping = new Transition(_fallingState, _jumpingState);
+            _fallingState.AddTransition(fallingToJumping);
             Transition fallingToGrounded = new Transition(_fallingState, _groundedState);
             _fallingState.AddTransition(fallingToGrounded);
             Transition fallingToWallSlide = new Transition(_fallingState, _wallSlideState);
