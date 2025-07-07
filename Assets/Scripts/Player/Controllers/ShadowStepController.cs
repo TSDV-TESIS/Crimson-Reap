@@ -60,6 +60,7 @@ namespace Player.Controllers
                 if (agent.MovementChecks.IsNearCeiling())
                 {
                     _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
+                    _healthPoints.SetCanTakeDamage(true);
                     break;
                 }
 

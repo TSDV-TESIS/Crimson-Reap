@@ -113,6 +113,13 @@ namespace Health
                 return false;
             }
 
+            TakeUnavoidableDamage(damage);
+
+            return true;
+        }
+
+        public void TakeUnavoidableDamage(int damage)
+        {
             CurrentHp -= damage;
 
             if (shouldFreeze)
@@ -125,14 +132,13 @@ namespace Health
                 onDeathEvent?.RaiseEvent();
                 onInternalDeathEvent?.Invoke();
             }
+            
             else
             {
                 onTakeDamageEvent?.RaiseEvent(CurrentHp);
                 onHit?.Invoke();
                 onInternalTakeDamageEvent?.Invoke(CurrentHp);
             }
-
-            return true;
         }
 
         public IEnumerator StunTime()

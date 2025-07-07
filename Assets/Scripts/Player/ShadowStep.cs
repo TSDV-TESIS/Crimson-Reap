@@ -29,6 +29,12 @@ namespace Player
             _shadows ??= new List<GameObject>();
         }
 
+        private void OnDisable()
+        {
+            StopShadows();
+            ClearShadows();
+        }
+
         public void InitShadowStepShadows()
         {
             _isShadow = true;
