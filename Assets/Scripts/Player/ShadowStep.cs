@@ -113,14 +113,11 @@ namespace Player
             Transform[] shadowBones = shadowBonesRoot.GetComponentsInChildren<Transform>();
             Transform[] actualBones = deformationSystem.GetComponentsInChildren<Transform>();
             
-            Debug.Log(shadowBones.Length);
-            
             Array.Sort(shadowBones, CompareName);
             Array.Sort(actualBones, CompareName);
 
             for (int i = 0; i < shadowBones.Length; i++)
             {
-                Debug.Log($"Copy bone {i}");
                 shadowBones[i].localPosition = actualBones[i].localPosition;
                 shadowBones[i].localRotation = actualBones[i].localRotation;
                 shadowBones[i].localScale = actualBones[i].localScale;

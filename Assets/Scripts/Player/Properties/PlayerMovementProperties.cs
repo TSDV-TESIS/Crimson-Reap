@@ -72,5 +72,6 @@ namespace Player.Properties
         public float ceilingCheckWaitTime = 0.5f;
         public int maxShadowStepsOnAir = 1;
         public Vector2 exitShadowstepMomentumMantained;
+        public LayerMask avoidableObjects;
     }
 }
