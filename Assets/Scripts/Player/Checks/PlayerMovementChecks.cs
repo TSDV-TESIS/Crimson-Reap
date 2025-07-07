@@ -24,6 +24,7 @@ namespace Player.Checks
 
         private RaycastHit _groundHit;
         private RaycastHit _ceilingHit;
+        private RaycastHit _wallHit;
 
         private bool _isWallSliding;
         [NonSerialized] public int WallSlideDirection;
@@ -32,25 +33,26 @@ namespace Player.Checks
         private bool _shouldCheckWall;
         private bool _shouldCheckCeiling;
         private bool _shouldUnboundWall;
-        
+
         private float _wallRideInCoyoteSeconds;
         private bool _inWallrideCoyoteTime;
 
         private float _groundedCoyoteTimeSeconds;
-        
+
         private Coroutine _shouldCheckWallCoroutine;
         private Coroutine _unboundWallCoroutine;
         private Coroutine _shadowstepCooldownCoroutine;
         private Coroutine _shouldCheckCeilingCoroutine;
 
         private int _shadowstepsOnAirLeft;
+
         private void OnEnable()
         {
             _shouldCheckCeiling = true;
             _shouldCheckWall = true;
             _shouldUnboundWall = false;
             _inWallrideCoyoteTime = false;
-            
+
             ResetShadowStepsOnAir();
         }
 
@@ -68,14 +70,14 @@ namespace Player.Checks
         {
             _shadowstepsOnAirLeft = playerMovementProperties.maxShadowStepsOnAir;
         }
-        
+
         public bool IsGrounded()
         {
             if (IsOnRaycastGround())
             {
                 if (_groundHit.transform.TryGetComponent(out IOpenable openable))
                     openable.Open();
-                
+
                 _groundedCoyoteTimeSeconds = 0f;
                 return true;
             }
@@ -99,7 +101,7 @@ namespace Player.Checks
         public bool IsOnPlatform()
         {
             return Physics.Raycast(feetPivot.position, Vector3.down, out _groundHit,
-            playerMovementProperties.checkDistance, playerMovementProperties.whatIsPlatform);
+                playerMovementProperties.checkDistance, playerMovementProperties.whatIsPlatform);
         }
 
         public bool IsFalling(Vector3 moveDirection)
@@ -195,7 +197,7 @@ namespace Player.Checks
             int signToCheck = Math.Sign(Math.Abs(velocity.x) > playerMovementProperties.wallVelocityCheck
                 ? velocity.x
                 : moveDirection.x);
-            
+
             _isWallSliding = WallRaycast(signToCheck);
 
             WallSlideDirection = _isWallSliding ? signToCheck : 0;
@@ -205,7 +207,7 @@ namespace Player.Checks
         public bool IsNearCeiling()
         {
             if (_shouldCheckCeiling && Physics.Raycast(headPivot.position, Vector3.up, out _ceilingHit,
-                playerMovementProperties.checkDistance, playerMovementProperties.whatIsCeiling))
+                    playerMovementProperties.checkDistance, playerMovementProperties.whatIsCeiling))
             {
                 Debug.Log($"Normal: {_ceilingHit.normal} is equal to V3.Down {_ceilingHit.normal == Vector3.down}");
 
@@ -227,18 +229,20 @@ namespace Player.Checks
         public bool IsNearCorner(out float cornerDisplace)
         {
             Vector3 displacement = Vector3.right * playerMovementProperties.cornerCorrectionMaxDistance;
-            if (Physics.Raycast(headPivot.position - displacement, Vector3.up, out RaycastHit _leftCornerHit, playerMovementProperties.checkDistance) ^
-                Physics.Raycast(headPivot.position + displacement, Vector3.up, out RaycastHit _rightCornerHit, playerMovementProperties.checkDistance))
+            if (Physics.Raycast(headPivot.position - displacement, Vector3.up, out RaycastHit leftCornerHit,
+                    playerMovementProperties.checkDistance) ^
+                Physics.Raycast(headPivot.position + displacement, Vector3.up, out RaycastHit rightCornerHit,
+                    playerMovementProperties.checkDistance))
             {
-                if (_leftCornerHit.normal == Vector3.down)
+                if (leftCornerHit.normal == Vector3.down)
                 {
-                    cornerDisplace = transform.position.x - _leftCornerHit.point.x;
+                    cornerDisplace = transform.position.x - leftCornerHit.point.x;
                     return true;
                 }
 
-                if (_rightCornerHit.normal == Vector3.down)
+                if (rightCornerHit.normal == Vector3.down)
                 {
-                    cornerDisplace = transform.position.x - _rightCornerHit.point.x;
+                    cornerDisplace = transform.position.x - rightCornerHit.point.x;
                     return true;
                 }
             }
@@ -249,9 +253,9 @@ namespace Player.Checks
 
         public bool WallRaycast(int signToCheck)
         {
-            bool hasRaycast = Physics.Raycast(feetPivot.position, Vector3.right * signToCheck,
-            playerMovementProperties.wallCheckDistance,
-            playerMovementProperties.whatIsWall);
+            bool hasRaycast = Physics.Raycast(feetPivot.position, Vector3.right * signToCheck, out _wallHit,
+                playerMovementProperties.wallCheckDistance,
+                playerMovementProperties.whatIsWall);
 
             if (hasRaycast)
             {
@@ -328,15 +332,16 @@ namespace Player.Checks
                 // Draw feet raycast
                 Gizmos.color = Color.blue;
                 Gizmos.DrawLine(feetPivot.position,
-                feetPivot.position + Vector3.down * playerMovementProperties.checkDistance);
-                Gizmos.DrawLine(headPivot.position, headPivot.position + Vector3.up * playerMovementProperties.checkDistance);
+                    feetPivot.position + Vector3.down * playerMovementProperties.checkDistance);
+                Gizmos.DrawLine(headPivot.position,
+                    headPivot.position + Vector3.up * playerMovementProperties.checkDistance);
 
                 // Wall raycast
                 Gizmos.color = Color.green;
                 Gizmos.DrawLine(feetPivot.position,
-                feetPivot.position + Vector3.right * playerMovementProperties.wallCheckDistance);
+                    feetPivot.position + Vector3.right * playerMovementProperties.wallCheckDistance);
                 Gizmos.DrawLine(feetPivot.position,
-                feetPivot.position + Vector3.left * playerMovementProperties.wallCheckDistance);
+                    feetPivot.position + Vector3.left * playerMovementProperties.wallCheckDistance);
             }
         }
 
@@ -355,16 +360,28 @@ namespace Player.Checks
         {
             float timer = 0;
             IsShadowStepOnCooldown = true;
-            
+
             while (timer < playerMovementProperties.shadowStepCooldown)
             {
-                onShadowstepCooldownValueEvent?.RaiseEvent((float)(timer / playerMovementProperties.shadowStepCooldown));
+                onShadowstepCooldownValueEvent?.RaiseEvent(
+                    (float)(timer / playerMovementProperties.shadowStepCooldown));
                 timer += Time.deltaTime;
                 yield return null;
             }
 
             onShadowstepCooldownValueEvent?.RaiseEvent(1);
             IsShadowStepOnCooldown = false;
+        }
+
+        public bool IsNearNonAvoidableWall()
+        {
+            bool test = WallRaycast(out WallSlideDirection);
+            if (test)
+            {
+                Debug.Log($"CHECKING IF WALL: ${(playerMovementProperties.avoidableObjects & (1 << _wallHit.transform.gameObject.layer)) == 0}");
+            }
+            return WallRaycast(out WallSlideDirection) &&
+                   (playerMovementProperties.avoidableObjects & (1 << _wallHit.transform.gameObject.layer)) == 0;
         }
     }
 }

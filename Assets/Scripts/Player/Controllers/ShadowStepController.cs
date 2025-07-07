@@ -11,18 +11,12 @@ namespace Player.Controllers
     public class ShadowStepController : Controller<PlayerAgent>
     {
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
-        [SerializeField] private ShadowStepProperties shadowStepProperties;
         [SerializeField] private GameObject bloodStepCollider;
-
-        [Header("Events")]
-        [SerializeField] private VoidEventChannelSO onFrenzyEnable;
-        [SerializeField] private VoidEventChannelSO onFrenzyDisable;
-
-        private bool _isFrenzied;
-
+        
         private PlayerMovement _playerMovement;
         private MouseLook _mouseLook;
         private CharacterController _characterController;
+        private CapsuleCollider _collider;
         private HealthPoints _healthPoints;
         private Coroutine _shadowstepCoroutine;
 
@@ -31,26 +25,8 @@ namespace Player.Controllers
             _playerMovement ??= GetComponent<PlayerMovement>();
             _mouseLook ??= GetComponent<MouseLook>();
             _characterController ??= GetComponent<CharacterController>();
+            _collider ??= GetComponent<CapsuleCollider>();
             _healthPoints ??= GetComponent<HealthPoints>();
-
-            onFrenzyEnable?.onEvent.AddListener(HandleOnFrenzyEnabled);
-            onFrenzyDisable?.onEvent.AddListener(HandleOnFrenzyDisabled);
-        }
-
-        private void OnDisable()
-        {
-            onFrenzyEnable?.onEvent.RemoveListener(HandleOnFrenzyEnabled);
-            onFrenzyDisable?.onEvent.RemoveListener(HandleOnFrenzyDisabled);
-        }
-
-        private void HandleOnFrenzyDisabled()
-        {
-            _isFrenzied = false;
-        }
-
-        private void HandleOnFrenzyEnabled()
-        {
-            _isFrenzied = true;
         }
 
         public void OnEnter()
@@ -65,22 +41,16 @@ namespace Player.Controllers
 
         private IEnumerator Shadowstep()
         {
-            Debug.Log($"IS FRENZIED {_isFrenzied}");
-            bool isBloodstep = _isFrenzied;
             float timer = 0;
             Vector2 direction = _mouseLook.CursorDir.normalized;
             bool changedToWallslide = false;
 
-            _characterController.excludeLayers |= shadowStepProperties.avoidableObjects;
+            _characterController.excludeLayers |= playerMovementProperties.avoidableObjects;
+            _collider.excludeLayers |= playerMovementProperties.avoidableObjects;
 
             float duration = playerMovementProperties.shadowStepTime;
-            if (isBloodstep)
-            {
-                bloodStepCollider?.SetActive(true);
-                duration = playerMovementProperties.bloodStepTime;
-            }
 
-            while (timer < duration)
+            while (timer < duration && !changedToWallslide)
             {
                 if (timer >= playerMovementProperties.shadowStepIframes.x && timer <= playerMovementProperties.shadowStepIframes.y)
                     _healthPoints.SetCanTakeDamage(false);
@@ -90,39 +60,36 @@ namespace Player.Controllers
                 if (agent.MovementChecks.IsNearCeiling())
                 {
                     _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
+                    _healthPoints.SetCanTakeDamage(true);
                     break;
                 }
 
-                _playerMovement.Shadowstep(direction, isBloodstep);
+                
+                _playerMovement.Shadowstep(direction);
+
+                if (agent.MovementChecks.IsNearNonAvoidableWall())
+                {
+                    Debug.Log("HEREEEE");
+                    changedToWallslide = true;
+                    agent.MovementChecks.SetShadowstepOnCooldown();
+                }
                 timer += Time.deltaTime;
                 yield return null;
             }
 
-            if (isBloodstep)
-            {
-                bloodStepCollider?.SetActive(false);
-                onFrenzyDisable.RaiseEvent();
-            }
-
-            _characterController.excludeLayers ^= shadowStepProperties.avoidableObjects;
-
-            if (agent.MovementChecks.IsNearWall())
-            {
-                changedToWallslide = true;
-                agent.MovementChecks.SetShadowstepOnCooldown();
-                agent.ChangeStateToWallSlide();
-            }
-
-            if (!changedToWallslide)
-                ExitShadowstep();
+            _characterController.excludeLayers ^= playerMovementProperties.avoidableObjects;
+            _collider.includeLayers ^= playerMovementProperties.avoidableObjects;
+            
+            ExitShadowstep();
         }
 
         private void ExitShadowstep()
         {
+            Debug.Log("Exiting");
             agent.MovementChecks.SetShadowstepOnCooldown();
             _playerMovement.ExitShadowstep();
 
-            if (agent.MovementChecks.IsNearWall())
+            if (agent.MovementChecks.IsNearNonAvoidableWall())
                 agent.ChangeStateToWallSlide();
             else if (!agent.MovementChecks.IsGrounded())
             {

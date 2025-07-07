@@ -39,7 +39,7 @@ namespace Player
             {
                 yield return new WaitForSeconds(healthTickProperties.secondsPerTick);
                 if (_shouldTick)
-                    _healthPoints.TryTakeDamage(healthTickProperties.healthTakenPerTick);
+                    _healthPoints.TakeUnavoidableDamage(healthTickProperties.healthTakenPerTick);
             }
         }
 

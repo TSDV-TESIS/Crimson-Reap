@@ -25,6 +25,8 @@ namespace Player
         [SerializeField] private ActionEventsWrapper wallSlidingEvents;
         [SerializeField] private ActionEventsWrapper shadowStepEvents;
         [SerializeField] private ActionEventsWrapper attackEvents;
+        
+        [Header("Internal Transitions Events")]
         [SerializeField] private UnityEvent onGroundToFallTransition;
         
         private State _groundedState;
