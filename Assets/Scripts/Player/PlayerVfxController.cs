@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Player
@@ -6,14 +7,45 @@ namespace Player
     {
         [SerializeField] private ParticleSystem walkingParticles;
         [SerializeField] private ParticleSystem wallrideParticles;
+        [SerializeField] private GameObject jumpParticles;
+        [SerializeField] private GameObject groundedParticles;
         [SerializeField] private float wallrideParticleAngle = 69f;
-        
+        [SerializeField] private Vector3 jumpVfxRotation;
+
+        [Header("Pivots")] [SerializeField] private GameObject floorPivot;
+        [SerializeField] private GameObject leftPivot;
+        [SerializeField] private GameObject rightPivot;
+
         private float _lastSign;
         private Vector3 _lastWallridePosition;
+        private Quaternion? _overrideJumpParticleAngle;
+        private GameObject _overrideJumpParticlePosition;
+
+        private void OnEnable()
+        {
+            _overrideJumpParticlePosition = null;
+            _overrideJumpParticleAngle = null;
+        }
+
+        public void HandleJump()
+        {
+            GameObject pivotToUse = _overrideJumpParticlePosition ?? floorPivot;
+            InstantiateInPosition(jumpParticles, pivotToUse, _overrideJumpParticleAngle ?? Quaternion.Euler(jumpVfxRotation));
+            _overrideJumpParticlePosition = null;
+            _overrideJumpParticleAngle = null;
+        }
+
+        public void HandleGrounded()
+        {
+            InstantiateInPosition(groundedParticles, floorPivot, Quaternion.Euler(jumpVfxRotation));
+            _overrideJumpParticlePosition = null;
+            _overrideJumpParticleAngle = null;
+        }
+
         public void OnWalking(float velocity)
         {
             float sign = Mathf.Sign(velocity);
-            
+
             if (walkingParticles.isStopped || !Mathf.Approximately(_lastSign, sign))
             {
                 walkingParticles.Stop();
@@ -41,6 +73,9 @@ namespace Player
                     new Vector3(sign > 0 ? wallrideParticleAngle * 2 : wallrideParticleAngle, 90, 0);
                 wallrideParticles.Play();
                 _lastWallridePosition = position;
+
+                _overrideJumpParticlePosition = sign > 0 ? rightPivot : leftPivot;
+                _overrideJumpParticleAngle = Quaternion.Euler(0, sign > 0 ? -90 : 90, 0);
             }
         }
 
@@ -50,6 +85,13 @@ namespace Player
             {
                 wallrideParticles.Stop();
             }
+        }
+
+        private void InstantiateInPosition(GameObject particlePrefab, GameObject objectOfPosition, Quaternion rotation)
+        {
+            GameObject particles = Instantiate(particlePrefab);
+            particles.transform.position = objectOfPosition.transform.position;
+            particles.transform.rotation = rotation;
         }
     }
 }

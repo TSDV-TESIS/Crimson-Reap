@@ -37,6 +37,7 @@ namespace Behaviours
         private readonly String _archerBowParameterName = "ArcherBow";
         private readonly String _attackVfxObjectParameterName = "AttackVfxObject";
         private readonly String _knightAnimatorParameterName = "Animator";
+        private readonly String _runningVfxObjectParameterName = "RunningVfxObject";
 
         protected override Status OnStart()
         {
@@ -62,6 +63,7 @@ namespace Behaviours
                     _agent.GetVariable(_attackVfxObjectParameterName, out BlackboardVariable attackVfxObject) && 
                     _agent.GetVariable(_archerBowParameterName, out BlackboardVariable archerBow) &&
                     _agent.GetVariable(_knightAnimatorParameterName, out BlackboardVariable knightAnimator) && 
+                    _agent.GetVariable(_runningVfxObjectParameterName, out BlackboardVariable runningVfxObject) &&
                     _agent.GetVariable(_arrowVelocityParameterName, out BlackboardVariable arrowVelocity)
                 )
             )
@@ -91,6 +93,7 @@ namespace Behaviours
             archerBow.ObjectValue = enemyObjects.GetArcherBowObject();
             attackVfxObject.ObjectValue = enemyObjects.GetAttackVfxObject();
             knightAnimator.ObjectValue = enemyObjects.GetKnightAnimator();
+            runningVfxObject.ObjectValue = enemyObjects.GetRunningVfxObject();
             
             return Status.Success;
         }

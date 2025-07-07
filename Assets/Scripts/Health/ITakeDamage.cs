@@ -7,5 +7,7 @@ namespace Health
         /// by each entity.
         /// </summary>
         public bool TryTakeDamage(int quantity);
+
+        public void TakeUnavoidableDamage(int quantity);
     }
 }
