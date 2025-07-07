@@ -36,6 +36,7 @@ namespace Player.Checks
         private float _wallRideInCoyoteSeconds;
         private bool _inWallrideCoyoteTime;
 
+        private float _groundedCoyoteTimeSeconds;
         
         private Coroutine _shouldCheckWallCoroutine;
         private Coroutine _unboundWallCoroutine;
@@ -70,15 +71,29 @@ namespace Player.Checks
         
         public bool IsGrounded()
         {
-            if (Physics.Raycast(feetPivot.position, Vector3.down, out _groundHit, playerMovementProperties.checkDistance, playerMovementProperties.whatIsGround))
+            if (IsOnRaycastGround())
             {
                 if (_groundHit.transform.TryGetComponent(out IOpenable openable))
                     openable.Open();
-
+                
+                _groundedCoyoteTimeSeconds = 0f;
                 return true;
             }
 
             return false;
+        }
+
+        public bool IsInGroundedCoyoteTime()
+        {
+            _groundedCoyoteTimeSeconds += Time.deltaTime;
+
+            return _groundedCoyoteTimeSeconds < playerMovementProperties.groundedMaxCoyoteTimeSeconds;
+        }
+
+        public bool IsOnRaycastGround()
+        {
+            return Physics.Raycast(feetPivot.position, Vector3.down, out _groundHit,
+                playerMovementProperties.checkDistance, playerMovementProperties.whatIsGround);
         }
 
         public bool IsOnPlatform()
