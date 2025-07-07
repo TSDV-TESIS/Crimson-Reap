@@ -26,7 +26,6 @@ namespace Enemy.Attack
 
         private void Update()
         {
-            Debug.Log($"{_isTraveling} {_velocity} {_direction}");
             if(_isTraveling)
                 transform.position += _velocity * _direction * Time.deltaTime;
         }

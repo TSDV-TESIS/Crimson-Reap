@@ -38,7 +38,8 @@ namespace Behaviours
         private readonly String _attackVfxObjectParameterName = "AttackVfxObject";
         private readonly String _knightAnimatorParameterName = "Animator";
         private readonly String _runningVfxObjectParameterName = "RunningVfxObject";
-
+        private readonly String _linePredictionRendererParameterName = "ArcherLinePredictor";
+        
         protected override Status OnStart()
         {
             _agent ??= Self.Value.GetComponent<BehaviorGraphAgent>();
@@ -64,6 +65,7 @@ namespace Behaviours
                     _agent.GetVariable(_archerBowParameterName, out BlackboardVariable archerBow) &&
                     _agent.GetVariable(_knightAnimatorParameterName, out BlackboardVariable knightAnimator) && 
                     _agent.GetVariable(_runningVfxObjectParameterName, out BlackboardVariable runningVfxObject) &&
+                    _agent.GetVariable(_linePredictionRendererParameterName, out BlackboardVariable linePredictionRenderer) &&
                     _agent.GetVariable(_arrowVelocityParameterName, out BlackboardVariable arrowVelocity)
                 )
             )
@@ -94,6 +96,7 @@ namespace Behaviours
             attackVfxObject.ObjectValue = enemyObjects.GetAttackVfxObject();
             knightAnimator.ObjectValue = enemyObjects.GetKnightAnimator();
             runningVfxObject.ObjectValue = enemyObjects.GetRunningVfxObject();
+            linePredictionRenderer.ObjectValue = enemyObjects.GetLineRenderer();
             
             return Status.Success;
         }
