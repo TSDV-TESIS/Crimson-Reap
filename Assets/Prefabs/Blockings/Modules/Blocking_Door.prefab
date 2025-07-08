@@ -83,8 +83,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.7258625, y: 2.9689827, z: 1}
-  m_Center: {x: 0.36293125, y: -0.4619503, z: 0}
+  m_Size: {x: 0.9276924, y: 2.9689827, z: 1}
+  m_Center: {x: -0.03615375, y: -0.4619503, z: 0}
 --- !u!114 &4675796913471173748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +323,7 @@ MonoBehaviour:
   doorProperties: {fileID: 11400000, guid: 693e68c688612d346b9accdd898bd75b, type: 2}
   soundCollisionHandler: {fileID: 658096148556460994}
   doorModel: {fileID: 8010225579475221098}
+  doorContactKill: {fileID: 7967053034431863958}
   onPlayEvent: {fileID: 11400000, guid: d81697f8835a04c42aa91bb535d74400, type: 2}
   openDoorEvent:
     idInternal: 0
@@ -445,6 +446,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 131810498820800861, guid: 630336662290e1e4e97dc540e6ab9fb8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1797141394187023810}
+    - targetCorrespondingSourceObject: {fileID: 131810498820800861, guid: 630336662290e1e4e97dc540e6ab9fb8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7967053034431863958}
   m_SourcePrefab: {fileID: 100100000, guid: 630336662290e1e4e97dc540e6ab9fb8, type: 3}
 --- !u!4 &7851230925518036678 stripped
 Transform:
@@ -495,7 +499,20 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.9670075, y: 3.1897583, z: 0.36708814}
   m_Center: {x: -0.98350376, y: 1.5948792, z: 0.100857995}
+--- !u!114 &7967053034431863958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8010225579475221098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fce37e1a4efed2479f8d4dc9e724281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorProperties: {fileID: 11400000, guid: 693e68c688612d346b9accdd898bd75b, type: 2}
