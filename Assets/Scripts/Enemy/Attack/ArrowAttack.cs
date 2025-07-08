@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Enemy.Attack
 {
-    [RequireComponent(typeof(SphereCollider))]
+    [RequireComponent(typeof(CapsuleCollider))]
     public class ArrowAttack : MonoBehaviour
     {
         [SerializeField] private int damage = 1000;
         [SerializeField] private ArrowAttackProperties properties;
 
-        private SphereCollider _collider;
+        private CapsuleCollider _collider;
         private Coroutine _arrowDestroyCoroutine;
 
         private bool _isTraveling;
@@ -21,7 +21,7 @@ namespace Enemy.Attack
         private void OnEnable()
         {
             _isTraveling = true;
-            _collider ??= GetComponent<SphereCollider>();
+            _collider ??= GetComponent<CapsuleCollider>();
         }
 
         private void Update()
@@ -34,6 +34,7 @@ namespace Enemy.Attack
         {
             _direction = (target - transform.position).normalized;
             _velocity = velocity;
+            transform.LookAt(target);
         }
 
         private void OnTriggerEnter(Collider other)
