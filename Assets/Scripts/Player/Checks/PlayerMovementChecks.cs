@@ -38,7 +38,8 @@ namespace Player.Checks
         private bool _inWallrideCoyoteTime;
 
         private float _groundedCoyoteTimeSeconds;
-
+        private float _offGroundGraceTimeSeconds;
+        
         private Coroutine _shouldCheckWallCoroutine;
         private Coroutine _unboundWallCoroutine;
         private Coroutine _shadowstepCooldownCoroutine;
@@ -79,12 +80,20 @@ namespace Player.Checks
                     openable.Open();
 
                 _groundedCoyoteTimeSeconds = 0f;
+                _offGroundGraceTimeSeconds = 0f;
                 return true;
             }
 
             return false;
         }
 
+        public bool IsInOffGroundGraceTime()
+        {
+            _offGroundGraceTimeSeconds += Time.deltaTime;
+
+            return _offGroundGraceTimeSeconds < playerMovementProperties.offGroundMaxGraceTimeSeconds;
+        }
+        
         public bool IsInGroundedCoyoteTime()
         {
             _groundedCoyoteTimeSeconds += Time.deltaTime;

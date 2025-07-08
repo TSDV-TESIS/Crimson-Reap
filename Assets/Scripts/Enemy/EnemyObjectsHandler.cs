@@ -13,6 +13,7 @@ namespace Enemy
         [Header("Miscelaneous")]
         [SerializeField] private Animator knightAnimator;
         [SerializeField] private GameObject runningVfxObject;
+        [SerializeField] private LineRenderer lineRenderer;
         
         public GameObject GetListeningObject()
         {
@@ -47,6 +48,11 @@ namespace Enemy
         public GameObject GetRunningVfxObject()
         {
             return runningVfxObject;
+        }
+
+        public LineRenderer GetLineRenderer()
+        {
+            return lineRenderer;
         }
     }
 }

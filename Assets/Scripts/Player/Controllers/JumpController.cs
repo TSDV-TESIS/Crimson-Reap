@@ -65,7 +65,7 @@ namespace Player.Controllers
                 }
             }
 
-            if (agent.MovementChecks.IsGrounded())
+            if (!agent.MovementChecks.IsInOffGroundGraceTime() && agent.MovementChecks.IsGrounded())
             {
                 agent.ChangeStateToGrounded();
             }
