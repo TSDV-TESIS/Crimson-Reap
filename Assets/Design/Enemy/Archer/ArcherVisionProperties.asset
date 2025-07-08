@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: ArcherVisionProperties
   m_EditorClassIdentifier: 
   visionLength: 13.98
-  visionAngle: 70
-  anglePerRaycast: 5
+  minAnglePerRaycast: 7
+  visionAngleInY: 70
+  anglePerRaycastInY: 5
+  visionAngleInX: 30
+  anglePerRaycastInX: 5
   whatIsObjective:
     serializedVersion: 2
     m_Bits: 64
   whatIsObstruction:
     serializedVersion: 2
-    m_Bits: 1792
-  minAnglePerRaycast: 7
+    m_Bits: 141056
   stillSeeingPlayerSeconds: 3
   shouldDrawGizmos: 1
