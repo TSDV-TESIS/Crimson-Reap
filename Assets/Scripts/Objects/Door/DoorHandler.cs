@@ -10,14 +10,15 @@ namespace Objects
     [RequireComponent(typeof(Collider))]
     public class DoorHandler : MonoBehaviour, IOpenable
     {
-        private static readonly int OpenParameter = Animator.StringToHash("Open");
+        private static readonly int OpenRightParameter = Animator.StringToHash("OpenRight");
+        private static readonly int OpenLeftParameter = Animator.StringToHash("OpenLeft");
         private static readonly int DoorOpenSpeed = Animator.StringToHash("DoorOpenSpeed");
 
         [SerializeField] private DoorProperties doorProperties;
+        [SerializeField] private bool OpensRight = true;
         [SerializeField] private SoundCollisionHandler soundCollisionHandler;
         [SerializeField] private GameObject doorModel;
         [SerializeField] private DoorContactKill doorContactKill;
-
         [Header("Sounds")]
         [SerializeField] private AkWwiseEventChannelSO onPlayEvent;
         [SerializeField] private Event openDoorEvent;
@@ -45,7 +46,7 @@ namespace Objects
 
             Animator doorAnim = doorModel.GetComponent<Animator>();
             doorAnim.SetFloat(DoorOpenSpeed, doorProperties.doorOpenTime);
-            doorAnim.SetBool(OpenParameter, true);
+            doorAnim.SetTrigger(OpensRight ? OpenRightParameter : OpenLeftParameter);
             gameObject.layer = LayerMask.NameToLayer("OpenedDoor");
             doorContactKill.gameObject.layer = LayerMask.NameToLayer("OpenedDoor");
             doorModel.layer = LayerMask.NameToLayer("OpenedDoor");
