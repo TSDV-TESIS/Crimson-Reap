@@ -4,7 +4,6 @@ using Events.Scriptables;
 using Health;
 using Sounds;
 using UnityEditor;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Objects
