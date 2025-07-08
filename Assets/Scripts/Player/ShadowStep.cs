@@ -95,6 +95,7 @@ namespace Player
                 diffuseMaterial.color = new Color(initialColor.r, initialColor.g, initialColor.b, alpha);
                 foreach (SkinnedMeshRenderer meshRenderer in meshRenderers)
                 {
+                    if(!meshRenderer) continue;
                     meshRenderer.material = diffuseMaterial;
                 }
 
@@ -103,6 +104,7 @@ namespace Player
 
             foreach (SkinnedMeshRenderer meshRenderer in meshRenderers)
             {
+                if(!meshRenderer) continue;
                 meshRenderer.material = oldMat;
             }
 

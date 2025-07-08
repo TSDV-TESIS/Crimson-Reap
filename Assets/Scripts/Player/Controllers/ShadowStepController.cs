@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Events;
 using FSM;
@@ -12,6 +13,7 @@ namespace Player.Controllers
     {
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private GameObject bloodStepCollider;
+        [SerializeField] private Vector3 displacementIfBlocked = new Vector3(0.01f, 0.01f, 0);
         
         private PlayerMovement _playerMovement;
         private MouseLook _mouseLook;
@@ -41,6 +43,7 @@ namespace Player.Controllers
 
         private IEnumerator Shadowstep()
         {
+            Debug.Log("START Shadowstep");
             float timer = 0;
             Vector2 direction = _mouseLook.CursorDir.normalized;
             bool changedToWallslide = false;
@@ -59,6 +62,7 @@ namespace Player.Controllers
 
                 if (agent.MovementChecks.IsNearCeiling())
                 {
+                    Debug.Log("STOP BECAUSE NEAR CEILING");
                     _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
                     _healthPoints.SetCanTakeDamage(true);
                     break;
@@ -69,17 +73,18 @@ namespace Player.Controllers
 
                 if (agent.MovementChecks.IsNearNonAvoidableWall())
                 {
-                    Debug.Log("HEREEEE");
+                    Debug.Log("STOP BECAUSE WALLSLIDE");
                     changedToWallslide = true;
                     agent.MovementChecks.SetShadowstepOnCooldown();
                 }
                 timer += Time.deltaTime;
                 yield return null;
             }
-
-            _characterController.excludeLayers ^= playerMovementProperties.avoidableObjects;
-            _collider.includeLayers ^= playerMovementProperties.avoidableObjects;
             
+            _characterController.excludeLayers ^= playerMovementProperties.avoidableObjects;
+            _collider.excludeLayers ^= playerMovementProperties.avoidableObjects;
+            
+            _characterController.Move(displacementIfBlocked);
             ExitShadowstep();
         }
 
@@ -88,16 +93,24 @@ namespace Player.Controllers
             Debug.Log("Exiting");
             agent.MovementChecks.SetShadowstepOnCooldown();
             _playerMovement.ExitShadowstep();
+            Debug.Log("Exited normal stuff");
 
             if (agent.MovementChecks.IsNearNonAvoidableWall())
+            {
+                Debug.Log("WALLSOLIDE");
                 agent.ChangeStateToWallSlide();
+            }
             else if (!agent.MovementChecks.IsGrounded())
             {
+                Debug.Log("Not wallslide... falling!");
                 agent.MovementChecks.SetShadowStepOnAirUsed();
                 agent.ChangeStateToFalling();
             }
             else
+            {
+                Debug.Log("Grounded!");
                 agent.ChangeStateToGrounded();
+            }
         }
     }
 }
