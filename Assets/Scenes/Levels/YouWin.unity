@@ -319,7 +319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2704467073682800236, guid: a0cce4b3bb13fb64eb563b111b84e73c, type: 3}
       propertyPath: 'scenesToSubscribeTo.Array.data[0]'
-      value: Level1
+      value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2704467073682800236, guid: a0cce4b3bb13fb64eb563b111b84e73c, type: 3}
       propertyPath: 'scenesToSubscribeTo.Array.data[1]'
@@ -331,7 +331,7 @@ PrefabInstance:
       objectReference: {fileID: 23800000, guid: 4fd603b8a654d474d954c8cf7e322c4a, type: 2}
     - target: {fileID: 5735985636032220243, guid: a0cce4b3bb13fb64eb563b111b84e73c, type: 3}
       propertyPath: levelScene
-      value: Level1
+      value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 6764111336305474664, guid: a0cce4b3bb13fb64eb563b111b84e73c, type: 3}
       propertyPath: m_Name
@@ -347,6 +347,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 933080626576746421, guid: a0cce4b3bb13fb64eb563b111b84e73c, type: 3}
   m_PrefabInstance: {fileID: 269058315}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &331853193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 331853195}
+  - component: {fileID: 331853194}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &331853194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331853193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5c751a67ae411447b7af9b980abeae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 11400000, guid: 9548c2e7f63a88146994d6b7d9800cc7, type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
+--- !u!4 &331853195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331853193}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &753901600
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,7 +776,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'YOU WIN!
 
-    Press F3 to start from level 1'
+    Press F3 to go to main menu'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -806,3 +863,4 @@ SceneRoots:
   - {fileID: 1882355445}
   - {fileID: 1993287554}
   - {fileID: 1083223689}
+  - {fileID: 331853195}

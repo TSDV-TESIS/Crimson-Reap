@@ -67,7 +67,7 @@ namespace Player.Controllers
                 _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
             }
 
-            if (agent.MovementChecks.IsGrounded())
+            if (!agent.MovementChecks.IsInOffGroundGraceTime() && agent.MovementChecks.IsGrounded())
             {
                 agent.ChangeStateToGrounded();
             }
