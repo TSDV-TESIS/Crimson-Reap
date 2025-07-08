@@ -9,9 +9,9 @@ namespace UI.Bars
 {
     public class HealthBar : MonoBehaviour
     {
-        [SerializeField] private Slider slider;
         [SerializeField] private bool shouldStartHided;
-    
+        [SerializeField] private Material healthMaterial;
+        
         [Header("Events")]
         [SerializeField] private IntEventChannelSO onTakeDamage;
         [SerializeField] private IntEventChannelSO onSumHealth;
@@ -19,6 +19,8 @@ namespace UI.Bars
         [SerializeField] private IntEventChannelSO onInitializeSlider;
         
         private bool _wasTriggered = false;
+        private int _maxHealthValue;
+        private static readonly int HealthParam = Shader.PropertyToID("_Health");
 
         private void Awake()
         {
@@ -27,12 +29,7 @@ namespace UI.Bars
 
         void Start()
         {
-            if (shouldStartHided)
-            {
-                slider.gameObject.SetActive(false);
-                _wasTriggered = false;
-            }
-
+            healthMaterial.SetFloat(HealthParam, 1);
             onSumHealth?.onIntEvent.AddListener(HandleTakeDamage);
             onTakeDamage?.onIntEvent.AddListener(HandleTakeDamage);
             onResetDamage?.onIntEvent.AddListener(HandleReset);
@@ -48,23 +45,23 @@ namespace UI.Bars
 
         public void HandleReset(int currentHp)
         {
-            slider.value = currentHp;
+            _maxHealthValue = currentHp;
+            healthMaterial.SetFloat(HealthParam, 1);
         }
     
         public void HandleInit(int maxValue)
         {
-            slider.maxValue = maxValue;
-            slider.value = maxValue;
+            _maxHealthValue = maxValue;
+            healthMaterial.SetFloat(HealthParam, 1);
         }
         
         public void HandleTakeDamage(int currentHealth)
         {
             if (!_wasTriggered)
             {
-                slider.gameObject.SetActive(true);
                 _wasTriggered = true;
             }
-            slider.value = currentHealth;
+            healthMaterial.SetFloat(HealthParam, (float)currentHealth / _maxHealthValue);
         }
     }
 }

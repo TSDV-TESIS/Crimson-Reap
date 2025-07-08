@@ -120,6 +120,8 @@ namespace Health
 
         public void TakeUnavoidableDamage(int damage)
         {
+            if (_isInvincible) return;
+            
             CurrentHp -= damage;
 
             if (shouldFreeze)
