@@ -21,6 +21,7 @@ namespace Player.Materials
 
         public void SetShadowStepMaterial(bool value)
         {
+            Debug.LogWarning($"SET SHADOW STEP MATERIAL {value}");
             int valueToUse = value ? 1 : 0;
             material.SetInt(EmissionBool, valueToUse);
             material.SetInt(IsFrenetic, valueToUse);

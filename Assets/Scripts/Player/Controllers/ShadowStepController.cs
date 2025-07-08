@@ -22,6 +22,8 @@ namespace Player.Controllers
         private HealthPoints _healthPoints;
         private Coroutine _shadowstepCoroutine;
 
+        private bool _shouldExitShadowstep;
+        
         private void OnEnable()
         {
             _playerMovement ??= GetComponent<PlayerMovement>();
@@ -33,12 +35,14 @@ namespace Player.Controllers
 
         public void OnEnter()
         {
+            _shouldExitShadowstep = false;
             if (_shadowstepCoroutine != null) StopCoroutine(_shadowstepCoroutine);
             _shadowstepCoroutine = StartCoroutine(Shadowstep());
         }
 
         public override void OnUpdate()
         {
+            if(_shouldExitShadowstep) ExitShadowstep();
         }
 
         private IEnumerator Shadowstep()
@@ -46,37 +50,21 @@ namespace Player.Controllers
             Debug.Log("START Shadowstep");
             float timer = 0;
             Vector2 direction = _mouseLook.CursorDir.normalized;
-            bool changedToWallslide = false;
 
             _characterController.excludeLayers |= playerMovementProperties.avoidableObjects;
             _collider.excludeLayers |= playerMovementProperties.avoidableObjects;
 
             float duration = playerMovementProperties.shadowStepTime;
 
-            while (timer < duration && !changedToWallslide)
+            while (timer < duration)
             {
                 if (timer >= playerMovementProperties.shadowStepIframes.x && timer <= playerMovementProperties.shadowStepIframes.y)
                     _healthPoints.SetCanTakeDamage(false);
                 else
                     _healthPoints.SetCanTakeDamage(true);
-
-                if (agent.MovementChecks.IsNearCeiling())
-                {
-                    Debug.Log("STOP BECAUSE NEAR CEILING");
-                    _playerMovement.SetVerticalVelocity(-playerMovementProperties.gravity * Time.deltaTime);
-                    _healthPoints.SetCanTakeDamage(true);
-                    break;
-                }
-
                 
                 _playerMovement.Shadowstep(direction);
-
-                if (agent.MovementChecks.IsNearNonAvoidableWall())
-                {
-                    Debug.Log("STOP BECAUSE WALLSLIDE");
-                    changedToWallslide = true;
-                    agent.MovementChecks.SetShadowstepOnCooldown();
-                }
+                
                 timer += Time.deltaTime;
                 yield return null;
             }
@@ -85,7 +73,7 @@ namespace Player.Controllers
             _collider.excludeLayers ^= playerMovementProperties.avoidableObjects;
             
             _characterController.Move(displacementIfBlocked);
-            ExitShadowstep();
+            _shouldExitShadowstep = true;
         }
 
         private void ExitShadowstep()
