@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Objects.Door
@@ -7,9 +6,10 @@ namespace Objects.Door
     public class DoorContactOpenHandler : MonoBehaviour
     {
         [SerializeField] private DoorHandler handler;
-        
+
         private BoxCollider _collider;
         private bool _hasBeenTriggered;
+
         void OnEnable()
         {
             _collider ??= GetComponent<BoxCollider>();
@@ -22,6 +22,7 @@ namespace Objects.Door
             {
                 handler.Open();
                 _hasBeenTriggered = true;
+                _collider.enabled = false;
             }
         }
     }

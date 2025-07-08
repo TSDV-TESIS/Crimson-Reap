@@ -10,20 +10,15 @@ public class EnemyBuilder : MonoBehaviour
     private const string ScanningString = "scanning";
     private const string EnemyIdleTypeParameterName = "EnemyIdleType";
     private const string PatrolPointsParameterName = "PatrolPoints";
-    
+
     [SerializeField] private GameObject knightPrefab;
     [SerializeField] private GameObject archerPrefab;
     [SerializeField] private Transform initPosition;
     [SerializeField] private List<GameObject> patrolPoints;
-    
+
     private string _patrolSelected;
     private bool _isArrowAttack;
-    private List<GameObject> _spawnedEnemies;
-
-    private void Awake()
-    {
-        _spawnedEnemies = new List<GameObject>();
-    }
+    private List<GameObject> _spawnedEnemies = new List<GameObject>();
 
     public void OnPatrolChange(string patrolType)
     {
@@ -37,7 +32,7 @@ public class EnemyBuilder : MonoBehaviour
 
     public void Spawn()
     {
-        GameObject instance = Instantiate(_isArrowAttack ? archerPrefab : knightPrefab, gameObject.transform);
+        GameObject instance = Instantiate(_isArrowAttack ? archerPrefab : knightPrefab, transform);
         instance.transform.position = initPosition.position;
 
         BehaviorGraphAgent behaviorGraphAgent = instance.GetComponent<BehaviorGraphAgent>();

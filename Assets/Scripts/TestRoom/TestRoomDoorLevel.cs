@@ -1,6 +1,4 @@
-using System;
 using Unity.Behavior;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace TestRoom
@@ -22,7 +20,7 @@ namespace TestRoom
 
         public void OnEnable()
         {
-            _selectedPosition = farPosition;
+            _selectedPosition = nearPosition;
             Reset();
         }
 
@@ -50,10 +48,10 @@ namespace TestRoom
         {
             if (_actualEnemyInstance != null) Destroy(_actualEnemyInstance);
 
-            _actualEnemyInstance = Instantiate(enemyKnightPrefab, _selectedPosition.position, quaternion.identity);
+            _actualEnemyInstance = Instantiate(enemyKnightPrefab, _selectedPosition);
 
             BehaviorGraphAgent behaviorGraphAgent = _actualEnemyInstance.GetComponent<BehaviorGraphAgent>();
-            behaviorGraphAgent.BlackboardReference.SetVariableValue(EnemyIdleTypeParameterName, IdleType.OnGuard);
+            behaviorGraphAgent.BlackboardReference.SetVariableValue(EnemyIdleTypeParameterName, IdleType.Scanning);
             behaviorGraphAgent.BlackboardReference.SetVariableValue(StartingDirectionParameterName, Direction.Right);
         }
     }
