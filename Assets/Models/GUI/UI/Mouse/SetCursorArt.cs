@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class S_Cursor_Art : MonoBehaviour
+public class SetCursorArt : MonoBehaviour
 {
     public Texture2D cursorDefault;
     public Texture2D cursorClick;
@@ -9,7 +9,6 @@ public class S_Cursor_Art : MonoBehaviour
 
     void Start()
     {
-        // Set default cursor al iniciar
         Cursor.SetCursor(cursorDefault, hotspot, cursorMode);
     }
 
