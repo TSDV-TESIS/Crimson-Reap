@@ -10,19 +10,17 @@ namespace TestRoom.UI
         private const string PatrolString = "patrol";
         private const string OnGuardString = "onGuard";
         private const string ScanningString = "scanning";
-        
+
         [SerializeField] private GameObject patrolText;
         [SerializeField] private GameObject chaseText;
         [SerializeField] private GameObject scanningText;
         [SerializeField] private UnityEvent<String> onNewSelectedPatrol;
-        
-        private List<string> _stringsToRotate;
-        private int _index;
-        
-        public void Start()
+
+        private List<string> _stringsToRotate = new List<string>() { PatrolString, OnGuardString, ScanningString };
+        private int _index = 0;
+
+        public void Awake()
         {
-            _stringsToRotate = new List<string>() { PatrolString, OnGuardString, ScanningString };
-            _index = 0;
             ResetWithActive(patrolText);
         }
 
@@ -30,7 +28,7 @@ namespace TestRoom.UI
         {
             _index++;
             if (_index >= _stringsToRotate.Count) _index = 0;
-            
+
             switch (_stringsToRotate[_index])
             {
                 case PatrolString:
@@ -43,6 +41,7 @@ namespace TestRoom.UI
                     ResetWithActive(scanningText);
                     break;
             }
+
             onNewSelectedPatrol?.Invoke(_stringsToRotate[_index]);
         }
 
@@ -51,7 +50,7 @@ namespace TestRoom.UI
             patrolText.SetActive(false);
             chaseText.SetActive(false);
             scanningText.SetActive(false);
-            
+
             objectToActivate.SetActive(true);
         }
     }
