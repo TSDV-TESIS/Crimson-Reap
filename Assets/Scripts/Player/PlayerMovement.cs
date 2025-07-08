@@ -263,9 +263,9 @@ namespace Player
             _characterController.enabled = true;
         }
 
-        public void Shadowstep(Vector2 direction, bool isBloodstep)
+        public void Shadowstep(Vector2 direction)
         {
-            float velocityToUse = isBloodstep ? playerMovementProperties.bloodStepVelocity : playerMovementProperties.shadowStepVelocity;
+            float velocityToUse = playerMovementProperties.shadowStepVelocity;
             Velocity.x = velocityToUse * direction.x;
             Velocity.y = velocityToUse * direction.y;
 

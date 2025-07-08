@@ -9,7 +9,10 @@ namespace Enemy
         [SerializeField] private GameObject knightWindupObject;
         [SerializeField] private GameObject attackVfxObject;
         [SerializeField] private GameObject archerBowObject;
+        
+        [Header("Miscelaneous")]
         [SerializeField] private Animator knightAnimator;
+        [SerializeField] private GameObject runningVfxObject;
         
         public GameObject GetListeningObject()
         {
@@ -39,6 +42,11 @@ namespace Enemy
         public Animator GetKnightAnimator()
         {
             return knightAnimator;
+        }
+
+        public GameObject GetRunningVfxObject()
+        {
+            return runningVfxObject;
         }
     }
 }
