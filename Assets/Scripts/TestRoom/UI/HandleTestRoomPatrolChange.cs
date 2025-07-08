@@ -21,7 +21,7 @@ namespace TestRoom.UI
 
         public void Awake()
         {
-            ResetWithActive(patrolText);
+            ResetWithActive(scanningText);
         }
 
         public void OnInteract(bool value)

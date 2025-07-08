@@ -12,12 +12,15 @@ namespace TestRoom
         [SerializeField] private Transform enemyPoint;
         [SerializeField] private Transform movementPoint;
         [SerializeField] private Transform doorPoint;
+        [SerializeField] private Transform artDemoPoint;
+        
         private void OnEnable()
         {
             testRoomInputHandler.onTeleportToTutorial.AddListener(HandleTeleportToTutorial);
             testRoomInputHandler.onTeleportToEnemy.AddListener(HandleTeleportToEnemy);
             testRoomInputHandler.onTeleportToMovement.AddListener(HandleTeleportToMovement);
             testRoomInputHandler.onTeleportToDoor.AddListener(HandleTeleportToDoor);
+            testRoomInputHandler.onTeleportToArtDemo.AddListener(HandleArtDemoTeleport);
         }
 
         private void HandleTeleportToMovement()
@@ -38,6 +41,11 @@ namespace TestRoom
         private void HandleTeleportToDoor()
         {
             SetPositionTo(doorPoint.position);
+        }
+
+        private void HandleArtDemoTeleport()
+        {
+            SetPositionTo(artDemoPoint.position);
         }
 
         private void SetPositionTo(Vector3 position)

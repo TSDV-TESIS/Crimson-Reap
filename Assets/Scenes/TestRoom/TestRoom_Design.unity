@@ -2851,19 +2851,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8718269034885697645, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
-      value: 88.69449
+      value: 88.1064
       objectReference: {fileID: 0}
     - target: {fileID: 8718269034885697645, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].y
-      value: 56.08211
+      value: 84.604645
       objectReference: {fileID: 0}
     - target: {fileID: 8718269034885697645, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
-      value: -11.4099865
+      value: -10.527845
       objectReference: {fileID: 0}
     - target: {fileID: 8718269034885697645, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
-      value: 55.92019
+      value: 84.442726
       objectReference: {fileID: 0}
     - target: {fileID: 8718269034885697645, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[2].x
@@ -9333,6 +9333,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 331910085861117758, guid: aa2f2d1956b46cd4186bef98d8dcebb9, type: 3}
   m_PrefabInstance: {fileID: 1507829034}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &745415309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 745415310}
+  m_Layer: 0
+  m_Name: Art
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &745415310
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745415309}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -20.18, y: 27.73, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 827772534}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &746086184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9920,6 +9951,7 @@ Transform:
   - {fileID: 646214142}
   - {fileID: 1977438231}
   - {fileID: 1165079580}
+  - {fileID: 745415310}
   m_Father: {fileID: 427664135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &827772535
@@ -9940,6 +9972,7 @@ MonoBehaviour:
   enemyPoint: {fileID: 1977438231}
   movementPoint: {fileID: 646214142}
   doorPoint: {fileID: 1165079580}
+  artDemoPoint: {fileID: 745415310}
 --- !u!1001 &828940322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18971,7 +19004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6391947559083867225, guid: e8092312e621bda4eac637f9edac4258, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.479
+      value: -22.98
       objectReference: {fileID: 0}
     - target: {fileID: 6391947559083867225, guid: e8092312e621bda4eac637f9edac4258, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24672,7 +24705,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055206824}
-  - component: {fileID: 2055206823}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -24680,31 +24712,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2055206823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055206822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c751a67ae411447b7af9b980abeae8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializationSettings: {fileID: 11400000, guid: 9548c2e7f63a88146994d6b7d9800cc7, type: 2}
-  basePath: 
-  language: 
-  defaultPoolSize: 0
-  lowerPoolSize: 0
-  streamingPoolSize: 0
-  memoryCutoffThreshold: 0
-  monitorPoolSize: 0
-  monitorQueuePoolSize: 0
-  callbackManagerBufferSize: 0
-  spatialAudioPoolSize: 0
-  maxSoundPropagationDepth: 0
-  engineLogging: 0
 --- !u!4 &2055206824
 Transform:
   m_ObjectHideFlags: 0

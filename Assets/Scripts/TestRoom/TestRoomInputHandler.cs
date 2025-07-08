@@ -11,6 +11,7 @@ namespace TestRoom
         public UnityEvent onTeleportToMovement;
         public UnityEvent onTeleportToEnemy;
         public UnityEvent onTeleportToDoor;
+        public UnityEvent onTeleportToArtDemo;
         
         public void HandleTeleportToTutorial(InputAction.CallbackContext context)
         {
@@ -41,6 +42,14 @@ namespace TestRoom
             if (context.performed)
             {
                 onTeleportToDoor?.Invoke();
+            }
+        }
+
+        public void HandleTeleportToArtDemo(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                onTeleportToArtDemo?.Invoke();
             }
         }
     }
