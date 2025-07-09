@@ -27,7 +27,7 @@ namespace Player.Checks
 
         public bool CanMoveOnYOnAttack()
         {
-            return _attacksOnJump >= 0;
+            return _attacksOnJump > 0;
         }
         
         public void SetAttackJumpDone()

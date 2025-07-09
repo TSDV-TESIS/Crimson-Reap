@@ -2756,11 +2756,6 @@ Transform:
   - {fileID: 1279383904}
   m_Father: {fileID: 427664135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &283142155 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 238100018967637552, guid: e8092312e621bda4eac637f9edac4258, type: 3}
-  m_PrefabInstance: {fileID: 1565628658}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &284936896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18993,7 +18988,7 @@ PrefabInstance:
     - target: {fileID: 1017526273433889760, guid: e8092312e621bda4eac637f9edac4258, type: 3}
       propertyPath: pivot
       value: 
-      objectReference: {fileID: 283142155}
+      objectReference: {fileID: 0}
     - target: {fileID: 2262308662148885198, guid: e8092312e621bda4eac637f9edac4258, type: 3}
       propertyPath: m_Height
       value: 1.3
@@ -22174,8 +22169,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -18.5671, y: -21.3679}
-  m_SizeDelta: {x: 7.7588, y: 2.784}
+  m_AnchoredPosition: {x: -13.43, y: -22.57}
+  m_SizeDelta: {x: 10.55, y: 5.36}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1855486516
 MonoBehaviour:
@@ -23578,7 +23573,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 1.3679008}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1974658883
@@ -23616,7 +23611,13 @@ MonoBehaviour:
     3:
     Enemy with door tests
 
-    4: Art showroom (TODO)'
+    4: Art showroom
+
+
+    With F4 you make yourself invincible
+    to Health tick and
+
+    enemy damage'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -23643,7 +23644,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.3
+  m_fontSize: 0.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

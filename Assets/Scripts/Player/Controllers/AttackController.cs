@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using FSM;
+using Player.Attacks;
 using Player.Properties;
 using UnityEngine;
 
@@ -11,7 +12,8 @@ namespace Player.Controllers
         [SerializeField] private PlayerAnimationController animationController;
 
         [SerializeField] private GameObject attackObject;
-
+        [SerializeField] private AttackPivot attackPivot;
+        
         [Header("Attack properties")]
         [SerializeField] private PlayerAttackProperties attackProperties;
         
@@ -44,16 +46,18 @@ namespace Player.Controllers
             animationController.HandleAttack();
             agent.AttackChecks.IsAttacking = true;
             attackObject.SetActive(true);
+            attackPivot.SetCanRotateFlag(false);
             float timer = 0;
             float startTime = Time.time;
 
             bool stopped = false;
             _shadows.InitShadowStepShadows();
             _playerMovement.Velocity = _mouseLook.CursorDir * attackProperties.displacementForce;
-            if ((agent.AttackChecks.IsNearGround() && _playerMovement.Velocity.y < 0) || !agent.AttackChecks.CanMoveOnYOnAttack())
+            if ((agent.MovementChecks.IsOnRaycastGround() && _playerMovement.Velocity.y < 0) || !agent.AttackChecks.CanMoveOnYOnAttack())
             {
                 _playerMovement.Velocity = new Vector2(_playerMovement.Velocity.x, 0);
             }
+            
             while (timer < attackProperties.duration)
             {
                 if (!agent.AttackChecks.CanMoveOnYOnAttack())
@@ -74,8 +78,9 @@ namespace Player.Controllers
             _shadows.StopShadows();
             attackObject.SetActive(false);
             agent.AttackChecks.IsAttacking = false;
+            attackPivot.SetCanRotateFlag(true);
 
-            if (agent.AttackChecks.IsNearGround())
+            if (agent.MovementChecks.IsOnRaycastGround())
             {
                 agent.ChangeStateToGrounded();
             }

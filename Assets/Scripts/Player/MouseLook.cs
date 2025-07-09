@@ -1,3 +1,4 @@
+using Player.Attacks;
 using UnityEngine;
 
 namespace Player
@@ -13,9 +14,12 @@ namespace Player
         private Vector2 _viewPortPos;
         private Vector2 cursorDir;
         public Vector2 CursorDir => cursorDir.normalized;
+
+        private AttackPivot _attackPivot;        
         void OnEnable()
         {
             handler.OnPlayerLook.AddListener(HandleLookDir);
+            _attackPivot ??= visorPivot.GetComponent<AttackPivot>();
         }
 
         private void OnDisable()
@@ -32,7 +36,7 @@ namespace Player
             _angle = Mathf.Atan2(cursorDir.x, cursorDir.y) * Mathf.Rad2Deg;
             if (is2D)
             {
-                visorPivot.transform.rotation = Quaternion.AngleAxis(-_angle + 90, Vector3.forward) * transform.rotation;
+                _attackPivot.RotateByPivot(Quaternion.AngleAxis(-_angle + 90, Vector3.forward) * transform.rotation);
                 return;
             }
 
