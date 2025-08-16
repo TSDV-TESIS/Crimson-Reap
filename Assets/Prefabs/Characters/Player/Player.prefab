@@ -1004,7 +1004,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 2378139602423631225}
-          m_TargetAssemblyTypeName: Player.Materials.SetShadowStepMaterialData, Assembly-CSharp
+          m_TargetAssemblyTypeName: Player.Materials.HandleShadowstepMaterialAndTrail,
+            Assembly-CSharp
           m_MethodName: SetShadowStepMaterial
           m_Mode: 6
           m_Arguments:
@@ -1411,6 +1412,7 @@ MonoBehaviour:
   agent: {fileID: 2452499770306614508}
   playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
   bloodStepCollider: {fileID: 0}
+  displacementIfBlocked: {x: 0.01, y: 0.01, z: 0}
 --- !u!114 &8298738303673191818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1548,6 +1550,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: aeb953dbb4f9bb24b974b27d970ac785, type: 2}
   trailRenderer: {fileID: 6944628735667728238}
   otherTrailRenderer: {fileID: 2105191789109718086}
+  playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
+  onShadowStepCooldown: {fileID: 11400000, guid: d1a973f980d430d4e9acbbda2aa50488, type: 2}
 --- !u!1001 &307453012941626532
 PrefabInstance:
   m_ObjectHideFlags: 0
