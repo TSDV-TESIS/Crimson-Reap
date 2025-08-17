@@ -40,9 +40,7 @@ namespace Player
         private Vector3 _moveDirection;
 
         public Vector3 MoveDirection => _moveDirection;
-
-        private bool _isFrenzied;
-
+        
         public float MaxSpeed
         {
             get => playerMovementProperties.maxSpeed;
@@ -61,8 +59,6 @@ namespace Player
 
             onPlayerDeath.onEvent.AddListener(HandleDeath);
             onPlayerRevive.onEvent.AddListener(HandleRevive);
-            onFrenziedStart.onEvent.AddListener(HandleIsFrenzied);
-            onFrenziedStop.onEvent.AddListener(HandleStopFrenzy);
             Velocity = new Vector2(playerMovementProperties.maxSpeed, 0);
         }
 
@@ -72,84 +68,55 @@ namespace Player
 
             onPlayerDeath.onEvent.RemoveListener(HandleDeath);
             onPlayerRevive.onEvent.RemoveListener(HandleRevive);
-
-            onFrenziedStart.onEvent.RemoveListener(HandleIsFrenzied);
-            onFrenziedStop.onEvent.RemoveListener(HandleStopFrenzy);
         }
-
-        private void HandleStopFrenzy()
-        {
-            _isFrenzied = false;
-        }
-
-        private void HandleIsFrenzied()
-        {
-            _isFrenzied = true;
-        }
-
+        
         public void HandleWalk()
         {
             HandleWalk(_moveDirection);
         }
 
-        public void HandleWalk(Vector3 moveDirection)
+        public void HandleWalkWith(Vector3 moveDirection, Action<float, float> setVelocity)
         {
             _moveDirection = moveDirection;
-
-            Vector3 prevPos = transform.position;
-
             if (_canWalk)
             {
-                float acceleration = _isFrenzied
-                    ? playerMovementProperties.frenziedAcceleration
-                    : playerMovementProperties.acceleration;
+                float acceleration = playerMovementProperties.acceleration;
+                float maxSpeed = playerMovementProperties.maxSpeed;
 
-                float maxSpeed = _isFrenzied
-                    ? playerMovementProperties.frenziedMaxSpeed
-                    : playerMovementProperties.maxSpeed;
-
-                Velocity.x = Mathf.Clamp(
-                Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
-                -maxSpeed, maxSpeed
-                );
+                setVelocity(acceleration, maxSpeed);
             }
 
             Move(Velocity * Time.deltaTime);
-            SetZPosition(prevPos);
+            SetZPosition();
+        }
+        
+        public void HandleWalk(Vector3 moveDirection)
+        {
+            HandleWalkWith(moveDirection, ((acceleration, maxSpeed) =>
+            {
+                Velocity.x = Mathf.Clamp(
+                    Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
+                    -maxSpeed, maxSpeed
+                );
+            }));
         }
 
         public void HandleGroundedWalk(Vector3 moveDirection)
         {
-            _moveDirection = moveDirection;
-            Vector3 prevPos = transform.position;
-
-            if (_canWalk)
+            HandleWalkWith(moveDirection, (acceleration, maxSpeed) =>
             {
-                float acceleration = _isFrenzied
-                    ? playerMovementProperties.frenziedAcceleration
-                    : playerMovementProperties.acceleration;
-
-                float maxSpeed = _isFrenzied
-                    ? playerMovementProperties.frenziedMaxSpeed
-                    : playerMovementProperties.maxSpeed;
-
                 float velocityToUse = Mathf.Clamp(
-                Velocity.magnitude + (_moveDirection.magnitude) * acceleration * Time.deltaTime,
-                -maxSpeed, maxSpeed
+                    Velocity.magnitude + (_moveDirection.magnitude) * acceleration * Time.deltaTime,
+                    -maxSpeed, maxSpeed
                 );
 
                 Velocity = _moveDirection * velocityToUse;
-            }
-
-            Move(Velocity * Time.deltaTime);
-            SetZPosition(prevPos);
+            });
         }
 
         public void HandleDeceleration()
         {
-            float maxSpeed = _isFrenzied
-                ? playerMovementProperties.frenziedMaxSpeed
-                : playerMovementProperties.maxSpeed;
+            float maxSpeed = playerMovementProperties.maxSpeed;
             Velocity.x = Mathf.Sign(Velocity.x) * Mathf.Clamp(Mathf.Abs(Velocity.x) - playerMovementProperties.friction * Time.deltaTime, 0, maxSpeed);
             if (Mathf.Abs(Velocity.x) >= playerMovementProperties.maxSpeedIdle)
             {
@@ -163,7 +130,16 @@ namespace Player
 
         public void FreeFall()
         {
-            Velocity.y = Mathf.Clamp(Velocity.y - playerMovementProperties.gravity * Time.deltaTime, -playerMovementProperties.maxGravityVelocity, playerMovementProperties.maxJumpVelocity);
+            float maxVelocity = playerMovementProperties.maxGravityVelocity;
+            float acceleration = playerMovementProperties.gravity;
+
+            if (_moveDirection.y < 0f)
+            {
+                maxVelocity += playerMovementProperties.maxDownPressedVelocity;
+                acceleration += playerMovementProperties.maxDownPressedAddedAcceleration;
+            }
+            
+            Velocity.y = Mathf.Clamp(Velocity.y - acceleration * Time.deltaTime, -maxVelocity, playerMovementProperties.maxJumpVelocity);
         }
 
         public void WallSlide()
@@ -197,7 +173,7 @@ namespace Player
             _characterController.Move(displacement);
         }
 
-        private void SetZPosition(Vector3 prevPos)
+        private void SetZPosition()
         {
             if (transform.position.z != 0)
             {
@@ -214,7 +190,8 @@ namespace Player
 
         private void HandleMove(Vector2 movement)
         {
-            _moveDirection = new Vector3(movement.x, 0, 0);
+            Debug.Log(movement);
+            _moveDirection = new Vector3(movement.x, movement.y, 0);
         }
 
         public void Jump()
@@ -286,6 +263,11 @@ namespace Player
         {
             Velocity.y *= playerMovementProperties.exitShadowstepMomentumMantained.y;
             Velocity.x = _moveDirection.x != 0 ? Velocity.x : Velocity.x * playerMovementProperties.exitShadowstepMomentumMantained.x;
+        }
+
+        public bool IsGoingDownFaster()
+        {
+            return _moveDirection.y < 0;
         }
     }
 }

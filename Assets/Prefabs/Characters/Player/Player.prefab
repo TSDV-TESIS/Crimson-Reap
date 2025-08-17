@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 8636656838643714394}
   - component: {fileID: 5751371299448155714}
   - component: {fileID: 6927853401671723050}
+  - component: {fileID: 2977028123855828456}
   - component: {fileID: 7947393677198273028}
   - component: {fileID: 9122317697623757532}
   - component: {fileID: 2300784253147170917}
@@ -835,6 +836,65 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  fasterFallingEvents:
+    onEnter:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2977028123855828456}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 7419154463842292251}
+          m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController,
+            Assembly-CSharp
+          m_MethodName: HandleFalling
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onUpdate:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2977028123855828456}
+          m_TargetAssemblyTypeName: Player.Controllers.FasterFallingController, Assembly-CSharp
+          m_MethodName: OnUpdate
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onExit:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2977028123855828456}
+          m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+          m_MethodName: set_enabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   wallSlidingEvents:
     onEnter:
       m_PersistentCalls:
@@ -1004,7 +1064,8 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 2378139602423631225}
-          m_TargetAssemblyTypeName: Player.Materials.SetShadowStepMaterialData, Assembly-CSharp
+          m_TargetAssemblyTypeName: Player.Materials.HandleShadowstepMaterialAndTrail,
+            Assembly-CSharp
           m_MethodName: SetShadowStepMaterial
           m_Mode: 6
           m_Arguments:
@@ -1242,6 +1303,21 @@ MonoBehaviour:
   agent: {fileID: 2452499770306614508}
   playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
   inputHandler: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
+--- !u!114 &2977028123855828456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182945775304313054}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef837b0088dcd6841b7af6c7a4419781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 2452499770306614508}
+  inputHandler: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
+  playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
 --- !u!114 &7947393677198273028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,6 +1487,7 @@ MonoBehaviour:
   agent: {fileID: 2452499770306614508}
   playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
   bloodStepCollider: {fileID: 0}
+  displacementIfBlocked: {x: 0.01, y: 0.01, z: 0}
 --- !u!114 &8298738303673191818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1548,6 +1625,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: aeb953dbb4f9bb24b974b27d970ac785, type: 2}
   trailRenderer: {fileID: 6944628735667728238}
   otherTrailRenderer: {fileID: 2105191789109718086}
+  playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
+  onShadowStepCooldown: {fileID: 11400000, guid: d1a973f980d430d4e9acbbda2aa50488, type: 2}
 --- !u!1001 &307453012941626532
 PrefabInstance:
   m_ObjectHideFlags: 0
