@@ -26,6 +26,10 @@ namespace Player.Properties
         public float maxJumpVelocity;
         public float cornerCorrectionMaxDistance;
         public LayerMask whatIsCeiling;
+        
+        [Header("Falling properties")]
+        public float maxDownPressedVelocity;
+        public float maxDownPressedAddedAcceleration;
 
         [Header("Grounding properties")]
         [Tooltip("Distance from where it should start checking that player is grounded")]
