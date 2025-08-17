@@ -12,7 +12,7 @@ namespace CameraScripts
         [SerializeField] private GameObject target;
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private PlayerMovementProperties movementProperties;
-        
+
         private Vector2 _dirTowardsTarget;
         private bool _isTracking = false;
 
@@ -22,23 +22,34 @@ namespace CameraScripts
 
         private Vector2 _prevCursorPosition;
 
+        private bool isCursorBased = false;
+        private Action onCursorEnterDeadZone;
+        private Coroutine pivotToPlayer;
+
         private void Start()
         {
             transform.position = target.transform.position;
             inputHandler.OnPlayerLook.AddListener(HandleLook);
+            onCursorEnterDeadZone += OnCursorDeadZoneEnter;
         }
 
         void Update()
         {
-            if ((GetDistance() >= cameraProperties.pivotMinDistance && !_isTracking) || (cameraProperties.shouldInfluence && _cursorPosition != _prevCursorPosition))
+            if (!isCursorBased)
             {
-                _isTracking = true;
+                transform.position = target.transform.position;
+                return;
             }
+
+            if ((GetDistance() >= cameraProperties.pivotMinDistance && !_isTracking) || (cameraProperties.shouldInfluence && _cursorPosition != _prevCursorPosition))
+                _isTracking = true;
 
             if (_isTracking)
             {
                 if (GetDistance() > DIST_TOLERANCE)
+                {
                     MoveTowardsTarget();
+                }
                 else
                     _isTracking = false;
             }
@@ -46,7 +57,7 @@ namespace CameraScripts
 
         private void MoveTowardsTarget()
         {
-            transform.Translate(GetDir() * (GetDistance() >= cameraProperties.pivotMaxDistance ? movementProperties.maxSpeed  * Time.deltaTime : cameraProperties.pivotSpeed * Time.deltaTime));
+            transform.Translate(GetDir() * (GetDistance() >= cameraProperties.pivotMaxDistance ? movementProperties.maxSpeed * Time.deltaTime : cameraProperties.pivotSpeed * Time.deltaTime));
         }
 
         private float GetDistance()
@@ -65,6 +76,29 @@ namespace CameraScripts
             return targetPos;
         }
 
+        private void OnCursorDeadZoneEnter()
+        {
+            if (pivotToPlayer != null)
+                StopCoroutine(pivotToPlayer);
+
+            pivotToPlayer = StartCoroutine(PivotToPlayer());
+        }
+
+        private IEnumerator PivotToPlayer()
+        {
+            float duration = Vector3.Distance(transform.position, target.transform.position) / cameraProperties.pivotSpeed;
+            float timer = 0;
+            float startTime = Time.time;
+            while (timer < duration)
+            {
+                timer = Time.time - startTime;
+                transform.Translate((target.transform.position - transform.position).normalized * (cameraProperties.pivotSpeed * Time.deltaTime));
+                yield return null;
+            }
+
+            isCursorBased = false;
+        }
+
         private Vector2 GetDir()
         {
             Vector2 pivotPosition = transform.position;
@@ -75,10 +109,17 @@ namespace CameraScripts
         {
             float cameraZ = -Camera.main.transform.position.z;
             _cursorPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cameraZ));
+            Vector2 cursorViewPortPos = Camera.main.ScreenToViewportPoint(new Vector3(mousePos.x, mousePos.y, cameraZ));
             _cursorOffset = _cursorPosition - new Vector2(target.transform.position.x, target.transform.position.y);
 
             if (cameraProperties.freeCamera)
                 return;
+
+            Vector2 trackIntensity = GetTrackingForce(cursorViewPortPos, cameraProperties.cursorDeadZone);
+            if (trackIntensity != Vector2.zero)
+                isCursorBased = true;
+            else if (isCursorBased)
+                onCursorEnterDeadZone?.Invoke();
 
             Vector2 lowerLeftLimit = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, cameraZ));
             Vector2 upperRightLimit = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, cameraZ));
@@ -87,6 +128,11 @@ namespace CameraScripts
 
             float xPos = Mathf.Clamp(_cursorPosition.x, target.transform.position.x - halfScreenWidth, target.transform.position.x + halfScreenWidth);
             float yPos = Mathf.Clamp(_cursorPosition.y, target.transform.position.y - halfScreenHeight, target.transform.position.y + halfScreenHeight);
+            if (trackIntensity.x == 0)
+                xPos = target.transform.position.x;
+            if (trackIntensity.y == 0)
+                yPos = target.transform.position.y;
+
             _cursorPosition = new Vector2(xPos, yPos);
             _cursorOffset = _cursorPosition - new Vector2(target.transform.position.x, target.transform.position.y);
         }
@@ -104,6 +150,35 @@ namespace CameraScripts
             Vector2 targetPos = target.transform.position;
             Gizmos.DrawCube(targetPos + _cursorOffset, new Vector3(0.5f, 0.5f, 0.5f));
             Gizmos.color = prevGizmosColor;
+
+            Gizmos.color = Color.red;
+            Vector3 cursorDeadZone = cameraProperties.cursorDeadZone;
+            Vector3 rectCornerUpperRight = Camera.main.ViewportToWorldPoint(new Vector3(cursorDeadZone.x, cursorDeadZone.y, -Camera.main.transform.position.z));
+            Vector3 rectCornerLowerLeft = Camera.main.ViewportToWorldPoint(new Vector3(1 - cursorDeadZone.x, 1 - cursorDeadZone.y, -Camera.main.transform.position.z));
+            Vector3 rectCornerUpperLeft = new Vector3(rectCornerLowerLeft.x, rectCornerUpperRight.y);
+            Vector3 rectCornerLowerRight = new Vector3(rectCornerUpperRight.x, rectCornerLowerLeft.y);
+
+            Gizmos.DrawLine(rectCornerLowerLeft, rectCornerLowerRight);
+            Gizmos.DrawLine(rectCornerUpperLeft, rectCornerUpperRight);
+            Gizmos.DrawLine(rectCornerLowerLeft, rectCornerUpperLeft);
+            Gizmos.DrawLine(rectCornerLowerRight, rectCornerUpperRight);
+        }
+
+        private Vector2 GetTrackingForce(Vector2 cursorViewPortPos, Vector2 deadZone)
+        {
+            Vector2 trackIntensity = Vector2.zero;
+
+            if (cursorViewPortPos.x >= deadZone.x)
+                trackIntensity.x = 1;
+            else if (cursorViewPortPos.x <= 1 - deadZone.x)
+                trackIntensity.x = -1;
+
+            if (cursorViewPortPos.y >= deadZone.y)
+                trackIntensity.y = 1;
+            else if (cursorViewPortPos.y <= 1 - deadZone.y)
+                trackIntensity.y = -1;
+
+            return trackIntensity;
         }
     }
 }
