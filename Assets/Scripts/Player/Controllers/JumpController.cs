@@ -72,6 +72,11 @@ namespace Player.Controllers
 
             if (agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection, _playerMovement.Velocity))
                 agent.ChangeStateToWallSlide();
+            
+            if (_playerMovement.IsGoingDownFaster())
+            {
+                agent.ChangeStateToFasterFalling();
+            }
         }
     }
 }

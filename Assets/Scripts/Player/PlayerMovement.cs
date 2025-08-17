@@ -135,8 +135,8 @@ namespace Player
 
             if (_moveDirection.y < 0f)
             {
-                maxVelocity += playerMovementProperties.addedDownVelocity;
-                acceleration += playerMovementProperties.addedDownGravity;
+                maxVelocity += playerMovementProperties.maxDownPressedVelocity;
+                acceleration += playerMovementProperties.maxDownPressedAddedAcceleration;
             }
             
             Velocity.y = Mathf.Clamp(Velocity.y - acceleration * Time.deltaTime, -maxVelocity, playerMovementProperties.maxJumpVelocity);
@@ -263,6 +263,11 @@ namespace Player
         {
             Velocity.y *= playerMovementProperties.exitShadowstepMomentumMantained.y;
             Velocity.x = _moveDirection.x != 0 ? Velocity.x : Velocity.x * playerMovementProperties.exitShadowstepMomentumMantained.x;
+        }
+
+        public bool IsGoingDownFaster()
+        {
+            return _moveDirection.y < 0;
         }
     }
 }

@@ -28,8 +28,8 @@ namespace Player.Properties
         public LayerMask whatIsCeiling;
         
         [Header("Falling properties")]
-        public float addedDownVelocity;
-        public float addedDownGravity;
+        public float maxDownPressedVelocity;
+        public float maxDownPressedAddedAcceleration;
 
         [Header("Grounding properties")]
         [Tooltip("Distance from where it should start checking that player is grounded")]
