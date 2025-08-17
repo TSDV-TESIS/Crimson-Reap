@@ -68,11 +68,10 @@ namespace Player.Properties
         public Vector2 shadowStepIframes;
         public float shadowStepVelocity = 10f;
         public double shadowStepCooldown = 1f;
-        public float bloodStepVelocity;
-        public float bloodStepTime;
         public float ceilingCheckWaitTime = 0.5f;
         public int maxShadowStepsOnAir = 1;
         public Vector2 exitShadowstepMomentumMantained;
         public LayerMask avoidableObjects;
+        public float shadowStepShowTrailTime = 1f;
     }
 }
