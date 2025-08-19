@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
+using CameraScripts;
 using Events;
+using Events.Scriptables;
 using FSM;
 using Health;
 using Player.Properties;
@@ -14,7 +16,9 @@ namespace Player.Controllers
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private GameObject bloodStepCollider;
         [SerializeField] private Vector3 displacementIfBlocked = new Vector3(0.01f, 0.01f, 0);
-
+        [SerializeField] private CameraShakeProfile knockBackShake;
+        [SerializeField] private ShakeProfileEventChannel onKnockBack;
+        
         private PlayerMovement _playerMovement;
         private MouseLook _mouseLook;
         private CharacterController _characterController;
@@ -125,6 +129,7 @@ namespace Player.Controllers
 
         private IEnumerator WallHit()
         {
+            onKnockBack?.RaiseEvent(knockBackShake);
             agent.MovementChecks.WallRaycast(out int dir);
             _playerMovement.KnockBack(dir);
             Debug.Log("Bonk");
