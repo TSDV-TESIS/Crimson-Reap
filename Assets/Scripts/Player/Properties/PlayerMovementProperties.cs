@@ -77,5 +77,11 @@ namespace Player.Properties
         public Vector2 exitShadowstepMomentumMantained;
         public LayerMask avoidableObjects;
         public float shadowStepShowTrailTime = 1f;
+
+        [Header("WallHitKnockBack")]
+        [Tooltip("[-90,90] where Zero means a perfectly perpendicular to the wall angle")]
+        public float knockBackAngle;
+        public float knockBackForce;
+        public float knockBackLockDuration;
     }
 }

@@ -14,13 +14,14 @@ namespace Player.Controllers
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private GameObject bloodStepCollider;
         [SerializeField] private Vector3 displacementIfBlocked = new Vector3(0.01f, 0.01f, 0);
-        
+
         private PlayerMovement _playerMovement;
         private MouseLook _mouseLook;
         private CharacterController _characterController;
         private CapsuleCollider _collider;
         private HealthPoints _healthPoints;
         private Coroutine _shadowstepCoroutine;
+        private Coroutine _knockBackCoroutine;
 
         private void OnEnable()
         {
@@ -68,7 +69,7 @@ namespace Player.Controllers
                     break;
                 }
 
-                
+
                 _playerMovement.Shadowstep(direction);
 
                 if (agent.MovementChecks.IsNearNonAvoidableWall())
@@ -77,13 +78,14 @@ namespace Player.Controllers
                     changedToWallslide = true;
                     agent.MovementChecks.SetShadowstepOnCooldown();
                 }
+
                 timer += Time.deltaTime;
                 yield return null;
             }
-            
+
             _characterController.excludeLayers ^= playerMovementProperties.avoidableObjects;
             _collider.excludeLayers ^= playerMovementProperties.avoidableObjects;
-            
+
             _characterController.Move(displacementIfBlocked);
             ExitShadowstep();
         }
@@ -98,7 +100,15 @@ namespace Player.Controllers
             if (agent.MovementChecks.IsNearNonAvoidableWall())
             {
                 Debug.Log("WALLSOLIDE");
-                agent.ChangeStateToWallSlide();
+                if (!agent.MovementChecks.IsGrounded())
+                    agent.ChangeStateToWallSlide();
+                else
+                {
+                    if (_knockBackCoroutine != null)
+                        StopCoroutine(_knockBackCoroutine);
+
+                    _knockBackCoroutine = StartCoroutine(WallHit());
+                }
             }
             else if (!agent.MovementChecks.IsGrounded())
             {
@@ -111,6 +121,15 @@ namespace Player.Controllers
                 Debug.Log("Grounded!");
                 agent.ChangeStateToGrounded();
             }
+        }
+
+        private IEnumerator WallHit()
+        {
+            agent.MovementChecks.WallRaycast(out int dir);
+            _playerMovement.KnockBack(dir);
+            Debug.Log("Bonk");
+            agent.ChangeStateToFalling();
+            yield return new WaitForSeconds(playerMovementProperties.knockBackLockDuration);
         }
     }
 }
