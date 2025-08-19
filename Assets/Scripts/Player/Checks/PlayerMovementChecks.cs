@@ -17,7 +17,9 @@ namespace Player.Checks
 
         [Header("Head pivot")] [SerializeField]
         private Transform headPivot;
-
+        [Header("WallRide pivot")] [SerializeField]
+        private Transform wallRidePivot;
+        
         [Header("Events")] [SerializeField] private FloatEventChannel onShadowstepCooldownValueEvent;
 
         [NonSerialized] public Vector3 WallrideHitPosition;
@@ -262,13 +264,13 @@ namespace Player.Checks
 
         public bool WallRaycast(int signToCheck)
         {
-            bool hasRaycast = Physics.Raycast(feetPivot.position, Vector3.right * signToCheck, out _wallHit,
+            bool hasRaycast = Physics.Raycast(wallRidePivot.position, Vector3.right * signToCheck, out _wallHit,
                 playerMovementProperties.wallCheckDistance,
                 playerMovementProperties.whatIsWall);
 
             if (hasRaycast)
             {
-                WallrideHitPosition = feetPivot.position + Vector3.right * signToCheck;
+                WallrideHitPosition = wallRidePivot.position + Vector3.right * signToCheck;
             }
 
             return hasRaycast;
