@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Events.Scriptables;
 using Unity.Cinemachine;
@@ -14,7 +13,6 @@ namespace CameraScripts
         [SerializeField] private NoiseSettings shakeSettings;
 
         [SerializeField] private ShakeProfileEventChannel onCameraShakeEventChannelSo;
-
 
         private Coroutine _cameraShake;
 

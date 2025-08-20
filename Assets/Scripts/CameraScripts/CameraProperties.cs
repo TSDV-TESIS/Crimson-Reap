@@ -24,6 +24,7 @@ namespace CameraScripts
         public bool shouldInfluence;
         [Range(0, 1)]
         public float cursorInfluence;
+        public Vector2 cursorDeadZone;
         public bool freeCamera;
         public float pivotMaxDistance = 5;
     }
