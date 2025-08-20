@@ -16,16 +16,13 @@ namespace Player.Controllers
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private GameObject bloodStepCollider;
         [SerializeField] private Vector3 displacementIfBlocked = new Vector3(0.01f, 0.01f, 0);
-        [SerializeField] private CameraShakeProfile knockBackShake;
-        [SerializeField] private ShakeProfileEventChannel onKnockBack;
-        
+
         private PlayerMovement _playerMovement;
         private MouseLook _mouseLook;
         private CharacterController _characterController;
         private CapsuleCollider _collider;
         private HealthPoints _healthPoints;
         private Coroutine _shadowstepCoroutine;
-        private Coroutine _knockBackCoroutine;
 
         private void OnEnable()
         {
@@ -105,14 +102,12 @@ namespace Player.Controllers
             {
                 Debug.Log("WALLSOLIDE");
                 if (!agent.MovementChecks.IsGrounded())
-                    agent.ChangeStateToWallSlide();
-                else
                 {
-                    if (_knockBackCoroutine != null)
-                        StopCoroutine(_knockBackCoroutine);
-
-                    _knockBackCoroutine = StartCoroutine(WallHit());
+                    Debug.LogWarning("WALLSLIDE");
+                    agent.ChangeStateToWallSlide();
                 }
+                else
+                    agent.ChangeStateToKnockBack();
             }
             else if (!agent.MovementChecks.IsGrounded())
             {
@@ -125,16 +120,6 @@ namespace Player.Controllers
                 Debug.Log("Grounded!");
                 agent.ChangeStateToGrounded();
             }
-        }
-
-        private IEnumerator WallHit()
-        {
-            onKnockBack?.RaiseEvent(knockBackShake);
-            agent.MovementChecks.WallRaycast(out int dir);
-            _playerMovement.KnockBack(dir);
-            Debug.Log("Bonk");
-            agent.ChangeStateToFalling();
-            yield return new WaitForSeconds(playerMovementProperties.knockBackLockDuration);
         }
     }
 }
