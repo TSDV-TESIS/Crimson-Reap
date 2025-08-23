@@ -26,10 +26,11 @@ namespace Player
         [SerializeField] private ActionEventsWrapper wallSlidingEvents;
         [SerializeField] private ActionEventsWrapper shadowStepEvents;
         [SerializeField] private ActionEventsWrapper attackEvents;
-        
+        [SerializeField] private ActionEventsWrapper knockBackEvents;
+
         [Header("Internal Transitions Events")]
         [SerializeField] private UnityEvent onGroundToFallTransition;
-        
+
         private State _groundedState;
         private State _jumpingState;
         private State _fallingState;
@@ -37,6 +38,7 @@ namespace Player
         private State _wallSlideState;
         private State _shadowStepState;
         private State _attackState;
+        private State _knockBackState;
 
         public PlayerMovementChecks MovementChecks
         {
@@ -70,7 +72,7 @@ namespace Player
             _fasterFallingState.EnterAction += fasterFallingEvents.ExecuteOnEnter;
             _fasterFallingState.UpdateAction += fasterFallingEvents.ExecuteOnUpdate;
             _fasterFallingState.ExitAction += fasterFallingEvents.ExecuteOnExit;
-            
+
             _wallSlideState = new State();
             _wallSlideState.EnterAction += wallSlidingEvents.ExecuteOnEnter;
             _wallSlideState.UpdateAction += wallSlidingEvents.ExecuteOnUpdate;
@@ -85,6 +87,11 @@ namespace Player
             _attackState.EnterAction += attackEvents.ExecuteOnEnter;
             _attackState.UpdateAction += attackEvents.ExecuteOnUpdate;
             _attackState.ExitAction += attackEvents.ExecuteOnExit;
+
+            _knockBackState = new State();
+            _knockBackState.EnterAction += knockBackEvents.ExecuteOnEnter;
+            _knockBackState.UpdateAction += knockBackEvents.ExecuteOnUpdate;
+            _knockBackState.ExitAction += knockBackEvents.ExecuteOnExit;
 
             Transition groundedToJumping = new Transition(_groundedState, _jumpingState);
             _groundedState.AddTransition(groundedToJumping);
@@ -142,6 +149,8 @@ namespace Player
             _shadowStepState.AddTransition(shadowStepToWallRiding);
             Transition shadowStepToAttack = new Transition(_shadowStepState, _attackState);
             _shadowStepState.AddTransition(shadowStepToAttack);
+            Transition shadowStepToKnockBack = new Transition(_shadowStepState, _knockBackState);
+            _shadowStepState.AddTransition(shadowStepToKnockBack);
 
             Transition attackToGrounded = new Transition(_attackState, _groundedState);
             _attackState.AddTransition(attackToGrounded);
@@ -163,6 +172,11 @@ namespace Player
             Transition fasterFallingToShadowStep = new Transition(_fasterFallingState, _shadowStepState);
             _fasterFallingState.AddTransition(fasterFallingToShadowStep);
 
+            Transition knockBackToFalling = new Transition(_knockBackState, _fallingState);
+            _knockBackState.AddTransition(knockBackToFalling);
+            Transition knockBackToGrounded = new Transition(_knockBackState, _groundedState);
+            _knockBackState.AddTransition(knockBackToGrounded);
+
             return new List<State>()
             {
                 _groundedState,
@@ -171,7 +185,8 @@ namespace Player
                 _wallSlideState,
                 _shadowStepState,
                 _fasterFallingState,
-                _attackState
+                _attackState,
+                _knockBackState
             };
         }
 
@@ -192,7 +207,7 @@ namespace Player
             LogMessage("Change state to falling");
             Fsm.ChangeState(_fallingState);
         }
-        
+
         public void ChangeStateToFasterFalling()
         {
             LogMessage("Change state to Faster Falling");
@@ -226,6 +241,12 @@ namespace Player
 
             LogMessage("Change state to Attack");
             Fsm.ChangeState(_attackState);
+        }
+
+        public void ChangeStateToKnockBack()
+        {
+            LogMessage("Change state to knockback");
+            Fsm.ChangeState(_knockBackState);
         }
 
         public void LogMessage(String message)

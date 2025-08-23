@@ -27,8 +27,8 @@ MonoBehaviour:
   whatIsCeiling:
     serializedVersion: 2
     m_Bits: 1792
-  addedDownVelocity: 35
-  addedDownGravity: 55
+  maxDownPressedVelocity: 0
+  maxDownPressedAddedAcceleration: 0
   checkDistance: 0.5
   whatIsGround:
     serializedVersion: 2
@@ -49,7 +49,7 @@ MonoBehaviour:
   wallJumpForce: {x: 12.4, y: 18.6}
   unboundTime: 0.5
   wallVelocityCheck: 1
-  wallRideMaxCoyoteSeconds: 0.25
+  wallRideMaxCoyoteSeconds: 0.1
   wallSlideMomentum: 14.6
   wallSlideMomentumAngleInfluence:
     serializedVersion: 2
@@ -89,3 +89,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   shadowStepShowTrailTime: 1
+  knockBackAngle: 25
+  knockBackForce: 12.5
+  knockBackLockDuration: 0.5
