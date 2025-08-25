@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Player.Properties;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Player.Controllers
 {
@@ -10,6 +11,7 @@ namespace Player.Controllers
     {
         [SerializeField] private Animator playerAnimator;
         [SerializeField] private PlayerMovementProperties properties;
+        [SerializeField] private PlayerAnimationProperties animationProperties;
         
         private static readonly int Walking = Animator.StringToHash("Velocity");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
@@ -20,12 +22,30 @@ namespace Player.Controllers
         private static readonly int IsWallSliding = Animator.StringToHash("IsWallSliding");
         private static readonly int IsInShadowstep = Animator.StringToHash("IsInShadowstep");
         private static readonly int Step = Animator.StringToHash("ShadowStep");
+        private static readonly int Glitch = Animator.StringToHash("Glitch");
         
         private PlayerAgent _agent;
+        private float _secondsToGlitch;
 
         private void OnEnable()
         {
             _agent ??= GetComponent<PlayerAgent>();
+            SetSecondsToGlitch();
+        }
+
+        public void Update()
+        {
+            if (_secondsToGlitch < Time.time)
+            {
+                playerAnimator.SetTrigger(Glitch);
+                SetSecondsToGlitch();
+            }
+        }
+
+        private void SetSecondsToGlitch()
+        {
+            _secondsToGlitch = Time.time + Random.Range(animationProperties.minSecondsToGlitch,
+                animationProperties.maxSecondsToGlitch);
         }
 
         public void HandleShadowstep(bool value)
