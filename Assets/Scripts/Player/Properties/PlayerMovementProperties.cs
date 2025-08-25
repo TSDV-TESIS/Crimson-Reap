@@ -14,6 +14,8 @@ namespace Player.Properties
         [Tooltip("(USED FOR ANIMATION) max speed with which the idle anim will be playing")]
         public float maxSpeedIdle = 0.04f;
         public float groundedMaxCoyoteTimeSeconds;
+        public double minStopAnimSpeedPercentage = 0.6;
+        public double minStopMovePercentage = 0.2;
 
         [Header("Frenzied movement")]
         public float frenziedAcceleration;
