@@ -3,6 +3,7 @@ using System.Collections;
 using Events;
 using Player.Controllers;
 using Player.Properties;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -36,11 +37,12 @@ namespace Player
         private bool _canWalk;
         [NonSerialized] public Vector2 Velocity;
         private Coroutine _velocityLock;
+        private Coroutine _knockBackVelocityLock;
 
         private Vector3 _moveDirection;
 
         public Vector3 MoveDirection => _moveDirection;
-        
+
         public float MaxSpeed
         {
             get => playerMovementProperties.maxSpeed;
@@ -69,7 +71,7 @@ namespace Player
             onPlayerDeath.onEvent.RemoveListener(HandleDeath);
             onPlayerRevive.onEvent.RemoveListener(HandleRevive);
         }
-        
+
         public void HandleWalk()
         {
             HandleWalk(_moveDirection);
@@ -89,14 +91,14 @@ namespace Player
             Move(Velocity * Time.deltaTime);
             SetZPosition();
         }
-        
+
         public void HandleWalk(Vector3 moveDirection)
         {
             HandleWalkWith(moveDirection, ((acceleration, maxSpeed) =>
             {
                 Velocity.x = Mathf.Clamp(
-                    Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
-                    -maxSpeed, maxSpeed
+                Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
+                -maxSpeed, maxSpeed
                 );
             }));
         }
@@ -106,8 +108,8 @@ namespace Player
             HandleWalkWith(moveDirection, (acceleration, maxSpeed) =>
             {
                 float velocityToUse = Mathf.Clamp(
-                    Velocity.magnitude + (_moveDirection.magnitude) * acceleration * Time.deltaTime,
-                    -maxSpeed, maxSpeed
+                Velocity.magnitude + (_moveDirection.magnitude) * acceleration * Time.deltaTime,
+                -maxSpeed, maxSpeed
                 );
 
                 Velocity = _moveDirection * velocityToUse;
@@ -138,7 +140,7 @@ namespace Player
                 maxVelocity += playerMovementProperties.maxDownPressedVelocity;
                 acceleration += playerMovementProperties.maxDownPressedAddedAcceleration;
             }
-            
+
             Velocity.y = Mathf.Clamp(Velocity.y - acceleration * Time.deltaTime, -maxVelocity, playerMovementProperties.maxJumpVelocity);
         }
 
@@ -149,21 +151,21 @@ namespace Player
 
             _characterController.Move(Velocity * Time.deltaTime);
         }
-        
+
         public void AddWallslideMomentum()
         {
             if (Velocity.y <= 0) return;
-            
+
             Vector3 velocityDirection = Velocity.normalized;
 
             float angle = Vector3.Angle(
-                transform.up,
-                velocityDirection
+            transform.up,
+            velocityDirection
             ) * Mathf.Deg2Rad;
 
             float cosValue = Mathf.Cos(angle);
             float influence = playerMovementProperties.wallSlideMomentumAngleInfluence.Evaluate(cosValue);
-            
+
             Velocity.x = 0;
             Velocity.y = playerMovementProperties.wallSlideMomentum * influence;
         }
@@ -210,6 +212,22 @@ namespace Player
             _velocityLock = StartCoroutine(LockAfterWallJump());
         }
 
+        public void KnockBack(int knockBackDirection)
+        {
+            knockBackDirection *= -1;
+            knockBackDirection = Mathf.Clamp(knockBackDirection, -1, 1);
+            float force = playerMovementProperties.knockBackForce;
+            float angle = playerMovementProperties.knockBackAngle;
+            Velocity.x = knockBackDirection * force * Mathf.Cos(angle * Mathf.Deg2Rad);
+            Velocity.y = force * Mathf.Sin(angle * Mathf.Deg2Rad);
+            Debug.Log($"KnockBack velocity: {Velocity}");
+
+            if (_knockBackVelocityLock != null)
+                StopCoroutine(_knockBackVelocityLock);
+
+            _knockBackVelocityLock = StartCoroutine(KnockBackLock());
+        }
+
         private void SetCanWalk(bool canWalk)
         {
             _canWalk = canWalk;
@@ -229,6 +247,13 @@ namespace Player
         {
             _canWalk = false;
             yield return new WaitForSeconds(playerMovementProperties.lockDuration);
+            _canWalk = true;
+        }
+
+        private IEnumerator KnockBackLock()
+        {
+            _canWalk = false;
+            yield return new WaitForSeconds(playerMovementProperties.knockBackLockDuration);
             _canWalk = true;
         }
 

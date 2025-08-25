@@ -14,7 +14,7 @@ namespace Player.Properties
         [Tooltip("(USED FOR ANIMATION) max speed with which the idle anim will be playing")]
         public float maxSpeedIdle = 0.04f;
         public float groundedMaxCoyoteTimeSeconds;
-        
+
         [Header("Frenzied movement")]
         public float frenziedAcceleration;
         public float frenziedMaxSpeed;
@@ -26,7 +26,7 @@ namespace Player.Properties
         public float maxJumpVelocity;
         public float cornerCorrectionMaxDistance;
         public LayerMask whatIsCeiling;
-        
+
         [Header("Falling properties")]
         public float maxDownPressedVelocity;
         public float maxDownPressedAddedAcceleration;
@@ -41,7 +41,7 @@ namespace Player.Properties
         [Header("DropDown properties")]
         public LayerMask whatIsPlatform;
         public Vector3 dropDownDisplacement;
-        
+
         [Header("Wall Slide properties")]
         public float wallCheckDistance;
         public LayerMask whatIsWall;
@@ -68,7 +68,7 @@ namespace Player.Properties
 
         [Header("ShadowStep")]
         public float shadowStepTime = 0.5f;
-        [MinMaxRangeSlider(0,1)]
+        [MinMaxRangeSlider(0, 1)]
         public Vector2 shadowStepIframes;
         public float shadowStepVelocity = 10f;
         public double shadowStepCooldown = 1f;
@@ -77,5 +77,11 @@ namespace Player.Properties
         public Vector2 exitShadowstepMomentumMantained;
         public LayerMask avoidableObjects;
         public float shadowStepShowTrailTime = 1f;
+
+        [Header("WallHitKnockBack")]
+        [Tooltip("[-90,90] where Zero means a perfectly perpendicular to the wall angle")]
+        public float knockBackAngle;
+        public float knockBackForce;
+        public float knockBackLockDuration;
     }
 }

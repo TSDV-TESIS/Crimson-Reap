@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7f59e54f2bfd184b9dd451a678d089b, type: 3}
-  m_Name: NoiseSettings
+  m_Script: {fileID: 11500000, guid: c20dce94abd8dfd41945cf9f30ebead4, type: 3}
+  m_Name: KnockBackCameraShake
   m_EditorClassIdentifier: 
-  PositionNoise:
-  - X:
+  duration: 0.25
+  noiseParams:
+    X:
       Frequency: 10
       Amplitude: 0.35
       Constant: 0
@@ -25,4 +26,3 @@ MonoBehaviour:
       Frequency: 0
       Amplitude: 0
       Constant: 0
-  OrientationNoise: []

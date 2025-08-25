@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: CameraProperties
   m_EditorClassIdentifier: 
   screenPosition: {x: 0, y: 0}
-  deadZone: 1
+  deadZone: 0
   deadZoneSize: {x: 0, y: 0}
   targetOffset: {x: 0, y: 0, z: 0}
-  damping: {x: 0.5, y: 1, z: 1}
+  damping: {x: 0, y: 1, z: 1}
   drawPivotGizmos: 1
-  pivotSpeed: 17.5
+  pivotSpeed: 5
   pivotMinDistance: 1
   shouldInfluence: 1
-  cursorInfluence: 0.205
+  cursorInfluence: 0.25
+  cursorDeadZone: {x: 0.8, y: 0.8}
   freeCamera: 0
   pivotMaxDistance: 0.76
