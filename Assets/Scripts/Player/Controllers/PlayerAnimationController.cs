@@ -23,6 +23,7 @@ namespace Player.Controllers
         private static readonly int IsInShadowstep = Animator.StringToHash("IsInShadowstep");
         private static readonly int Step = Animator.StringToHash("ShadowStep");
         private static readonly int Glitch = Animator.StringToHash("Glitch");
+        private static readonly int Knockback = Animator.StringToHash("Knockback");
         
         private PlayerAgent _agent;
         private float _secondsToGlitch;
@@ -48,6 +49,11 @@ namespace Player.Controllers
                 animationProperties.maxSecondsToGlitch);
         }
 
+        public void HandleKnockback()
+        {
+            playerAnimator.SetTrigger(Knockback);    
+        }
+        
         public void HandleShadowstep(bool value)
         {
             playerAnimator.SetBool(IsInShadowstep, value);
