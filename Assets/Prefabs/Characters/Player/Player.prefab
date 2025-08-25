@@ -568,7 +568,6 @@ GameObject:
   - component: {fileID: 8298738303673191818}
   - component: {fileID: 3952974800099293948}
   - component: {fileID: 1120912602510473844}
-  - component: {fileID: 3959408854681076375}
   - component: {fileID: 7419154463842292251}
   - component: {fileID: 3229360985905636374}
   - component: {fileID: 268850717818560038}
@@ -1236,8 +1235,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handler: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
-  is2D: 1
   visorPivot: {fileID: 238100018967637552}
+  lookProperties: {fileID: 11400000, guid: 539e3687ead78604dbb842f11590802b, type: 2}
+  showDeadzone: 1
 --- !u!114 &8394943398975191318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1589,21 +1589,6 @@ MonoBehaviour:
   onBloodlustStart: {fileID: 11400000, guid: a35f6f56a7aa8bb4ab396c441347dc5b, type: 2}
   onBloodlustEnd: {fileID: 11400000, guid: 9af1ae5dcd881ea4da96db96896b02c9, type: 2}
   onBloodlustUsage: {fileID: 11400000, guid: 3d1982e3887ed0a40b550994bb23f2f4, type: 2}
-  onFrenzyStart: {fileID: 11400000, guid: ef4985810d9bd934abdba52e7ade37ad, type: 2}
-  onFrenzyEnd: {fileID: 11400000, guid: 6bf763bcfdc1da24da3f818394e46eb3, type: 2}
---- !u!114 &3959408854681076375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9182945775304313054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4625bb15f8d7e874f9806f60af6bd5e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frenzyProperties: {fileID: 11400000, guid: dfc2aaaf4d15a1d4994b828c443c5aab, type: 2}
   onFrenzyStart: {fileID: 11400000, guid: ef4985810d9bd934abdba52e7ade37ad, type: 2}
   onFrenzyEnd: {fileID: 11400000, guid: 6bf763bcfdc1da24da3f818394e46eb3, type: 2}
 --- !u!114 &7419154463842292251
