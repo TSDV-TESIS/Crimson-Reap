@@ -8,6 +8,7 @@ namespace CameraScripts
     public class CameraController : MonoBehaviour
     {
         [SerializeField] private CameraProperties _properties;
+        [SerializeField] private CinemachineCamera camera;
         [SerializeField] private CinemachinePositionComposer composer;
         [SerializeField] private CinemachineBasicMultiChannelPerlin shakeController;
         [SerializeField] private NoiseSettings shakeSettings;
@@ -33,6 +34,9 @@ namespace CameraScripts
 
         private void SetComposerSettings()
         {
+            camera.Lens.FieldOfView = _properties.FOV;
+            composer.CameraDistance = _properties.cameraDistance;
+
             composer.Composition.ScreenPosition = _properties.screenPosition;
             composer.Composition.DeadZone.Enabled = _properties.deadZone;
             composer.Composition.DeadZone.Size = _properties.deadZoneSize;
