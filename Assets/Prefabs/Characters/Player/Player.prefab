@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 3904165753785042548}
   - component: {fileID: 2378139602423631225}
   - component: {fileID: 5990451584755475820}
+  - component: {fileID: 5929810191845268401}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1697,6 +1698,24 @@ MonoBehaviour:
   playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
   knockBackShake: {fileID: 11400000, guid: 8675a901ab4b2ca408bd171f6edf758f, type: 2}
   onKnockBack: {fileID: 11400000, guid: e0d6c8c1282a08643984e3b80dc9bf17, type: 2}
+--- !u!114 &5929810191845268401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182945775304313054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ce93ee4e46e7741900704344316324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderProperties: {fileID: 11400000, guid: 5195199fa8891264c8263e99905281d2, type: 2}
+  lowHealthShaderMaterial: {fileID: 2100000, guid: 1c144114b57274741bb210720e875322, type: 2}
+  onTakeDamage: {fileID: 11400000, guid: 907783a8cffc33e4ebffa90d6b4df275, type: 2}
+  onPlayerDeath: {fileID: 11400000, guid: 22935ebca27667842b100ca2831ca89e, type: 2}
+  onSumHealth: {fileID: 11400000, guid: 84372648de01f7d41a1f7238606514f9, type: 2}
+  onEnemiesDied: {fileID: 11400000, guid: 28f1c62b15c308d488b10d247b81f6a7, type: 2}
 --- !u!1001 &307453012941626532
 PrefabInstance:
   m_ObjectHideFlags: 0
