@@ -5,6 +5,10 @@ namespace CameraScripts
     [CreateAssetMenu(fileName = "CameraProperties", menuName = "Camera/Properties", order = 0)]
     public class CameraProperties : ScriptableObject
     {
+        [Header("Fov and Distance")]
+        public float FOV;
+        public float cameraDistance;
+
         [Header("Position Composer Properties\n")]
         public Vector2 screenPosition;
         public bool deadZone;
