@@ -4,7 +4,7 @@ using Health;
 using Player.Properties;
 using UnityEngine;
 
-namespace Player
+namespace Player.Health
 {
     [RequireComponent(typeof(HealthPoints))]
     public class HealthTick : MonoBehaviour
