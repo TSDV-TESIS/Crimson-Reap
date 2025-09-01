@@ -638,7 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3a23b0292845f45bc12ba3c0f3be18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logChanges: 1
+  logChanges: 0
   canWallSlide: 1
   healthPoints: {fileID: 2230639419180364887}
   playerMovementChecks: {fileID: 9122317697623757532}
@@ -1158,6 +1158,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 7419154463842292251}
+          m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController,
+            Assembly-CSharp
+          m_MethodName: HandleKnockback
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onUpdate:
       m_PersistentCalls:
         m_Calls: []
@@ -1237,7 +1250,6 @@ MonoBehaviour:
   handler: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
   visorPivot: {fileID: 238100018967637552}
   lookProperties: {fileID: 11400000, guid: 539e3687ead78604dbb842f11590802b, type: 2}
-  showDeadzone: 1
 --- !u!114 &8394943398975191318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,6 +1617,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 464815956518199404}
   properties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
+  animationProperties: {fileID: 11400000, guid: 65c2a2b94242d9a42b7181ad279a72a3, type: 2}
 --- !u!114 &3229360985905636374
 MonoBehaviour:
   m_ObjectHideFlags: 0
