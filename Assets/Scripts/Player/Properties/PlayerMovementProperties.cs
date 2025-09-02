@@ -13,7 +13,6 @@ namespace Player.Properties
         public float maxSpeed;
         [Tooltip("(USED FOR ANIMATION) max speed with which the idle anim will be playing")]
         public float maxSpeedIdle = 0.04f;
-        public float groundedMaxCoyoteTimeSeconds;
 
         [Header("Frenzied movement")]
         public float frenziedAcceleration;
@@ -22,6 +21,7 @@ namespace Player.Properties
         [Header("Jumping properties")]
         public float gravity;
         public float jumpForce;
+        public float coyoteTimeSeconds;
         public float maxGravityVelocity;
         public float maxJumpVelocity;
         public float cornerCorrectionMaxDistance;

@@ -100,7 +100,7 @@ namespace Player.Checks
         {
             _groundedCoyoteTimeSeconds += Time.deltaTime;
 
-            return _groundedCoyoteTimeSeconds < playerMovementProperties.groundedMaxCoyoteTimeSeconds;
+            return _groundedCoyoteTimeSeconds < playerMovementProperties.coyoteTimeSeconds;
         }
 
         public bool IsOnRaycastGround()
