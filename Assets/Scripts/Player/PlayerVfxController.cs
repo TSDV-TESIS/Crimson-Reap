@@ -1,4 +1,5 @@
 using System;
+using Decals;
 using UnityEngine;
 
 namespace Player
@@ -37,7 +38,9 @@ namespace Player
 
         public void HandleGrounded()
         {
-            InstantiateInPosition(groundedParticles, floorPivot, Quaternion.Euler(jumpVfxRotation));
+            GameObject groundedVfxHandler = InstantiateInPosition(groundedParticles, floorPivot, Quaternion.Euler(jumpVfxRotation));
+            groundedVfxHandler.GetComponent<DecalSpawner>().Spawn(floorPivot.transform.position, Quaternion.Euler(jumpVfxRotation));
+            
             _overrideJumpParticlePosition = null;
             _overrideJumpParticleAngle = null;
         }
@@ -87,11 +90,13 @@ namespace Player
             }
         }
 
-        private void InstantiateInPosition(GameObject particlePrefab, GameObject objectOfPosition, Quaternion rotation)
+        private GameObject InstantiateInPosition(GameObject particlePrefab, GameObject objectOfPosition, Quaternion rotation)
         {
             GameObject particles = Instantiate(particlePrefab);
             particles.transform.position = objectOfPosition.transform.position;
             particles.transform.rotation = rotation;
+
+            return particles;
         }
     }
 }
