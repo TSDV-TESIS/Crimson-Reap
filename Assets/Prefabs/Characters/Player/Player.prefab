@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 3904165753785042548}
   - component: {fileID: 2378139602423631225}
   - component: {fileID: 5990451584755475820}
+  - component: {fileID: 5929810191845268401}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -638,7 +639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf3a23b0292845f45bc12ba3c0f3be18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logChanges: 1
+  logChanges: 0
   canWallSlide: 1
   healthPoints: {fileID: 2230639419180364887}
   playerMovementChecks: {fileID: 9122317697623757532}
@@ -1158,6 +1159,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 7419154463842292251}
+          m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController,
+            Assembly-CSharp
+          m_MethodName: HandleKnockback
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onUpdate:
       m_PersistentCalls:
         m_Calls: []
@@ -1237,7 +1251,6 @@ MonoBehaviour:
   handler: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
   visorPivot: {fileID: 238100018967637552}
   lookProperties: {fileID: 11400000, guid: 539e3687ead78604dbb842f11590802b, type: 2}
-  showDeadzone: 1
 --- !u!114 &8394943398975191318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1605,6 +1618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 464815956518199404}
   properties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
+  animationProperties: {fileID: 11400000, guid: 65c2a2b94242d9a42b7181ad279a72a3, type: 2}
 --- !u!114 &3229360985905636374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1684,6 +1698,24 @@ MonoBehaviour:
   playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
   knockBackShake: {fileID: 11400000, guid: 8675a901ab4b2ca408bd171f6edf758f, type: 2}
   onKnockBack: {fileID: 11400000, guid: e0d6c8c1282a08643984e3b80dc9bf17, type: 2}
+--- !u!114 &5929810191845268401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182945775304313054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55ce93ee4e46e7741900704344316324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderProperties: {fileID: 11400000, guid: 5195199fa8891264c8263e99905281d2, type: 2}
+  lowHealthShaderMaterial: {fileID: 2100000, guid: 1c144114b57274741bb210720e875322, type: 2}
+  onTakeDamage: {fileID: 11400000, guid: 907783a8cffc33e4ebffa90d6b4df275, type: 2}
+  onPlayerDeath: {fileID: 11400000, guid: 22935ebca27667842b100ca2831ca89e, type: 2}
+  onSumHealth: {fileID: 11400000, guid: 84372648de01f7d41a1f7238606514f9, type: 2}
+  onEnemiesDied: {fileID: 11400000, guid: 28f1c62b15c308d488b10d247b81f6a7, type: 2}
 --- !u!1001 &307453012941626532
 PrefabInstance:
   m_ObjectHideFlags: 0

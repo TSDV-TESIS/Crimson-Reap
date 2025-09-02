@@ -94,26 +94,25 @@ namespace Player
 
         public void HandleWalk(Vector3 moveDirection)
         {
-            HandleWalkWith(moveDirection, ((acceleration, maxSpeed) =>
-            {
-                Velocity.x = Mathf.Clamp(
-                Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
-                -maxSpeed, maxSpeed
-                );
-            }));
+            HandleWalkWith(moveDirection, SetXVelocity);
         }
 
         public void HandleGroundedWalk(Vector3 moveDirection)
         {
             HandleWalkWith(moveDirection, (acceleration, maxSpeed) =>
             {
-                float velocityToUse = Mathf.Clamp(
-                Velocity.magnitude + (_moveDirection.magnitude) * acceleration * Time.deltaTime,
-                -maxSpeed, maxSpeed
-                );
-
-                Velocity = _moveDirection * velocityToUse;
+                if (Mathf.Approximately(_moveDirection.x, 0)) return;
+                
+                SetXVelocity(acceleration, maxSpeed);
             });
+        }
+
+        private void SetXVelocity(float acceleration, float maxSpeed)
+        {
+            Velocity.x = Mathf.Clamp(
+                Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
+                -maxSpeed, maxSpeed
+            );
         }
 
         public void HandleDeceleration()
