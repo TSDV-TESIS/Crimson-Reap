@@ -1,3 +1,4 @@
+using System;
 using Player.Properties;
 using UnityEngine;
 
@@ -8,10 +9,17 @@ namespace Player
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private GameObject model;
         [SerializeField] private PlayerMovementProperties properties;
-        
+
+        public bool LockRotation { set; get; }
+
+        private void OnEnable()
+        {
+            LockRotation = false;
+        }
+
         void Update()
         {
-            if (Mathf.Abs(playerMovement.Velocity.x) < properties.maxSpeedIdle) return; 
+            if (LockRotation || Mathf.Abs(playerMovement.Velocity.x) < properties.maxSpeedIdle) return; 
            
             // TODO rotate more gracefully
             if (playerMovement.Velocity.x > 0)
