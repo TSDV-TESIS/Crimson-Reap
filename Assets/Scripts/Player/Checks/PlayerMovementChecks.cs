@@ -130,7 +130,7 @@ namespace Player.Checks
         public bool ShouldUnboundWallslide(Vector3 moveDirection, Vector2 movementVelocity)
         {
             if (ShouldUnboundByInput(moveDirection) || ShouldUnboundByCoyote(movementVelocity))
-                Debug.LogError($"Unbound by ShouldUnboundByInput: {ShouldUnboundByInput(moveDirection)}, Unbound by ShouldUnboundByCoyote: {ShouldUnboundByCoyote(movementVelocity)}");
+                Debug.Log($"Unbound by ShouldUnboundByInput: {ShouldUnboundByInput(moveDirection)}, Unbound by ShouldUnboundByCoyote: {ShouldUnboundByCoyote(movementVelocity)}");
 
             return ShouldUnboundByInput(moveDirection) || ShouldUnboundByCoyote(movementVelocity);
         }
