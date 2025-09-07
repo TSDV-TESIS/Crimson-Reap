@@ -281,7 +281,7 @@ namespace Player
 
         public bool IsGoingDownFaster()
         {
-            return _moveDirection.y < 0;
+            return _moveDirection.y <= playerMovementProperties.dropdownThreshold;
         }
     }
 }
