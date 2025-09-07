@@ -18,7 +18,6 @@ namespace Player.Controllers
             inputHandler.OnPlayerJump.AddListener(OnJump);
             inputHandler.OnPlayerShadowStep.AddListener(OnShadowstep);
             inputHandler.OnPlayerAttack.AddListener(OnAttack);
-            inputHandler.OnDropDown.AddListener(OnDropDown);
 
             float clearance = agent.MovementChecks.GetGroundClearance();
             if (clearance == 0) return;
@@ -34,7 +33,6 @@ namespace Player.Controllers
             inputHandler.OnPlayerJump.RemoveListener(OnJump);
             inputHandler.OnPlayerShadowStep.RemoveListener(OnShadowstep);
             inputHandler.OnPlayerAttack.RemoveListener(OnAttack);
-            inputHandler.OnDropDown.RemoveListener(OnDropDown);
         }
 
         public override void OnUpdate()
@@ -62,12 +60,6 @@ namespace Player.Controllers
         private void OnAttack()
         {
             agent.ChangeStateToAttack();
-        }
-
-        private void OnDropDown()
-        {
-            if (agent.MovementChecks.IsOnPlatform())
-                _playerMovement.DropDown();
         }
     }
 }

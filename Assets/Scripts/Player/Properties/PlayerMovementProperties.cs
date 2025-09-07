@@ -42,7 +42,7 @@ namespace Player.Properties
 
         [Header("DropDown properties")]
         public LayerMask whatIsPlatform;
-        public Vector3 dropDownDisplacement;
+        public float stopCheckingPlatformSeconds = 0.2f;
 
         [Header("Wall Slide properties")]
         public float wallCheckDistance;
