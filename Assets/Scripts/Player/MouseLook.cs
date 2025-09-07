@@ -1,10 +1,6 @@
-using System;
 using Events;
-using Events.Scriptables;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
-using UnityEngine.Serialization;
 
 namespace Player
 {
