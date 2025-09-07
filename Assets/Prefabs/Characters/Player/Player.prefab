@@ -1371,6 +1371,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 11400000, guid: 1963f86050fdce341bc837ffd9633f80, type: 2}
+          m_TargetAssemblyTypeName: Events.ScriptableObjects.EventChannelSO`1[[Utils.RumbleControllerData,
+            Assembly-CSharp
+          m_MethodName: RaiseEvent
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 11400000, guid: fec9788b35c94cc46b56b1a23d48d2ac, type: 2}
+            m_ObjectArgumentAssemblyTypeName: Utils.RumbleControllerData, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onUpdate:
       m_PersistentCalls:
         m_Calls: []
@@ -1425,7 +1438,20 @@ MonoBehaviour:
       m_Calls: []
   onInternalDeathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 1963f86050fdce341bc837ffd9633f80, type: 2}
+        m_TargetAssemblyTypeName: Events.ScriptableObjects.EventChannelSO`1[[Utils.RumbleControllerData,
+          Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: bd7e4ba81d8844641af39920b607fe08, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Utils.RumbleControllerData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onInternalResetEvent:
     m_PersistentCalls:
       m_Calls: []
