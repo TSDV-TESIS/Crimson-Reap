@@ -62,6 +62,7 @@ namespace Player.Checks
             _shouldCheckWall = true;
             _shouldUnboundWall = false;
             _inWallrideCoyoteTime = false;
+            _shouldCheckPlatforms = true;
 
             _whatIsGround = playerMovementProperties.whatIsGround;
             inputHandler.OnDropDown.AddListener(HandleDropdownOn);
@@ -443,9 +444,12 @@ namespace Player.Checks
         public void StopCheckingPlatforms()
         {
             _whatIsGround &= ~playerMovementProperties.whatIsPlatform;
-            
-            if(_stopCheckingPlatformCooldownCoroutine != null) StopCoroutine(_stopCheckingPlatformCooldownCoroutine);
-            _stopCheckingPlatformCooldownCoroutine = StartCoroutine(StopCheckingPlatformsCooldownCoroutine());
+
+            if (IsOnPlatform())
+            {
+                if(_stopCheckingPlatformCooldownCoroutine != null) StopCoroutine(_stopCheckingPlatformCooldownCoroutine);
+                _stopCheckingPlatformCooldownCoroutine = StartCoroutine(StopCheckingPlatformsCooldownCoroutine());   
+            }
         }
 
         private IEnumerator StopCheckingPlatformsCooldownCoroutine()
