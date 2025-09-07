@@ -8,10 +8,10 @@ namespace Enemy
 {
     public class EnemiesManager : MonoBehaviour
     {
-        [Header("Events")] 
-        [SerializeField] private GameObjectEventChannelSO onEnemyEnabled;
+        [Header("Events")] [SerializeField] private GameObjectEventChannelSO onEnemyEnabled;
         [SerializeField] private GameObjectEventChannelSO onEnemyDisabled;
         [SerializeField] private VoidEventChannelSO onAllEnemiesDisabled;
+        [SerializeField] private IntEventChannelSO onEnemyCountUpdate;
 
         private List<GameObject> _enemies;
 
@@ -32,6 +32,7 @@ namespace Enemy
         {
             Debug.Log("ENEMY DISABLED!");
             _enemies.Remove(enemy);
+            onEnemyCountUpdate?.RaiseEvent(_enemies.Count);
             if (_enemies.Count == 0)
             {
                 Debug.Log("ALL ENEMIES DISABLED!");
@@ -43,6 +44,7 @@ namespace Enemy
         {
             Debug.Log("ENEMY ENABLED!");
             _enemies.Add(enemy);
+            onEnemyCountUpdate?.RaiseEvent(_enemies.Count);
         }
     }
 }
