@@ -9,8 +9,11 @@ namespace Player.Checks
 {
     public class PlayerMovementChecks : MonoBehaviour
     {
-        [Header("Movement Properties")] [SerializeField]
-        private PlayerMovementProperties playerMovementProperties;
+        [Header("Input handler")] 
+        [SerializeField] private InputHandler inputHandler;
+        
+        [Header("Movement Properties")] 
+        [SerializeField] private PlayerMovementProperties playerMovementProperties;
 
         [Header("Feet pivot")] [SerializeField]
         private Transform feetPivot;
@@ -23,14 +26,15 @@ namespace Player.Checks
         [Header("Events")] [SerializeField] private FloatEventChannel onShadowstepCooldownValueEvent;
 
         [NonSerialized] public Vector3 WallrideHitPosition;
-
+        [NonSerialized] public bool IsOnDropdown;
+        [NonSerialized] public int WallSlideDirection;
+        [NonSerialized] public bool IsShadowStepOnCooldown;
+        
         private RaycastHit _groundHit;
         private RaycastHit _ceilingHit;
         private RaycastHit _wallHit;
 
         private bool _isWallSliding;
-        [NonSerialized] public int WallSlideDirection;
-        [NonSerialized] public bool IsShadowStepOnCooldown;
 
         private bool _shouldCheckWall;
         private bool _shouldCheckCeiling;
@@ -48,6 +52,9 @@ namespace Player.Checks
         private Coroutine _shouldCheckCeilingCoroutine;
 
         private int _shadowstepsOnAirLeft;
+        private LayerMask _whatIsGround;
+        private Coroutine _stopCheckingPlatformCooldownCoroutine;
+        private bool _shouldCheckPlatforms;
 
         private void OnEnable()
         {
@@ -55,8 +62,33 @@ namespace Player.Checks
             _shouldCheckWall = true;
             _shouldUnboundWall = false;
             _inWallrideCoyoteTime = false;
+            _shouldCheckPlatforms = true;
 
+            _whatIsGround = playerMovementProperties.whatIsGround;
+            inputHandler.OnDropDown.AddListener(HandleDropdownOn);
+            inputHandler.OnDropdownCancelled.AddListener(HandleDropdownOff);
             ResetShadowStepsOnAir();
+        }
+
+        private void OnDisable()
+        {
+            inputHandler.OnDropDown.RemoveListener(HandleDropdownOn);
+            inputHandler.OnDropdownCancelled.RemoveListener(HandleDropdownOff);
+        }
+
+        private void Update()
+        {
+            CheckDropdown();
+        }
+
+        private void HandleDropdownOff()
+        {
+            IsOnDropdown = false;
+        }
+
+        private void HandleDropdownOn()
+        {
+            IsOnDropdown = true;
         }
 
         public bool CanShadowStepOnAir()
@@ -106,7 +138,7 @@ namespace Player.Checks
         public bool IsOnRaycastGround()
         {
             return Physics.Raycast(feetPivot.position, Vector3.down, out _groundHit,
-            playerMovementProperties.checkDistance, playerMovementProperties.whatIsGround);
+            playerMovementProperties.checkDistance, _whatIsGround);
         }
 
         public bool IsOnPlatform()
@@ -395,6 +427,41 @@ namespace Player.Checks
 
             return WallRaycast(out WallSlideDirection) &&
                    (playerMovementProperties.avoidableObjects & (1 << _wallHit.transform.gameObject.layer)) == 0;
+        }
+        
+        private void CheckDropdown()
+        {
+            if (IsOnDropdown)
+            {
+                StopCheckingPlatforms();
+            }
+            else if (_shouldCheckPlatforms)
+            {
+                RestartCheckingPlatforms();
+            }
+        }
+
+        public void StopCheckingPlatforms()
+        {
+            _whatIsGround &= ~playerMovementProperties.whatIsPlatform;
+
+            if (IsOnPlatform())
+            {
+                if(_stopCheckingPlatformCooldownCoroutine != null) StopCoroutine(_stopCheckingPlatformCooldownCoroutine);
+                _stopCheckingPlatformCooldownCoroutine = StartCoroutine(StopCheckingPlatformsCooldownCoroutine());   
+            }
+        }
+
+        private IEnumerator StopCheckingPlatformsCooldownCoroutine()
+        {
+            _shouldCheckPlatforms = false;
+            yield return new WaitForSeconds(playerMovementProperties.stopCheckingPlatformSeconds);
+            _shouldCheckPlatforms = true;
+        }
+
+        public void RestartCheckingPlatforms()
+        {
+            _whatIsGround |= playerMovementProperties.whatIsPlatform;
         }
     }
 }

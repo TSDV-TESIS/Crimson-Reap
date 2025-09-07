@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using Events;
-using Player.Controllers;
 using Player.Properties;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -58,7 +55,6 @@ namespace Player
             if (playerTransform != null) playerTransform.playerTransform = transform;
 
             input.OnPlayerMove.AddListener(HandleMove);
-
             onPlayerDeath.onEvent.AddListener(HandleDeath);
             onPlayerRevive.onEvent.AddListener(HandleRevive);
             Velocity = new Vector2(playerMovementProperties.maxSpeed, 0);
@@ -270,11 +266,6 @@ namespace Player
             Velocity.y = velocityToUse * direction.y;
 
             Move(Velocity * Time.deltaTime);
-        }
-
-        public void DropDown()
-        {
-            Move(playerMovementProperties.dropDownDisplacement);
         }
 
         public void OnDrawGizmos()

@@ -23,7 +23,6 @@ namespace Decals
         {
             if (_timePassed < TimeToDissolve)
             {
-                Debug.Log($"{_timePassed} {TimeToDissolve} {_projector.fadeFactor}");
                 _projector.fadeFactor = DissolveAnim.Evaluate(_timePassed / TimeToDissolve);
                 _timePassed += Time.deltaTime;
             }
