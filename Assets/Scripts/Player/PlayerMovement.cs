@@ -191,7 +191,6 @@ namespace Player
 
         private void HandleMove(Vector2 movement)
         {
-            Debug.Log(movement);
             _moveDirection = new Vector3(movement.x, movement.y, 0);
         }
 
