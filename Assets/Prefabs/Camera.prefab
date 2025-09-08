@@ -271,7 +271,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -445,6 +445,55 @@ PolygonCollider2D:
       - {x: 46.232586, y: -3.7812142}
       - {x: 131.61667, y: -3.107759}
   m_UseDelaunayMesh: 0
+--- !u!1 &4608008854458715121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3122361472722123266}
+  - component: {fileID: 4706489656801691376}
+  m_Layer: 0
+  m_Name: Global_PP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3122361472722123266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4608008854458715121}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 382221573784365381}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4706489656801691376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4608008854458715121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 4af8053c6cb2b7a45a0fa6eef91abedb, type: 2}
 --- !u!1 &9041736024612758590
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +527,7 @@ Transform:
   - {fileID: 4094420147974547824}
   - {fileID: 8140299472095044765}
   - {fileID: 1103101380005934185}
+  - {fileID: 3122361472722123266}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &682023752696851805
@@ -493,6 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _properties: {fileID: 11400000, guid: 7b65555b26e931442b0a16564bef0fbb, type: 2}
+  camera: {fileID: 0}
   composer: {fileID: 3293087587073084945}
   shakeController: {fileID: 7614435106831715451}
   shakeSettings: {fileID: 11400000, guid: 446ab664b7d8edd49a948520f2a5a464, type: 2}
