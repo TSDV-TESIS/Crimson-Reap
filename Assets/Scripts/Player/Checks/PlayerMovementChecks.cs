@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Events;
 using Events.Scriptables;
 using Objects;
 using Player.Properties;
@@ -23,8 +24,11 @@ namespace Player.Checks
         [Header("WallRide pivot")] [SerializeField]
         private Transform wallRidePivot;
 
-        [Header("Events")] [SerializeField] private FloatEventChannel onShadowstepCooldownValueEvent;
-
+        [Header("Events")] 
+        [SerializeField] private FloatEventChannel onShadowstepCooldownValueEvent;
+        [SerializeField] private VoidEventChannelSO onDoingDropdown;
+        [SerializeField] private VoidEventChannelSO onStopDropdown;
+        
         [NonSerialized] public Vector3 WallrideHitPosition;
         [NonSerialized] public bool IsOnDropdown;
         [NonSerialized] public int WallSlideDirection;
@@ -65,15 +69,15 @@ namespace Player.Checks
             _shouldCheckPlatforms = true;
 
             _whatIsGround = playerMovementProperties.whatIsGround;
-            inputHandler.OnDropDown.AddListener(HandleDropdownOn);
-            inputHandler.OnDropdownCancelled.AddListener(HandleDropdownOff);
+            onDoingDropdown.onEvent.AddListener(HandleDropdownOn);
+            onStopDropdown.onEvent.AddListener(HandleDropdownOff);
             ResetShadowStepsOnAir();
         }
 
         private void OnDisable()
         {
-            inputHandler.OnDropDown.RemoveListener(HandleDropdownOn);
-            inputHandler.OnDropdownCancelled.RemoveListener(HandleDropdownOff);
+            onDoingDropdown.onEvent.RemoveListener(HandleDropdownOn);
+            onStopDropdown.onEvent.RemoveListener(HandleDropdownOff);
         }
 
         private void Update()

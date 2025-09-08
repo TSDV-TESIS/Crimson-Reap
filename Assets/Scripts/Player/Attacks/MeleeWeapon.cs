@@ -7,6 +7,8 @@ using Health;
 using Objects;
 using Player.Properties;
 using UnityEngine;
+using UnityEngine.Events;
+using Utils;
 
 namespace Player.Attacks
 {
@@ -18,7 +20,11 @@ namespace Player.Attacks
         [Header("Damage properties")] [SerializeField]
         private PlayerAttackProperties playerAttackProperties;
 
-        [Header("Events")] [SerializeField] private VoidEventChannelSO onFrenziedEvent;
+        [Header("Internal Events")] 
+        [SerializeField] private UnityEvent onHit;
+        
+        [Header("Events")] 
+        [SerializeField] private VoidEventChannelSO onFrenziedEvent;
         [SerializeField] private FloatEventChannel onHitStop;
         [SerializeField] private AkWwiseEventChannelSO onPlayEvent;
         [SerializeField] private AK.Wwise.Event decapitationEvent;
@@ -43,6 +49,8 @@ namespace Player.Attacks
                     playerAttackProperties.attackOcclussion))
             {
                 takeDamageInterface.TryTakeDamage(playerAttackProperties.damage);
+                onHitStop?.RaiseEvent();
+                onHit?.Invoke();
                 _hittedEnemies.Add(other);
 
                 if (other.gameObject.TryGetComponent<EnemyBeatHandler>(out EnemyBeatHandler enemyBeatHandler) &&

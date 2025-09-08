@@ -42,6 +42,7 @@ namespace Player.Properties
 
         [Header("DropDown properties")]
         public LayerMask whatIsPlatform;
+        public float dropdownThreshold = -0.5f;
         public float stopCheckingPlatformSeconds = 0.2f;
 
         [Header("Wall Slide properties")]

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Events;
 using Player;
 using Player.Properties;
 using UnityEngine;
@@ -12,6 +13,9 @@ namespace CameraScripts
         [SerializeField] private GameObject target;
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private PlayerMovementProperties movementProperties;
+
+        [Header("Events")] [SerializeField] private VoidEventChannelSO onGamepadUsed;
+        [SerializeField] private VoidEventChannelSO onKeyboardUsed;
 
         private Vector2 _dirTowardsTarget;
         private bool _isTracking = false;
@@ -26,11 +30,26 @@ namespace CameraScripts
         private Action onCursorEnterDeadZone;
         private Coroutine pivotToPlayer;
 
+        private bool _isGamepadUsed;
+
         private void Start()
         {
             transform.position = target.transform.position;
-            inputHandler.OnPlayerLook.AddListener(HandleLook);
             onCursorEnterDeadZone += OnCursorDeadZoneEnter;
+        }
+
+        private void OnEnable()
+        {
+            inputHandler.OnPlayerLook.AddListener(HandleLook);
+            onGamepadUsed?.onEvent.AddListener(HandleGamepadUsed);
+            onKeyboardUsed?.onEvent.AddListener(HandleKeyboardUsed);
+        }
+
+        private void OnDisable()
+        {
+            inputHandler.OnPlayerLook.RemoveListener(HandleLook);
+            onGamepadUsed?.onEvent.RemoveListener(HandleGamepadUsed);
+            onKeyboardUsed?.onEvent.RemoveListener(HandleKeyboardUsed);
         }
 
         void Update()
@@ -41,7 +60,8 @@ namespace CameraScripts
                 return;
             }
 
-            if ((GetDistance() >= cameraProperties.pivotMinDistance && !_isTracking) || (cameraProperties.shouldInfluence && _cursorPosition != _prevCursorPosition))
+            if ((GetDistance() >= cameraProperties.pivotMinDistance && !_isTracking) ||
+                (cameraProperties.shouldInfluence && _cursorPosition != _prevCursorPosition))
                 _isTracking = true;
 
             if (_isTracking)
@@ -55,9 +75,21 @@ namespace CameraScripts
             }
         }
 
+        private void HandleKeyboardUsed()
+        {
+            _isGamepadUsed = false;
+        }
+
+        private void HandleGamepadUsed()
+        {
+            _isGamepadUsed = true;
+        }
+
         private void MoveTowardsTarget()
         {
-            transform.Translate(GetDir() * (GetDistance() >= cameraProperties.pivotMaxDistance ? movementProperties.maxSpeed * Time.deltaTime : cameraProperties.pivotSpeed * Time.deltaTime));
+            transform.Translate(GetDir() * (GetDistance() >= cameraProperties.pivotMaxDistance
+                ? movementProperties.maxSpeed * Time.deltaTime
+                : cameraProperties.pivotSpeed * Time.deltaTime));
         }
 
         private float GetDistance()
@@ -86,13 +118,15 @@ namespace CameraScripts
 
         private IEnumerator PivotToPlayer()
         {
-            float duration = Vector3.Distance(transform.position, target.transform.position) / cameraProperties.pivotSpeed;
+            float duration = Vector3.Distance(transform.position, target.transform.position) /
+                             cameraProperties.pivotSpeed;
             float timer = 0;
             float startTime = Time.time;
             while (timer < duration)
             {
                 timer = Time.time - startTime;
-                transform.Translate((target.transform.position - transform.position).normalized * (cameraProperties.pivotSpeed * Time.deltaTime));
+                transform.Translate((target.transform.position - transform.position).normalized *
+                                    (cameraProperties.pivotSpeed * Time.deltaTime));
                 yield return null;
             }
 
@@ -107,6 +141,45 @@ namespace CameraScripts
 
         private void HandleLook(Vector2 mousePos)
         {
+            if (_isGamepadUsed)
+                HandleLookWithGamepad(mousePos);
+            else
+                HandleLookWithCursor(mousePos);
+        }
+
+        private void HandleLookWithGamepad(Vector2 joystickPos)
+        {
+            float cameraZ = -Camera.main.transform.position.z;
+
+            Vector2 lowerLeftLimit = Camera.main.ViewportToWorldPoint(new Vector3(0, 0, cameraZ));
+            Vector2 upperRightLimit = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, cameraZ));
+
+            float posX = joystickPos.x / 2f + 0.5f;
+            float posY = joystickPos.y / 2f + 0.5f;
+
+            _cursorPosition = new Vector2(Mathf.Lerp(lowerLeftLimit.x, upperRightLimit.x, posX),
+                Mathf.Lerp(lowerLeftLimit.y, upperRightLimit.y, posY));
+
+            _cursorOffset = _cursorPosition - new Vector2(target.transform.position.x, target.transform.position.y);
+
+            if (cameraProperties.freeCamera) return;
+            
+            Vector2 trackIntensity = GetTrackingForce(new Vector2(posX, posY), cameraProperties.cursorDeadZone);
+
+            if (trackIntensity != Vector2.zero)
+            {
+                isCursorBased = true;
+                return;
+            }
+
+            if (isCursorBased)
+                onCursorEnterDeadZone?.Invoke();
+            _cursorPosition = target.transform.position;
+            _cursorOffset = new Vector2(0f, 0f);
+        }
+
+        private void HandleLookWithCursor(Vector2 mousePos)
+        {
             float cameraZ = -Camera.main.transform.position.z;
             _cursorPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, cameraZ));
             Vector2 cursorViewPortPos = Camera.main.ScreenToViewportPoint(new Vector3(mousePos.x, mousePos.y, cameraZ));
@@ -116,6 +189,7 @@ namespace CameraScripts
                 return;
 
             Vector2 trackIntensity = GetTrackingForce(cursorViewPortPos, cameraProperties.cursorDeadZone);
+
             if (trackIntensity != Vector2.zero)
                 isCursorBased = true;
             else if (isCursorBased)
@@ -126,8 +200,10 @@ namespace CameraScripts
             float halfScreenWidth = (upperRightLimit.x - lowerLeftLimit.x) / 2;
             float halfScreenHeight = (upperRightLimit.y - lowerLeftLimit.y) / 2;
 
-            float xPos = Mathf.Clamp(_cursorPosition.x, target.transform.position.x - halfScreenWidth, target.transform.position.x + halfScreenWidth);
-            float yPos = Mathf.Clamp(_cursorPosition.y, target.transform.position.y - halfScreenHeight, target.transform.position.y + halfScreenHeight);
+            float xPos = Mathf.Clamp(_cursorPosition.x, target.transform.position.x - halfScreenWidth,
+                target.transform.position.x + halfScreenWidth);
+            float yPos = Mathf.Clamp(_cursorPosition.y, target.transform.position.y - halfScreenHeight,
+                target.transform.position.y + halfScreenHeight);
             if (trackIntensity.x == 0)
                 xPos = target.transform.position.x;
             if (trackIntensity.y == 0)
@@ -153,8 +229,10 @@ namespace CameraScripts
 
             Gizmos.color = Color.red;
             Vector3 cursorDeadZone = cameraProperties.cursorDeadZone;
-            Vector3 rectCornerUpperRight = Camera.main.ViewportToWorldPoint(new Vector3(cursorDeadZone.x, cursorDeadZone.y, -Camera.main.transform.position.z));
-            Vector3 rectCornerLowerLeft = Camera.main.ViewportToWorldPoint(new Vector3(1 - cursorDeadZone.x, 1 - cursorDeadZone.y, -Camera.main.transform.position.z));
+            Vector3 rectCornerUpperRight = Camera.main.ViewportToWorldPoint(new Vector3(cursorDeadZone.x,
+                cursorDeadZone.y, -Camera.main.transform.position.z));
+            Vector3 rectCornerLowerLeft = Camera.main.ViewportToWorldPoint(new Vector3(1 - cursorDeadZone.x,
+                1 - cursorDeadZone.y, -Camera.main.transform.position.z));
             Vector3 rectCornerUpperLeft = new Vector3(rectCornerLowerLeft.x, rectCornerUpperRight.y);
             Vector3 rectCornerLowerRight = new Vector3(rectCornerUpperRight.x, rectCornerLowerLeft.y);
 
@@ -163,7 +241,7 @@ namespace CameraScripts
             Gizmos.DrawLine(rectCornerLowerLeft, rectCornerUpperLeft);
             Gizmos.DrawLine(rectCornerLowerRight, rectCornerUpperRight);
         }
-
+        
         private Vector2 GetTrackingForce(Vector2 cursorViewPortPos, Vector2 deadZone)
         {
             Vector2 trackIntensity = Vector2.zero;

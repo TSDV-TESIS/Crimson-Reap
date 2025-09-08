@@ -22,11 +22,13 @@ namespace Player
         [SerializeField] private VoidEventChannelSO onPlayerRevive;
         [SerializeField] private VoidEventChannelSO onFrenziedStart;
         [SerializeField] private VoidEventChannelSO onFrenziedStop;
-
+        [SerializeField] private VoidEventChannelSO onDropdown;
+        [SerializeField] private VoidEventChannelSO onDropdownStop;
+        
         [Header("Save properties")]
         [SerializeField] private PlayerTransform playerTransform;
 
-        [Header("Events")]
+        [Header("Unity Events")]
         [SerializeField] private UnityEvent<float> onWalk;
         [SerializeField] private UnityEvent onStop;
 
@@ -37,6 +39,7 @@ namespace Player
         private Coroutine _knockBackVelocityLock;
 
         private Vector3 _moveDirection;
+        private bool _isGoingDownFaster;
 
         public Vector3 MoveDirection => _moveDirection;
 
@@ -66,6 +69,13 @@ namespace Player
 
             onPlayerDeath.onEvent.RemoveListener(HandleDeath);
             onPlayerRevive.onEvent.RemoveListener(HandleRevive);
+        }
+
+        private void Update()
+        {
+            _isGoingDownFaster = _moveDirection.y <= playerMovementProperties.dropdownThreshold;
+            if (_isGoingDownFaster) onDropdown?.RaiseEvent();
+            else onDropdownStop?.RaiseEvent();
         }
 
         public void HandleWalk()
@@ -281,7 +291,7 @@ namespace Player
 
         public bool IsGoingDownFaster()
         {
-            return _moveDirection.y < 0;
+            return _isGoingDownFaster;
         }
     }
 }
