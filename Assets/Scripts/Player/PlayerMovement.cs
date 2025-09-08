@@ -1,12 +1,9 @@
 using System;
 using System.Collections;
 using Events;
-using Player.Controllers;
 using Player.Properties;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 namespace Player
 {
@@ -58,7 +55,6 @@ namespace Player
             if (playerTransform != null) playerTransform.playerTransform = transform;
 
             input.OnPlayerMove.AddListener(HandleMove);
-
             onPlayerDeath.onEvent.AddListener(HandleDeath);
             onPlayerRevive.onEvent.AddListener(HandleRevive);
             Velocity = new Vector2(playerMovementProperties.maxSpeed, 0);
@@ -94,26 +90,25 @@ namespace Player
 
         public void HandleWalk(Vector3 moveDirection)
         {
-            HandleWalkWith(moveDirection, ((acceleration, maxSpeed) =>
-            {
-                Velocity.x = Mathf.Clamp(
-                Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
-                -maxSpeed, maxSpeed
-                );
-            }));
+            HandleWalkWith(moveDirection, SetXVelocity);
         }
 
         public void HandleGroundedWalk(Vector3 moveDirection)
         {
             HandleWalkWith(moveDirection, (acceleration, maxSpeed) =>
             {
-                float velocityToUse = Mathf.Clamp(
-                Velocity.magnitude + (_moveDirection.magnitude) * acceleration * Time.deltaTime,
-                -maxSpeed, maxSpeed
-                );
-
-                Velocity = _moveDirection * velocityToUse;
+                if (Mathf.Approximately(_moveDirection.x, 0)) return;
+                
+                SetXVelocity(acceleration, maxSpeed);
             });
+        }
+
+        private void SetXVelocity(float acceleration, float maxSpeed)
+        {
+            Velocity.x = Mathf.Clamp(
+                Velocity.x + (_moveDirection.x) * acceleration * Time.deltaTime,
+                -maxSpeed, maxSpeed
+            );
         }
 
         public void HandleDeceleration()
@@ -192,7 +187,6 @@ namespace Player
 
         private void HandleMove(Vector2 movement)
         {
-            Debug.Log(movement);
             _moveDirection = new Vector3(movement.x, movement.y, 0);
         }
 
@@ -272,11 +266,6 @@ namespace Player
             Velocity.y = velocityToUse * direction.y;
 
             Move(Velocity * Time.deltaTime);
-        }
-
-        public void DropDown()
-        {
-            Move(playerMovementProperties.dropDownDisplacement);
         }
 
         public void OnDrawGizmos()

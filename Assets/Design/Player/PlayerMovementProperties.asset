@@ -12,21 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efffc1ad49e5884f8f6b465f8514502, type: 3}
   m_Name: PlayerMovementProperties
   m_EditorClassIdentifier: 
-  acceleration: 93
-  friction: 5
+  acceleration: 117.8
+  friction: 51
   maxSpeed: 10.54
-  maxSpeedIdle: 0.1
-  groundedMaxCoyoteTimeSeconds: 1
+  maxSpeedIdle: 1.9
+  minStopAnimSpeedPercentage: 0.6
+  minStopMovePercentage: 0.2
   frenziedAcceleration: 250
   frenziedMaxSpeed: 21
   gravity: 34.1
   jumpForce: 15.25
+  coyoteTimeSeconds: 0
   maxGravityVelocity: 18.6
   maxJumpVelocity: 24.8
   cornerCorrectionMaxDistance: 0.25
   whatIsCeiling:
     serializedVersion: 2
-    m_Bits: 1792
+    m_Bits: 1536
   maxDownPressedVelocity: 35
   maxDownPressedAddedAcceleration: 55
   checkDistance: 0.5
@@ -38,11 +40,11 @@ MonoBehaviour:
   whatIsPlatform:
     serializedVersion: 2
     m_Bits: 131072
-  dropDownDisplacement: {x: 0, y: -1, z: 0}
+  stopCheckingPlatformSeconds: 0.2
   wallCheckDistance: 0.5
   whatIsWall:
     serializedVersion: 2
-    m_Bits: 141056
+    m_Bits: 9728
   lockDuration: 0.5
   wallSlideGravity: 43.4
   maxWallSlideVerticalVelocity: 6
@@ -89,6 +91,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   shadowStepShowTrailTime: 1
-  knockBackAngle: 25
-  knockBackForce: 12.5
+  knockBackAngle: 60
+  knockBackForce: 8.43
   knockBackLockDuration: 0.5

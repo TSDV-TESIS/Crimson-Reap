@@ -7,21 +7,23 @@ namespace Managers
 {
     public class WinTrigger : MonoBehaviour
     {
-        [Header("Objects")] 
+        [Header("Objects")]
         [SerializeField] private GameObject closedDoor;
         [SerializeField] private GameObject openDoor;
-        
+
         [SerializeField] private string nextLevel;
-        
+
         [Header("Events")]
         [SerializeField] private VoidEventChannelSO onEnemiesDisabled;
+        [SerializeField] private VoidEventChannelSO onPlayerWin;
+        [SerializeField] private VoidEventChannelSO onChangeLevel;
 
         [SerializeField] private Vector3ChannelSO onDoorPosition;
         [SerializeField] private StringEventChannelSO onLoadScene;
-        
+
         private bool _canWin;
         private BoxCollider _collider;
-        
+
         private void OnEnable()
         {
             _collider ??= GetComponent<BoxCollider>();
@@ -29,6 +31,7 @@ namespace Managers
             gameObject.layer = LayerMask.NameToLayer("Wall");
             _canWin = false;
             onEnemiesDisabled?.onEvent.AddListener(HandleCanWin);
+            onChangeLevel?.onEvent.AddListener(PlayNextLevel);
         }
 
         private void OnDisable()
@@ -38,7 +41,7 @@ namespace Managers
 
         private void Update()
         {
-            if(_canWin)
+            if (_canWin)
                 onDoorPosition?.RaiseEvent(Camera.main.WorldToScreenPoint(transform.position));
         }
 
@@ -57,9 +60,14 @@ namespace Managers
             if (other.CompareTag("Player") && _canWin)
             {
                 Debug.Log("TRIGGERED!");
-                onLoadScene?.RaiseEvent(nextLevel);
+                onPlayerWin?.RaiseEvent();
                 _canWin = false;
-            } 
+            }
+        }
+
+        private void PlayNextLevel()
+        {
+            onLoadScene?.RaiseEvent(nextLevel);
         }
     }
 }

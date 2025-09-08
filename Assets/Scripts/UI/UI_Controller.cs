@@ -54,7 +54,6 @@ namespace UI
             var vector3 = goObject.localPosition;
             vector3.x = Mathf.Clamp(position.x, minGoPositions.x, maxGoPositions.x);
             vector3.y = Mathf.Clamp(position.y, minGoPositions.y, maxGoPositions.y);
-            Debug.Log($"POSITION: {vector3} OBTAINED: {position}");
             goObject.localPosition = vector3;
         }
 
