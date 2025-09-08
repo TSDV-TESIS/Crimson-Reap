@@ -39,6 +39,7 @@ namespace Player
         private Coroutine _knockBackVelocityLock;
 
         private Vector3 _moveDirection;
+        private Vector2 _inputDirection;
         private bool _isGoingDownFaster;
 
         public Vector3 MoveDirection => _moveDirection;
@@ -73,7 +74,7 @@ namespace Player
 
         private void Update()
         {
-            _isGoingDownFaster = _moveDirection.y <= playerMovementProperties.dropdownThreshold;
+            _isGoingDownFaster = _inputDirection.y <= playerMovementProperties.dropdownThreshold;
             if (_isGoingDownFaster) onDropdown?.RaiseEvent();
             else onDropdownStop?.RaiseEvent();
         }
@@ -197,6 +198,7 @@ namespace Player
 
         private void HandleMove(Vector2 movement)
         {
+            _inputDirection = movement;
             _moveDirection = new Vector3(movement.x, movement.y, 0);
         }
 

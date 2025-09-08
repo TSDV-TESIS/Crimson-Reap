@@ -59,7 +59,6 @@ namespace UI
 
         private bool DoorIsInScreen(Vector3 position)
         {
-            Debug.Log($"CHECKS: {position.x > minInScreenPosition.x} {position.x < maxInScreenPosition.x} {position.y > minInScreenPosition.y} {position.y < maxInScreenPosition.y}");
             return position.x > minInScreenPosition.x && position.x < maxInScreenPosition.x &&
                    position.y > minInScreenPosition.y && position.y < maxInScreenPosition.y;
         }

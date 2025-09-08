@@ -26,7 +26,6 @@ namespace Enemy.Actions
             Player.Value = player;
             if (_wasNull ? !Player.Value : Player.Value) return Status.Success;
             
-            Debug.Log($"CHANGED!");
             _wasNull = !Player.Value;
             Restart.Value = true;
             return Status.Success;

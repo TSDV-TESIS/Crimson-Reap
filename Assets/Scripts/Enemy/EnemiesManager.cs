@@ -30,19 +30,16 @@ namespace Enemy
 
         private void HandleEnemyDisabled(GameObject enemy)
         {
-            Debug.Log("ENEMY DISABLED!");
             _enemies.Remove(enemy);
             onEnemyCountUpdate?.RaiseEvent(_enemies.Count);
             if (_enemies.Count == 0)
             {
-                Debug.Log("ALL ENEMIES DISABLED!");
                 onAllEnemiesDisabled?.RaiseEvent();
             }
         }
 
         private void HandleNewEnemy(GameObject enemy)
         {
-            Debug.Log("ENEMY ENABLED!");
             _enemies.Add(enemy);
             onEnemyCountUpdate?.RaiseEvent(_enemies.Count);
         }

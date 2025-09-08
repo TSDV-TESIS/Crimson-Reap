@@ -18,7 +18,6 @@ public partial class CreateArrowAction : Action
     
     protected override Status OnStart()
     {
-        Debug.Log($"TEST {ArrowPrefab.Value} {Self.Value}");
         GameObject arrowObject = Object.Instantiate(ArrowPrefab.Value, Self.Value.transform);
         arrowObject.transform.position = Self.Value.transform.position + offset;
         arrowObject.GetComponent<ArrowAttack>().SetVelocityAndDirection(Velocity, Player.Value.transform.position);
