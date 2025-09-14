@@ -26,13 +26,14 @@ namespace Player.Controllers
         private static readonly int Glitch = Animator.StringToHash("Glitch");
         private static readonly int Knockback = Animator.StringToHash("Knockback");
         private static readonly int RunRotate = Animator.StringToHash("RunRotate");
-
+        private static readonly int StopRunning = Animator.StringToHash("StopRunning");
+        private static readonly int IsDeadByTime = Animator.StringToHash("IsDeadByTime");
+        
         private PlayerAgent _agent;
         private PlayerMovement _playerMovement;
         private float _secondsToGlitch;
         private float _lastMovementDirection;
         private bool _shouldResetMoveDirection;
-        private static readonly int StopRunning = Animator.StringToHash("StopRunning");
 
         private void OnEnable()
         {
@@ -130,6 +131,12 @@ namespace Player.Controllers
         {
             _shouldResetMoveDirection = true;
             playerAnimator.SetBool(Falling, false);
+        }
+
+        public void HandleDeathByTime()
+        {
+            playerAnimator.SetTrigger(Dead);
+            playerAnimator.SetBool(IsDeadByTime, true);
         }
     }
 }
