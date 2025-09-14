@@ -58,10 +58,6 @@ namespace Enemy
                         raycastDirection, (_playerHit.transform.position - pivot.position).magnitude,
                         enemyVisionProperties.whatIsObstruction);
 
-                    if (isSeeingPlayer)
-                        Debug.Log(
-                            $"MAGNITUDE: {(_playerHit.transform.position - pivot.position).magnitude} LENGTH: {enemyVisionProperties.visionLength}");
-
                     if (isSeeingPlayerWithoutObstruction)
                     {
                         if (_stillSeeingPlayerCoroutine != null) StopCoroutine(_stillSeeingPlayerCoroutine);
