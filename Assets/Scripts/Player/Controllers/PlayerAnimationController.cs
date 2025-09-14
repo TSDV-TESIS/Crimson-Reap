@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
+using Events;
+using Events.Scriptables;
 using Player.Properties;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Player.Controllers
@@ -13,7 +16,11 @@ namespace Player.Controllers
         [SerializeField] private Animator playerAnimator;
         [SerializeField] private PlayerMovementProperties properties;
         [SerializeField] private PlayerAnimationProperties animationProperties;
+        [SerializeField] private PlayerRotation playerRotation;
 
+        [Header("Events")] 
+        [SerializeField] private VoidEventChannelSO onPlayerFinishRotating;
+        
         private static readonly int Walking = Animator.StringToHash("Velocity");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
         private static readonly int Falling = Animator.StringToHash("IsFalling");
@@ -33,14 +40,31 @@ namespace Player.Controllers
         private PlayerMovement _playerMovement;
         private float _secondsToGlitch;
         private float _lastMovementDirection;
+        private float _lastVelocityDirection;
         private bool _shouldResetMoveDirection;
+        private Coroutine _stopRunningAnimationCoroutine;
 
+        private bool _isLockedRotation;
+        private Coroutine _lockRotationCoroutine;
+        
         private void OnEnable()
         {
             _agent ??= GetComponent<PlayerAgent>();
             _playerMovement ??= GetComponent<PlayerMovement>();
             _lastMovementDirection = 0f;
             SetSecondsToGlitch();
+            
+            onPlayerFinishRotating?.onEvent.AddListener(HandleFinishRotating);
+        }
+
+        private void OnDisable()
+        {
+            onPlayerFinishRotating?.onEvent.RemoveListener(HandleFinishRotating);
+        }
+
+        private void HandleFinishRotating()
+        {
+            playerRotation.LockRotation = false;
         }
 
         public void Update()
@@ -98,20 +122,38 @@ namespace Player.Controllers
         public void HandleWalk(float velocity)
         {
             float moveDirection = _playerMovement.MoveDirection.x;
+            float velocityDirection = _playerMovement.Velocity.x;
             float velocityToUse = Mathf.Abs(velocity);
-
+            
+            if (!Mathf.Approximately(Mathf.Sign(velocityDirection), Mathf.Sign(_lastVelocityDirection)) && !playerRotation.LockRotation)
+            {
+                Debug.Log("ROTATION!");
+                playerRotation.LockRotation = true;
+                playerAnimator.SetTrigger(RunRotate);
+            }
+            
             if (Math.Abs(moveDirection - _lastMovementDirection) > properties.minStopAnimSpeedPercentage &&
-                Math.Abs(moveDirection) < properties.minStopMovePercentage) playerAnimator.SetTrigger(StopRunning);
-
+                Math.Abs(moveDirection) < properties.minStopMovePercentage)
+            {
+                HandleStopRunningCoroutine();
+            };
+            
             playerAnimator.SetFloat(Walking, velocityToUse / properties.maxSpeed);
             _lastMovementDirection = moveDirection;
+            _lastVelocityDirection = velocityDirection;
         }
 
         public void HandleAttack()
         {
-            Debug.Log("Hello ATTACK");
             _shouldResetMoveDirection = true;
             playerAnimator.SetTrigger(Attack1);
+            ResetRotate();
+        }
+
+        private void ResetRotate()
+        {
+            playerRotation.LockRotation = false;
+            playerAnimator.ResetTrigger(RunRotate);
         }
 
         public void HandleJump()
@@ -119,12 +161,15 @@ namespace Player.Controllers
             _shouldResetMoveDirection = true;
             playerAnimator.SetTrigger(Jump);
             playerAnimator.SetBool(Falling, true);
+            ResetRotate();
         }
 
         public void HandleFalling()
         {
             _shouldResetMoveDirection = true;
+            playerAnimator.ResetTrigger(RunRotate);
             playerAnimator.SetBool(Falling, true);
+            ResetRotate();
         }
 
         public void HandleGrounded()
@@ -137,6 +182,19 @@ namespace Player.Controllers
         {
             playerAnimator.SetTrigger(Dead);
             playerAnimator.SetBool(IsDeadByTime, true);
+        }
+        
+        private void HandleStopRunningCoroutine()
+        {
+            if(_stopRunningAnimationCoroutine != null) StopCoroutine(_stopRunningAnimationCoroutine);
+            _stopRunningAnimationCoroutine = StartCoroutine(StopRunningCoroutine());
+        }
+
+        private IEnumerator StopRunningCoroutine()
+        {
+            yield return new WaitForSeconds(animationProperties.stopRunningAnimationWaitTime);
+            if(Math.Abs(_playerMovement.MoveDirection.x) < properties.minStopMovePercentage)
+                playerAnimator.SetTrigger(StopRunning);
         }
     }
 }
