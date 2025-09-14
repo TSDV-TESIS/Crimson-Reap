@@ -108,6 +108,7 @@ namespace Player.Controllers
 
         public void HandleAttack()
         {
+            Debug.Log("Hello ATTACK");
             _shouldResetMoveDirection = true;
             playerAnimator.SetTrigger(Attack1);
         }
