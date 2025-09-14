@@ -56,10 +56,8 @@ namespace Managers
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log($"Check if can win {other.CompareTag("Player")} {_canWin}");
             if (other.CompareTag("Player") && _canWin)
             {
-                Debug.Log("TRIGGERED!");
                 onPlayerWin?.RaiseEvent();
                 _canWin = false;
             }
