@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using Events;
 using Events.Scriptables;
 using Player;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Managers
 {
