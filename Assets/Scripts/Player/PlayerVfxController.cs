@@ -21,9 +21,11 @@ namespace Player
         private Vector3 _lastWallridePosition;
         private Quaternion? _overrideJumpParticleAngle;
         private GameObject _overrideJumpParticlePosition;
-
+        private bool _shouldAddDecal;
+        
         private void OnEnable()
         {
+            _shouldAddDecal = true;
             _overrideJumpParticlePosition = null;
             _overrideJumpParticleAngle = null;
         }
@@ -38,6 +40,11 @@ namespace Player
 
         public void HandleGrounded()
         {
+            if (!_shouldAddDecal)
+            {
+                _shouldAddDecal = true;
+                return;
+            }
             GameObject groundedVfxHandler = InstantiateInPosition(groundedParticles, floorPivot, Quaternion.Euler(jumpVfxRotation));
             groundedVfxHandler.GetComponent<DecalSpawner>().Spawn(floorPivot.transform.position, Quaternion.Euler(jumpVfxRotation));
             
@@ -97,6 +104,11 @@ namespace Player
             particles.transform.rotation = rotation;
 
             return particles;
+        }
+        
+        public void SetShouldAddDecal(bool value)
+        {
+            _shouldAddDecal = value;
         }
     }
 }

@@ -30,7 +30,8 @@ namespace Player
 
         [Header("Internal Transitions Events")]
         [SerializeField] private UnityEvent onGroundToFallTransition;
-
+        [SerializeField] private UnityEvent onAttackToGroundTransition;
+        
         private State _groundedState;
         private State _jumpingState;
         private State _fallingState;
@@ -154,6 +155,7 @@ namespace Player
 
             Transition attackToGrounded = new Transition(_attackState, _groundedState);
             _attackState.AddTransition(attackToGrounded);
+            attackToGrounded.AddTransitionAction(onAttackToGroundTransition.Invoke);
             Transition attackToFalling = new Transition(_attackState, _fallingState);
             _attackState.AddTransition(attackToFalling);
             Transition attackToWallRiding = new Transition(_attackState, _wallSlideState);

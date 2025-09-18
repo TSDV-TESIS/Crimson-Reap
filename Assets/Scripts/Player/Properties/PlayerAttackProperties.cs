@@ -16,6 +16,8 @@ namespace Player.Properties
 
         [Header("Check Fields")]
         public float checkDistance = 1f;
+        [Tooltip("Min angle that the attack has to have in order to get the character off ground")]
+        public float minYAngle = 30f;
 
         [Header("Gizmos")]
         public bool shouldDrawGizmos = false;
