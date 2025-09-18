@@ -17,6 +17,8 @@ namespace CameraScripts
         [Header("Events")] [SerializeField] private VoidEventChannelSO onGamepadUsed;
         [SerializeField] private VoidEventChannelSO onKeyboardUsed;
 
+        [NonSerialized] public bool ShouldPivot;
+        
         private Vector2 _dirTowardsTarget;
         private bool _isTracking = false;
 
@@ -40,6 +42,7 @@ namespace CameraScripts
 
         private void OnEnable()
         {
+            ShouldPivot = true;
             inputHandler.OnPlayerLook.AddListener(HandleLook);
             onGamepadUsed?.onEvent.AddListener(HandleGamepadUsed);
             onKeyboardUsed?.onEvent.AddListener(HandleKeyboardUsed);
@@ -54,7 +57,7 @@ namespace CameraScripts
 
         void Update()
         {
-            if (!isCursorBased)
+            if (!isCursorBased || !ShouldPivot)
             {
                 transform.position = target.transform.position;
                 return;
