@@ -3,6 +3,7 @@ using Events;
 using Health;
 using Player.Properties;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player.Health
 {
@@ -12,7 +13,8 @@ namespace Player.Health
         [SerializeField] private HealthTickProperties healthTickProperties;
 
         [SerializeField] private VoidEventChannelSO onEnemiesDisabled;
-
+        [SerializeField] private UnityEvent onDeathByTime;
+        
         private HealthPoints _healthPoints;
         private Coroutine _tickCoroutine;
 
@@ -38,8 +40,15 @@ namespace Player.Health
             while (_shouldTick)
             {
                 yield return new WaitForSeconds(healthTickProperties.secondsPerTick);
-                if (_shouldTick)
+                if (_shouldTick && !_healthPoints.IsDead())
+                {
                     _healthPoints.TakeUnavoidableDamage(healthTickProperties.healthTakenPerTick);
+                    if (_healthPoints.IsDead())
+                    {
+                        onDeathByTime?.Invoke();
+                        _shouldTick = false;
+                    }
+                }
             }
         }
 
