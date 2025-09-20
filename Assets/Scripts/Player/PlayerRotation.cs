@@ -11,10 +11,13 @@ namespace Player
         [SerializeField] private PlayerMovementProperties properties;
 
         public bool LockRotation { set; get; }
+        private Animator _animator;
+        private static readonly int Velocity = Animator.StringToHash("Velocity");
 
         private void OnEnable()
         {
             LockRotation = false;
+            _animator = model.GetComponent<Animator>();
         }
 
         void Update()
