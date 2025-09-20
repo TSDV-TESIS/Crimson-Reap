@@ -1,6 +1,8 @@
 using System;
+using Events;
 using Player.Properties;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Player
 {
@@ -10,17 +12,34 @@ namespace Player
         [SerializeField] private GameObject model;
         [SerializeField] private PlayerMovementProperties properties;
 
+        [Header("Events")] 
+        [SerializeField] private VoidEventChannelSO onFinishRotating;
+        
         public bool LockRotation { set; get; }
-        private Animator _animator;
-        private static readonly int Velocity = Animator.StringToHash("Velocity");
 
         private void OnEnable()
         {
             LockRotation = false;
-            _animator = model.GetComponent<Animator>();
+            onFinishRotating?.onEvent.AddListener(HandleUnlockAndRotate);
         }
 
-        void Update()
+        private void OnDisable()
+        {
+            onFinishRotating?.onEvent.RemoveListener(HandleUnlockAndRotate);
+        }
+        
+        private void Update()
+        {
+            Rotate();
+        }
+        
+        private void HandleUnlockAndRotate()
+        {
+            LockRotation = false;
+            Rotate();
+        }
+
+        private void Rotate()
         {
             if (LockRotation || Mathf.Abs(playerMovement.Velocity.x) < properties.maxSpeedIdle) return; 
            

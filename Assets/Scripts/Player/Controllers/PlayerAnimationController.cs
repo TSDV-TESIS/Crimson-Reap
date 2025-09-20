@@ -14,12 +14,10 @@ namespace Player.Controllers
     public class PlayerAnimationController : MonoBehaviour
     {
         [SerializeField] private Animator playerAnimator;
+        [SerializeField] private GameObject model;
         [SerializeField] private PlayerMovementProperties properties;
         [SerializeField] private PlayerAnimationProperties animationProperties;
         [SerializeField] private PlayerRotation playerRotation;
-
-        [Header("Events")] 
-        [SerializeField] private VoidEventChannelSO onPlayerFinishRotating;
         
         private static readonly int Walking = Animator.StringToHash("Velocity");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
@@ -35,36 +33,25 @@ namespace Player.Controllers
         private static readonly int RunRotate = Animator.StringToHash("RunRotate");
         private static readonly int StopRunning = Animator.StringToHash("StopRunning");
         private static readonly int IsDeadByTime = Animator.StringToHash("IsDeadByTime");
-        
+
         private PlayerAgent _agent;
         private PlayerMovement _playerMovement;
         private float _secondsToGlitch;
         private float _lastMovementDirection;
         private float _lastVelocityDirection;
         private bool _shouldResetMoveDirection;
+        private bool _isRotating;
         private Coroutine _stopRunningAnimationCoroutine;
 
         private bool _isLockedRotation;
         private Coroutine _lockRotationCoroutine;
-        
+
         private void OnEnable()
         {
             _agent ??= GetComponent<PlayerAgent>();
             _playerMovement ??= GetComponent<PlayerMovement>();
             _lastMovementDirection = 0f;
             SetSecondsToGlitch();
-            
-            onPlayerFinishRotating?.onEvent.AddListener(HandleFinishRotating);
-        }
-
-        private void OnDisable()
-        {
-            onPlayerFinishRotating?.onEvent.RemoveListener(HandleFinishRotating);
-        }
-
-        private void HandleFinishRotating()
-        {
-            playerRotation.LockRotation = false;
         }
 
         public void Update()
@@ -122,25 +109,24 @@ namespace Player.Controllers
         public void HandleWalk(float velocity)
         {
             float moveDirection = _playerMovement.MoveDirection.x;
-            float velocityDirection = _playerMovement.Velocity.x;
             float velocityToUse = Mathf.Abs(velocity);
-            
-            if (!Mathf.Approximately(Mathf.Sign(velocityDirection), Mathf.Sign(_lastVelocityDirection)) && !playerRotation.LockRotation)
+
+            if (velocity != 0 && !Mathf.Approximately(Mathf.Sign(velocity), Mathf.Sign(model.transform.forward.x)) &&
+                !playerRotation.LockRotation)
             {
-                Debug.Log("ROTATION!");
                 playerRotation.LockRotation = true;
+
                 playerAnimator.SetTrigger(RunRotate);
             }
-            
+
             if (Math.Abs(moveDirection - _lastMovementDirection) > properties.minStopAnimSpeedPercentage &&
                 Math.Abs(moveDirection) < properties.minStopMovePercentage)
             {
                 HandleStopRunningCoroutine();
-            };
-            
+            }
+
             playerAnimator.SetFloat(Walking, velocityToUse / properties.maxSpeed);
             _lastMovementDirection = moveDirection;
-            _lastVelocityDirection = velocityDirection;
         }
 
         public void HandleAttack()
@@ -183,18 +169,19 @@ namespace Player.Controllers
             playerAnimator.SetTrigger(Dead);
             playerAnimator.SetBool(IsDeadByTime, true);
         }
-        
+
         private void HandleStopRunningCoroutine()
         {
-            if(_stopRunningAnimationCoroutine != null) StopCoroutine(_stopRunningAnimationCoroutine);
+            if (_stopRunningAnimationCoroutine != null) StopCoroutine(_stopRunningAnimationCoroutine);
             _stopRunningAnimationCoroutine = StartCoroutine(StopRunningCoroutine());
         }
 
         private IEnumerator StopRunningCoroutine()
         {
             yield return new WaitForSeconds(animationProperties.stopRunningAnimationWaitTime);
-            if(Math.Abs(_playerMovement.MoveDirection.x) < properties.minStopMovePercentage)
-                playerAnimator.SetTrigger(StopRunning);
+            if (!(Math.Abs(_playerMovement.MoveDirection.x) < properties.minStopMovePercentage)) yield break;
+            ResetRotate();
+            playerAnimator.SetTrigger(StopRunning);
         }
     }
 }
