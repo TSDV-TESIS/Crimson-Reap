@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6920540975527904211}
+  - component: {fileID: 6162906569644128333}
   m_Layer: 5
   m_Name: Medal
   m_TagString: Untagged
@@ -38,6 +39,64 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6162906569644128333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5301592880392400045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b5a484c9d7cc46409a3715033d83779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeInMs: 0
+  fill: {fileID: 6605282675247995630}
+  timeText: {fileID: 3371980539931113873}
+  animDuration: 1
+  sizeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 11.576264
+      outSlope: 11.576264
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.0152801275
+      value: 1.1768868
+      inSlope: 0.0505147
+      outSlope: 0.0505147
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.15572667
+    - serializedVersion: 3
+      time: 0.898443
+      value: 0.97428244
+      inSlope: -0.40181693
+      outSlope: -0.40181693
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.68758744
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.2532327
+      outSlope: 0.2532327
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6605282675247995630
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +129,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6920540975527904211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 0.2}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
