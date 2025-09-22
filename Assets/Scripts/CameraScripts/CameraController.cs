@@ -8,7 +8,6 @@ namespace CameraScripts
 {
     public class CameraController : MonoBehaviour
     {
-        [FormerlySerializedAs("_properties")] [SerializeField] private CameraProperties properties;
         [FormerlySerializedAs("camera")] [SerializeField] private CinemachineCamera mainCamera;
         [SerializeField] private CinemachinePositionComposer composer;
         [SerializeField] private CinemachineBasicMultiChannelPerlin shakeController;
@@ -16,6 +15,7 @@ namespace CameraScripts
 
         [SerializeField] private ShakeProfileEventChannel onCameraShakeEventChannelSo;
 
+        private CameraProperties _cameraProperties;
         private Coroutine _cameraShake;
 
         private void Awake()
@@ -35,15 +35,15 @@ namespace CameraScripts
 
         private void SetComposerSettings()
         {
-            mainCamera.Lens.FieldOfView = properties.FOV;
-            composer.CameraDistance = properties.cameraDistance;
+            mainCamera.Lens.FieldOfView = _cameraProperties.FOV;
+            composer.CameraDistance = _cameraProperties.cameraDistance;
 
-            composer.Composition.ScreenPosition = properties.screenPosition;
-            composer.Composition.DeadZone.Enabled = properties.deadZone;
-            composer.Composition.DeadZone.Size = properties.deadZoneSize;
+            composer.Composition.ScreenPosition = _cameraProperties.screenPosition;
+            composer.Composition.DeadZone.Enabled = _cameraProperties.deadZone;
+            composer.Composition.DeadZone.Size = _cameraProperties.deadZoneSize;
 
-            composer.TargetOffset = properties.targetOffset;
-            composer.Damping = properties.damping;
+            composer.TargetOffset = _cameraProperties.targetOffset;
+            composer.Damping = _cameraProperties.damping;
         }
 
         private void HandleCameraShake(CameraShakeProfile shakeProfile)
@@ -62,6 +62,12 @@ namespace CameraScripts
             yield return new WaitForSeconds(duration);
             shakeController.NoiseProfile = null;
             shakeController.enabled = false;
+        }
+
+        public void SetNewFov(CameraProperties cameraProperties)
+        {
+            _cameraProperties = cameraProperties;
+            SetComposerSettings();
         }
     }
 }

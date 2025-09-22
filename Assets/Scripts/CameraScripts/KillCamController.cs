@@ -1,6 +1,7 @@
 using System.Collections;
 using Events;
 using Unity.Cinemachine;
+using UnityEditor;
 using UnityEngine;
 using Utils;
 
@@ -10,8 +11,6 @@ namespace CameraScripts
     {
         [Header("Properties")] [SerializeField]
         private KillCamProperties killCamProperties;
-
-        [SerializeField] private CameraProperties properties;
         
         [Header("Camera objects")] 
         [SerializeField] private CinemachineCamera mainCamera;
@@ -24,6 +23,7 @@ namespace CameraScripts
 
         private Sequence _killCamSequence;
         private Coroutine _killCamCoroutine;
+        private CameraProperties _cameraProperties;
 
         private void OnEnable()
         {
@@ -45,7 +45,6 @@ namespace CameraScripts
 
         private IEnumerator HandleWinDoor()
         {
-            Debug.Log("RAISING WINDOORENABLE");
             onWinDoorEnable?.RaiseEvent();
             yield return null;
         }
@@ -59,22 +58,23 @@ namespace CameraScripts
             while (timeInKillCam < killCamProperties.killCamDuration)
             {
                 float killCamTime = timeInKillCam / killCamProperties.killCamDuration;
-
+                Debug.Log($"KILL CAM TIME {killCamTime} {killCamProperties.killCamDuration}");
                 Time.timeScale = ChangeValueByLerp(killCamTime, killCamProperties.deltaTimeAnimation,
                     killCamProperties.minDeltaTime, 1f);
 
                 mainCamera.Lens.FieldOfView = ChangeValueByLerp(killCamTime, killCamProperties.cameraFovAnimation,
-                    killCamProperties.maxCameraFov, properties.FOV);
+                    killCamProperties.maxCameraFov, _cameraProperties.FOV);
 
                 composer.CameraDistance = ChangeValueByLerp(killCamTime, killCamProperties.cameraZoomAnimation,
-                    killCamProperties.maxCameraZoom, properties.cameraDistance);
+                    killCamProperties.maxCameraZoom, _cameraProperties.cameraDistance);
                 
                 timeInKillCam += Time.unscaledDeltaTime;
                 yield return null;
             }
 
-            mainCamera.Lens.FieldOfView = properties.FOV;
-            composer.CameraDistance = properties.cameraDistance;
+            Debug.Log($"Out of kill cam");
+            mainCamera.Lens.FieldOfView = _cameraProperties.FOV;
+            composer.CameraDistance = _cameraProperties.cameraDistance;
             
             confiner.enabled = true;
             pivotController.ShouldPivot = true;
@@ -91,6 +91,18 @@ namespace CameraScripts
         {
             if (_killCamCoroutine != null) StopCoroutine(_killCamCoroutine);
             _killCamCoroutine = StartCoroutine(_killCamSequence.Execute());
+        }
+
+        public void SetNewFov(CameraProperties cameraProperty)
+        {
+            _cameraProperties = cameraProperty;
+        }
+
+        [ContextMenu("execute kill cam")]
+        private void HandleKillcamTest()
+        {
+            if (_killCamCoroutine != null) StopCoroutine(_killCamCoroutine);
+            _killCamCoroutine = StartCoroutine(KillCamSequence());
         }
     }
 }
