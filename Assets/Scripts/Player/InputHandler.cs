@@ -19,6 +19,7 @@ namespace Player
         public UnityEvent<bool> OnZoomOut;
         public UnityEvent OnInteract;
         public UnityEvent onInvincible;
+        public UnityEvent onPauseToggle;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -89,13 +90,18 @@ namespace Player
             if (context.performed)
                 OnInteract.Invoke();
         }
-        
+
         public void HandleInvincible(InputAction.CallbackContext context)
         {
             if (context.performed)
             {
                 onInvincible?.Invoke();
             }
+        }
+
+        public void OnPause(InputAction.CallbackContext context)
+        {
+            onPauseToggle?.Invoke();
         }
     }
 }

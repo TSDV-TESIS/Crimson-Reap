@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Events;
 using Events.Scriptables;
@@ -7,11 +6,12 @@ using UnityEngine;
 
 public class WinPanel : MonoBehaviour
 {
-    [SerializeField] private VoidEventChannelSO onWinPanel;
     [SerializeField] private VoidEventChannelSO onChangeLevel;
+    [SerializeField] private VoidEventChannelSO onLevelReset;
     [SerializeField] private FloatEventChannel onTimerFinish;
 
     [SerializeField] private GameObject panel;
+    [SerializeField] private TieredTimes medals;
     [SerializeField] private TextMeshProUGUI timeTMPro;
     [SerializeField] private TextMeshProUGUI timePersonalBestTMPro;
     [SerializeField] private TextMeshProUGUI NextLevelCountDown;
@@ -25,31 +25,28 @@ public class WinPanel : MonoBehaviour
 
     private Coroutine countDown;
 
+    private float levelClearTime;
+
     private void OnEnable()
     {
         panel.SetActive(false);
-        onWinPanel.onEvent.AddListener(OnWin);
         onTimerFinish?.onFloatEvent.AddListener(HandleTimerFinish);
     }
 
     private void OnDisable()
     {
-        onWinPanel.onEvent.RemoveListener(OnWin);
         onTimerFinish?.onFloatEvent.RemoveListener(HandleTimerFinish);
     }
 
-    private void OnWin()
+    private void HandleTimerFinish(float time)
     {
         panel.SetActive(true);
         Time.timeScale = 0;
         if (countDown != null)
             StopCoroutine(countDown);
 
-        countDown = StartCoroutine(NextLevelCoroutine());
-    }
+        countDown = StartCoroutine(NextLevelCoroutine(time));
 
-    private void HandleTimerFinish(float time)
-    {
         bool shouldDisplayPersonalBest = false;
         if (!PlayerPrefs.HasKey(timePersonalBest) || PlayerPrefs.GetFloat(timePersonalBest) > time)
         {
@@ -65,25 +62,22 @@ public class WinPanel : MonoBehaviour
         //     timePersonalBestTMPro.text = recordSuffix + TimeFormatting.GetFormattedTime(PlayerPrefs.GetFloat(timePersonalBest));
     }
 
-    private IEnumerator NextLevelCoroutine()
+    private IEnumerator NextLevelCoroutine(float levelClearTime)
     {
-        float startTime = Time.unscaledTime;
-        float timer = 0;
-        while (timer < countDownDuration)
-        {
-            timer = Time.unscaledTime - startTime;
-            int countDownNumber = Mathf.CeilToInt(Mathf.Clamp((int)countDownDuration - Mathf.CeilToInt(timer), 0f, countDownDuration));
-            NextLevelCountDown.text = countDownNumber.ToString();
-            yield return null;
-        }
-
-        NextLevel();
+        yield return medals.UnlockMedalsCoroutine(levelClearTime);
     }
 
     public void NextLevel()
     {
         Debug.Log("NEXT LEVEL PRESSED");
         onChangeLevel?.RaiseEvent();
+        Time.timeScale = 1;
+    }
+
+    public void ResetLevel()
+    {
+        Debug.Log("Restart LEVEL PRESSED");
+        onLevelReset?.RaiseEvent();
         Time.timeScale = 1;
     }
 }
