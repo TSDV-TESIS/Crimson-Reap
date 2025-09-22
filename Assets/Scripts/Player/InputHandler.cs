@@ -20,7 +20,8 @@ namespace Player
         public UnityEvent OnInteract;
         public UnityEvent onInvincible;
         public UnityEvent onPauseToggle;
-
+        public UnityEvent onChangeFov;
+        
         public void OnMove(InputAction.CallbackContext context)
         {
             Vector2 movement = context.ReadValue<Vector2>();
@@ -102,6 +103,14 @@ namespace Player
         public void OnPause(InputAction.CallbackContext context)
         {
             onPauseToggle?.Invoke();
+        }
+
+        public void ChangeFov(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                onChangeFov?.Invoke();
+            }
         }
     }
 }
