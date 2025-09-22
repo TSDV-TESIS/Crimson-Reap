@@ -226,9 +226,12 @@ namespace CameraScripts
             Gizmos.DrawCube(transform.position, new Vector3(0.5f, 0.5f, 0.5f));
 
             Gizmos.color = Color.green;
-            Vector2 targetPos = target.transform.position;
-            Gizmos.DrawCube(targetPos + _cursorOffset, new Vector3(0.5f, 0.5f, 0.5f));
-            Gizmos.color = prevGizmosColor;
+            if (target != null)
+            {
+                Vector2 targetPos = target.transform.position;
+                Gizmos.DrawCube(targetPos + _cursorOffset, new Vector3(0.5f, 0.5f, 0.5f));
+                Gizmos.color = prevGizmosColor;
+            }
 
             Gizmos.color = Color.red;
             Vector3 cursorDeadZone = cameraProperties.cursorDeadZone;

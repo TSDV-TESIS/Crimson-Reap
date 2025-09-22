@@ -1,27 +1,31 @@
 using System;
+using System.Collections;
 using Events;
 using Health;
+using Player.Properties;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace UI.Bars
 {
-    public class HealthBar : MonoBehaviour
+    public class TimedBar : MonoBehaviour
     {
         [SerializeField] private bool shouldStartHided;
-        [SerializeField] private Material healthMaterial;
+        [SerializeField] private Slider timeSlider;
+        [SerializeField] private HealthTickProperties tickProperties;
         
         [Header("Events")]
         [SerializeField] private IntEventChannelSO onTakeDamage;
         [SerializeField] private IntEventChannelSO onSumHealth;
-        [SerializeField] private IntEventChannelSO onResetDamage;
         [SerializeField] private IntEventChannelSO onInitializeSlider;
         
         private bool _wasTriggered = false;
         private int _maxHealthValue;
         private static readonly int HealthParam = Shader.PropertyToID("_Health");
 
+        private Coroutine _tickCoroutine;
+        
         private void Awake()
         {
             onInitializeSlider?.onIntEvent.AddListener(HandleInit);
@@ -29,10 +33,9 @@ namespace UI.Bars
 
         void Start()
         {
-            healthMaterial.SetFloat(HealthParam, 1);
+            timeSlider.value = 1f;
             onSumHealth?.onIntEvent.AddListener(HandleTakeDamage);
             onTakeDamage?.onIntEvent.AddListener(HandleTakeDamage);
-            onResetDamage?.onIntEvent.AddListener(HandleReset);
         }
 
         private void OnDestroy()
@@ -40,19 +43,13 @@ namespace UI.Bars
             onSumHealth?.onIntEvent?.RemoveListener(HandleTakeDamage);
             onTakeDamage?.onIntEvent.RemoveListener(HandleTakeDamage);
             onInitializeSlider?.onIntEvent.RemoveListener(HandleInit);
-            onResetDamage?.onIntEvent.RemoveListener(HandleReset);
         }
-
-        public void HandleReset(int currentHp)
-        {
-            _maxHealthValue = currentHp;
-            healthMaterial.SetFloat(HealthParam, 1);
-        }
+        
     
         public void HandleInit(int maxValue)
         {
             _maxHealthValue = maxValue;
-            healthMaterial.SetFloat(HealthParam, 1);
+            timeSlider.value = 1;
         }
         
         public void HandleTakeDamage(int currentHealth)
@@ -61,7 +58,26 @@ namespace UI.Bars
             {
                 _wasTriggered = true;
             }
-            healthMaterial.SetFloat(HealthParam, (float)currentHealth / _maxHealthValue);
+            
+            if(_tickCoroutine != null) StopCoroutine(_tickCoroutine);
+            _tickCoroutine = StartCoroutine(TickBar(currentHealth));
+        }
+
+        private IEnumerator TickBar(int currentHealth)
+        {
+            float timePassed = 0f;
+            float maxValue = timeSlider.value;
+            float nextValue = (float)currentHealth / _maxHealthValue;
+            
+            while (timePassed < tickProperties.secondsPerTick)
+            {
+                timeSlider.value = Mathf.Lerp(maxValue, nextValue, timePassed / tickProperties.secondsPerTick) ;
+
+                timePassed += Time.deltaTime;
+                yield return null;
+            }
+
+            timeSlider.value = nextValue;
         }
     }
 }
