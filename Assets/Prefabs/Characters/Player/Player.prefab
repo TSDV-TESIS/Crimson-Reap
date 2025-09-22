@@ -773,6 +773,7 @@ GameObject:
   - component: {fileID: 2378139602423631225}
   - component: {fileID: 5990451584755475820}
   - component: {fileID: 5929810191845268401}
+  - component: {fileID: 483606759693865408}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1405,6 +1406,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onAttackToGroundTransition:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4405460492393543286}
+        m_TargetAssemblyTypeName: Player.PlayerVfxController, Assembly-CSharp
+        m_MethodName: SetShouldAddDecal
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2230639419180364887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1804,6 +1820,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthTickProperties: {fileID: 11400000, guid: 227dd53dfc5b606468c9dcfc64a7386a, type: 2}
   onEnemiesDisabled: {fileID: 11400000, guid: 28f1c62b15c308d488b10d247b81f6a7, type: 2}
+  onDeathByTime:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7419154463842292251}
+        m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController, Assembly-CSharp
+        m_MethodName: HandleDeathByTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3952974800099293948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1850,8 +1881,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAnimator: {fileID: 6982609478166550638}
+  model: {fileID: 7396943002701793500}
   properties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
   animationProperties: {fileID: 11400000, guid: 65c2a2b94242d9a42b7181ad279a72a3, type: 2}
+  playerRotation: {fileID: 268850717818560038}
 --- !u!114 &3229360985905636374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1882,8 +1915,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 2907933239904170874}
-  model: {fileID: 7838729848613971127}
+  model: {fileID: 7396943002701793500}
   properties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
+  onFinishRotating: {fileID: 11400000, guid: 7e6cdbfe09df31742b2ddf24a0f6ee56, type: 2}
 --- !u!114 &3904165753785042548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1949,6 +1983,22 @@ MonoBehaviour:
   onPlayerDeath: {fileID: 11400000, guid: 22935ebca27667842b100ca2831ca89e, type: 2}
   onSumHealth: {fileID: 11400000, guid: 84372648de01f7d41a1f7238606514f9, type: 2}
   onEnemiesDied: {fileID: 11400000, guid: 28f1c62b15c308d488b10d247b81f6a7, type: 2}
+--- !u!114 &483606759693865408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182945775304313054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe74ef825618c3d46beca70c8759be3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDeathProperties: {fileID: 11400000, guid: 8b4ede072054db040b5d5a10e0404004, type: 2}
+  onPlayerDeath: {fileID: 11400000, guid: 22935ebca27667842b100ca2831ca89e, type: 2}
+  playerMaterial: {fileID: 2100000, guid: aeb953dbb4f9bb24b974b27d970ac785, type: 2}
+  fireEffect: {fileID: 1212672894942375179}
 --- !u!1001 &307453012941626532
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3107,6 +3157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6877872030457235673, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
+    - {fileID: 5416851832186766789, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -3114,6 +3165,11 @@ PrefabInstance:
 --- !u!1 &238100018967637552 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3333737466961538101, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
+  m_PrefabInstance: {fileID: 3246591912298365445}
+  m_PrefabAsset: {fileID: 0}
+--- !u!2083052967 &1212672894942375179 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 4456999808623423246, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
   m_PrefabInstance: {fileID: 3246591912298365445}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1793660363553960741 stripped
@@ -3134,6 +3190,11 @@ GameObject:
 --- !u!95 &6982609478166550638 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5614018924553689707, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
+  m_PrefabInstance: {fileID: 3246591912298365445}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7396943002701793500 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5451904616451623641, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
   m_PrefabInstance: {fileID: 3246591912298365445}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7838729848613971127 stripped

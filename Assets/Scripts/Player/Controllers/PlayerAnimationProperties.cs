@@ -7,5 +7,6 @@ namespace Player.Controllers
     {
         public float minSecondsToGlitch;
         public float maxSecondsToGlitch;
+        public float stopRunningAnimationWaitTime = 0.2f;
     }
 }

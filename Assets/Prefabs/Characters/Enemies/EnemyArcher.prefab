@@ -911,6 +911,7 @@ GameObject:
   - component: {fileID: 2899276800007189105}
   - component: {fileID: 4894851001479967532}
   - component: {fileID: 6972602299936960612}
+  - component: {fileID: 2970091758304724923}
   m_Layer: 7
   m_Name: EnemyArcher
   m_TagString: Untagged
@@ -1008,10 +1009,24 @@ MonoBehaviour:
   objectsToDisable:
   - {fileID: 3330162490132244641}
   - {fileID: 1849996611223251185}
-  - {fileID: 6273223615720730471}
   - {fileID: 7757488391369713847}
   onEnemyEnabled: {fileID: 11400000, guid: 2afde693373712a459fd5bba221fdfa8, type: 2}
   onEnemyDeath: {fileID: 11400000, guid: 9ab2348d68fe8e041bcd88bda4b0dc54, type: 2}
+  onInternalDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2970091758304724923}
+        m_TargetAssemblyTypeName: Enemy.EnemyAnimationHandler, Assembly-CSharp
+        m_MethodName: OnDead
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onBloodlustStart: {fileID: 11400000, guid: a35f6f56a7aa8bb4ab396c441347dc5b, type: 2}
   onBloodlustEnd: {fileID: 11400000, guid: 9af1ae5dcd881ea4da96db96896b02c9, type: 2}
   onEnemyDisabled: {fileID: 11400000, guid: 33d75e1a6724e3e4685688bdaaf89f48, type: 2}
@@ -1264,6 +1279,19 @@ MonoBehaviour:
           m_Value1: 13584661603401326576
         Name: Animator
         m_Value: {fileID: 0}
+--- !u!114 &2970091758304724923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4049606406497483204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371fc211ba293c94f9c681dd5cbf124c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4331220948365245276}
 --- !u!1 &5062257244889901477
 GameObject:
   m_ObjectHideFlags: 0
@@ -4369,11 +4397,6 @@ PrefabInstance:
 --- !u!95 &4331220948365245276 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2877836176585692340, guid: ec6034832c0019344bb799e5b95926fb, type: 3}
-  m_PrefabInstance: {fileID: 2011902046225231848}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6273223615720730471 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5540907365660016783, guid: ec6034832c0019344bb799e5b95926fb, type: 3}
   m_PrefabInstance: {fileID: 2011902046225231848}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8275079152102090622 stripped
