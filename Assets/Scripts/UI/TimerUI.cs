@@ -7,10 +7,15 @@ public class TimerUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private FloatEventChannel onTimerTick;
+    [SerializeField] private GlobalTime globalTimer;
+
+    [SerializeField] private string suffix = "";
 
     private void OnEnable()
     {
         onTimerTick?.onFloatEvent.AddListener(UpdateTimer);
+        if (globalTimer != null)
+            UpdateTimer(globalTimer.time);
     }
 
     private void OnDisable()
@@ -20,6 +25,6 @@ public class TimerUI : MonoBehaviour
 
     private void UpdateTimer(float time)
     {
-        timerText.text = TimeFormatting.GetFormattedTime(time);
+        timerText.text = suffix + TimeFormatting.GetFormattedTime(time);
     }
 }

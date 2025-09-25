@@ -6,6 +6,7 @@ using Sounds;
 using UI.Bars;
 using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace Enemy
@@ -22,6 +23,7 @@ namespace Enemy
         [Header("Events")]
         [SerializeField] private GameObjectEventChannelSO onEnemyEnabled;
         [SerializeField] private IntEventChannelSO onEnemyDeath;
+        [SerializeField] private UnityEvent onInternalDeath;
         [SerializeField] private VoidEventChannelSO onBloodlustStart;
         [SerializeField] private VoidEventChannelSO onBloodlustEnd;
         [SerializeField] private GameObjectEventChannelSO onEnemyDisabled;
@@ -76,6 +78,7 @@ namespace Enemy
             isDeadVariable.ObjectValue = true;
             
             onEnemyDeath?.RaiseEvent(enemyDeathProperties.healthRewardOnDeath);
+            onInternalDeath?.Invoke();
             screamSoundCollisionHandler.EnableSound(enemyDeathProperties.shouldDrawGizmos);
 
             splashBloodParticles.Play();

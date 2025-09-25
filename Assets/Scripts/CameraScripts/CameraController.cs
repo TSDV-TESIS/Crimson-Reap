@@ -2,13 +2,14 @@ using System.Collections;
 using Events.Scriptables;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CameraScripts
 {
     public class CameraController : MonoBehaviour
     {
-        [SerializeField] private CameraProperties _properties;
-        [SerializeField] private CinemachineCamera camera;
+        [FormerlySerializedAs("_properties")] [SerializeField] private CameraProperties properties;
+        [FormerlySerializedAs("camera")] [SerializeField] private CinemachineCamera mainCamera;
         [SerializeField] private CinemachinePositionComposer composer;
         [SerializeField] private CinemachineBasicMultiChannelPerlin shakeController;
         [SerializeField] private NoiseSettings shakeSettings;
@@ -34,15 +35,15 @@ namespace CameraScripts
 
         private void SetComposerSettings()
         {
-            camera.Lens.FieldOfView = _properties.FOV;
-            composer.CameraDistance = _properties.cameraDistance;
+            mainCamera.Lens.FieldOfView = properties.FOV;
+            composer.CameraDistance = properties.cameraDistance;
 
-            composer.Composition.ScreenPosition = _properties.screenPosition;
-            composer.Composition.DeadZone.Enabled = _properties.deadZone;
-            composer.Composition.DeadZone.Size = _properties.deadZoneSize;
+            composer.Composition.ScreenPosition = properties.screenPosition;
+            composer.Composition.DeadZone.Enabled = properties.deadZone;
+            composer.Composition.DeadZone.Size = properties.deadZoneSize;
 
-            composer.TargetOffset = _properties.targetOffset;
-            composer.Damping = _properties.damping;
+            composer.TargetOffset = properties.targetOffset;
+            composer.Damping = properties.damping;
         }
 
         private void HandleCameraShake(CameraShakeProfile shakeProfile)
