@@ -18,8 +18,14 @@
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
 								</Reference>
+								<Reference Name="DefaultSwitchOrState">
+									<ObjectRef Name="Wood" ID="{6A842DC2-874A-4B08-9175-0528AA9EADEF}" WorkUnitID="{BC4E4FBE-0797-4555-8774-103648E0EDC1}"/>
+								</Reference>
 								<Reference Name="OutputBus">
 									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+								<Reference Name="SwitchGroupOrStateGroup">
+									<ObjectRef Name="StepsTerrain" ID="{43C9A447-6871-4158-B36C-82A0F4988BB4}" WorkUnitID="{BC4E4FBE-0797-4555-8774-103648E0EDC1}"/>
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
@@ -198,6 +204,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="StoneSteps_006" ID="{3E9D8092-2EA9-4D64-A683-FD60FB9C15DB}" ShortID="217982958">
+											<PropertyList>
+												<Property Name="Weight" Type="Real64">
+													<ValueList>
+														<Value>18</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
