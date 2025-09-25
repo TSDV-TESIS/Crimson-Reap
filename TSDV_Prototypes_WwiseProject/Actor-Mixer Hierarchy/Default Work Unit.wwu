@@ -233,6 +233,110 @@
 								</GroupingBehaviorList>
 							</GroupingInfo>
 						</SwitchContainer>
+						<RandomSequenceContainer Name="DashSFX" ID="{4C55A1C6-5A9F-4B66-BDAC-BD1A0F730B56}" ShortID="720801472">
+							<PropertyList>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="PreDash" ID="{64D6D1FF-0D24-4624-8B0B-426E45D60E30}" ShortID="25892819">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="WHSH_InsJ_Whooshing_Low_Double_01-01" ID="{BF445D11-1DB7-4186-B210-67742F93D981}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.0556563522355507"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.140068486459469"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>WHSH_InsJ_Whooshing_Low_Double_01-01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="580944423"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="WHSH_InsJ_Whooshing_Low_Double_01-01" ID="{BF445D11-1DB7-4186-B210-67742F93D981}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Dash" ID="{F10A27D8-3435-4B5A-B5F1-FEB383767773}" ShortID="375154064">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="WHSH_InsJ_Whooshing_Low_Double_01-01" ID="{927B2657-91C0-4ECC-ADDA-B1441BDD5E17}">
+											<PropertyList>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.473078994002181"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.555635916484915"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>WHSH_InsJ_Whooshing_Low_Double_01-01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="968396502"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="WHSH_InsJ_Whooshing_Low_Double_01-01" ID="{927B2657-91C0-4ECC-ADDA-B1441BDD5E17}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Silence" ID="{B4782337-7A71-4065-9F84-1969E7322ABB}" ShortID="196350534">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<SourcePlugin Name="Silence" ID="{69811DA9-BDAE-4699-8E05-8FD23F54594F}" ShortID="976203125" PluginName="Wwise Silence" CompanyID="0" PluginID="101">
+											<PropertyList>
+												<Property Name="Length" Type="Real32" Value="0.25"/>
+											</PropertyList>
+											<Language>SFX</Language>
+										</SourcePlugin>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Silence" ID="{69811DA9-BDAE-4699-8E05-8FD23F54594F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Playlist">
+									<Reference>
+										<ObjectRef Name="PreDash" ID="{64D6D1FF-0D24-4624-8B0B-426E45D60E30}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+									</Reference>
+									<Reference>
+										<ObjectRef Name="Silence" ID="{B4782337-7A71-4065-9F84-1969E7322ABB}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+									</Reference>
+									<Reference>
+										<ObjectRef Name="Dash" ID="{F10A27D8-3435-4B5A-B5F1-FEB383767773}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</RandomSequenceContainer>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="EnemySFX" ID="{9DCF72FD-A7C5-408B-96A8-54D394712D63}" ShortID="833381834">
