@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{3E1C7913-A2C7-405E-8C11-8082D7DF99E3}" SchemaVersion="119">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{3E1C7913-A2C7-405E-8C11-8082D7DF99E3}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{3E1C7913-A2C7-405E-8C11-8082D7DF99E3}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Footsteps_Play" ID="{56978155-028D-4443-A1A4-60E987FA7E55}">
+					<ChildrenList>
+						<Action Name="" ID="{B39C086D-65AD-45B7-B20F-8AEDC20533C1}" ShortID="102153469">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FootSteps" ID="{C11BA530-0C68-4F19-8554-6A566F83859D}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Wood_Steps_Switch" ID="{DAA04872-7D25-47D7-81B3-0DAED3122C11}">
+					<ChildrenList>
+						<Action Name="" ID="{CAFBDD65-3E57-4220-8231-6489531D0C9E}" ShortID="1059442611">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Wood" ID="{6A842DC2-874A-4B08-9175-0528AA9EADEF}" WorkUnitID="{BC4E4FBE-0797-4555-8774-103648E0EDC1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Stone_Steps_Switch" ID="{D658E08A-8E46-4B8D-9026-76CCACA20E49}">
+					<ChildrenList>
+						<Action Name="" ID="{A02CF455-62CD-41E5-9766-EDF0040CA56E}" ShortID="986606135">
+							<PropertyList>
+								<Property Name="ActionType" Type="int16" Value="23"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Stone" ID="{CBE6C635-D5D6-4647-A62F-530489E060B3}" WorkUnitID="{BC4E4FBE-0797-4555-8774-103648E0EDC1}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>
