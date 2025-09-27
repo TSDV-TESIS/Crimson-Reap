@@ -448,13 +448,107 @@
 							<ObjectLists>
 								<ObjectList Name="Playlist">
 									<Reference>
-										<ObjectRef Name="PreDash" ID="{64D6D1FF-0D24-4624-8B0B-426E45D60E30}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+										<ObjectRef Name="Dash" ID="{F10A27D8-3435-4B5A-B5F1-FEB383767773}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
 									</Reference>
 									<Reference>
 										<ObjectRef Name="Silence" ID="{B4782337-7A71-4065-9F84-1969E7322ABB}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
 									</Reference>
 									<Reference>
-										<ObjectRef Name="Dash" ID="{F10A27D8-3435-4B5A-B5F1-FEB383767773}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+										<ObjectRef Name="PreDash" ID="{64D6D1FF-0D24-4624-8B0B-426E45D60E30}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+						</RandomSequenceContainer>
+						<RandomSequenceContainer Name="WallSlide" ID="{B8F4180C-2EDF-404B-BBB5-9A24DB665724}" ShortID="157141340">
+							<PropertyList>
+								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
+								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
+								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="WallSlide" ID="{A405AFF6-7642-4D48-9AF9-F3BA1B76ED60}" ShortID="392727809">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+										<Reference Name="UserAuxSend0">
+											<ObjectRef Name="Reverb" ID="{0888B9CD-0621-4596-B245-10BB75FE5CE4}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="wallslide" ID="{5E3F79C2-111D-48C0-AE4D-E7BED409301F}">
+											<PropertyList>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.2"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.149889025054466"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>wallslide.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="116575656"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="wallslide" ID="{5E3F79C2-111D-48C0-AE4D-E7BED409301F}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="WallSlide_01" ID="{D5638B46-D10D-4BEC-AFA8-9AD0955118C7}" ShortID="882004321">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+										<Reference Name="UserAuxSend0">
+											<ObjectRef Name="Reverb" ID="{0888B9CD-0621-4596-B245-10BB75FE5CE4}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="wallslide" ID="{4BF294DA-BCAC-46B2-8389-761D22FD46C4}">
+											<PropertyList>
+												<Property Name="CrossfadeDuration" Type="Real64" Value="211.363"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0.34260348583878"/>
+												<Property Name="LoopEnd" Type="Real64" Value="0.913979212055193"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="1.20376466049383"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>wallslide.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="393363659"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="wallslide" ID="{4BF294DA-BCAC-46B2-8389-761D22FD46C4}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Playlist">
+									<Reference>
+										<ObjectRef Name="WallSlide" ID="{A405AFF6-7642-4D48-9AF9-F3BA1B76ED60}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+									</Reference>
+									<Reference>
+										<ObjectRef Name="WallSlide_01" ID="{D5638B46-D10D-4BEC-AFA8-9AD0955118C7}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
 									</Reference>
 								</ObjectList>
 							</ObjectLists>
