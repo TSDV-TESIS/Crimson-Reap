@@ -15,11 +15,11 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
+  m_FogColor: {r: 0.79622644, g: 0.5384748, b: 0.16074759, a: 1}
+  m_FogMode: 1
   m_FogDensity: 0.01
-  m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogStart: 10
+  m_LinearFogEnd: 30
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
@@ -599,6 +599,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2266886}
     m_Modifications:
+    - target: {fileID: 3061158825569481231, guid: a5c5815dac5df6346a898528c05ce405, type: 3}
+      propertyPath: levelType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3061158825569481231, guid: a5c5815dac5df6346a898528c05ce405, type: 3}
+      propertyPath: onGameStart
+      value: 
+      objectReference: {fileID: 11400000, guid: aef5ae3240851c649909d0b9a8a36e6b, type: 2}
+    - target: {fileID: 3061158825569481231, guid: a5c5815dac5df6346a898528c05ce405, type: 3}
+      propertyPath: isFirstLevel
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4607257409059050519, guid: a5c5815dac5df6346a898528c05ce405, type: 3}
       propertyPath: m_Name
       value: TimerManager

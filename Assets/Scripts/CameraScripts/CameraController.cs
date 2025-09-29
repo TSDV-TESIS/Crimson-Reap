@@ -2,19 +2,20 @@ using System.Collections;
 using Events.Scriptables;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CameraScripts
 {
     public class CameraController : MonoBehaviour
     {
-        [SerializeField] private CameraProperties _properties;
-        [SerializeField] private CinemachineCamera camera;
+        [FormerlySerializedAs("camera")] [SerializeField] private CinemachineCamera mainCamera;
         [SerializeField] private CinemachinePositionComposer composer;
         [SerializeField] private CinemachineBasicMultiChannelPerlin shakeController;
         [SerializeField] private NoiseSettings shakeSettings;
 
         [SerializeField] private ShakeProfileEventChannel onCameraShakeEventChannelSo;
 
+        private CameraProperties _cameraProperties;
         private Coroutine _cameraShake;
 
         private void Awake()
@@ -34,15 +35,15 @@ namespace CameraScripts
 
         private void SetComposerSettings()
         {
-            camera.Lens.FieldOfView = _properties.FOV;
-            composer.CameraDistance = _properties.cameraDistance;
+            mainCamera.Lens.FieldOfView = _cameraProperties.FOV;
+            composer.CameraDistance = _cameraProperties.cameraDistance;
 
-            composer.Composition.ScreenPosition = _properties.screenPosition;
-            composer.Composition.DeadZone.Enabled = _properties.deadZone;
-            composer.Composition.DeadZone.Size = _properties.deadZoneSize;
+            composer.Composition.ScreenPosition = _cameraProperties.screenPosition;
+            composer.Composition.DeadZone.Enabled = _cameraProperties.deadZone;
+            composer.Composition.DeadZone.Size = _cameraProperties.deadZoneSize;
 
-            composer.TargetOffset = _properties.targetOffset;
-            composer.Damping = _properties.damping;
+            composer.TargetOffset = _cameraProperties.targetOffset;
+            composer.Damping = _cameraProperties.damping;
         }
 
         private void HandleCameraShake(CameraShakeProfile shakeProfile)
@@ -61,6 +62,12 @@ namespace CameraScripts
             yield return new WaitForSeconds(duration);
             shakeController.NoiseProfile = null;
             shakeController.enabled = false;
+        }
+
+        public void SetNewFov(CameraProperties cameraProperties)
+        {
+            _cameraProperties = cameraProperties;
+            SetComposerSettings();
         }
     }
 }
