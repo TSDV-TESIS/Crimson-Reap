@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3888226032029172081}
   - component: {fileID: 6351619270321078846}
+  - component: {fileID: 9162014837358328059}
   m_Layer: 8
   m_Name: Blocking_ShadowWall
   m_TagString: Untagged
@@ -54,6 +55,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 2, z: 5}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &9162014837358328059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7817203677057276792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df0dabff942eb045ac9edb801a0dd3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options: {fileID: 11400000, guid: b6182482ae29ae04db5683d551d4c7c8, type: 2}
+  materialToReplace: {fileID: 2100000, guid: b7d5e660de07b5a47847f3c695757984, type: 2}
+  meshRenderer: {fileID: 1509611615866566817}
 --- !u!1001 &2341524439804427771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66,6 +82,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Model_ShadowWall
       objectReference: {fileID: 0}
+    - target: {fileID: 3786950963277301082, guid: 7d5990d17bf08da47807d6213b447cdc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6af20d21fdb3e9846be9fcc5368045e6, type: 2}
     - target: {fileID: 6300040315174083669, guid: 7d5990d17bf08da47807d6213b447cdc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -111,6 +131,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d5990d17bf08da47807d6213b447cdc, type: 3}
+--- !u!23 &1509611615866566817 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3786950963277301082, guid: 7d5990d17bf08da47807d6213b447cdc, type: 3}
+  m_PrefabInstance: {fileID: 2341524439804427771}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8579631462933291438 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6300040315174083669, guid: 7d5990d17bf08da47807d6213b447cdc, type: 3}
