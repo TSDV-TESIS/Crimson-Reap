@@ -6,14 +6,16 @@
 				<SoundcasterSession Name="StepTest" ID="{CBA363D2-05B6-4CB1-806C-796E86038BEC}">
 					<ModuleList>
 						<Module>
-							<ObjectRef Name="Footsteps_Play" ID="{56978155-028D-4443-A1A4-60E987FA7E55}" WorkUnitID="{3E1C7913-A2C7-405E-8C11-8082D7DF99E3}"/>
+							<ObjectRef Name="Start" ID="{A7933A44-1FA2-4E6D-8310-CFC5B3AD5095}" WorkUnitID="{3E1C7913-A2C7-405E-8C11-8082D7DF99E3}"/>
 							<Position X="0" Y="0"/>
 						</Module>
 					</ModuleList>
 					<RTPCValueList ShowAll="true"/>
-					<CurrentStateList ShowAll="true"/>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="MainMenu" ID="{AB68E3B4-7705-4D30-B7CA-B5DE19C4F94C}"/>
+					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Wood" ID="{6A842DC2-874A-4B08-9175-0528AA9EADEF}"/>
+						<CurrentSwitchRef Name="Stone" ID="{CBE6C635-D5D6-4647-A62F-530489E060B3}"/>
 					</CurrentSwitchList>
 				</SoundcasterSession>
 			</ChildrenList>
