@@ -758,6 +758,18 @@
 				</RandomSequenceContainer>
 				<RandomSequenceContainer Name="KillEnemy" ID="{3DC68471-3688-4E4C-BF5E-FD8229A51998}" ShortID="574872764">
 					<PropertyList>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{3C7DCA8A-70A4-465D-82BA-C79B47BA6810}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="150"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
 								<Value>3</Value>
@@ -835,6 +847,19 @@
 				</RandomSequenceContainer>
 				<RandomSequenceContainer Name="DashSFX_ElQueVa" ID="{E678D03F-3371-44E0-AA26-D650A23C5BE1}" ShortID="8823113">
 					<PropertyList>
+						<Property Name="Pitch" Type="int32">
+							<ModifierList>
+								<ModifierInfo>
+									<Modifier Name="" ID="{3CDA55A6-7C9B-4D31-99EE-1A189689FBC1}">
+										<PropertyList>
+											<Property Name="Enabled" Type="bool" Value="True"/>
+											<Property Name="Max" Type="Real64" Value="100"/>
+											<Property Name="Min" Type="Real64" Value="-150"/>
+										</PropertyList>
+									</Modifier>
+								</ModifierInfo>
+							</ModifierList>
+						</Property>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
 								<Value>4</Value>
