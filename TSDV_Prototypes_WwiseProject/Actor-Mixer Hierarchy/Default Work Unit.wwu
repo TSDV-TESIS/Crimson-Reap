@@ -461,7 +461,6 @@
 						</RandomSequenceContainer>
 						<RandomSequenceContainer Name="WallSlide" ID="{B8F4180C-2EDF-404B-BBB5-9A24DB665724}" ShortID="157141340">
 							<PropertyList>
-								<Property Name="PlayMechanismLoop" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitions" Type="bool" Value="True"/>
 								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2.5"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
@@ -476,7 +475,7 @@
 								</Reference>
 							</ReferenceList>
 							<ChildrenList>
-								<Sound Name="WallSlide" ID="{A405AFF6-7642-4D48-9AF9-F3BA1B76ED60}" ShortID="392727809">
+								<Sound Name="Wall_Slide_Start" ID="{A405AFF6-7642-4D48-9AF9-F3BA1B76ED60}" ShortID="392727809">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -506,7 +505,7 @@
 										<ActiveSource Name="wallslide" ID="{5E3F79C2-111D-48C0-AE4D-E7BED409301F}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="WallSlide_01" ID="{D5638B46-D10D-4BEC-AFA8-9AD0955118C7}" ShortID="882004321">
+								<Sound Name="Wall_Slide_Jump" ID="{D5638B46-D10D-4BEC-AFA8-9AD0955118C7}" ShortID="882004321">
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -522,10 +521,11 @@
 										<AudioFileSource Name="wallslide" ID="{4BF294DA-BCAC-46B2-8389-761D22FD46C4}">
 											<PropertyList>
 												<Property Name="CrossfadeDuration" Type="Real64" Value="69.971"/>
-												<Property Name="LoopBegin" Type="Real64" Value="0.063764071280419"/>
-												<Property Name="LoopEnd" Type="Real64" Value="0.450663833819713"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0.835854528434991"/>
+												<Property Name="LoopEnd" Type="Real64" Value="1.16633849556633"/>
 												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-												<Property Name="TrimEnd" Type="Real64" Value="0.51418967814678"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.759195418204182"/>
+												<Property Name="TrimEnd" Type="Real64" Value="1.21052178146782"/>
 											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>wallslide.wav</AudioFile>
@@ -538,9 +538,16 @@
 										<ActiveSource Name="wallslide" ID="{4BF294DA-BCAC-46B2-8389-761D22FD46C4}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="WallSlide_02" ID="{C284F9DB-C4C3-4C8D-9EE0-5099D0E0F8F1}" ShortID="954308056">
+								<Sound Name="Wall_Slide_Loop" ID="{C284F9DB-C4C3-4C8D-9EE0-5099D0E0F8F1}" ShortID="954308056">
 									<PropertyList>
 										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+										<Property Name="LoopCount" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{DA5E5757-6D91-44C4-9512-7C33F47AC06E}"/>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -575,10 +582,13 @@
 							<ObjectLists>
 								<ObjectList Name="Playlist">
 									<Reference>
-										<ObjectRef Name="WallSlide" ID="{A405AFF6-7642-4D48-9AF9-F3BA1B76ED60}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+										<ObjectRef Name="Wall_Slide_Start" ID="{A405AFF6-7642-4D48-9AF9-F3BA1B76ED60}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
 									</Reference>
 									<Reference>
-										<ObjectRef Name="WallSlide_02" ID="{C284F9DB-C4C3-4C8D-9EE0-5099D0E0F8F1}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+										<ObjectRef Name="Wall_Slide_Loop" ID="{C284F9DB-C4C3-4C8D-9EE0-5099D0E0F8F1}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+									</Reference>
+									<Reference>
+										<ObjectRef Name="Wall_Slide_Jump" ID="{D5638B46-D10D-4BEC-AFA8-9AD0955118C7}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
 									</Reference>
 								</ObjectList>
 							</ObjectLists>
@@ -823,7 +833,7 @@
 						</Sound>
 					</ChildrenList>
 				</RandomSequenceContainer>
-				<RandomSequenceContainer Name="DashSFX" ID="{E678D03F-3371-44E0-AA26-D650A23C5BE1}" ShortID="8823113">
+				<RandomSequenceContainer Name="DashSFX_ElQueVa" ID="{E678D03F-3371-44E0-AA26-D650A23C5BE1}" ShortID="8823113">
 					<PropertyList>
 						<Property Name="Volume" Type="Real64">
 							<ValueList>
