@@ -408,10 +408,9 @@
 									<ChildrenList>
 										<AudioFileSource Name="WallSlide_01" ID="{E7DD4ED3-F7BB-4C6C-9D83-B4DD5589F939}">
 											<PropertyList>
-												<Property Name="CrossfadeDuration" Type="Real64" Value="414.487"/>
 												<Property Name="CrossfadeShape" Type="int16" Value="9"/>
 												<Property Name="LoopBegin" Type="Real64" Value="0.485191823346805"/>
-												<Property Name="LoopEnd" Type="Real64" Value="1.55376905333679"/>
+												<Property Name="LoopEnd" Type="Real64" Value="1.51333640139122"/>
 												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 												<Property Name="TrimBegin" Type="Real64" Value="0.268588330781267"/>
 											</PropertyList>
@@ -441,6 +440,74 @@
 								</ObjectList>
 							</ObjectLists>
 						</RandomSequenceContainer>
+						<Sound Name="Jump_SFX" ID="{EBE94EA3-7106-403E-AF9A-F3CC05CB7FA2}" ShortID="382431914">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>1</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>4</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-150</Value>
+									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{537229F9-B2A3-402C-AFE3-809BB027B172}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Min" Type="Real64" Value="-101"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-6</Value>
+									</ValueList>
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{E64902AE-4AA5-4048-89E6-B8DB132AB20D}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Min" Type="Real64" Value="-3"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Jump 1" ID="{C954452A-AB1F-4FEC-9335-AC637E187A51}">
+									<PropertyList>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.0682461028691919"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>Jump 1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="974702253"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Jump 1" ID="{C954452A-AB1F-4FEC-9335-AC637E187A51}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="EnemySFX" ID="{9DCF72FD-A7C5-408B-96A8-54D394712D63}" ShortID="833381834">
@@ -693,7 +760,7 @@
 						</Sound>
 					</ChildrenList>
 				</RandomSequenceContainer>
-				<RandomSequenceContainer Name="DashSFX_ElQueVa" ID="{E678D03F-3371-44E0-AA26-D650A23C5BE1}" ShortID="8823113">
+				<RandomSequenceContainer Name="Dash_Sfx" ID="{E678D03F-3371-44E0-AA26-D650A23C5BE1}" ShortID="8823113">
 					<PropertyList>
 						<Property Name="Pitch" Type="int32">
 							<ModifierList>

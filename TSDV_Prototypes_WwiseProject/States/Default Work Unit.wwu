@@ -9,22 +9,25 @@
 					</PropertyList>
 					<ChildrenList>
 						<State Name="None" ID="{13B5BD15-A997-42F5-97D7-B9BE0917E173}"/>
-						<State Name="MainMenu" ID="{AB68E3B4-7705-4D30-B7CA-B5DE19C4F94C}"/>
-						<State Name="Play" ID="{07FEE305-291D-454B-BB4B-9AA02A359DD5}"/>
-						<State Name="PauseMenu" ID="{888DDC29-F7EA-45C6-BDB0-9BF7F605D9C9}"/>
-						<State Name="LevelEndMenu" ID="{5D686081-5692-47F8-84B4-6AC5EEF52032}"/>
-						<State Name="DeathScreen" ID="{C128B7B8-C26C-44D7-8859-A254BF123223}"/>
+						<State Name="Main_Menu" ID="{AB68E3B4-7705-4D30-B7CA-B5DE19C4F94C}"/>
+						<State Name="Level_1" ID="{07FEE305-291D-454B-BB4B-9AA02A359DD5}"/>
+						<State Name="Pause_Menu" ID="{888DDC29-F7EA-45C6-BDB0-9BF7F605D9C9}"/>
+						<State Name="Level_End_Menu" ID="{5D686081-5692-47F8-84B4-6AC5EEF52032}"/>
+						<State Name="Death_Screen" ID="{C128B7B8-C26C-44D7-8859-A254BF123223}"/>
+						<State Name="Level_2" ID="{E7D14C4B-881F-40F0-9E8F-73EF448F9CBC}"/>
+						<State Name="Level_3" ID="{5711D6C7-0CD3-43D1-8897-5041F98F6C71}"/>
+						<State Name="Level_4" ID="{EEE99724-955C-4E11-B5F7-CFA2DB0A62A3}"/>
 					</ChildrenList>
 					<TransitionList>
 						<Transition>
 							<StartState Name="None" ID="{13B5BD15-A997-42F5-97D7-B9BE0917E173}"/>
-							<EndState Name="MainMenu" ID="{AB68E3B4-7705-4D30-B7CA-B5DE19C4F94C}"/>
+							<EndState Name="Main_Menu" ID="{AB68E3B4-7705-4D30-B7CA-B5DE19C4F94C}"/>
 							<Time>0</Time>
 							<IsShared>false</IsShared>
 						</Transition>
 						<Transition>
-							<StartState Name="MainMenu" ID="{AB68E3B4-7705-4D30-B7CA-B5DE19C4F94C}"/>
-							<EndState Name="Play" ID="{07FEE305-291D-454B-BB4B-9AA02A359DD5}"/>
+							<StartState Name="Main_Menu" ID="{AB68E3B4-7705-4D30-B7CA-B5DE19C4F94C}"/>
+							<EndState Name="Level_1" ID="{07FEE305-291D-454B-BB4B-9AA02A359DD5}"/>
 							<Time>0</Time>
 							<IsShared>false</IsShared>
 						</Transition>
