@@ -109,9 +109,12 @@
 									<ChildrenList>
 										<MusicTrack Name="coro1_stem" ID="{6C3691E0-F735-4FF8-B1BF-AD641A1E20E4}" ShortID="335277216">
 											<PropertyList>
+												<Property Name="OverrideOutput" Type="bool" Value="True"/>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+												<Property Name="SpeakerPanning" Type="int16" Value="1"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-10</Value>
+														<Value>-6</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -139,6 +142,14 @@
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
+											<PositioningInfo>
+												<Panner Name="" ID="{EC1424AE-0CE3-44FE-B386-4E1DFA5C3013}">
+													<PropertyList>
+														<Property Name="PanX" Type="Real64" Value="58.7837837837838"/>
+														<Property Name="PanY" Type="Real64" Value="-1.81159420289857"/>
+													</PropertyList>
+												</Panner>
+											</PositioningInfo>
 											<StateInfo>
 												<StateGroupList>
 													<StateGroupInfo>
@@ -192,6 +203,12 @@
 																						<YPos>-0.37654</YPos>
 																						<Flags>5</Flags>
 																						<SegmentShape>Exp2</SegmentShape>
+																					</Point>
+																					<Point>
+																						<XPos>45.2356</XPos>
+																						<YPos>-0.26821</YPos>
+																						<Flags>0</Flags>
+																						<SegmentShape>Exp3</SegmentShape>
 																					</Point>
 																					<Point>
 																						<XPos>75.18325</XPos>
@@ -301,9 +318,11 @@
 										</MusicTrack>
 										<MusicTrack Name="coro2_stem" ID="{FC127AD4-EEEB-4920-A880-818B3EAA9D47}" ShortID="877780190">
 											<PropertyList>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+												<Property Name="SpeakerPanning" Type="int16" Value="1"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-10</Value>
+														<Value>-6</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -334,6 +353,14 @@
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
+											<PositioningInfo>
+												<Panner Name="" ID="{1710DD3B-4C50-4E9E-AFCB-AAC14F70E500}">
+													<PropertyList>
+														<Property Name="PanX" Type="Real64" Value="-63.8513513513514"/>
+														<Property Name="PanY" Type="Real64" Value="0.362318840579714"/>
+													</PropertyList>
+												</Panner>
+											</PositioningInfo>
 											<StateInfo>
 												<StateGroupList>
 													<StateGroupInfo>
@@ -364,6 +391,96 @@
 												</CustomStateList>
 											</StateInfo>
 											<ObjectLists>
+												<ObjectList Name="RTPC">
+													<Reference>
+														<Local>
+															<RTPC Name="" ID="{09264DD5-6A4E-4D44-B5F3-9CF92C82EEE2}" ShortID="164184726">
+																<PropertyList>
+																	<Property Name="PropertyName" Type="string" Value="Volume"/>
+																</PropertyList>
+																<ReferenceList>
+																	<Reference Name="ControlInput">
+																		<ObjectRef Name="Player_Health" ID="{A0A779A7-07B7-4873-AAB9-54D6FC4C65C6}" WorkUnitID="{2A2501B1-80A0-4243-8C52-C6AFB5797720}"/>
+																	</Reference>
+																	<Reference Name="Curve">
+																		<Custom>
+																			<Curve Name="" ID="{08E287A1-C17C-4493-B698-25249077C9F3}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="3"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>0</XPos>
+																						<YPos>-0.376540000000006</YPos>
+																						<Flags>5</Flags>
+																						<SegmentShape>Exp2</SegmentShape>
+																					</Point>
+																					<Point>
+																						<XPos>75.18325</XPos>
+																						<YPos>-200</YPos>
+																						<Flags>0</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>100</XPos>
+																						<YPos>-200</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</Custom>
+																	</Reference>
+																</ReferenceList>
+															</RTPC>
+														</Local>
+													</Reference>
+													<Reference>
+														<Local>
+															<RTPC Name="" ID="{6C60C1BD-2209-49EC-94B6-C964E6C68438}" ShortID="458182181">
+																<PropertyList>
+																	<Property Name="PropertyName" Type="string" Value="Volume"/>
+																</PropertyList>
+																<ReferenceList>
+																	<Reference Name="ControlInput">
+																		<ObjectRef Name="Player_Health" ID="{A0A779A7-07B7-4873-AAB9-54D6FC4C65C6}" WorkUnitID="{2A2501B1-80A0-4243-8C52-C6AFB5797720}"/>
+																	</Reference>
+																	<Reference Name="Curve">
+																		<Custom>
+																			<Curve Name="" ID="{622EAE0B-E987-4519-A2E6-824E978C8CD7}">
+																				<PropertyList>
+																					<Property Name="Flags" Type="int32" Value="3"/>
+																				</PropertyList>
+																				<PointList>
+																					<Point>
+																						<XPos>0</XPos>
+																						<YPos>-0.376540000000006</YPos>
+																						<Flags>5</Flags>
+																						<SegmentShape>Exp2</SegmentShape>
+																					</Point>
+																					<Point>
+																						<XPos>45.2356</XPos>
+																						<YPos>-0.26821000000001</YPos>
+																						<Flags>0</Flags>
+																						<SegmentShape>Exp3</SegmentShape>
+																					</Point>
+																					<Point>
+																						<XPos>75.18325</XPos>
+																						<YPos>-200</YPos>
+																						<Flags>0</Flags>
+																					</Point>
+																					<Point>
+																						<XPos>100</XPos>
+																						<YPos>-200</YPos>
+																						<Flags>37</Flags>
+																					</Point>
+																				</PointList>
+																			</Curve>
+																		</Custom>
+																	</Reference>
+																</ReferenceList>
+															</RTPC>
+														</Local>
+													</Reference>
+												</ObjectList>
 												<ObjectList Name="Sequences">
 													<Reference>
 														<Local>
@@ -606,6 +723,8 @@
 										<MusicTrack Name="cuerdas_stem" ID="{2EAB4737-BE64-4826-BCD9-E596D7469B93}" ShortID="4379849">
 											<PropertyList>
 												<Property Name="OverrideEffect" Type="bool" Value="True"/>
+												<Property Name="OverridePositioning" Type="bool" Value="True"/>
+												<Property Name="SpeakerPanning" Type="int16" Value="1"/>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
 														<Value>-6</Value>
@@ -639,6 +758,14 @@
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
+											<PositioningInfo>
+												<Panner Name="" ID="{F4E34271-AC5B-4B60-999B-FEEEBAFF98D4}">
+													<PropertyList>
+														<Property Name="PanX" Type="Real64" Value="24.6621621621622"/>
+														<Property Name="PanY" Type="Real64" Value="94.9275362318841"/>
+													</PropertyList>
+												</Panner>
+											</PositioningInfo>
 											<StateInfo>
 												<StateGroupList>
 													<StateGroupInfo>
@@ -785,9 +912,10 @@
 																						<XPos>0</XPos>
 																						<YPos>5.46003</YPos>
 																						<Flags>5</Flags>
+																						<SegmentShape>Exp3</SegmentShape>
 																					</Point>
 																					<Point>
-																						<XPos>69.63351</XPos>
+																						<XPos>44.92147</XPos>
 																						<YPos>-200</YPos>
 																						<Flags>0</Flags>
 																					</Point>
@@ -896,7 +1024,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-6</Value>
+														<Value>-3</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -1199,7 +1327,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-6</Value>
+														<Value>-9</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -1319,7 +1447,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-6</Value>
+														<Value>-9</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -1439,7 +1567,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-6</Value>
+														<Value>-9</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>
@@ -1559,7 +1687,7 @@
 											<PropertyList>
 												<Property Name="Volume" Type="Real64">
 													<ValueList>
-														<Value>-6</Value>
+														<Value>-9</Value>
 													</ValueList>
 												</Property>
 											</PropertyList>

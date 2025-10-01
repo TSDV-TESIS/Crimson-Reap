@@ -491,10 +491,9 @@
 									<ChildrenList>
 										<AudioFileSource Name="wallslide" ID="{5E3F79C2-111D-48C0-AE4D-E7BED409301F}">
 											<PropertyList>
-												<Property Name="FadeOutDuration" Type="Real64" Value="0.2"/>
-												<Property Name="LoopBegin" Type="Real64" Value="0"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.149889025054466"/>
 												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-												<Property Name="TrimEnd" Type="Real64" Value="0.149889025054466"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.480324398158197"/>
 											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>wallslide.wav</AudioFile>
@@ -508,9 +507,6 @@
 									</ActiveSourceList>
 								</Sound>
 								<Sound Name="WallSlide_01" ID="{D5638B46-D10D-4BEC-AFA8-9AD0955118C7}" ShortID="882004321">
-									<PropertyList>
-										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
-									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
 											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -525,10 +521,11 @@
 									<ChildrenList>
 										<AudioFileSource Name="wallslide" ID="{4BF294DA-BCAC-46B2-8389-761D22FD46C4}">
 											<PropertyList>
-												<Property Name="CrossfadeDuration" Type="Real64" Value="166.531"/>
-												<Property Name="LoopBegin" Type="Real64" Value="0.192714460784314"/>
-												<Property Name="LoopEnd" Type="Real64" Value="1.05673066448802"/>
+												<Property Name="CrossfadeDuration" Type="Real64" Value="69.971"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0.063764071280419"/>
+												<Property Name="LoopEnd" Type="Real64" Value="0.450663833819713"/>
 												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimEnd" Type="Real64" Value="0.51418967814678"/>
 											</PropertyList>
 											<Language>SFX</Language>
 											<AudioFile>wallslide.wav</AudioFile>
@@ -541,6 +538,39 @@
 										<ActiveSource Name="wallslide" ID="{4BF294DA-BCAC-46B2-8389-761D22FD46C4}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="WallSlide_02" ID="{C284F9DB-C4C3-4C8D-9EE0-5099D0E0F8F1}" ShortID="954308056">
+									<PropertyList>
+										<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="WallSlide_01" ID="{E7DD4ED3-F7BB-4C6C-9D83-B4DD5589F939}">
+											<PropertyList>
+												<Property Name="CrossfadeDuration" Type="Real64" Value="414.487"/>
+												<Property Name="CrossfadeShape" Type="int16" Value="9"/>
+												<Property Name="LoopBegin" Type="Real64" Value="0.485191823346805"/>
+												<Property Name="LoopEnd" Type="Real64" Value="1.55376905333679"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.268588330781267"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>WallSlide_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="548106568"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="WallSlide_01" ID="{E7DD4ED3-F7BB-4C6C-9D83-B4DD5589F939}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 							<ObjectLists>
 								<ObjectList Name="Playlist">
@@ -548,7 +578,7 @@
 										<ObjectRef Name="WallSlide" ID="{A405AFF6-7642-4D48-9AF9-F3BA1B76ED60}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
 									</Reference>
 									<Reference>
-										<ObjectRef Name="WallSlide_01" ID="{D5638B46-D10D-4BEC-AFA8-9AD0955118C7}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+										<ObjectRef Name="WallSlide_02" ID="{C284F9DB-C4C3-4C8D-9EE0-5099D0E0F8F1}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
 									</Reference>
 								</ObjectList>
 							</ObjectLists>
@@ -609,28 +639,6 @@
 						</Sound>
 					</ChildrenList>
 				</ActorMixer>
-				<Sound Name="WallSlide_01" ID="{C284F9DB-C4C3-4C8D-9EE0-5099D0E0F8F1}" ShortID="954308056">
-					<ReferenceList>
-						<Reference Name="Conversion">
-							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
-						</Reference>
-						<Reference Name="OutputBus">
-							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
-						</Reference>
-					</ReferenceList>
-					<ChildrenList>
-						<AudioFileSource Name="WallSlide_01" ID="{E7DD4ED3-F7BB-4C6C-9D83-B4DD5589F939}">
-							<Language>SFX</Language>
-							<AudioFile>WallSlide_01.wav</AudioFile>
-							<MediaIDList>
-								<MediaID ID="548106568"/>
-							</MediaIDList>
-						</AudioFileSource>
-					</ChildrenList>
-					<ActiveSourceList>
-						<ActiveSource Name="WallSlide_01" ID="{E7DD4ED3-F7BB-4C6C-9D83-B4DD5589F939}" Platform="Linked"/>
-					</ActiveSourceList>
-				</Sound>
 				<RandomSequenceContainer Name="AttackSFX" ID="{68326478-DA67-46E4-A978-9270AC4F418D}" ShortID="556763177">
 					<PropertyList>
 						<Property Name="Volume" Type="Real64">
