@@ -521,6 +521,13 @@
 					</ReferenceList>
 				</ActorMixer>
 				<ActorMixer Name="EnvironmentSFX" ID="{1250C2B9-69AF-46D2-B25B-E719E606349E}" ShortID="808347812">
+					<PropertyList>
+						<Property Name="UserAuxSendVolume0" Type="Real64">
+							<ValueList>
+								<Value>-18</Value>
+							</ValueList>
+						</Property>
+					</PropertyList>
 					<ReferenceList>
 						<Reference Name="Conversion">
 							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -528,7 +535,51 @@
 						<Reference Name="OutputBus">
 							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
 						</Reference>
+						<Reference Name="UserAuxSend0">
+							<ObjectRef Name="Reverb" ID="{0888B9CD-0621-4596-B245-10BB75FE5CE4}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+						</Reference>
 					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="Door_Opening_SFX" ID="{A2FB0940-572B-4591-AB9E-13A8D4FCD314}" ShortID="862679512">
+							<PropertyList>
+								<Property Name="3DSpatialization" Type="int16" Value="2"/>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>10</Value>
+									</ValueList>
+								</Property>
+								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Attenuation">
+									<ObjectRef Name="Default Attenuation" ID="{47D019F7-C547-4B80-9F79-D1D0BF128899}" WorkUnitID="{99405AE2-9EC0-47B3-9AEB-8B144E07FD9B}"/>
+								</Reference>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Door_SFX" ID="{64F49BDB-2B92-4F68-A638-86075DE1F932}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0253554301833568"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.078179243065352"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>Door_SFX.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="637968647"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="Door_SFX" ID="{64F49BDB-2B92-4F68-A638-86075DE1F932}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="UI" ID="{DDB3122A-2934-463C-96EC-D4E0B340A5E5}" ShortID="766544002">
 					<ReferenceList>
