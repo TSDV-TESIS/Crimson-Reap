@@ -228,6 +228,39 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
+				<Event Name="DeathTime" ID="{14925A33-A5BF-49B9-A72D-9FDE11AAE0C4}">
+					<ChildrenList>
+						<Action Name="" ID="{1FA73EC6-7541-48FD-9244-69CBFEB15D16}" ShortID="641412048">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="D_Time_1" ID="{F2D5AD65-C9C2-4291-8873-3A33CA5E41A0}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="DeathKilled" ID="{F13FA31C-09EB-4408-B47D-AC206ADD3744}">
+					<ChildrenList>
+						<Action Name="" ID="{52F209A8-5981-4AF3-9CB3-3A5D771B473B}" ShortID="1055804966">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="DeathKilledSFX" ID="{2AF12F1B-B5D2-4423-9C91-591056901BE9}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="DeathSpikes" ID="{4A463125-04A8-495D-BBCA-EC6A72C90829}">
+					<ChildrenList>
+						<Action Name="" ID="{A3F504B3-81A7-4888-B540-89C583023128}" ShortID="1028524765">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="DeathSpikes" ID="{23EBAF1C-3B74-4C12-81A9-C4A1E00497E1}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>
