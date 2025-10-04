@@ -230,7 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDeathProperties: {fileID: 11400000, guid: a7f74deb79001af45b94b5d766d21fed, type: 2}
   isDeadVariableName: IsDead
-  splashBloodParticles: {fileID: 4344133017347210881}
+  soulVfxObject: {fileID: 0}
   screamSoundCollisionHandler: {fileID: 4402436665083117}
   objectsToDisable:
   - {fileID: 2103776553090905920}
@@ -244,6 +244,11 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Enemy.EnemyAnimationHandler, Assembly-CSharp
         m_MethodName: OnDead
         m_Mode: 1
+      - m_Target: {fileID: 11400000, guid: c828e2c7d29e5454bb073cf1046fd6d1, type: 2}
+        m_TargetAssemblyTypeName: Events.ScriptableObjects.EventChannelSO`1[[UnityEngine.Vector3,
+          UnityEngine
+        m_MethodName: RaiseEvent
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -252,8 +257,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onBloodlustStart: {fileID: 11400000, guid: a35f6f56a7aa8bb4ab396c441347dc5b, type: 2}
-  onBloodlustEnd: {fileID: 11400000, guid: 9af1ae5dcd881ea4da96db96896b02c9, type: 2}
   onEnemyDisabled: {fileID: 11400000, guid: 33d75e1a6724e3e4685688bdaaf89f48, type: 2}
   onHitStop: {fileID: 11400000, guid: bf98232cb9f3a554d9a79b4bbad54e2f, type: 2}
 --- !u!114 &294149342326178854
@@ -1117,6 +1120,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 630253617540380130}
   - {fileID: 4344133017347210894}
   - {fileID: 4910447328066004457}
   - {fileID: 99148466739825648}
@@ -1869,6 +1873,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFXR2 Blood Shape Splash
       objectReference: {fileID: 0}
+    - target: {fileID: 4553287630450876385, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4553287630450876386, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -1950,15 +1958,80 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
---- !u!198 &4344133017347210881 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4553287630450876387, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
-  m_PrefabInstance: {fileID: 250498500871250274}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4344133017347210894 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4553287630450876396, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
   m_PrefabInstance: {fileID: 250498500871250274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &776581437345066656
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5737244970653642897}
+    m_Modifications:
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.185
+      objectReference: {fileID: 0}
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360517014756560054, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_Name
+      value: VFX_Soul
+      objectReference: {fileID: 0}
+    - target: {fileID: 7360517014756560054, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871780801384438080, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+--- !u!4 &630253617540380130 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 178425313263049538, guid: ce7bef57eab45004d9884a3b94da2619, type: 3}
+  m_PrefabInstance: {fileID: 776581437345066656}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6833938166585223624
 PrefabInstance:

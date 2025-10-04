@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDeathProperties: {fileID: 11400000, guid: 9f238685875f38447b5db71021b570a1, type: 2}
   isDeadVariableName: IsDead
-  splashBloodParticles: {fileID: 7543469455397891725}
+  soulVfxObject: {fileID: 0}
   screamSoundCollisionHandler: {fileID: 3677931793589164812}
   objectsToDisable:
   - {fileID: 3330162490132244641}
@@ -1027,8 +1027,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onBloodlustStart: {fileID: 11400000, guid: a35f6f56a7aa8bb4ab396c441347dc5b, type: 2}
-  onBloodlustEnd: {fileID: 11400000, guid: 9af1ae5dcd881ea4da96db96896b02c9, type: 2}
+      - m_Target: {fileID: 11400000, guid: c828e2c7d29e5454bb073cf1046fd6d1, type: 2}
+        m_TargetAssemblyTypeName: Events.ScriptableObjects.EventChannelSO`1[[UnityEngine.Vector3,
+          UnityEngine
+        m_MethodName: RaiseEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onEnemyDisabled: {fileID: 11400000, guid: 33d75e1a6724e3e4685688bdaaf89f48, type: 2}
   onHitStop: {fileID: 11400000, guid: bf98232cb9f3a554d9a79b4bbad54e2f, type: 2}
 --- !u!114 &3967679794223160263
@@ -4504,11 +4515,6 @@ PrefabInstance:
 --- !u!4 &7543469455397891714 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4553287630450876396, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
-  m_PrefabInstance: {fileID: 6313852584011788654}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7543469455397891725 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4553287630450876387, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
   m_PrefabInstance: {fileID: 6313852584011788654}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8343983565792700622
