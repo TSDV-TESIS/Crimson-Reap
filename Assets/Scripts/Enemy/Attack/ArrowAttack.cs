@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Health;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Enemy.Attack
 {
@@ -12,9 +13,12 @@ namespace Enemy.Attack
         [SerializeField] private ArrowAttackProperties properties;
         [SerializeField] private Light pointLight;
         [SerializeField] private float dimDuration;
+        [SerializeField] private VisualEffect arrowVFX;
+        [SerializeField] private VisualEffect hitVFX;
 
         private CapsuleCollider _collider;
         private Coroutine _arrowDestroyCoroutine;
+        private Coroutine _hitCoroutine;
         private Coroutine _lightDimCoroutine;
 
         private bool _isTraveling;
@@ -25,6 +29,7 @@ namespace Enemy.Attack
         {
             _isTraveling = true;
             _collider ??= GetComponent<CapsuleCollider>();
+            arrowVFX.SendEvent(properties.vfxStartEvent);
         }
 
         private void Update()
@@ -45,7 +50,9 @@ namespace Enemy.Attack
             if (other.CompareTag("Player") && other.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageObject))
             {
                 takeDamageObject.TryTakeDamage(damage);
-                Destroy(gameObject);
+                if (_hitCoroutine != null) StopCoroutine(_hitCoroutine);
+
+                _hitCoroutine = StartCoroutine(WaitPlayerHitVfx());
                 return;
             }
 
@@ -60,6 +67,8 @@ namespace Enemy.Attack
         {
             _collider.enabled = false;
             gameObject.transform.parent = otherGameObject.transform;
+            arrowVFX.SendEvent(properties.vfxStopEvent);
+            arrowVFX.SendEvent(properties.hitVfxStartEvent);
 
             if (_lightDimCoroutine != null) StopCoroutine(_lightDimCoroutine);
             _lightDimCoroutine = StartCoroutine(LightDim());
@@ -72,6 +81,16 @@ namespace Enemy.Attack
         {
             yield return new WaitForSeconds(properties.destroySeconds);
             Destroy(gameObject);
+        }
+
+        private IEnumerator WaitPlayerHitVfx()
+        {
+            _collider.enabled = false;
+            _isTraveling = false;
+
+            arrowVFX.SendEvent(properties.vfxStopEvent);
+            hitVFX.SendEvent(properties.hitJesterVfxStartEvent);
+            yield return WaitAndDestroy();
         }
 
         private IEnumerator LightDim()
