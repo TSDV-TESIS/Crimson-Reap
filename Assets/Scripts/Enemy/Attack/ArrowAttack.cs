@@ -10,14 +10,17 @@ namespace Enemy.Attack
     {
         [SerializeField] private int damage = 1000;
         [SerializeField] private ArrowAttackProperties properties;
+        [SerializeField] private Light pointLight;
+        [SerializeField] private float dimDuration;
 
         private CapsuleCollider _collider;
         private Coroutine _arrowDestroyCoroutine;
+        private Coroutine _lightDimCoroutine;
 
         private bool _isTraveling;
         private float _velocity;
         private Vector3 _direction;
-        
+
         private void OnEnable()
         {
             _isTraveling = true;
@@ -26,7 +29,7 @@ namespace Enemy.Attack
 
         private void Update()
         {
-            if(_isTraveling)
+            if (_isTraveling)
                 transform.position += _velocity * _direction * Time.deltaTime;
         }
 
@@ -55,10 +58,13 @@ namespace Enemy.Attack
 
         private void GlueAndDestroy(GameObject otherGameObject)
         {
-            _collider.enabled = false;   
+            _collider.enabled = false;
             gameObject.transform.parent = otherGameObject.transform;
-            
-            if(_arrowDestroyCoroutine != null) StopCoroutine(_arrowDestroyCoroutine);
+
+            if (_lightDimCoroutine != null) StopCoroutine(_lightDimCoroutine);
+            _lightDimCoroutine = StartCoroutine(LightDim());
+
+            if (_arrowDestroyCoroutine != null) StopCoroutine(_arrowDestroyCoroutine);
             _arrowDestroyCoroutine = StartCoroutine(WaitAndDestroy());
         }
 
@@ -66,6 +72,19 @@ namespace Enemy.Attack
         {
             yield return new WaitForSeconds(properties.destroySeconds);
             Destroy(gameObject);
+        }
+
+        private IEnumerator LightDim()
+        {
+            float timer = 0;
+            float startTime = Time.time;
+            float initialIntensity = pointLight.intensity;
+            while (timer < dimDuration)
+            {
+                timer = Time.time - startTime;
+                pointLight.intensity = Mathf.Lerp(initialIntensity, 0, timer / dimDuration);
+                yield return null;
+            }
         }
     }
 }
