@@ -16,7 +16,6 @@ namespace CameraScripts
         [SerializeField] private CinemachineCamera mainCamera;
         [SerializeField] private CinemachinePositionComposer composer;
         [SerializeField] private CameraPivotController pivotController;
-        [SerializeField] private CinemachineConfiner2D confiner;
         
         [Header("Events")] [SerializeField] private VoidEventChannelSO onLastEnemyKilled;
         [SerializeField] private VoidEventChannelSO onWinDoorEnable;
@@ -51,8 +50,8 @@ namespace CameraScripts
 
         private IEnumerator KillCamSequence()
         {
+            mainCamera.Follow = pivotController.target.transform;
             pivotController.ShouldPivot = false;
-            confiner.enabled = false;
             
             float timeInKillCam = 0f;
             while (timeInKillCam < killCamProperties.killCamDuration)
@@ -75,8 +74,8 @@ namespace CameraScripts
             Debug.Log($"Out of kill cam");
             mainCamera.Lens.FieldOfView = _cameraProperties.FOV;
             composer.CameraDistance = _cameraProperties.cameraDistance;
+            mainCamera.Follow = pivotController.transform;
             
-            confiner.enabled = true;
             pivotController.ShouldPivot = true;
         }
 
