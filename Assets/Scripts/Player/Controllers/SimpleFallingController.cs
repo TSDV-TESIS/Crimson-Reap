@@ -6,6 +6,12 @@ namespace Player.Controllers
     [RequireComponent(typeof(PlayerMovement))]
     public class SimpleFallingController : FallingController
     {
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlayerMovementActions.ShouldAddFasterFallingValues = false;
+        }
+        
         protected override void OnDisable()
         {
             base.OnDisable();
@@ -15,7 +21,7 @@ namespace Player.Controllers
         public override void OnUpdate()
         {
             base.OnUpdate();
-            if (PlayerMovementActions.IsGoingDownFaster())
+            if (agent.MovementChecks.IsDoingDropdown())
             {
                 agent.ChangeStateToFasterFalling();
             }
