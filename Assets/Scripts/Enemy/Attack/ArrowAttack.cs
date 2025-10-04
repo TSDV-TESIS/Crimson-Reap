@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Health;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.VFX;
 
 namespace Enemy.Attack
@@ -15,6 +16,7 @@ namespace Enemy.Attack
         [SerializeField] private float dimDuration;
         [SerializeField] private VisualEffect arrowVFX;
         [SerializeField] private VisualEffect hitVFX;
+        [SerializeField] private GameObject decalPrefab;
 
         private CapsuleCollider _collider;
         private Coroutine _arrowDestroyCoroutine;
@@ -69,6 +71,8 @@ namespace Enemy.Attack
             gameObject.transform.parent = otherGameObject.transform;
             arrowVFX.SendEvent(properties.vfxStopEvent);
             arrowVFX.SendEvent(properties.hitVfxStartEvent);
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1, properties.whatIsStoppableColliders))
+                Instantiate(decalPrefab, hit.point, Quaternion.LookRotation(-hit.normal));
 
             if (_lightDimCoroutine != null) StopCoroutine(_lightDimCoroutine);
             _lightDimCoroutine = StartCoroutine(LightDim());
@@ -88,7 +92,7 @@ namespace Enemy.Attack
             _collider.enabled = false;
             _isTraveling = false;
 
-            arrowVFX.SendEvent(properties.vfxStopEvent);
+            arrowVFX.enabled = false;
             hitVFX.SendEvent(properties.hitJesterVfxStartEvent);
             yield return WaitAndDestroy();
         }
