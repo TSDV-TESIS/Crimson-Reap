@@ -12,6 +12,7 @@ namespace Player
         public UnityEvent<Vector2> OnPlayerLook;
         public UnityEvent OnPlayerHook;
         public UnityEvent OnPlayerJump;
+        public UnityEvent OnPlayerJumpCancelled;
         public UnityEvent OnPlayerShadowStep;
         public UnityEvent OnPlayerBloodlust;
         public UnityEvent OnRestartScene;
@@ -21,6 +22,8 @@ namespace Player
         public UnityEvent onInvincible;
         public UnityEvent onPauseToggle;
         public UnityEvent onChangeFov;
+        public UnityEvent onDropdown;
+        public UnityEvent onDropdownStop;
         
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -52,8 +55,8 @@ namespace Player
 
         public void OnJump(InputAction.CallbackContext context)
         {
-            if (context.started)
-                OnPlayerJump?.Invoke();
+            if (context.performed) OnPlayerJump?.Invoke();
+            if(context.canceled) OnPlayerJumpCancelled?.Invoke();
         }
 
         public void OnShadowStep(InputAction.CallbackContext context)
@@ -111,6 +114,12 @@ namespace Player
             {
                 onChangeFov?.Invoke();
             }
+        }
+
+        public void OnDropdownHandle(InputAction.CallbackContext context)
+        {
+            if(context.performed) onDropdown?.Invoke();
+            if(context.canceled) onDropdownStop?.Invoke();
         }
     }
 }

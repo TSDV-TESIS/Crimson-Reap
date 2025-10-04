@@ -28,7 +28,9 @@ namespace Player.Properties
         public float maxJumpVelocity;
         public float cornerCorrectionMaxDistance;
         public LayerMask whatIsCeiling;
-        public float maxJumpTimeNearWall;
+        public float minJumpTimeForCancel = 0.2f;
+        public float maxCancelTime = 0.6f;
+        public float maxJumpTimeDelayForActions = 0.25f;
 
         [Header("Falling properties")]
         public float maxDownPressedVelocity;

@@ -49,7 +49,7 @@ namespace Player.Checks
 
         private float _groundedCoyoteTimeSeconds;
         private float _offGroundGraceTimeSeconds;
-
+        
         private Coroutine _shouldCheckWallCoroutine;
         private Coroutine _unboundWallCoroutine;
         private Coroutine _shadowstepCooldownCoroutine;
@@ -471,6 +471,11 @@ namespace Player.Checks
             StopUnbounding();
             _shouldUnboundWall = false;
             _isWallSliding = false;
+        }
+
+        public bool IsDoingDropdown()
+        {
+            return IsOnDropdown;
         }
     }
 }
