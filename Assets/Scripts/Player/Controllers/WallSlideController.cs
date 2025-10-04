@@ -54,6 +54,7 @@ namespace Player.Controllers
         public void OnLeave()
         {
             _isActive = false;
+            agent.MovementChecks.ClearUnbound();
             input.OnPlayerJump.RemoveListener(OnJump);
             input.OnPlayerShadowStep.RemoveListener(OnShadowstep);
             input.OnPlayerAttack.RemoveListener(OnAttack);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using FSM;
 using Player.Properties;
 using UnityEngine;
@@ -12,8 +13,11 @@ namespace Player.Controllers
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private InputHandler inputHandler;
 
+        private Coroutine _changeToWallslideCheckCoroutine;
+
         private void OnEnable()
         {
+            _changeToWallslideCheckCoroutine = null;
             _playerMovement ??= GetComponent<PlayerMovement>();
             inputHandler?.OnPlayerShadowStep.AddListener(HandleShadowstep);
             inputHandler?.OnPlayerAttack.AddListener(OnAttack);
@@ -21,6 +25,7 @@ namespace Player.Controllers
 
         private void OnDisable()
         {
+            _changeToWallslideCheckCoroutine = null;
             inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
             inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
         }
@@ -33,7 +38,7 @@ namespace Player.Controllers
         private void HandleShadowstep()
         {
             if (!agent.MovementChecks.CanShadowStepOnAir()) return;
-            
+
             agent.ChangeStateToShadowStep();
         }
 
@@ -71,12 +76,36 @@ namespace Player.Controllers
             }
 
             if (agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection, _playerMovement.Velocity))
-                agent.ChangeStateToWallSlide();
-            
+            {
+                if (_changeToWallslideCheckCoroutine != null) return;
+                _changeToWallslideCheckCoroutine = StartCoroutine(CheckWallslide());
+            }
+
             if (_playerMovement.IsGoingDownFaster())
             {
                 agent.ChangeStateToFasterFalling();
             }
         }
+
+        private IEnumerator CheckWallslide()
+        {
+            float timeInWallInit = 0f;
+
+            while (timeInWallInit < playerMovementProperties.maxJumpTimeNearWall)
+            {
+                Debug.Log("WAITING!");
+                if (!agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection, _playerMovement.Velocity))
+                {
+                    Debug.Log("BREAKING.");
+                    yield break;
+                }
+                
+                timeInWallInit += Time.deltaTime;
+                yield return null;
+            }
+            
+            agent.ChangeStateToWallSlide();
+        }
     }
+
 }

@@ -165,9 +165,6 @@ namespace Player.Checks
 
         public bool ShouldUnboundWallslide(Vector3 moveDirection, Vector2 movementVelocity)
         {
-            if (ShouldUnboundByInput(moveDirection) || ShouldUnboundByCoyote(movementVelocity))
-                Debug.Log($"Unbound by ShouldUnboundByInput: {ShouldUnboundByInput(moveDirection)}, Unbound by ShouldUnboundByCoyote: {ShouldUnboundByCoyote(movementVelocity)}");
-
             return ShouldUnboundByInput(moveDirection) || ShouldUnboundByCoyote(movementVelocity);
         }
 
@@ -213,7 +210,7 @@ namespace Player.Checks
                 _shouldUnboundWall = false;
                 return true;
             }
-
+            
             if (Mathf.Sign(moveDirection.x) == Mathf.Sign(WallSlideDirection))
             {
                 StopUnbounding();
@@ -234,6 +231,7 @@ namespace Player.Checks
 
         private IEnumerator UnboundWallCoroutine()
         {
+            Debug.Log($"UNBOUND COROUTINE CALLED");
             yield return new WaitForSeconds(playerMovementProperties.unboundTime);
             _shouldUnboundWall = true;
         }
@@ -466,6 +464,13 @@ namespace Player.Checks
         public void RestartCheckingPlatforms()
         {
             _whatIsGround |= playerMovementProperties.whatIsPlatform;
+        }
+
+        public void ClearUnbound()
+        {
+            StopUnbounding();
+            _shouldUnboundWall = false;
+            _isWallSliding = false;
         }
     }
 }

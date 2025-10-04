@@ -117,7 +117,6 @@ namespace Player
                 );
                 
                 Velocity = velocityMagnitude * moveDirection;
-                Debug.Log($"New Velocity {Velocity}");
             });
         }
 
