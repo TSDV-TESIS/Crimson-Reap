@@ -1,33 +1,48 @@
 using System;
 using Decals;
+using Events;
+using Health;
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace Player
 {
+    [RequireComponent(typeof(HealthPoints))]
     public class PlayerVfxController : MonoBehaviour
     {
         [SerializeField] private ParticleSystem walkingParticles;
         [SerializeField] private ParticleSystem wallrideParticles;
         [SerializeField] private GameObject jumpParticles;
+        [SerializeField] private VisualEffect auraVfx;
         [SerializeField] private GameObject groundedParticles;
         [SerializeField] private float wallrideParticleAngle = 69f;
         [SerializeField] private Vector3 jumpVfxRotation;
-
+        
         [Header("Pivots")] [SerializeField] private GameObject floorPivot;
         [SerializeField] private GameObject leftPivot;
         [SerializeField] private GameObject rightPivot;
-
+        
         private float _lastSign;
         private Vector3 _lastWallridePosition;
         private Quaternion? _overrideJumpParticleAngle;
         private GameObject _overrideJumpParticlePosition;
         private bool _shouldAddDecal;
+
+        private HealthPoints _healthPoints;
         
         private void OnEnable()
         {
             _shouldAddDecal = true;
             _overrideJumpParticlePosition = null;
             _overrideJumpParticleAngle = null;
+
+            _healthPoints ??= GetComponent<HealthPoints>();
+
+        }
+
+        private void Update()
+        {
+            auraVfx.SetFloat("AuraIntensity", (float)_healthPoints.CurrentHp / (float)_healthPoints.MaxHealth);
         }
 
         public void HandleJump()
