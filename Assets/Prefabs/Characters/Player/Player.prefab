@@ -433,6 +433,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4094496332656559244}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7081232291647756323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1764498939030004863}
+  m_Layer: 6
+  m_Name: PointerPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1764498939030004863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081232291647756323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6391947559083867225}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7736462112751391781
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +707,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 1, y: 0}
-  m_SizeDelta: {x: 2.4, y: 1.5}
+  m_SizeDelta: {x: 1.35, y: 0.84375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &917740719339753750
 CanvasRenderer:
@@ -731,7 +762,7 @@ MonoBehaviour:
   mouseDataFromPlayer: {fileID: 11400000, guid: dbf45747cd601024c92dc64b4065441e, type: 2}
   rotationPoint: {fileID: 6391947559083867225}
   handler: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
-  radius: 1
+  radius: 0.7
   moveLerpVelocity: 100
   rotationLerpVelocity: 100
   onGamepadControlUsed: {fileID: 11400000, guid: 6f295ebfa77135841a5412b31439ae74, type: 2}
@@ -800,6 +831,7 @@ Transform:
   - {fileID: 3615591402240694169}
   - {fileID: 4094496332656559244}
   - {fileID: 410731331810919608}
+  - {fileID: 1764498939030004863}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!143 &6981576557858149188
@@ -1712,8 +1744,6 @@ MonoBehaviour:
   onPlayerRevive: {fileID: 11400000, guid: 759bf030b0f37734e82f041ac9950e9e, type: 2}
   onFrenziedStart: {fileID: 11400000, guid: ef4985810d9bd934abdba52e7ade37ad, type: 2}
   onFrenziedStop: {fileID: 11400000, guid: 6bf763bcfdc1da24da3f818394e46eb3, type: 2}
-  onDropdown: {fileID: 11400000, guid: 0956c342fcdb4c342a0ef0cfb4795fdf, type: 2}
-  onDropdownStop: {fileID: 11400000, guid: 97ab0a3fbacc5aa4bab6adf9be27a69a, type: 2}
   playerTransform: {fileID: 11400000, guid: 33cff94758fa9be458f6c60e98048cb4, type: 2}
   onWalk:
     m_PersistentCalls:
