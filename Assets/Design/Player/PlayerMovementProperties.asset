@@ -22,13 +22,14 @@ MonoBehaviour:
   frenziedMaxSpeed: 21
   gravity: 34.1
   jumpForce: 15.25
-  coyoteTimeSeconds: 0
+  coyoteTimeSeconds: 0.25
   maxGravityVelocity: 18.6
   maxJumpVelocity: 24.8
   cornerCorrectionMaxDistance: 0.25
   whatIsCeiling:
     serializedVersion: 2
     m_Bits: 1536
+  maxJumpTimeDelayForActions: 0.25
   maxDownPressedVelocity: 35
   maxDownPressedAddedAcceleration: 55
   checkDistance: 0.5
@@ -40,6 +41,7 @@ MonoBehaviour:
   whatIsPlatform:
     serializedVersion: 2
     m_Bits: 131072
+  dropdownThreshold: -0.8
   stopCheckingPlatformSeconds: 0.2
   wallCheckDistance: 0.5
   whatIsWall:
