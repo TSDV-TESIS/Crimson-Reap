@@ -38,7 +38,6 @@ namespace Player.Attacks
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.gameObject);
             if (!this.enabled || _hittedEnemies.Contains(other) || other.CompareTag("Player"))
                 return;
             

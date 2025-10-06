@@ -3,7 +3,6 @@ using System.Collections;
 using Events;
 using Events.Scriptables;
 using Sounds;
-using UI.Bars;
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,28 +15,21 @@ namespace Enemy
     {
         [SerializeField] private EnemyDeathProperties enemyDeathProperties;
         [SerializeField] private String isDeadVariableName = "IsDead";
-        [SerializeField] private ParticleSystem splashBloodParticles;
         [SerializeField] private SoundCollisionHandler screamSoundCollisionHandler;
         [SerializeField] private GameObject[] objectsToDisable;
 
         [Header("Events")]
         [SerializeField] private GameObjectEventChannelSO onEnemyEnabled;
         [SerializeField] private IntEventChannelSO onEnemyDeath;
-        [SerializeField] private UnityEvent onInternalDeath;
-        [SerializeField] private VoidEventChannelSO onBloodlustStart;
-        [SerializeField] private VoidEventChannelSO onBloodlustEnd;
+        [SerializeField] private UnityEvent<Vector3> onInternalDeath;
         [SerializeField] private GameObjectEventChannelSO onEnemyDisabled;
         [SerializeField] private TimeStopEventChannelSO onHitStop;
 
         private Coroutine _disableCoroutine;
-        private bool _isInBloodlust;
         private BehaviorGraphAgent _behaviorAgent;
 
         private void OnEnable()
         {
-            _isInBloodlust = false;
-            onBloodlustStart?.onEvent.AddListener(HandleFrenzyStart);
-            onBloodlustEnd?.onEvent.AddListener(HandleFrenzyEnd);
             screamSoundCollisionHandler.SoundRadius = enemyDeathProperties.screamingRadius;
             _behaviorAgent ??= GetComponent<BehaviorGraphAgent>();
         }
@@ -45,23 +37,6 @@ namespace Enemy
         private void Start()
         {
             onEnemyEnabled?.RaiseEvent(gameObject);
-        }
-
-        private void OnDisable()
-        {
-            onBloodlustStart?.onEvent.RemoveListener(HandleFrenzyStart);
-            onBloodlustEnd?.onEvent.RemoveListener(HandleFrenzyEnd);
-        }
-
-        private void HandleFrenzyEnd()
-        {
-            _isInBloodlust = false;
-        }
-
-        private void HandleFrenzyStart()
-        {
-            Debug.Log("FRENZY START ON ENEMY");
-            _isInBloodlust = true;
         }
 
         public void HandleInitMaxHealth(int maxHealth)
@@ -78,10 +53,9 @@ namespace Enemy
             isDeadVariable.ObjectValue = true;
             
             onEnemyDeath?.RaiseEvent(enemyDeathProperties.healthRewardOnDeath);
-            onInternalDeath?.Invoke();
+            onInternalDeath?.Invoke(gameObject.transform.position);
             screamSoundCollisionHandler.EnableSound(enemyDeathProperties.shouldDrawGizmos);
 
-            splashBloodParticles.Play();
             onHitStop?.RaiseEvent(enemyDeathProperties.hitstopProperties);
 
             foreach (GameObject obj in objectsToDisable)
