@@ -535,7 +535,7 @@
 										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-4</Value>
+												<Value>-6</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -548,7 +548,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="D_Spikes_01" ID="{E197E1F1-BAE1-4DFA-A49B-0CFFA037FF59}" ShortID="799730377">
+										<Sound Name="D_Spikes_01" ID="{97C613BD-E4F8-425E-99C1-FD085DE9FDEC}" ShortID="1039067690">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -558,7 +558,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="D_Spikes_01" ID="{9B906BEE-E7F4-433C-B1CF-1215FF371A1C}">
+												<AudioFileSource Name="D_Spikes_01" ID="{23D3C8B7-149B-4749-8981-ADEC23137F95}">
 													<Language>SFX</Language>
 													<AudioFile>D_Spikes_01.wav</AudioFile>
 													<MediaIDList>
@@ -567,10 +567,10 @@
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="D_Spikes_01" ID="{9B906BEE-E7F4-433C-B1CF-1215FF371A1C}" Platform="Linked"/>
+												<ActiveSource Name="D_Spikes_01" ID="{23D3C8B7-149B-4749-8981-ADEC23137F95}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="D_Spikes_02" ID="{A367CCF9-877C-4848-945A-22D2F72971D3}" ShortID="410223098">
+										<Sound Name="D_Spikes_02" ID="{E298B280-249A-4658-8FD5-48CF490FB6E2}" ShortID="1011132826">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -580,7 +580,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="D_Spikes_02" ID="{B9C9F0E5-6993-43EF-AE74-9A966088822A}">
+												<AudioFileSource Name="D_Spikes_02" ID="{7371E62C-A386-4B3C-B595-3654D93FA924}">
 													<Language>SFX</Language>
 													<AudioFile>D_Spikes_02.wav</AudioFile>
 													<MediaIDList>
@@ -589,16 +589,29 @@
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="D_Spikes_02" ID="{B9C9F0E5-6993-43EF-AE74-9A966088822A}" Platform="Linked"/>
+												<ActiveSource Name="D_Spikes_02" ID="{7371E62C-A386-4B3C-B595-3654D93FA924}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
 								</RandomSequenceContainer>
 								<RandomSequenceContainer Name="DeathKilledSFX" ID="{2AF12F1B-B5D2-4423-9C91-591056901BE9}" ShortID="1057407494">
 									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{A25C91F2-96BE-4829-9CA3-9EB520D642B8}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="76"/>
+															<Property Name="Min" Type="Real64" Value="-25"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-4</Value>
+												<Value>-6</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -611,7 +624,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="D_Enemy_01" ID="{D00B130D-ABD1-4270-BED1-08E77B96BD9F}" ShortID="36634484">
+										<Sound Name="D_Enemy_01" ID="{7DDB3475-11F2-45AA-B441-B1224EF2FDB3}" ShortID="645252244">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -621,7 +634,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="D_Enemy_01" ID="{3267E868-BAC3-433F-BFD3-D16DCF9DDC65}">
+												<AudioFileSource Name="D_Enemy_01" ID="{F2818688-D53D-4A34-BF6B-BA746A1A21E3}">
 													<Language>SFX</Language>
 													<AudioFile>D_Enemy_01.wav</AudioFile>
 													<MediaIDList>
@@ -630,10 +643,10 @@
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="D_Enemy_01" ID="{3267E868-BAC3-433F-BFD3-D16DCF9DDC65}" Platform="Linked"/>
+												<ActiveSource Name="D_Enemy_01" ID="{F2818688-D53D-4A34-BF6B-BA746A1A21E3}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="D_Enemy_02" ID="{07454F1D-4761-480E-96B3-CFC6ED04CA93}" ShortID="1049611955">
+										<Sound Name="D_Enemy_02" ID="{0293494B-8C86-4DB0-8D57-20D72CD6051C}" ShortID="1037722060">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -643,7 +656,7 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="D_Enemy_02" ID="{2F8C6CBB-93A7-47C0-8981-B19F8C627E25}">
+												<AudioFileSource Name="D_Enemy_02" ID="{6766345E-49AF-4F90-9446-F3100CEBCCBC}">
 													<Language>SFX</Language>
 													<AudioFile>D_Enemy_02.wav</AudioFile>
 													<MediaIDList>
@@ -652,7 +665,7 @@
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="D_Enemy_02" ID="{2F8C6CBB-93A7-47C0-8981-B19F8C627E25}" Platform="Linked"/>
+												<ActiveSource Name="D_Enemy_02" ID="{6766345E-49AF-4F90-9446-F3100CEBCCBC}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -693,6 +706,90 @@
 								</Sound>
 							</ChildrenList>
 						</ActorMixer>
+						<Sound Name="Idle_Fire01" ID="{9CCDFD4D-78DF-4EF8-84D9-3FB792306698}" ShortID="480066622">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>44</Value>
+									</ValueList>
+								</Property>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="OverrideEffect" Type="bool" Value="True"/>
+								<Property Name="OverrideUserAuxSends" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>150</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-9</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Idle_Fire01" ID="{F84261C6-0929-46B3-A154-B90EEE613CE1}">
+									<PropertyList>
+										<Property Name="CrossfadeDuration" Type="Real64" Value="663.158"/>
+										<Property Name="LoopBegin" Type="Real64" Value="0.432422417786012"/>
+										<Property Name="LoopEnd" Type="Real64" Value="9.77952755905512"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>Idle_Fire01.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="514572124"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Effects">
+									<Reference>
+										<Local>
+											<EffectSlot Name="" ID="{6B4B79B5-48D6-40C3-8179-0B85A7A09CB7}" ShortID="51517188">
+												<ReferenceList>
+													<Reference Name="Effect">
+														<Custom>
+															<Effect Name="RoomVerb (Custom)" ID="{77DDDF54-D48D-4F9C-B83C-8D2F4C58EF63}" ShortID="395277219" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+																<PropertyList>
+																	<Property Name="DecayTime" Type="Real32" Value="1.4"/>
+																	<Property Name="Density" Type="Real32" Value="76"/>
+																	<Property Name="DryLevel" Type="Real32" Value="-4.3"/>
+																	<Property Name="ERPattern" Type="int32" Value="1"/>
+																	<Property Name="EnableToneControls" Type="bool" Value="True"/>
+																	<Property Name="Filter1Freq" Type="Real32" Value="210"/>
+																	<Property Name="Filter1Gain" Type="Real32" Value="-24"/>
+																	<Property Name="PreDelay" Type="Real32" Value="11"/>
+																	<Property Name="ReverbLevel" Type="Real32" Value="-23"/>
+																	<Property Name="RoomShape" Type="Real32" Value="84"/>
+																	<Property Name="RoomSize" Type="Real32" Value="37"/>
+																</PropertyList>
+															</Effect>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</EffectSlot>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+							<ActiveSourceList>
+								<ActiveSource Name="Idle_Fire01" ID="{F84261C6-0929-46B3-A154-B90EEE613CE1}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="EnemySFX" ID="{9DCF72FD-A7C5-408B-96A8-54D394712D63}" ShortID="833381834">
