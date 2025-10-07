@@ -706,6 +706,90 @@
 								</Sound>
 							</ChildrenList>
 						</ActorMixer>
+						<Sound Name="Idle_Fire01" ID="{9CCDFD4D-78DF-4EF8-84D9-3FB792306698}" ShortID="480066622">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>44</Value>
+									</ValueList>
+								</Property>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>3</Value>
+									</ValueList>
+								</Property>
+								<Property Name="OverrideEffect" Type="bool" Value="True"/>
+								<Property Name="OverrideUserAuxSends" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>150</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-9</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="Idle_Fire01" ID="{F84261C6-0929-46B3-A154-B90EEE613CE1}">
+									<PropertyList>
+										<Property Name="CrossfadeDuration" Type="Real64" Value="663.158"/>
+										<Property Name="LoopBegin" Type="Real64" Value="0.432422417786012"/>
+										<Property Name="LoopEnd" Type="Real64" Value="9.77952755905512"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
+									<Language>SFX</Language>
+									<AudioFile>Idle_Fire01.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="514572124"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ObjectLists>
+								<ObjectList Name="Effects">
+									<Reference>
+										<Local>
+											<EffectSlot Name="" ID="{6B4B79B5-48D6-40C3-8179-0B85A7A09CB7}" ShortID="51517188">
+												<ReferenceList>
+													<Reference Name="Effect">
+														<Custom>
+															<Effect Name="RoomVerb (Custom)" ID="{77DDDF54-D48D-4F9C-B83C-8D2F4C58EF63}" ShortID="395277219" PluginName="Wwise RoomVerb" CompanyID="0" PluginID="118" PluginType="3">
+																<PropertyList>
+																	<Property Name="DecayTime" Type="Real32" Value="1.4"/>
+																	<Property Name="Density" Type="Real32" Value="76"/>
+																	<Property Name="DryLevel" Type="Real32" Value="-4.3"/>
+																	<Property Name="ERPattern" Type="int32" Value="1"/>
+																	<Property Name="EnableToneControls" Type="bool" Value="True"/>
+																	<Property Name="Filter1Freq" Type="Real32" Value="210"/>
+																	<Property Name="Filter1Gain" Type="Real32" Value="-24"/>
+																	<Property Name="PreDelay" Type="Real32" Value="11"/>
+																	<Property Name="ReverbLevel" Type="Real32" Value="-23"/>
+																	<Property Name="RoomShape" Type="Real32" Value="84"/>
+																	<Property Name="RoomSize" Type="Real32" Value="37"/>
+																</PropertyList>
+															</Effect>
+														</Custom>
+													</Reference>
+												</ReferenceList>
+											</EffectSlot>
+										</Local>
+									</Reference>
+								</ObjectList>
+							</ObjectLists>
+							<ActiveSourceList>
+								<ActiveSource Name="Idle_Fire01" ID="{F84261C6-0929-46B3-A154-B90EEE613CE1}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="EnemySFX" ID="{9DCF72FD-A7C5-408B-96A8-54D394712D63}" ShortID="833381834">
