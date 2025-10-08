@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using Events;
+using Events.ScriptableObjects;
 using Events.Scriptables;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -15,9 +18,15 @@ namespace CameraScripts
 
         [SerializeField] private ShakeProfileEventChannel onCameraShakeEventChannelSo;
 
+        [Header("Events")] 
+        [SerializeField] private CameraZoomZoneEventSO onCameraZoomZoneEnter;
+        [SerializeField] private VoidEventChannelSO onCameraZoomZoneLeave;
+        
         private CameraProperties _cameraProperties;
         private Coroutine _cameraShake;
 
+        private float _initialCameraDistance;
+        
         private void Awake()
         {
             SetComposerSettings();
@@ -28,15 +37,34 @@ namespace CameraScripts
             onCameraShakeEventChannelSo.onTypedEvent.AddListener(HandleCameraShake);
         }
 
+        private void OnEnable()
+        {
+            onCameraZoomZoneEnter?.onTypedEvent.AddListener(HandleCameraZoomZoneEnter);
+            onCameraZoomZoneLeave?.onEvent.AddListener(HandleCameraZoomZoneLeave);
+        }
+
         private void OnDestroy()
         {
             onCameraShakeEventChannelSo.onTypedEvent.RemoveListener(HandleCameraShake);
+            onCameraZoomZoneEnter.onTypedEvent.RemoveListener(HandleCameraZoomZoneEnter);
+            onCameraZoomZoneLeave.onEvent.RemoveListener(HandleCameraZoomZoneLeave);
+        }
+        
+        private void HandleCameraZoomZoneLeave()
+        {
+            composer.CameraDistance = _initialCameraDistance;
+        }
+
+        private void HandleCameraZoomZoneEnter(CameraZoomZoneProperties newProperties)
+        {
+            composer.CameraDistance = newProperties.zoomIn;
         }
 
         private void SetComposerSettings()
         {
             mainCamera.Lens.FieldOfView = _cameraProperties.FOV;
             composer.CameraDistance = _cameraProperties.cameraDistance;
+            _initialCameraDistance = _cameraProperties.cameraDistance;
 
             composer.Composition.ScreenPosition = _cameraProperties.screenPosition;
             composer.Composition.DeadZone.Enabled = _cameraProperties.deadZone;

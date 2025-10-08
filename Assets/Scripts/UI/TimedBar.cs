@@ -1,13 +1,10 @@
-using System;
 using System.Collections;
 using Events;
-using Health;
 using Player.Properties;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace UI.Bars
+namespace UI
 {
     public class TimedBar : MonoBehaviour
     {

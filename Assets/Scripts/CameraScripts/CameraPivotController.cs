@@ -10,7 +10,7 @@ namespace CameraScripts
     public class CameraPivotController : MonoBehaviour
     {
         [SerializeField] private CameraProperties cameraProperties;
-        [SerializeField] private GameObject target;
+        [SerializeField] public GameObject target;
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private PlayerMovementProperties movementProperties;
 

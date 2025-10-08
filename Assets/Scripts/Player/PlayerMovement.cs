@@ -11,25 +11,23 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("Input Handler")]
-        [SerializeField] private InputHandler input;
+        [Header("Input Handler")] [SerializeField]
+        private InputHandler input;
 
-        [Header("Movement Properties")]
-        [SerializeField] private PlayerMovementProperties playerMovementProperties;
+        [Header("Movement Properties")] [SerializeField]
+        private PlayerMovementProperties playerMovementProperties;
 
-        [Header("Events")]
-        [SerializeField] private VoidEventChannelSO onPlayerDeath;
+        [Header("Events")] [SerializeField] private VoidEventChannelSO onPlayerDeath;
         [SerializeField] private VoidEventChannelSO onPlayerRevive;
         [SerializeField] private VoidEventChannelSO onFrenziedStart;
         [SerializeField] private VoidEventChannelSO onFrenziedStop;
-        [SerializeField] private VoidEventChannelSO onDropdown;
-        [SerializeField] private VoidEventChannelSO onDropdownStop;
-        
-        [Header("Save properties")]
-        [SerializeField] private PlayerTransform playerTransform;
 
-        [Header("Unity Events")]
-        [SerializeField] private UnityEvent<float> onWalk;
+        [Header("Save properties")] [SerializeField]
+        private PlayerTransform playerTransform;
+
+        [Header("Unity Events")] [SerializeField]
+        private UnityEvent<float> onWalk;
+
         [SerializeField] private UnityEvent onStop;
 
         private CharacterController _characterController;
@@ -39,11 +37,9 @@ namespace Player
         private Coroutine _knockBackVelocityLock;
 
         private Vector3 _moveDirection;
-        private Vector2 _inputDirection;
-        private bool _isGoingDownFaster;
-
+        [NonSerialized] public bool ShouldAddFasterFallingValues;
+        
         public Vector3 MoveDirection => _moveDirection;
-
         public float MaxSpeed
         {
             get => playerMovementProperties.maxSpeed;
@@ -70,13 +66,6 @@ namespace Player
 
             onPlayerDeath.onEvent.RemoveListener(HandleDeath);
             onPlayerRevive.onEvent.RemoveListener(HandleRevive);
-        }
-
-        private void Update()
-        {
-            _isGoingDownFaster = _inputDirection.y <= playerMovementProperties.dropdownThreshold;
-            if (_isGoingDownFaster) onDropdown?.RaiseEvent();
-            else onDropdownStop?.RaiseEvent();
         }
 
         public void HandleWalk()
@@ -108,9 +97,15 @@ namespace Player
         {
             HandleWalkWith(moveDirection, (acceleration, maxSpeed) =>
             {
-                if (Mathf.Approximately(_moveDirection.x, 0)) return;
+                if (Mathf.Approximately(moveDirection.x, 0)) return;
+
+                float velocityMagnitude = Mathf.Clamp(
+                    Velocity.magnitude +
+                    moveDirection.magnitude * acceleration * Time.deltaTime,
+                    -maxSpeed, maxSpeed
+                );
                 
-                SetXVelocity(acceleration, maxSpeed);
+                Velocity = velocityMagnitude * moveDirection;
             });
         }
 
@@ -125,7 +120,9 @@ namespace Player
         public void HandleDeceleration()
         {
             float maxSpeed = playerMovementProperties.maxSpeed;
-            Velocity.x = Mathf.Sign(Velocity.x) * Mathf.Clamp(Mathf.Abs(Velocity.x) - playerMovementProperties.friction * Time.deltaTime, 0, maxSpeed);
+            Velocity.x = Mathf.Sign(Velocity.x) *
+                         Mathf.Clamp(Mathf.Abs(Velocity.x) - playerMovementProperties.friction * Time.deltaTime, 0,
+                             maxSpeed);
             if (Mathf.Abs(Velocity.x) >= playerMovementProperties.maxSpeedIdle)
             {
                 onWalk?.Invoke(Velocity.x);
@@ -141,19 +138,21 @@ namespace Player
             float maxVelocity = playerMovementProperties.maxGravityVelocity;
             float acceleration = playerMovementProperties.gravity;
 
-            if (_moveDirection.y < 0f)
+            if (ShouldAddFasterFallingValues)
             {
                 maxVelocity += playerMovementProperties.maxDownPressedVelocity;
                 acceleration += playerMovementProperties.maxDownPressedAddedAcceleration;
             }
 
-            Velocity.y = Mathf.Clamp(Velocity.y - acceleration * Time.deltaTime, -maxVelocity, playerMovementProperties.maxJumpVelocity);
+            Velocity.y = Mathf.Clamp(Velocity.y - acceleration * Time.deltaTime, -maxVelocity,
+                playerMovementProperties.maxJumpVelocity);
         }
 
         public void WallSlide()
         {
             Velocity.x = 0;
-            Velocity.y = Mathf.Clamp(Velocity.y - playerMovementProperties.wallSlideGravity * Time.deltaTime, -playerMovementProperties.maxWallSlideVerticalVelocity, Velocity.y);
+            Velocity.y = Mathf.Clamp(Velocity.y - playerMovementProperties.wallSlideGravity * Time.deltaTime,
+                -playerMovementProperties.maxWallSlideVerticalVelocity, Velocity.y);
 
             _characterController.Move(Velocity * Time.deltaTime);
         }
@@ -165,8 +164,8 @@ namespace Player
             Vector3 velocityDirection = Velocity.normalized;
 
             float angle = Vector3.Angle(
-            transform.up,
-            velocityDirection
+                transform.up,
+                velocityDirection
             ) * Mathf.Deg2Rad;
 
             float cosValue = Mathf.Cos(angle);
@@ -198,7 +197,6 @@ namespace Player
 
         private void HandleMove(Vector2 movement)
         {
-            _inputDirection = movement;
             _moveDirection = new Vector3(movement.x, movement.y, 0);
         }
 
@@ -288,12 +286,14 @@ namespace Player
         public void ExitShadowstep()
         {
             Velocity.y *= playerMovementProperties.exitShadowstepMomentumMantained.y;
-            Velocity.x = _moveDirection.x != 0 ? Velocity.x : Velocity.x * playerMovementProperties.exitShadowstepMomentumMantained.x;
+            Velocity.x = _moveDirection.x != 0
+                ? Velocity.x
+                : Velocity.x * playerMovementProperties.exitShadowstepMomentumMantained.x;
         }
 
-        public bool IsGoingDownFaster()
+        public void JumpCancel()
         {
-            return _isGoingDownFaster;
+            Velocity.y = 0f;
         }
     }
 }

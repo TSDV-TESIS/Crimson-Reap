@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 13791743788204196}
   - component: {fileID: 639795380989303491}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3463123842548943488}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8204185222829135435}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BowPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1004,7 +1004,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDeathProperties: {fileID: 11400000, guid: 9f238685875f38447b5db71021b570a1, type: 2}
   isDeadVariableName: IsDead
-  splashBloodParticles: {fileID: 7543469455397891725}
+  soulVfxObject: {fileID: 0}
   screamSoundCollisionHandler: {fileID: 3677931793589164812}
   objectsToDisable:
   - {fileID: 3330162490132244641}
@@ -1027,8 +1027,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onBloodlustStart: {fileID: 11400000, guid: a35f6f56a7aa8bb4ab396c441347dc5b, type: 2}
-  onBloodlustEnd: {fileID: 11400000, guid: 9af1ae5dcd881ea4da96db96896b02c9, type: 2}
+      - m_Target: {fileID: 11400000, guid: c828e2c7d29e5454bb073cf1046fd6d1, type: 2}
+        m_TargetAssemblyTypeName: Events.ScriptableObjects.EventChannelSO`1[[UnityEngine.Vector3,
+          UnityEngine
+        m_MethodName: RaiseEvent
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onEnemyDisabled: {fileID: 11400000, guid: 33d75e1a6724e3e4685688bdaaf89f48, type: 2}
   onHitStop: {fileID: 11400000, guid: bf98232cb9f3a554d9a79b4bbad54e2f, type: 2}
 --- !u!114 &3967679794223160263
@@ -1939,7 +1950,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 813421611363868630}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PathPredictor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4420,6 +4431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CFXR2 Blood Shape Splash
       objectReference: {fileID: 0}
+    - target: {fileID: 4553287630450876385, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4553287630450876386, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
@@ -4488,9 +4503,17 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4553287630628875899, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5287935014664579224, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5287935014664579226, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5287935014664579231, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
       propertyPath: playOnAwake
@@ -4504,11 +4527,6 @@ PrefabInstance:
 --- !u!4 &7543469455397891714 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4553287630450876396, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
-  m_PrefabInstance: {fileID: 6313852584011788654}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7543469455397891725 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 4553287630450876387, guid: 15483e51212e3d74886ea57291f4639a, type: 3}
   m_PrefabInstance: {fileID: 6313852584011788654}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8343983565792700622
@@ -4568,6 +4586,10 @@ PrefabInstance:
       value: EnemyRunningVfx
       objectReference: {fileID: 0}
     - target: {fileID: 8656522925564163052, guid: ef04367aecdfd1c408c69c6d587b0395, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8656522925564163052, guid: ef04367aecdfd1c408c69c6d587b0395, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -4598,6 +4620,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7003484632652249242}
     m_Modifications:
+    - target: {fileID: 1010469353794949299, guid: 60d310309985b9d4e9917e6e851e63c9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1010469353794949300, guid: 60d310309985b9d4e9917e6e851e63c9, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -4689,6 +4715,10 @@ PrefabInstance:
     - target: {fileID: 6445826192643391251, guid: 60d310309985b9d4e9917e6e851e63c9, type: 3}
       propertyPath: m_Name
       value: white-red bolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445826192643391251, guid: 60d310309985b9d4e9917e6e851e63c9, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6445826192643391251, guid: 60d310309985b9d4e9917e6e851e63c9, type: 3}
       propertyPath: m_IsActive
