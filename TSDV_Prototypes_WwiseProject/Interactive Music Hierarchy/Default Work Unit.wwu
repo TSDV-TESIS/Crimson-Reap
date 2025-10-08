@@ -158,9 +158,6 @@
 								</MusicTransition>
 							</Custom>
 						</Reference>
-						<Reference Name="UserAuxSend0">
-							<ObjectRef Name="MusicReverb" ID="{851C3C9B-1AAA-4995-8197-599F1353AE61}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
-						</Reference>
 					</ReferenceList>
 					<ChildrenList>
 						<MusicPlaylistContainer Name="GameplayMusic" ID="{C4F8A4BB-B556-4FF0-AE1C-C2DA9CDD76BD}" ShortID="239271605">
@@ -2063,6 +2060,13 @@
 							</ChildrenList>
 						</MusicPlaylistContainer>
 						<MusicPlaylistContainer Name="MenuMusic" ID="{E5FAB4DE-6514-4775-A776-818929647F09}" ShortID="309283286">
+							<PropertyList>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-1</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
