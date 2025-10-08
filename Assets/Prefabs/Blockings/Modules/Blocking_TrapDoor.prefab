@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3756629238863687999}
   - component: {fileID: 6667236577439016873}
   - component: {fileID: 4924399142292187237}
+  - component: {fileID: 6079980925657496060}
   m_Layer: 17
   m_Name: Blocking_TrapDoor
   m_TagString: Untagged
@@ -75,6 +76,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 0.5, z: 5}
   m_Center: {x: 0, y: 0, z: -2.5}
+--- !u!114 &6079980925657496060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6862726447907665899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df0dabff942eb045ac9edb801a0dd3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  options: {fileID: 11400000, guid: b6182482ae29ae04db5683d551d4c7c8, type: 2}
+  materialToReplace: {fileID: 2100000, guid: ccd95f0cc99d64744b5fddb6a9630b2c, type: 2}
+  meshRenderer: {fileID: 5209937699742467591}
 --- !u!1001 &6259494614945178062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -123,6 +139,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2203205300144039881, guid: 1d196329d49eb6c45b7906793ae13727, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ec4e7373ac023f42bc829945cdcdf38, type: 2}
     - target: {fileID: 8171123761594568968, guid: 1d196329d49eb6c45b7906793ae13727, type: 3}
       propertyPath: m_Name
       value: Model_TrapDoor
@@ -132,6 +152,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d196329d49eb6c45b7906793ae13727, type: 3}
+--- !u!23 &5209937699742467591 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2203205300144039881, guid: 1d196329d49eb6c45b7906793ae13727, type: 3}
+  m_PrefabInstance: {fileID: 6259494614945178062}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5504193597430733551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1926665266864962337, guid: 1d196329d49eb6c45b7906793ae13727, type: 3}

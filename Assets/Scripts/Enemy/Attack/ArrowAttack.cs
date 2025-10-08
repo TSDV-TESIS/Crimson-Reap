@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using Health;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.VFX;
 
 namespace Enemy.Attack
 {
@@ -10,23 +12,31 @@ namespace Enemy.Attack
     {
         [SerializeField] private int damage = 1000;
         [SerializeField] private ArrowAttackProperties properties;
+        [SerializeField] private Light pointLight;
+        [SerializeField] private float dimDuration;
+        [SerializeField] private VisualEffect arrowVFX;
+        [SerializeField] private VisualEffect hitVFX;
+        [SerializeField] private GameObject decalPrefab;
 
         private CapsuleCollider _collider;
         private Coroutine _arrowDestroyCoroutine;
+        private Coroutine _hitCoroutine;
+        private Coroutine _lightDimCoroutine;
 
         private bool _isTraveling;
         private float _velocity;
         private Vector3 _direction;
-        
+
         private void OnEnable()
         {
             _isTraveling = true;
             _collider ??= GetComponent<CapsuleCollider>();
+            arrowVFX.SendEvent(properties.vfxStartEvent);
         }
 
         private void Update()
         {
-            if(_isTraveling)
+            if (_isTraveling)
                 transform.position += _velocity * _direction * Time.deltaTime;
         }
 
@@ -42,7 +52,9 @@ namespace Enemy.Attack
             if (other.CompareTag("Player") && other.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageObject))
             {
                 takeDamageObject.TryTakeDamage(damage);
-                Destroy(gameObject);
+                if (_hitCoroutine != null) StopCoroutine(_hitCoroutine);
+
+                _hitCoroutine = StartCoroutine(WaitPlayerHitVfx());
                 return;
             }
 
@@ -55,10 +67,17 @@ namespace Enemy.Attack
 
         private void GlueAndDestroy(GameObject otherGameObject)
         {
-            _collider.enabled = false;   
+            _collider.enabled = false;
             gameObject.transform.parent = otherGameObject.transform;
-            
-            if(_arrowDestroyCoroutine != null) StopCoroutine(_arrowDestroyCoroutine);
+            arrowVFX.SendEvent(properties.vfxStopEvent);
+            arrowVFX.SendEvent(properties.hitVfxStartEvent);
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 1, properties.whatIsStoppableColliders))
+                Instantiate(decalPrefab, hit.point, Quaternion.LookRotation(-hit.normal));
+
+            if (_lightDimCoroutine != null) StopCoroutine(_lightDimCoroutine);
+            _lightDimCoroutine = StartCoroutine(LightDim());
+
+            if (_arrowDestroyCoroutine != null) StopCoroutine(_arrowDestroyCoroutine);
             _arrowDestroyCoroutine = StartCoroutine(WaitAndDestroy());
         }
 
@@ -66,6 +85,29 @@ namespace Enemy.Attack
         {
             yield return new WaitForSeconds(properties.destroySeconds);
             Destroy(gameObject);
+        }
+
+        private IEnumerator WaitPlayerHitVfx()
+        {
+            _collider.enabled = false;
+            _isTraveling = false;
+
+            arrowVFX.enabled = false;
+            hitVFX.SendEvent(properties.hitJesterVfxStartEvent);
+            yield return WaitAndDestroy();
+        }
+
+        private IEnumerator LightDim()
+        {
+            float timer = 0;
+            float startTime = Time.time;
+            float initialIntensity = pointLight.intensity;
+            while (timer < dimDuration)
+            {
+                timer = Time.time - startTime;
+                pointLight.intensity = Mathf.Lerp(initialIntensity, 0, timer / dimDuration);
+                yield return null;
+            }
         }
     }
 }

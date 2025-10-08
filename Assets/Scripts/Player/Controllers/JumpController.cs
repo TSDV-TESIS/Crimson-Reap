@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using FSM;
 using Player.Properties;
 using UnityEngine;
@@ -12,28 +13,60 @@ namespace Player.Controllers
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private InputHandler inputHandler;
 
+        private Coroutine _changeToWallslideCheckCoroutine;
+        private Coroutine _changeToFasterFallingCheckCoroutine;
+        private float _timeInJump;
+        private bool _isJumpCancelled;
+
         private void OnEnable()
         {
+            _timeInJump = 0f;
+            _isJumpCancelled = false;
+            
+            _changeToWallslideCheckCoroutine = null;
+            _changeToFasterFallingCheckCoroutine = null;
+            
             _playerMovement ??= GetComponent<PlayerMovement>();
+            _playerMovement.ShouldAddFasterFallingValues = false;
+            
             inputHandler?.OnPlayerShadowStep.AddListener(HandleShadowstep);
+            inputHandler?.OnPlayerJumpCancelled.AddListener(OnJumpCancel);
+            inputHandler?.OnPlayerJump.AddListener(OnJumpEnabled);
             inputHandler?.OnPlayerAttack.AddListener(OnAttack);
         }
 
         private void OnDisable()
         {
+            _changeToWallslideCheckCoroutine = null;
+            _changeToFasterFallingCheckCoroutine = null;
+           
+            inputHandler?.OnPlayerShadowStep.RemoveListener(OnJumpCancel);
+            inputHandler?.OnPlayerJump.AddListener(OnJumpEnabled);
             inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
             inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
+        }
+
+        private void OnJumpEnabled()
+        {
+            _isJumpCancelled = false;
         }
 
         private void Jump()
         {
             _playerMovement.Jump();
         }
+        
+        private void OnJumpCancel()
+        {
+            if (_timeInJump >= playerMovementProperties.maxCancelTime) return;
+            
+            _isJumpCancelled = true;
+        }
 
         private void HandleShadowstep()
         {
             if (!agent.MovementChecks.CanShadowStepOnAir()) return;
-            
+
             agent.ChangeStateToShadowStep();
         }
 
@@ -46,13 +79,18 @@ namespace Player.Controllers
         {
             _playerMovement.HandleWalk();
             _playerMovement.FreeFall();
+            _timeInJump += Time.deltaTime;
+
+            if (_timeInJump > playerMovementProperties.minJumpTimeForCancel && _isJumpCancelled)
+            {
+                _playerMovement.JumpCancel();
+                _isJumpCancelled = false;
+            }
 
             if (agent.MovementChecks.IsFalling(_playerMovement.Velocity))
                 agent.ChangeStateToFalling();
 
-            float cornerDisplace = 0;
-
-            if (agent.MovementChecks.IsNearCorner(out cornerDisplace))
+            if (agent.MovementChecks.IsNearCorner(out var cornerDisplace))
             {
                 _playerMovement.Move(new Vector3(cornerDisplace, 0, 0));
             }
@@ -71,12 +109,46 @@ namespace Player.Controllers
             }
 
             if (agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection, _playerMovement.Velocity))
-                agent.ChangeStateToWallSlide();
-            
-            if (_playerMovement.IsGoingDownFaster())
             {
-                agent.ChangeStateToFasterFalling();
+                if (_changeToWallslideCheckCoroutine != null) return;
+                _changeToWallslideCheckCoroutine = StartCoroutine(
+                    DelayedCheck(
+                        () => !agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection,
+                            _playerMovement.Velocity),
+                        agent.ChangeStateToWallSlide
+                    )
+                );
             }
+
+            if (agent.MovementChecks.IsDoingDropdown())
+            {
+                if (_changeToFasterFallingCheckCoroutine != null) return;
+                _changeToFasterFallingCheckCoroutine = StartCoroutine(
+                    DelayedCheck(
+                        () => agent.MovementChecks.IsDoingDropdown(),
+                        agent.ChangeStateToFasterFalling)
+                );
+            }
+        }
+
+        private IEnumerator DelayedCheck(Func<bool> isStillDoingAction, Action changeFunc)
+        {
+            float timeDoingAction = 0f;
+
+            while (timeDoingAction < playerMovementProperties.maxJumpTimeDelayForActions)
+            {
+                Debug.Log("WAITING!");
+                if (!isStillDoingAction())
+                {
+                    Debug.Log("BREAKING.");
+                    yield break;
+                }
+
+                timeDoingAction += Time.deltaTime;
+                yield return null;
+            }
+
+            changeFunc();
         }
     }
 }

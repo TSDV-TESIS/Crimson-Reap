@@ -5,13 +5,14 @@ namespace Player.Controllers
         protected override void OnEnable()
         {
             base.OnEnable();
+            PlayerMovementActions.ShouldAddFasterFallingValues = true;
             IsFromGroundedTransition = false;
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
-            if (!PlayerMovementActions.IsGoingDownFaster())
+            if (!agent.MovementChecks.IsDoingDropdown())
             {
                 agent.ChangeStateToFalling();
             }
