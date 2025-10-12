@@ -9,6 +9,8 @@ namespace UI.Leaderboard
     {
         [SerializeField] private GameObject leaderboardRow;
         [SerializeField] private GameObject leaderboardTable;
+        [SerializeField] private GameObject loadingObject;
+        [SerializeField] private GameObject scrollView;
         [SerializeField] private LeaderboardData leaderboardData;
         [SerializeField] private LeaderboardCreateEvent createNewTimeEvent;
         [SerializeField] private PlayerName playerName;
@@ -38,6 +40,8 @@ namespace UI.Leaderboard
 
         public void HandleSetTime(int time)
         {
+            loadingObject.SetActive(true);
+            scrollView.SetActive(false);
             createNewTimeEvent.createNewTime.Invoke(new LeaderboardRow(playerName.playerName, time, level));
         }
 
@@ -50,6 +54,9 @@ namespace UI.Leaderboard
                 Debug.LogError("ERROR!");
                 return;
             }
+            
+            loadingObject.SetActive(false);
+            scrollView.SetActive(true);
 
             foreach (LeaderboardRow row in leaderboardData.data)
             {
