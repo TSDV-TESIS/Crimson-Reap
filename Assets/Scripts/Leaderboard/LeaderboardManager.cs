@@ -75,6 +75,8 @@ namespace Leaderboard
                     
                     break;
             }
+            
+            leaderboardData.requestObtained.Invoke();
         }
     }
 }

@@ -20,5 +20,6 @@ namespace Leaderboard
         public string leaderboardLevel;
         public LeaderboardRow[] data;
         public UnityEvent<LevelEnum> requestData;
+        public UnityEvent requestObtained;
     }
 }
