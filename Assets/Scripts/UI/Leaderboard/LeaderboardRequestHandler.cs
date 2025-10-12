@@ -1,5 +1,6 @@
 using System;
 using Leaderboard;
+using Player;
 using UnityEngine;
 
 namespace UI.Leaderboard
@@ -10,6 +11,7 @@ namespace UI.Leaderboard
         [SerializeField] private GameObject leaderboardTable;
         [SerializeField] private LeaderboardData leaderboardData;
         [SerializeField] private LeaderboardCreateEvent createNewTimeEvent;
+        [SerializeField] private PlayerName playerName;
         [SerializeField] private LevelEnum level;
         
         void OnEnable()
@@ -36,7 +38,7 @@ namespace UI.Leaderboard
 
         public void HandleSetTime(int time)
         {
-            createNewTimeEvent.createNewTime.Invoke(new LeaderboardRow("TEST", time, level));
+            createNewTimeEvent.createNewTime.Invoke(new LeaderboardRow(playerName.playerName, time, level));
         }
 
         private void HandleLeaderboard()
