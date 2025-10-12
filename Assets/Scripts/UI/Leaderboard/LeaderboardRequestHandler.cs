@@ -10,6 +10,7 @@ namespace UI.Leaderboard
         [SerializeField] private GameObject leaderboardRow;
         [SerializeField] private GameObject leaderboardTable;
         [SerializeField] private GameObject loadingObject;
+        [SerializeField] private GameObject errorObject;
         [SerializeField] private GameObject scrollView;
         [SerializeField] private LeaderboardData leaderboardData;
         [SerializeField] private LeaderboardCreateEvent createNewTimeEvent;
@@ -34,6 +35,9 @@ namespace UI.Leaderboard
             if (createNewTimeEvent.hasError)
             {
                 Debug.LogError("Error creating new time.");
+                loadingObject.SetActive(false);
+                errorObject.SetActive(true);
+                return;
             }
             leaderboardData.requestData.Invoke(level);
         }
@@ -51,7 +55,9 @@ namespace UI.Leaderboard
             
             if (leaderboardData.hasError)
             {
-                Debug.LogError("ERROR!");
+                Debug.LogError("ERROR obtaining leaderboard!");
+                loadingObject.SetActive(false);
+                errorObject.SetActive(true);
                 return;
             }
             
