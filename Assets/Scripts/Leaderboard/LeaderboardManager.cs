@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -10,42 +11,47 @@ namespace Leaderboard
         private static readonly string LeaderboardURL = "https://crimson-leaderboard.onrender.com";
 
         [SerializeField] private LeaderboardData leaderboardData;
-
+        [SerializeField] private LeaderboardCreateEvent leaderboardCreateEvent;
+        
         public void OnEnable()
         {
             leaderboardData.requestData.AddListener(RequestData);
+            leaderboardCreateEvent.createNewTime.AddListener(HandleNewTime);
         }
 
         public void OnDisable()
         {
             leaderboardData.requestData.RemoveListener(RequestData);
+            leaderboardCreateEvent.createNewTime.RemoveListener(HandleNewTime);
+        }
+
+        private void HandleNewTime(LeaderboardRow row)
+        {
+            StartCoroutine(HandleNewRow(row));
+        }
+
+        private IEnumerator HandleNewRow(LeaderboardRow row)
+        {
+            UnityWebRequest request = new UnityWebRequest(LeaderboardURL + "/leaderboard", "POST");
+            byte[] bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(row));
+            request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
+            
+            Debug.Log("Create new row Status Code: " + request.responseCode);
+            
+            leaderboardCreateEvent.hasError = request.responseCode != 201;
+            leaderboardCreateEvent.createNewTimeFinish.Invoke();
         }
 
         public void RequestData(LevelEnum level)
         {
             leaderboardData.isLoading = true;
-            StartCoroutine(WebTestRequest(GetLevelNameByLevelEnum(level)));
+            StartCoroutine(RequestLeaderboard(LeaderboardRow.GetLevelNameByLevelEnum(level)));
         }
 
-        private string GetLevelNameByLevelEnum(LevelEnum level)
-        {
-            switch (level)
-            {
-                case LevelEnum.Level1:
-                    return LevelNames.Level1;
-                case LevelEnum.Level2:
-                    return LevelNames.Level2;
-                case LevelEnum.Level3:
-                    return LevelNames.Level3;
-                case LevelEnum.Level4:
-                    return LevelNames.Level4;
-                default:
-                    Debug.LogError("Level enum not specified correctly");
-                    return "";
-            }
-        }
-
-        private IEnumerator WebTestRequest(string levelName)
+        private IEnumerator RequestLeaderboard(string levelName)
         {
             UnityWebRequest getLeaderboardRequest = UnityWebRequest.Get(LeaderboardURL + "/leaderboard?type=" + levelName);
             yield return getLeaderboardRequest.SendWebRequest();

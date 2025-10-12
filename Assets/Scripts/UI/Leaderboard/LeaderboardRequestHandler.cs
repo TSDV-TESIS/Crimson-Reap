@@ -9,17 +9,34 @@ namespace UI.Leaderboard
         [SerializeField] private GameObject leaderboardRow;
         [SerializeField] private GameObject leaderboardTable;
         [SerializeField] private LeaderboardData leaderboardData;
+        [SerializeField] private LeaderboardCreateEvent createNewTimeEvent;
         [SerializeField] private LevelEnum level;
         
         void OnEnable()
         {
             leaderboardData.requestObtained.AddListener(HandleLeaderboard);
-            leaderboardData.requestData.Invoke(level);
+            createNewTimeEvent.createNewTimeFinish.AddListener(HandleGetLeaderboard);
         }
 
         private void OnDisable()
         {
             leaderboardData.requestObtained.RemoveListener(HandleLeaderboard);
+            createNewTimeEvent.createNewTimeFinish.RemoveListener(HandleGetLeaderboard);
+
+        }
+
+        private void HandleGetLeaderboard()
+        {
+            if (createNewTimeEvent.hasError)
+            {
+                Debug.LogError("Error creating new time.");
+            }
+            leaderboardData.requestData.Invoke(level);
+        }
+
+        public void HandleSetTime(int time)
+        {
+            createNewTimeEvent.createNewTime.Invoke(new LeaderboardRow("TEST", time, level));
         }
 
         private void HandleLeaderboard()
