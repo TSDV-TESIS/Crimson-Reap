@@ -149,6 +149,8 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_Running" ID="{481166F1-4FF4-4DED-8520-89CF2222FC67}"/>
+						<Event Name="Play_Walking" ID="{5B2E35AC-3D6F-4DDA-A2F8-5533D952F7DC}"/>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="UI" ID="{B0C14029-B0D0-4F5B-BA6C-9448327FF559}" ShortID="350392747">
@@ -351,6 +353,36 @@
 							</ReferenceList>
 						</Action>
 					</ChildrenList>
+				</Event>
+				<Event Name="Play_Enemy_Slash" ID="{71B9ACC6-A86A-424B-8B6E-70CBCF85BB3F}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+				</Event>
+				<Event Name="Play_Enemy_StartPointing" ID="{F08546C5-6BA3-4606-BF22-1522CDDDE8C6}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+				</Event>
+				<Event Name="Play_Bow_Hit_Wall" ID="{E47C4409-7C59-4F86-B138-CE226CE1E502}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+				</Event>
+				<Event Name="Play_Bow_Hit_Explosion" ID="{9EFBAD5C-D4E1-471B-A0EF-4C5748A4022E}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
+				</Event>
+				<Event Name="Play_Enemies_Dead" ID="{F5640C14-B04D-4496-81BF-942D8431316E}">
+					<PropertyList>
+						<Property Name="Color" Type="int16" Value="10"/>
+						<Property Name="OverrideColor" Type="bool" Value="True"/>
+					</PropertyList>
 				</Event>
 			</ChildrenList>
 		</WorkUnit>
