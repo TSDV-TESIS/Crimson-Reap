@@ -2,6 +2,7 @@ using System.Collections;
 using Events;
 using Events.Scriptables;
 using TMPro;
+using UI.Leaderboard;
 using UnityEngine;
 
 public class WinPanel : MonoBehaviour
@@ -14,6 +15,7 @@ public class WinPanel : MonoBehaviour
     [SerializeField] private TieredTimes medals;
     [SerializeField] private TextMeshProUGUI timeTMPro;
     [SerializeField] private TextMeshProUGUI timePersonalBestTMPro;
+    [SerializeField] private LeaderboardRequestHandler leaderboardRequestHandler;
     [SerializeField] private TextMeshProUGUI NextLevelCountDown;
     [SerializeField] private float countDownDuration = 3;
 
@@ -41,6 +43,7 @@ public class WinPanel : MonoBehaviour
     private void HandleTimerFinish(float time)
     {
         panel.SetActive(true);
+        leaderboardRequestHandler.HandleSetTime((int)(time * 1000));
         Time.timeScale = 0;
         if (countDown != null)
             StopCoroutine(countDown);
