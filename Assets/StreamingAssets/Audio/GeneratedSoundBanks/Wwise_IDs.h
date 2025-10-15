@@ -11,15 +11,48 @@
 
 namespace AK
 {
-    namespace EVENTS
+    namespace STATES
     {
-        static const AkUniqueID PLAYDECAPITATION = 110328308U;
-        static const AkUniqueID PLAYHEARTBEAT = 4284960165U;
-        static const AkUniqueID PLAYOPENDOOR = 3209110383U;
-        static const AkUniqueID STOPALL = 3086540886U;
-        static const AkUniqueID STOPDECAPITATION = 1680636502U;
-        static const AkUniqueID STOPHEARTBEAT = 111480559U;
-    } // namespace EVENTS
+        namespace STATES
+        {
+            static const AkUniqueID GROUP = 1208172739U;
+
+            namespace STATE
+            {
+                static const AkUniqueID DEATH_SCREEN = 1585856288U;
+                static const AkUniqueID LEVEL_1 = 1290008369U;
+                static const AkUniqueID LEVEL_2 = 1290008370U;
+                static const AkUniqueID LEVEL_3 = 1290008371U;
+                static const AkUniqueID LEVEL_4 = 1290008372U;
+                static const AkUniqueID LEVEL_CLEAR = 4087184639U;
+                static const AkUniqueID LEVEL_END_MENU = 2726253275U;
+                static const AkUniqueID MAIN_MENU = 2005704188U;
+                static const AkUniqueID NONE = 748895195U;
+                static const AkUniqueID PAUSE_MENU = 3422541661U;
+            } // namespace STATE
+        } // namespace STATES
+
+    } // namespace STATES
+
+    namespace SWITCHES
+    {
+        namespace STEPSTERRAIN
+        {
+            static const AkUniqueID GROUP = 3017341193U;
+
+            namespace SWITCH
+            {
+                static const AkUniqueID STONE = 1216965916U;
+                static const AkUniqueID WOOD = 2058049674U;
+            } // namespace SWITCH
+        } // namespace STEPSTERRAIN
+
+    } // namespace SWITCHES
+
+    namespace GAME_PARAMETERS
+    {
+        static const AkUniqueID PLAYER_HEALTH = 215992295U;
+    } // namespace GAME_PARAMETERS
 
     namespace BANKS
     {
@@ -31,6 +64,11 @@ namespace AK
     {
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
     } // namespace BUSSES
+
+    namespace AUX_BUSSES
+    {
+        static const AkUniqueID REVERB = 348963605U;
+    } // namespace AUX_BUSSES
 
     namespace AUDIO_DEVICES
     {
