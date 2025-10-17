@@ -981,68 +981,7 @@
 													<Reference>
 														<Local>
 															<EffectSlot Name="" ID="{940E6DD6-CE58-4298-83F0-E9A68E29C715}" ShortID="676733307">
-																<ReferenceList>
-																	<Reference Name="Effect">
-																		<Custom>
-																			<Effect Name="iZotope Trash Distortion (Custom)" ID="{50B65198-3B6D-4758-A5B8-E46651E23E93}" ShortID="674047373" PluginName="iZotope Trash Distortion" CompanyID="259" PluginID="3" PluginType="3">
-																				<PropertyList>
-																					<Property Name="Distortion1InputGain" Type="Real32" Value="-2"/>
-																					<Property Name="Distortion1Mix" Type="Real32" Value="34"/>
-																					<Property Name="Distortion1Overdrive" Type="Real32" Value="2"/>
-																					<Property Name="Distortion1Type" Type="int32" Value="2"/>
-																					<Property Name="Distortion2InputGain" Type="Real32" Value="-2"/>
-																					<Property Name="Distortion2Mix" Type="Real32" Value="20"/>
-																					<Property Name="Distortion2Overdrive" Type="Real32" Value="2"/>
-																					<Property Name="Distortion2Type" Type="int32" Value="2"/>
-																				</PropertyList>
-																				<ObjectLists>
-																					<ObjectList Name="RTPC">
-																						<Reference>
-																							<Local>
-																								<RTPC Name="" ID="{03CD888E-E061-43F5-A75E-256A01C6AD45}" ShortID="1059539270">
-																									<PropertyList>
-																										<Property Name="PropertyName" Type="string" Value="Distortion1Overdrive"/>
-																									</PropertyList>
-																									<ReferenceList>
-																										<Reference Name="ControlInput">
-																											<ObjectRef Name="Player_Health" ID="{A0A779A7-07B7-4873-AAB9-54D6FC4C65C6}" WorkUnitID="{2A2501B1-80A0-4243-8C52-C6AFB5797720}"/>
-																										</Reference>
-																										<Reference Name="Curve">
-																											<Custom>
-																												<Curve Name="" ID="{8F398D0B-7DD2-4003-9A0E-335883D17017}">
-																													<PropertyList>
-																														<Property Name="Flags" Type="int32" Value="1"/>
-																													</PropertyList>
-																													<PointList>
-																														<Point>
-																															<XPos>0</XPos>
-																															<YPos>7.89796</YPos>
-																															<Flags>5</Flags>
-																														</Point>
-																														<Point>
-																															<XPos>69.82623</XPos>
-																															<YPos>0</YPos>
-																															<Flags>0</Flags>
-																														</Point>
-																														<Point>
-																															<XPos>100</XPos>
-																															<YPos>0</YPos>
-																															<Flags>37</Flags>
-																														</Point>
-																													</PointList>
-																												</Curve>
-																											</Custom>
-																										</Reference>
-																									</ReferenceList>
-																								</RTPC>
-																							</Local>
-																						</Reference>
-																					</ObjectList>
-																				</ObjectLists>
-																			</Effect>
-																		</Custom>
-																	</Reference>
-																</ReferenceList>
+																<ReferenceList/>
 																<StateInfo>
 																	<CustomStateList>
 																		<CustomState>
