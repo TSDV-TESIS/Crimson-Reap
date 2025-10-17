@@ -3,6 +3,7 @@ using System.Collections;
 using FSM;
 using Player.Properties;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player.Controllers
 {
@@ -12,7 +13,8 @@ namespace Player.Controllers
         private PlayerMovement _playerMovement;
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private InputHandler inputHandler;
-
+        [SerializeField] private UnityEvent<int> onWallJumpFromJump;
+        
         private Coroutine _changeToWallslideCheckCoroutine;
         private Coroutine _changeToFasterFallingCheckCoroutine;
         private float _timeInJump;
@@ -41,7 +43,7 @@ namespace Player.Controllers
             _changeToFasterFallingCheckCoroutine = null;
            
             inputHandler?.OnPlayerShadowStep.RemoveListener(OnJumpCancel);
-            inputHandler?.OnPlayerJump.AddListener(OnJumpEnabled);
+            inputHandler?.OnPlayerJump.RemoveListener(OnJumpEnabled);
             inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
             inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
         }
@@ -49,6 +51,12 @@ namespace Player.Controllers
         private void OnJumpEnabled()
         {
             _isJumpCancelled = false;
+
+            if (agent.MovementChecks.IsNearWall())
+            {
+                _playerMovement.WallJump(agent.MovementChecks.WallSlideDirection);
+                onWallJumpFromJump?.Invoke(agent.MovementChecks.WallSlideDirection);
+            }
         }
 
         private void Jump()
@@ -137,10 +145,8 @@ namespace Player.Controllers
 
             while (timeDoingAction < playerMovementProperties.maxJumpTimeDelayForActions)
             {
-                Debug.Log("WAITING!");
                 if (!isStillDoingAction())
                 {
-                    Debug.Log("BREAKING.");
                     yield break;
                 }
 
