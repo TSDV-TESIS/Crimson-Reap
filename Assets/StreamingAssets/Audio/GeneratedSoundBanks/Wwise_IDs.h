@@ -11,6 +11,37 @@
 
 namespace AK
 {
+    namespace EVENTS
+    {
+        static const AkUniqueID PLAY_BOW_HIT_EXPLOSION = 1382688776U;
+        static const AkUniqueID PLAY_BOW_HIT_WALL = 2208803663U;
+        static const AkUniqueID PLAY_BUTTON_CLICK = 1149159311U;
+        static const AkUniqueID PLAY_DEATH_KILLED = 3613662132U;
+        static const AkUniqueID PLAY_DEATH_SPIKES = 1404038322U;
+        static const AkUniqueID PLAY_DEATH_TIME = 2560480776U;
+        static const AkUniqueID PLAY_DOOR_OPEN = 1660008929U;
+        static const AkUniqueID PLAY_ENEMIES_DEAD = 3646203123U;
+        static const AkUniqueID PLAY_ENEMY_SLASH = 4254899904U;
+        static const AkUniqueID PLAY_ENEMY_STARTPOINTING = 1286921909U;
+        static const AkUniqueID PLAY_FOOTSTEPS = 3854155799U;
+        static const AkUniqueID PLAY_JESTER_ATTACK = 2470198904U;
+        static const AkUniqueID PLAY_JESTER_DASH = 3979710576U;
+        static const AkUniqueID PLAY_JESTER_IDLE = 2419592722U;
+        static const AkUniqueID PLAY_JESTER_JUMP = 4218416840U;
+        static const AkUniqueID PLAY_RUNNING = 1626672999U;
+        static const AkUniqueID PLAY_WALKING = 1733885923U;
+        static const AkUniqueID STATE_DEATH_SCREEN = 2137624854U;
+        static const AkUniqueID STATE_LEVEL_1_START = 3554189746U;
+        static const AkUniqueID STATE_LEVEL_2_START = 3448289457U;
+        static const AkUniqueID STATE_LEVEL_3_START = 1000583068U;
+        static const AkUniqueID STATE_LEVEL_4_START = 1353561099U;
+        static const AkUniqueID STATE_LEVEL_END_MENU = 411919777U;
+        static const AkUniqueID STATE_PAUSE_MENU = 3737670699U;
+        static const AkUniqueID STATE_PLAY_GAME_START = 2241352131U;
+        static const AkUniqueID SWITCH_STONE_STEPS = 2690449455U;
+        static const AkUniqueID SWITCH_WOOD_STEPS = 3931069151U;
+    } // namespace EVENTS
+
     namespace STATES
     {
         namespace STATES
@@ -57,7 +88,7 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
-        static const AkUniqueID HEARTBEAT = 2179486487U;
+        static const AkUniqueID GAME = 702482391U;
     } // namespace BANKS
 
     namespace BUSSES
