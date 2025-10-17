@@ -43,15 +43,21 @@ VisualEffect:
   m_GameObject: {fileID: 1078324672557897130}
   m_Enabled: 1
   m_Asset: {fileID: 8926484042661614526, guid: 5fb2bbd1afcc2714e9c1fa0e928124b6, type: 3}
-  m_InitialEventName: Soul_Absorb
+  m_InitialEventName: Absorb_Loop
   m_InitialEventNameOverriden: 1
   m_StartSeed: 0
-  m_ResetSeedOnPlay: 0
+  m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 0.11
+        m_Name: Delay
+        m_Overridden: 1
+      - m_Value: 2.75
+        m_Name: Radio_Absorb
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -65,7 +71,7 @@ VisualEffect:
       - m_Value: {x: 1, y: 1, z: 1}
         m_Name: Transform_scale
         m_Overridden: 1
-      - m_Value: {x: 0, y: 1.2, z: 0}
+      - m_Value: {x: 0, y: 1, z: 0.17}
         m_Name: Position_position
         m_Overridden: 1
     m_Vector4f:
@@ -76,7 +82,10 @@ VisualEffect:
     m_Uint:
       m_Array: []
     m_Int:
-      m_Array: []
+      m_Array:
+      - m_Value: 34
+        m_Name: Spaw_Absorb
+        m_Overridden: 1
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
