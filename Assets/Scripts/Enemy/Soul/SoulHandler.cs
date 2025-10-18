@@ -1,18 +1,19 @@
-using System;
 using System.Collections;
+using Events;
+using Player.Properties;
 using UnityEngine;
 
-namespace UI
+namespace Enemy.Soul
 {
     public class SoulHandler : MonoBehaviour
     {
         [SerializeField] private float secondsUntilMove;
         [SerializeField] private float secondsInMove;
         [SerializeField] private AnimationCurve velocityCurve;
-        [SerializeField] private float distanceToHandler;
+        [SerializeField] private float distanceToPlayer = 0.5f;
+        [SerializeField] private PlayerTransform playerTransform;
+        [SerializeField] private VoidEventChannelSO onSoulClose;
         
-        [NonSerialized] public GameObject TimerHandler;
-
         private float _secondsAlive;
         private Coroutine _movingCoroutine;
 
@@ -35,18 +36,20 @@ namespace UI
         private IEnumerator MoveSoul()
         {
             _secondsAlive = 0f;
-
-            while (_secondsAlive < secondsInMove)
+            
+            while (_secondsAlive < secondsInMove &&
+                   (transform.position - playerTransform.playerTransform.position).magnitude > distanceToPlayer)
             {
                 float percentage = velocityCurve.Evaluate(_secondsAlive / secondsInMove);
-                
+
                 transform.position =
-                    Vector3.LerpUnclamped(transform.position, TimerHandler.transform.position, percentage);
+                    Vector3.LerpUnclamped(transform.position, playerTransform.playerTransform.position, percentage);
 
                 _secondsAlive += Time.deltaTime;
                 yield return null;
             }
             
+            onSoulClose?.RaiseEvent();
             Destroy(gameObject);
         }
     }
