@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{8F40B142-A5D9-4DD3-B9C5-3B903B1DB0C9}" SchemaVersion="119">
 	<Effects>
-		<WorkUnit Name="Default Work Unit" ID="{8F40B142-A5D9-4DD3-B9C5-3B903B1DB0C9}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{8F40B142-A5D9-4DD3-B9C5-3B903B1DB0C9}" PersistMode="Standalone">
+			<ChildrenList>
+				<Effect Name="CrimsonReapMusicReverb" ID="{FA2CF881-83F7-40C2-A5F9-F6D7A055F236}" PluginName="iZotope Hybrid Reverb" CompanyID="259" PluginID="2" PluginType="3">
+					<PropertyList>
+						<Property Name="FrontWet" Type="Real32" Value="12.2"/>
+						<Property Name="TailGain" Type="Real32" Value="-0.1"/>
+					</PropertyList>
+				</Effect>
+			</ChildrenList>
+		</WorkUnit>
 	</Effects>
 </WwiseDocument>

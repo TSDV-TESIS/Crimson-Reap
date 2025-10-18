@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{20874D66-B9FD-4F33-A8B9-78873CD624E1}" SchemaVersion="119">
 	<SoundcasterSessions>
-		<WorkUnit Name="Default Work Unit" ID="{20874D66-B9FD-4F33-A8B9-78873CD624E1}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{20874D66-B9FD-4F33-A8B9-78873CD624E1}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundcasterSession Name="StepTest" ID="{CBA363D2-05B6-4CB1-806C-796E86038BEC}">
+					<ModuleList>
+						<Module>
+							<ObjectRef Name="State_Play_Game_Start" ID="{A7933A44-1FA2-4E6D-8310-CFC5B3AD5095}" WorkUnitID="{3E1C7913-A2C7-405E-8C11-8082D7DF99E3}"/>
+							<Position X="0" Y="0"/>
+						</Module>
+					</ModuleList>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="Player_Health" ID="{A0A779A7-07B7-4873-AAB9-54D6FC4C65C6}"/>
+							<Value>47</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="Level_Clear" ID="{012BB80A-6EBF-4A73-AEB7-0C2E3E470CD7}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Stone" ID="{CBE6C635-D5D6-4647-A62F-530489E060B3}"/>
+					</CurrentSwitchList>
+				</SoundcasterSession>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundcasterSessions>
 </WwiseDocument>
