@@ -1,4 +1,5 @@
 using System;
+using AK.Wwise;
 using Events.Scriptables;
 using UnityEngine;
 
@@ -12,8 +13,8 @@ namespace Managers
         [SerializeField] private AkWwiseEventChannelSO onPlayEvent;
         [SerializeField] private AkWwiseEventChannelSO onStopEvent;
         [SerializeField] private AkWwiseEventWithCallbackChannelSO onPlayEventWithCallback;
-
         [SerializeField] private AkWwiseSwitchEventChannelSO onSwitch;
+        [SerializeField] private AkWwiseRTPCEventChannelSO onRTPC;
 
         public void OnEnable()
         {
@@ -21,6 +22,7 @@ namespace Managers
             onPlayEventWithCallback?.onTypedEvent.AddListener(PlayEvent);
             onStopEvent?.onTypedEvent.AddListener(StopEvent);
             onSwitch?.onTypedEvent.AddListener(ToggleSwitch);
+            onRTPC?.onTypedEvent.AddListener(SetRTPC);
         }
 
         public void OnDisable()
@@ -51,6 +53,11 @@ namespace Managers
         private void ToggleSwitch(AK.Wwise.Switch inSwitch)
         {
             inSwitch.SetValue(gameObject);
+        }
+
+        private void SetRTPC((RTPC rtpc, int value) tuple)
+        {
+            tuple.rtpc.SetValue(gameObject, tuple.value);
         }
     }
 }

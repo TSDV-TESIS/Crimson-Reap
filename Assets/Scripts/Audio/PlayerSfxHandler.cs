@@ -15,17 +15,20 @@ public class PlayerSfxHandler : MonoBehaviour
     [SerializeField] private AK.Wwise.Event jumpSFX;
     [SerializeField] private AK.Wwise.RTPC healthRTPC;
 
+    [Header("WwiseEvents")]
     [SerializeField] private AkWwiseEventChannelSO playEvent;
     [SerializeField] private AkWwiseEventChannelSO stopEvent;
     [SerializeField] private AkWwiseSwitchEventChannelSO switchEvent;
+    [SerializeField] private AkWwiseRTPCEventChannelSO rtpcEvent;
 
-    [Header("Level Event Channels")]
+    [Header("PlayerEvents")]
     [SerializeField] private VoidEventChannelSO onDash;
     [SerializeField] private VoidEventChannelSO onJump;
     [SerializeField] private VoidEventChannelSO onAttack;
     [SerializeField] private StepsMaterialEventChannelSO onWalk;
     [SerializeField] private VoidEventChannelSO onStopWalking;
-
+    [SerializeField] private IntEventChannelSO onTakeDamage;
+    [SerializeField] private IntEventChannelSO onHeal;
     [Header("VFX Properties")]
     [SerializeField] private float stepsDelay;
 
@@ -43,6 +46,8 @@ public class PlayerSfxHandler : MonoBehaviour
         onAttack?.onEvent.AddListener(HandleAttackSFX);
         onWalk?.onTypedEvent.AddListener(HandleWalkSFX);
         onStopWalking?.onEvent.AddListener(HandleStopWalk);
+        onTakeDamage?.onIntEvent.AddListener(HandleLife);
+        onHeal?.onIntEvent.AddListener(HandleLife);
     }
 
     private void HandleDashSFX()
@@ -89,6 +94,11 @@ public class PlayerSfxHandler : MonoBehaviour
     {
         _isWalking = false;
         stopEvent?.RaiseEvent(stepsSFX);
+    }
+
+    private void HandleLife(int currentHealth)
+    {
+        rtpcEvent?.RaiseEvent((healthRTPC, currentHealth));
     }
 
     private IEnumerator StepCoolDown()
