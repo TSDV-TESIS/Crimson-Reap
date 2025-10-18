@@ -71,6 +71,7 @@ namespace Player
 
         public void HandleJump()
         {
+            Debug.Log($"OVERRIDE {_overrideJumpParticlePosition} {_overrideJumpParticleAngle}");
             GameObject pivotToUse = _overrideJumpParticlePosition ?? floorPivot;
             InstantiateInPosition(jumpParticles, pivotToUse, _overrideJumpParticleAngle ?? Quaternion.Euler(jumpVfxRotation));
             _overrideJumpParticlePosition = null;
@@ -126,6 +127,12 @@ namespace Player
                 _overrideJumpParticlePosition = sign > 0 ? rightPivot : leftPivot;
                 _overrideJumpParticleAngle = Quaternion.Euler(0, sign > 0 ? -90 : 90, 0);
             }
+        }
+
+        public void SetOverrides(int sign)
+        {
+            _overrideJumpParticlePosition = sign > 0 ? rightPivot : leftPivot;
+            _overrideJumpParticleAngle = Quaternion.Euler(0, sign > 0 ? -90 : 90, 0);
         }
 
         public void OnWallrideStop()
