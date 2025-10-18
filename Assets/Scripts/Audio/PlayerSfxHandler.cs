@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Events;
 using Events.ScriptableObjects;
 using Events.Scriptables;
@@ -16,6 +17,7 @@ public class PlayerSfxHandler : MonoBehaviour
 
     [SerializeField] private AkWwiseEventChannelSO playEvent;
     [SerializeField] private AkWwiseEventChannelSO stopEvent;
+    [SerializeField] private AkWwiseSwitchEventChannelSO switchEvent;
 
     [Header("Level Event Channels")]
     [SerializeField] private VoidEventChannelSO onDash;
@@ -24,7 +26,15 @@ public class PlayerSfxHandler : MonoBehaviour
     [SerializeField] private StepsMaterialEventChannelSO onWalk;
     [SerializeField] private VoidEventChannelSO onStopWalking;
 
-    private bool isWalking = false;
+    [Header("VFX Properties")]
+    [SerializeField] private float stepsDelay;
+
+    private bool _isWalking = false;
+
+    private Coroutine _stepCoolDown;
+    private bool _shouldStep = true;
+
+    private FloorMaterials _currentFloorMaterial = FloorMaterials.NONE;
 
     private void Start()
     {
@@ -52,28 +62,39 @@ public class PlayerSfxHandler : MonoBehaviour
 
     private void HandleWalkSFX(FloorMaterials floorMaterial)
     {
-        switch (floorMaterial)
+        if (!_shouldStep)
+            return;
+
+        if (floorMaterial != _currentFloorMaterial)
         {
-            case FloorMaterials.Wood:
-                Debug.Log("WoodenFloor");
-                break;
-            case FloorMaterials.Stone:
-                Debug.Log("StoneFloor");
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(floorMaterial), floorMaterial, null);
+            _currentFloorMaterial = floorMaterial;
+            switch (floorMaterial)
+            {
+                case FloorMaterials.Wood:
+                    switchEvent?.RaiseEvent(woodStepsSwitch);
+                    break;
+                case FloorMaterials.Stone:
+                    switchEvent?.RaiseEvent(stoneStepsSwitch);
+                    break;
+            }
         }
 
-        if (!isWalking)
-        {
-            isWalking = true;
-            playEvent?.RaiseEvent(stepsSFX);
-        }
+        playEvent?.RaiseEvent(stepsSFX);
+        if (_stepCoolDown != null)
+            StopCoroutine(_stepCoolDown);
+        _stepCoolDown = StartCoroutine(StepCoolDown());
     }
 
-    private void HandleStopWalk()
+    public void HandleStopWalk()
     {
-        isWalking = false;
+        _isWalking = false;
         stopEvent?.RaiseEvent(stepsSFX);
+    }
+
+    private IEnumerator StepCoolDown()
+    {
+        _shouldStep = false;
+        yield return new WaitForSeconds(stepsDelay);
+        _shouldStep = true;
     }
 }

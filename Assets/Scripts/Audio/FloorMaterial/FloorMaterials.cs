@@ -1,5 +1,6 @@
 public enum FloorMaterials
 {
     Wood,
-    Stone
+    Stone,
+    NONE
 }

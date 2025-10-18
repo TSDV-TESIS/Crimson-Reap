@@ -8,16 +8,19 @@ namespace Managers
     {
         [SerializeField] private AK.Wwise.Event stopAllSoundEvent;
 
-        [Header("Events")] 
+        [Header("Events")]
         [SerializeField] private AkWwiseEventChannelSO onPlayEvent;
         [SerializeField] private AkWwiseEventChannelSO onStopEvent;
         [SerializeField] private AkWwiseEventWithCallbackChannelSO onPlayEventWithCallback;
+
+        [SerializeField] private AkWwiseSwitchEventChannelSO onSwitch;
 
         public void OnEnable()
         {
             onPlayEvent?.onTypedEvent.AddListener(PlayEvent);
             onPlayEventWithCallback?.onTypedEvent.AddListener(PlayEvent);
             onStopEvent?.onTypedEvent.AddListener(StopEvent);
+            onSwitch?.onTypedEvent.AddListener(ToggleSwitch);
         }
 
         public void OnDisable()
@@ -32,7 +35,7 @@ namespace Managers
         {
             anEvent.Stop(gameObject);
         }
-        
+
         private void PlayEvent(AK.Wwise.Event anEvent)
         {
             Debug.Log("PLAY EVENT!");
@@ -42,7 +45,12 @@ namespace Managers
         private void PlayEvent(AK.Wwise.Event anEvent, AkCallbackManager.EventCallback callback)
         {
             anEvent.Post(gameObject,
-                (uint)(AkCallbackType.AK_MusicSyncAll | AkCallbackType.AK_EnableGetMusicPlayPosition), callback);
+            (uint)(AkCallbackType.AK_MusicSyncAll | AkCallbackType.AK_EnableGetMusicPlayPosition), callback);
+        }
+
+        private void ToggleSwitch(AK.Wwise.Switch inSwitch)
+        {
+            inSwitch.SetValue(gameObject);
         }
     }
 }
