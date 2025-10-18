@@ -16,7 +16,6 @@ public class WinPanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timeTMPro;
     [SerializeField] private TextMeshProUGUI timePersonalBestTMPro;
     [SerializeField] private LeaderboardRequestHandler leaderboardRequestHandler;
-    [SerializeField] private TextMeshProUGUI NextLevelCountDown;
     [SerializeField] private float countDownDuration = 3;
 
     private string timePersonalBest = "timePersonalBest";
@@ -50,19 +49,11 @@ public class WinPanel : MonoBehaviour
 
         countDown = StartCoroutine(NextLevelCoroutine(time));
 
-        bool shouldDisplayPersonalBest = false;
         if (!PlayerPrefs.HasKey(timePersonalBest) || PlayerPrefs.GetFloat(timePersonalBest) > time)
-        {
             PlayerPrefs.SetFloat(timePersonalBest, time);
-            shouldDisplayPersonalBest = true;
-        }
 
         timeTMPro.text = timeSuffix + TimeFormatting.GetFormattedTime(time);
-
-        // if (shouldDisplayPersonalBest)
-        //     timePersonalBestTMPro.text = recordText;
-        // else
-        //     timePersonalBestTMPro.text = recordSuffix + TimeFormatting.GetFormattedTime(PlayerPrefs.GetFloat(timePersonalBest));
+        timePersonalBestTMPro.text = TimeFormatting.GetFormattedTime(PlayerPrefs.GetFloat(timePersonalBest));
     }
 
     private IEnumerator NextLevelCoroutine(float levelClearTime)

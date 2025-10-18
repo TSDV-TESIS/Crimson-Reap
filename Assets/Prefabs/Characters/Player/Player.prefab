@@ -464,6 +464,94 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6391947559083867225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7675558998481323390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1481131112328293689}
+  - component: {fileID: 7964009424280103045}
+  m_Layer: 6
+  m_Name: SFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1481131112328293689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675558998481323390}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6391947559083867225}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7964009424280103045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7675558998481323390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38211fbc2432440418c73becc9daeabe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepsSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: eeab960a0de1a164d9fc24fb3e9b4aba, type: 2}
+  woodStepsSwitch:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 040f58fa79734bf4ca3c22cf4b90bbb6, type: 2}
+  stoneStepsSwitch:
+    idInternal: 0
+    valueGuidInternal: 
+    groupIdInternal: 0
+    groupGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 32edc6d04c6b33a46a6608070c6c2cfa, type: 2}
+  dashSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: c45b4bb2d298bc7479ccc142ab70731e, type: 2}
+  attackSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 671efe57cdcbee5489a36f1b00b69fcc, type: 2}
+  jumpSFX:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e0ef71542f1394f43b7e875127b6ebd8, type: 2}
+  healthRTPC:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 9b7a850805810f54d82952f2edc13b28, type: 2}
+  playEvent: {fileID: 11400000, guid: d81697f8835a04c42aa91bb535d74400, type: 2}
+  stopEvent: {fileID: 11400000, guid: a574df59ea7f45f489eda4edb77accb8, type: 2}
+  switchEvent: {fileID: 11400000, guid: 09e44adb9d646e24a9f56e9292ef254f, type: 2}
+  rtpcEvent: {fileID: 11400000, guid: 5daf39f6afc06b547a527d006c78c235, type: 2}
+  onDash: {fileID: 11400000, guid: d1a973f980d430d4e9acbbda2aa50488, type: 2}
+  onJump: {fileID: 11400000, guid: b47bd6829286430468009d7b8b6f07f1, type: 2}
+  onAttack: {fileID: 11400000, guid: d87a3b18f1777fc40abdf7775c0a9e60, type: 2}
+  onWalk: {fileID: 11400000, guid: fd1dd04d848796a4494040578062054a, type: 2}
+  onStopWalking: {fileID: 11400000, guid: 0ad6bda068cbe014ebae7a948311cd43, type: 2}
+  onTakeDamage: {fileID: 11400000, guid: 907783a8cffc33e4ebffa90d6b4df275, type: 2}
+  onHeal: {fileID: 11400000, guid: 84372648de01f7d41a1f7238606514f9, type: 2}
+  stepsDelay: 0.2
 --- !u!1 &7736462112751391781
 GameObject:
   m_ObjectHideFlags: 0
@@ -832,6 +920,7 @@ Transform:
   - {fileID: 4094496332656559244}
   - {fileID: 410731331810919608}
   - {fileID: 1764498939030004863}
+  - {fileID: 1481131112328293689}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!143 &6981576557858149188
@@ -950,6 +1039,18 @@ MonoBehaviour:
         - m_Target: {fileID: 4405460492393543286}
           m_TargetAssemblyTypeName: Player.PlayerVfxController, Assembly-CSharp
           m_MethodName: OnWalkingStop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 7964009424280103045}
+          m_TargetAssemblyTypeName: PlayerSfxHandler, Assembly-CSharp
+          m_MethodName: HandleStopWalk
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1560,6 +1661,7 @@ MonoBehaviour:
   agent: {fileID: 2452499770306614508}
   animationController: {fileID: 7419154463842292251}
   attackObject: {fileID: 4589949393311906425}
+  onAttack: {fileID: 11400000, guid: d87a3b18f1777fc40abdf7775c0a9e60, type: 2}
   attackProperties: {fileID: 11400000, guid: 4917520e4ef130b49a9886cfabf46d90, type: 2}
 --- !u!136 &2262308662148885198
 CapsuleCollider:
@@ -1632,6 +1734,8 @@ MonoBehaviour:
   agent: {fileID: 2452499770306614508}
   inputHandler: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
   unboundWallBufferSeconds: 0.75
+  onWalkEvent: {fileID: 11400000, guid: fd1dd04d848796a4494040578062054a, type: 2}
+  onStopWalkEvent: {fileID: 11400000, guid: 0ad6bda068cbe014ebae7a948311cd43, type: 2}
 --- !u!114 &6927853401671723050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1674,6 +1778,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onJump: {fileID: 11400000, guid: b47bd6829286430468009d7b8b6f07f1, type: 2}
 --- !u!114 &2977028123855828456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2901,7 +3006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5823546749146910717, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.x
-      value: -4.1410954e-15
+      value: 1.0069759e-14
       objectReference: {fileID: 0}
     - target: {fileID: 5823546749146910717, guid: 66634b1a9dbb26248825f77e0900702f, type: 3}
       propertyPath: m_PropertySheet.m_Vector3f.m_Array.Array.data[1].m_Value.z

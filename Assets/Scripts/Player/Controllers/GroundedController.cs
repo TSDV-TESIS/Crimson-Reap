@@ -1,4 +1,6 @@
 using System;
+using Events;
+using Events.Scriptables;
 using FSM;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,7 +13,9 @@ namespace Player.Controllers
         private PlayerMovement _playerMovement;
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private float unboundWallBufferSeconds = 0.75f;
-        
+        [SerializeField] private StepsMaterialEventChannelSO onWalkEvent;
+        [SerializeField] private VoidEventChannelSO onStopWalkEvent;
+
         private void OnEnable()
         {
             _playerMovement ??= GetComponent<PlayerMovement>();
@@ -21,9 +25,9 @@ namespace Player.Controllers
 
             float clearance = agent.MovementChecks.GetGroundClearance();
             if (clearance == 0) return;
-            
+
             _playerMovement.Grounded(clearance);
-            
+
             agent.MovementChecks.ResetShadowStepsOnAir();
             agent.AttackChecks.ResetAttacksOnJump();
         }
@@ -45,6 +49,13 @@ namespace Player.Controllers
 
             if (!agent.MovementChecks.IsGrounded())
                 agent.ChangeStateToFalling();
+            else if (_playerMovement.Velocity.x != 0)
+            {
+                if (agent.MovementChecks.GroundHit.transform.TryGetComponent(out WalkableFloor floor))
+                    onWalkEvent?.RaiseEvent(floor.Material);
+            }
+            else
+                onStopWalkEvent?.RaiseEvent();
         }
 
         private void OnJump()
