@@ -10,10 +10,10 @@ namespace Player.Checks
 {
     public class PlayerMovementChecks : MonoBehaviour
     {
-        [Header("Input handler")] 
+        [Header("Input handler")]
         [SerializeField] private InputHandler inputHandler;
-        
-        [Header("Movement Properties")] 
+
+        [Header("Movement Properties")]
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
 
         [Header("Feet pivot")] [SerializeField]
@@ -24,16 +24,16 @@ namespace Player.Checks
         [Header("WallRide pivot")] [SerializeField]
         private Transform wallRidePivot;
 
-        [Header("Events")] 
+        [Header("Events")]
         [SerializeField] private FloatEventChannel onShadowstepCooldownValueEvent;
         [SerializeField] private VoidEventChannelSO onDoingDropdown;
         [SerializeField] private VoidEventChannelSO onStopDropdown;
-        
+
         [NonSerialized] public Vector3 WallrideHitPosition;
         [NonSerialized] public bool IsOnDropdown;
         [NonSerialized] public int WallSlideDirection;
         [NonSerialized] public bool IsShadowStepOnCooldown;
-        
+
         private RaycastHit _groundHit;
         private RaycastHit _ceilingHit;
         private RaycastHit _wallHit;
@@ -49,7 +49,7 @@ namespace Player.Checks
 
         private float _groundedCoyoteTimeSeconds;
         private float _offGroundGraceTimeSeconds;
-        
+
         private Coroutine _shouldCheckWallCoroutine;
         private Coroutine _unboundWallCoroutine;
         private Coroutine _shadowstepCooldownCoroutine;
@@ -59,6 +59,8 @@ namespace Player.Checks
         private LayerMask _whatIsGround;
         private Coroutine _stopCheckingPlatformCooldownCoroutine;
         private bool _shouldCheckPlatforms;
+
+        public RaycastHit GroundHit => _groundHit;
 
         private void OnEnable()
         {
@@ -116,7 +118,6 @@ namespace Player.Checks
             {
                 if (_groundHit.transform.TryGetComponent(out IOpenable openable))
                     openable.Open();
-
                 _groundedCoyoteTimeSeconds = 0f;
                 _offGroundGraceTimeSeconds = 0f;
                 return true;
@@ -210,7 +211,7 @@ namespace Player.Checks
                 _shouldUnboundWall = false;
                 return true;
             }
-            
+
             if (Mathf.Sign(moveDirection.x) == Mathf.Sign(WallSlideDirection))
             {
                 StopUnbounding();
@@ -430,7 +431,7 @@ namespace Player.Checks
             return WallRaycast(out WallSlideDirection) &&
                    (playerMovementProperties.avoidableObjects & (1 << _wallHit.transform.gameObject.layer)) == 0;
         }
-        
+
         private void CheckDropdown()
         {
             if (IsOnDropdown)
@@ -449,8 +450,8 @@ namespace Player.Checks
 
             if (IsOnPlatform())
             {
-                if(_stopCheckingPlatformCooldownCoroutine != null) StopCoroutine(_stopCheckingPlatformCooldownCoroutine);
-                _stopCheckingPlatformCooldownCoroutine = StartCoroutine(StopCheckingPlatformsCooldownCoroutine());   
+                if (_stopCheckingPlatformCooldownCoroutine != null) StopCoroutine(_stopCheckingPlatformCooldownCoroutine);
+                _stopCheckingPlatformCooldownCoroutine = StartCoroutine(StopCheckingPlatformsCooldownCoroutine());
             }
         }
 

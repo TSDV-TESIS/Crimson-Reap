@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Events;
 using FSM;
 using Player.Properties;
 using UnityEngine;
@@ -14,7 +15,8 @@ namespace Player.Controllers
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private UnityEvent<int> onWallJumpFromJump;
-        
+        [SerializeField] private VoidEventChannelSO onJump;
+
         private Coroutine _changeToWallslideCheckCoroutine;
         private Coroutine _changeToFasterFallingCheckCoroutine;
         private float _timeInJump;
@@ -24,13 +26,13 @@ namespace Player.Controllers
         {
             _timeInJump = 0f;
             _isJumpCancelled = false;
-            
+
             _changeToWallslideCheckCoroutine = null;
             _changeToFasterFallingCheckCoroutine = null;
-            
+
             _playerMovement ??= GetComponent<PlayerMovement>();
             _playerMovement.ShouldAddFasterFallingValues = false;
-            
+
             inputHandler?.OnPlayerShadowStep.AddListener(HandleShadowstep);
             inputHandler?.OnPlayerJumpCancelled.AddListener(OnJumpCancel);
             inputHandler?.OnPlayerJump.AddListener(OnJumpEnabled);
@@ -41,7 +43,7 @@ namespace Player.Controllers
         {
             _changeToWallslideCheckCoroutine = null;
             _changeToFasterFallingCheckCoroutine = null;
-           
+
             inputHandler?.OnPlayerShadowStep.RemoveListener(OnJumpCancel);
             inputHandler?.OnPlayerJump.RemoveListener(OnJumpEnabled);
             inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
@@ -62,12 +64,13 @@ namespace Player.Controllers
         private void Jump()
         {
             _playerMovement.Jump();
+            onJump?.RaiseEvent();
         }
-        
+
         private void OnJumpCancel()
         {
             if (_timeInJump >= playerMovementProperties.maxCancelTime) return;
-            
+
             _isJumpCancelled = true;
         }
 
@@ -120,11 +123,11 @@ namespace Player.Controllers
             {
                 if (_changeToWallslideCheckCoroutine != null) return;
                 _changeToWallslideCheckCoroutine = StartCoroutine(
-                    DelayedCheck(
-                        () => !agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection,
-                            _playerMovement.Velocity),
-                        agent.ChangeStateToWallSlide
-                    )
+                DelayedCheck(
+                () => !agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection,
+                _playerMovement.Velocity),
+                agent.ChangeStateToWallSlide
+                )
                 );
             }
 
@@ -132,9 +135,9 @@ namespace Player.Controllers
             {
                 if (_changeToFasterFallingCheckCoroutine != null) return;
                 _changeToFasterFallingCheckCoroutine = StartCoroutine(
-                    DelayedCheck(
-                        () => agent.MovementChecks.IsDoingDropdown(),
-                        agent.ChangeStateToFasterFalling)
+                DelayedCheck(
+                () => agent.MovementChecks.IsDoingDropdown(),
+                agent.ChangeStateToFasterFalling)
                 );
             }
         }
