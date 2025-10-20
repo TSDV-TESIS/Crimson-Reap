@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4780742236517142286
+--- !u!1 &7739124224071820701
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,64 +8,76 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8190387995973269039}
-  - component: {fileID: 7358834492934848713}
-  - component: {fileID: 2998995236198478869}
-  m_Layer: 5
-  m_Name: VFX_Explosion
+  - component: {fileID: 3525604483180422698}
+  - component: {fileID: 5361277707690137207}
+  - component: {fileID: 2780338292690768700}
+  m_Layer: 0
+  m_Name: VE_Sunrays
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8190387995973269039
+--- !u!4 &3525604483180422698
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4780742236517142286}
+  m_GameObject: {fileID: 7739124224071820701}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
+  m_LocalRotation: {x: 0, y: 0, z: -0.4059393, w: 0.9139001}
+  m_LocalPosition: {x: 22.98, y: 9.51, z: -1.267}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &7358834492934848713
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -47.9}
+--- !u!2083052967 &5361277707690137207
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4780742236517142286}
+  m_GameObject: {fileID: 7739124224071820701}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: ac86b1396fea7ce478bf7a8adef06fb4, type: 3}
-  m_InitialEventName: explosion
+  m_Asset: {fileID: 8926484042661614526, guid: 0834a018946996a429ea550f17b33b7b, type: 3}
+  m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
-  m_ResetSeedOnPlay: 0
+  m_ResetSeedOnPlay: 1
   m_AllowInstancing: 1
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 1
-        m_Name: AuraIntensity
+      - m_Value: 1.82
+        m_Name: Length
         m_Overridden: 1
-      - m_Value: 0.1
-        m_Name: Duration
+      - m_Value: 0.319
+        m_Name: Spawn Size
         m_Overridden: 1
+      - m_Value: 2.37
+        m_Name: Size
+        m_Overridden: 1
+      - m_Value: -2
+        m_Name: Dust Height
+        m_Overridden: 1
+      - m_Value: 0.16
+        m_Name: Dust amount
+        m_Overridden: 0
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array:
-      - m_Value: {x: 2, y: 2, z: 2}
-        m_Name: BoundsSizeXYZ
-        m_Overridden: 0
-    m_Vector4f:
       m_Array: []
+    m_Vector4f:
+      m_Array:
+      - m_Value: {x: 0.9339623, y: 0.2519444, z: 0.09251513, w: 0}
+        m_Name: Ray Color
+        m_Overridden: 1
+      - m_Value: {x: 2, y: 0.7084081, z: 0.24199998, w: 0}
+        m_Name: Dust Color
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
@@ -80,14 +92,14 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &2998995236198478869
+--- !u!73398921 &2780338292690768700
 VFXRenderer:
   serializedVersion: 1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4780742236517142286}
+  m_GameObject: {fileID: 7739124224071820701}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
