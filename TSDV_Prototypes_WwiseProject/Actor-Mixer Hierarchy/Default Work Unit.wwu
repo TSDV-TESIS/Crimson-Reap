@@ -1081,6 +1081,101 @@
 							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
 						</Reference>
 					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="shot_bow_01" ID="{B2B4E7E3-54CB-4758-A328-330642981034}" ShortID="798626982">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="shot_bow_01" ID="{31516D23-200F-4E5F-95F5-E6442D0C9ACC}">
+									<Language>SFX</Language>
+									<AudioFile>shot_bow_01.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="255401681"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="shot_bow_01" ID="{31516D23-200F-4E5F-95F5-E6442D0C9ACC}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<RandomSequenceContainer Name="Enemy_Slash" ID="{A23B4219-4FC4-4044-BA07-0B04B946651F}" ShortID="298697586">
+							<PropertyList>
+								<Property Name="Pitch" Type="int32">
+									<ModifierList>
+										<ModifierInfo>
+											<Modifier Name="" ID="{C5975821-189D-4B3D-867C-739375BBDF51}">
+												<PropertyList>
+													<Property Name="Enabled" Type="bool" Value="True"/>
+													<Property Name="Max" Type="Real64" Value="80"/>
+													<Property Name="Min" Type="Real64" Value="-76"/>
+												</PropertyList>
+											</Modifier>
+										</ModifierInfo>
+									</ModifierList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="Enemy_Slash_01" ID="{D017AF56-D45D-4201-A00B-EB2275E820A6}" ShortID="647286361">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Enemy_Slash_01" ID="{A4DDEBF8-539B-47B4-AFC8-1AA58AFFDD76}">
+											<Language>SFX</Language>
+											<AudioFile>Enemy_Slash_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="520663491"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Enemy_Slash_01" ID="{A4DDEBF8-539B-47B4-AFC8-1AA58AFFDD76}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Enemy_Slash_02" ID="{2343AD7E-410D-408C-BD46-4169405F288C}" ShortID="482621046">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="Enemy_Slash_02" ID="{7FF20F7F-6416-417D-A954-52A3F2F24A72}">
+											<Language>SFX</Language>
+											<AudioFile>Enemy_Slash_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="891342299"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="Enemy_Slash_02" ID="{7FF20F7F-6416-417D-A954-52A3F2F24A72}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
+					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="Environment" ID="{1250C2B9-69AF-46D2-B25B-E719E606349E}" ShortID="808347812">
 					<PropertyList>
@@ -1107,12 +1202,17 @@
 						<Sound Name="Door_Opening_01" ID="{A2FB0940-572B-4591-AB9E-13A8D4FCD314}" ShortID="862679512">
 							<PropertyList>
 								<Property Name="3DSpatialization" Type="int16" Value="2"/>
-								<Property Name="Lowpass" Type="int16">
+								<Property Name="Highpass" Type="int16">
 									<ValueList>
-										<Value>10</Value>
+										<Value>25</Value>
 									</ValueList>
 								</Property>
 								<Property Name="OverridePositioning" Type="bool" Value="True"/>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>130</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Attenuation">
@@ -1128,10 +1228,10 @@
 							<ChildrenList>
 								<AudioFileSource Name="Door_SFX" ID="{64F49BDB-2B92-4F68-A638-86075DE1F932}">
 									<PropertyList>
-										<Property Name="FadeInDuration" Type="Real64" Value="0.0253554301833568"/>
-										<Property Name="FadeOutDuration" Type="Real64" Value="0.078179243065352"/>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0743124018609167"/>
+										<Property Name="FadeOutDuration" Type="Real64" Value="0.102657728904132"/>
 										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-										<Property Name="TrimEnd" Type="Real64" Value="0.47730730809674"/>
+										<Property Name="TrimEnd" Type="Real64" Value="0.443037427922448"/>
 									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>Door_SFX.wav</AudioFile>

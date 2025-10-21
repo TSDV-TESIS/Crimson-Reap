@@ -359,6 +359,15 @@
 						<Property Name="Color" Type="int16" Value="10"/>
 						<Property Name="OverrideColor" Type="bool" Value="True"/>
 					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{1C14F3FD-6F8D-4952-BAC2-2B9B64840F5C}" ShortID="417350514">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Enemy_Slash" ID="{A23B4219-4FC4-4044-BA07-0B04B946651F}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
 				</Event>
 				<Event Name="Play_Enemy_StartPointing" ID="{F08546C5-6BA3-4606-BF22-1522CDDDE8C6}">
 					<PropertyList>
@@ -371,6 +380,15 @@
 						<Property Name="Color" Type="int16" Value="10"/>
 						<Property Name="OverrideColor" Type="bool" Value="True"/>
 					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{F4F4BE84-F699-4130-B0C1-E84AC338E58D}" ShortID="1067956111">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="shot_bow_01" ID="{B2B4E7E3-54CB-4758-A328-330642981034}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
 				</Event>
 				<Event Name="Play_Bow_Hit_Explosion" ID="{9EFBAD5C-D4E1-471B-A0EF-4C5748A4022E}">
 					<PropertyList>
