@@ -7,6 +7,7 @@ namespace Utils
 {
     public class BlockMenuManager : MonoBehaviour
     {
+        #if UNITY_EDITOR
         [MenuItem("Blockings/Hide colliders")]
         static void HideColliders()
         {
@@ -28,5 +29,6 @@ namespace Utils
                 blockColliderHider.Show();
             }
         }
+        #endif
     }
 }

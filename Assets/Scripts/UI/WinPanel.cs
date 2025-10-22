@@ -2,6 +2,7 @@ using System.Collections;
 using Events;
 using Events.Scriptables;
 using TMPro;
+using UI.Leaderboard;
 using UnityEngine;
 
 public class WinPanel : MonoBehaviour
@@ -14,7 +15,7 @@ public class WinPanel : MonoBehaviour
     [SerializeField] private TieredTimes medals;
     [SerializeField] private TextMeshProUGUI timeTMPro;
     [SerializeField] private TextMeshProUGUI timePersonalBestTMPro;
-    [SerializeField] private TextMeshProUGUI NextLevelCountDown;
+    [SerializeField] private LeaderboardRequestHandler leaderboardRequestHandler;
     [SerializeField] private float countDownDuration = 3;
 
     private string timePersonalBest = "timePersonalBest";
@@ -41,25 +42,18 @@ public class WinPanel : MonoBehaviour
     private void HandleTimerFinish(float time)
     {
         panel.SetActive(true);
+        leaderboardRequestHandler.HandleSetTime((int)(time * 1000));
         Time.timeScale = 0;
         if (countDown != null)
             StopCoroutine(countDown);
 
         countDown = StartCoroutine(NextLevelCoroutine(time));
 
-        bool shouldDisplayPersonalBest = false;
         if (!PlayerPrefs.HasKey(timePersonalBest) || PlayerPrefs.GetFloat(timePersonalBest) > time)
-        {
             PlayerPrefs.SetFloat(timePersonalBest, time);
-            shouldDisplayPersonalBest = true;
-        }
 
         timeTMPro.text = timeSuffix + TimeFormatting.GetFormattedTime(time);
-
-        // if (shouldDisplayPersonalBest)
-        //     timePersonalBestTMPro.text = recordText;
-        // else
-        //     timePersonalBestTMPro.text = recordSuffix + TimeFormatting.GetFormattedTime(PlayerPrefs.GetFloat(timePersonalBest));
+        timePersonalBestTMPro.text = TimeFormatting.GetFormattedTime(PlayerPrefs.GetFloat(timePersonalBest));
     }
 
     private IEnumerator NextLevelCoroutine(float levelClearTime)

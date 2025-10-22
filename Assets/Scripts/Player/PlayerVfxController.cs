@@ -18,9 +18,18 @@ namespace Player
         [SerializeField] private float wallrideParticleAngle = 69f;
         [SerializeField] private Vector3 jumpVfxRotation;
         
+        [Header("Abosrb Vfx")]    
+        [SerializeField] private VisualEffect absorbVfx;
+
+        [SerializeField] private string absorbLoopEventName = "Absorb_Loop";
+        [SerializeField] private string absorbExplosionEventName = "Explosion_Start";
+        
         [Header("Pivots")] [SerializeField] private GameObject floorPivot;
         [SerializeField] private GameObject leftPivot;
         [SerializeField] private GameObject rightPivot;
+
+        [Header("Events")] 
+        [SerializeField] private VoidEventChannelSO onSoulAbsorb;
         
         private float _lastSign;
         private Vector3 _lastWallridePosition;
@@ -37,16 +46,32 @@ namespace Player
             _overrideJumpParticleAngle = null;
 
             _healthPoints ??= GetComponent<HealthPoints>();
+            onSoulAbsorb?.onEvent.AddListener(HandleAbsorbExplosion);
+        }
 
+        private void OnDisable()
+        {
+            onSoulAbsorb?.onEvent.RemoveListener(HandleAbsorbExplosion);
         }
 
         private void Update()
         {
             auraVfx.SetFloat("AuraIntensity", (float)_healthPoints.CurrentHp / (float)_healthPoints.MaxHealth);
         }
+        
+        private void HandleAbsorbExplosion()
+        {
+            absorbVfx.SendEvent(absorbExplosionEventName);
+        }
+
+        public void HandleAbsorb()
+        {
+            absorbVfx.SendEvent(absorbLoopEventName);
+        }
 
         public void HandleJump()
         {
+            Debug.Log($"OVERRIDE {_overrideJumpParticlePosition} {_overrideJumpParticleAngle}");
             GameObject pivotToUse = _overrideJumpParticlePosition ?? floorPivot;
             InstantiateInPosition(jumpParticles, pivotToUse, _overrideJumpParticleAngle ?? Quaternion.Euler(jumpVfxRotation));
             _overrideJumpParticlePosition = null;
@@ -102,6 +127,12 @@ namespace Player
                 _overrideJumpParticlePosition = sign > 0 ? rightPivot : leftPivot;
                 _overrideJumpParticleAngle = Quaternion.Euler(0, sign > 0 ? -90 : 90, 0);
             }
+        }
+
+        public void SetOverrides(int sign)
+        {
+            _overrideJumpParticlePosition = sign > 0 ? rightPivot : leftPivot;
+            _overrideJumpParticleAngle = Quaternion.Euler(0, sign > 0 ? -90 : 90, 0);
         }
 
         public void OnWallrideStop()
