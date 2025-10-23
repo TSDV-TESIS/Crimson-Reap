@@ -55,7 +55,8 @@
 											<PropertyList>
 												<Property Name="DestinationContextType" Type="int16" Value="2"/>
 												<Property Name="EnableSourceFadeOut" Type="bool" Value="True"/>
-												<Property Name="ExitSourceAt" Type="int16" Value="0"/>
+												<Property Name="ExitSourceAt" Type="int16" Value="2"/>
+												<Property Name="PlayTransitionPreEntry" Type="bool" Value="False"/>
 												<Property Name="SourceContextType" Type="int16" Value="2"/>
 												<Property Name="UseTransitionObject" Type="bool" Value="True"/>
 											</PropertyList>
@@ -72,7 +73,8 @@
 												<SourceFadeOut>
 													<MusicFade Name="Source Fade-out" ID="{74F19B6B-ABAA-42D5-AE16-C13E38F59D19}">
 														<PropertyList>
-															<Property Name="FadeTime" Type="Real64" Value="0.1"/>
+															<Property Name="FadeOffset" Type="Real64" Value="0.6"/>
+															<Property Name="FadeTime" Type="Real64" Value="0.8"/>
 															<Property Name="FadeType" Type="int16" Value="1"/>
 														</PropertyList>
 													</MusicFade>
@@ -262,7 +264,7 @@
 																				<MusicClip Name="GAMEPLAY MUSIC 1 - 16 GAMEPLAY MUSIC 1 START" ID="{DF0C0EFC-4EEF-4BE9-8DC1-7DC51B6D07C8}">
 																					<PropertyList>
 																						<Property Name="EndTrimOffset" Type="Real64" Value="32836.2291666667"/>
-																						<Property Name="FadeInMode" Type="int16" Value="0"/>
+																						<Property Name="FadeInDuration" Type="Real64" Value="40.7226910424799"/>
 																						<Property Name="FadeOutMode" Type="int16" Value="0"/>
 																					</PropertyList>
 																					<AudioSourceRef Name="GAMEPLAY MUSIC 1 - 16 GAMEPLAY MUSIC 1 START" ID="{3F32D3AF-7AC3-40C3-BB67-1D98F53F80FE}"/>
@@ -422,12 +424,12 @@
 																				<PointList>
 																					<Point>
 																						<XPos>0</XPos>
-																						<YPos>-0</YPos>
+																						<YPos>-2.76605</YPos>
 																						<Flags>5</Flags>
 																					</Point>
 																					<Point>
 																						<XPos>15.32567</XPos>
-																						<YPos>-0.2221</YPos>
+																						<YPos>-2.52799</YPos>
 																						<Flags>0</Flags>
 																					</Point>
 																					<Point>
@@ -1437,7 +1439,7 @@
 						</MusicPlaylistContainer>
 						<MusicSegment Name="Drums Only Transition" ID="{CB2E4287-A732-4D07-A04D-D7FEE2E00898}" ShortID="1003536093">
 							<PropertyList>
-								<Property Name="EndPosition" Type="Real64" Value="8741.45833333333"/>
+								<Property Name="EndPosition" Type="Real64" Value="8887.19136483297"/>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -1505,7 +1507,11 @@
 								<ObjectList Name="Cues">
 									<Reference>
 										<Local>
-											<MusicCue Name="Entry Cue" ID="{B8FDFCE9-34FC-43F1-84A7-9D4F11061D6F}"/>
+											<MusicCue Name="Entry Cue" ID="{B8FDFCE9-34FC-43F1-84A7-9D4F11061D6F}">
+												<PropertyList>
+													<Property Name="TimeMs" Type="Real64" Value="2000"/>
+												</PropertyList>
+											</MusicCue>
 										</Local>
 									</Reference>
 									<Reference>
@@ -1513,7 +1519,7 @@
 											<MusicCue Name="Exit Cue" ID="{80C3D7EC-2139-45CF-8293-E01EDA0D9560}">
 												<PropertyList>
 													<Property Name="CueType" Type="int16" Value="1"/>
-													<Property Name="TimeMs" Type="Real64" Value="8741.45833333333"/>
+													<Property Name="TimeMs" Type="Real64" Value="8000"/>
 												</PropertyList>
 											</MusicCue>
 										</Local>

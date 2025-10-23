@@ -4,6 +4,28 @@
 		<WorkUnit Name="Default Work Unit" ID="{20874D66-B9FD-4F33-A8B9-78873CD624E1}" PersistMode="Standalone">
 			<ChildrenList>
 				<SoundcasterSession Name="StepTest" ID="{CBA363D2-05B6-4CB1-806C-796E86038BEC}">
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="Sfx_Volume" ID="{843A4C4C-F5C9-41EB-87CD-ED4EC442B9CD}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Player_Health" ID="{A0A779A7-07B7-4873-AAB9-54D6FC4C65C6}"/>
+							<Value>0</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Music_Volume" ID="{E20A6395-6C29-4ED2-BE16-E7B92A370C0C}"/>
+							<Value>100</Value>
+						</RTPCValue>
+					</RTPCValueList>
+					<CurrentStateList ShowAll="true">
+						<CurrentStateRef Name="Level_End_Menu" ID="{5D686081-5692-47F8-84B4-6AC5EEF52032}"/>
+					</CurrentStateList>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Stone" ID="{CBE6C635-D5D6-4647-A62F-530489E060B3}"/>
+					</CurrentSwitchList>
+				</SoundcasterSession>
+				<SoundcasterSession Name="Music Transitions" ID="{0C3A3468-8279-4345-B129-12B04D6EAFF3}">
 					<ModuleList>
 						<Module>
 							<ObjectRef Name="State_Play_Game_Start" ID="{A7933A44-1FA2-4E6D-8310-CFC5B3AD5095}" WorkUnitID="{3E1C7913-A2C7-405E-8C11-8082D7DF99E3}"/>
@@ -13,11 +35,11 @@
 					<RTPCValueList ShowAll="true">
 						<RTPCValue>
 							<GameParameterRef Name="Sfx_Volume" ID="{843A4C4C-F5C9-41EB-87CD-ED4EC442B9CD}"/>
-							<Value>0</Value>
+							<Value>100</Value>
 						</RTPCValue>
 						<RTPCValue>
 							<GameParameterRef Name="Player_Health" ID="{A0A779A7-07B7-4873-AAB9-54D6FC4C65C6}"/>
-							<Value>4.21455938697318</Value>
+							<Value>0</Value>
 						</RTPCValue>
 						<RTPCValue>
 							<GameParameterRef Name="Music_Volume" ID="{E20A6395-6C29-4ED2-BE16-E7B92A370C0C}"/>
@@ -27,9 +49,7 @@
 					<CurrentStateList ShowAll="true">
 						<CurrentStateRef Name="Level_1" ID="{07FEE305-291D-454B-BB4B-9AA02A359DD5}"/>
 					</CurrentStateList>
-					<CurrentSwitchList ShowAll="true">
-						<CurrentSwitchRef Name="Stone" ID="{CBE6C635-D5D6-4647-A62F-530489E060B3}"/>
-					</CurrentSwitchList>
+					<CurrentSwitchList ShowAll="true"/>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>
