@@ -60,6 +60,7 @@ namespace AK
                 static const AkUniqueID MAIN_MENU = 2005704188U;
                 static const AkUniqueID NONE = 748895195U;
                 static const AkUniqueID PAUSE_MENU = 3422541661U;
+                static const AkUniqueID TUTORIAL = 3762955427U;
             } // namespace STATE
         } // namespace STATES
 
@@ -82,7 +83,9 @@ namespace AK
 
     namespace GAME_PARAMETERS
     {
+        static const AkUniqueID MUSIC_VOLUME = 1006694123U;
         static const AkUniqueID PLAYER_HEALTH = 215992295U;
+        static const AkUniqueID SFX_VOLUME = 1564184899U;
     } // namespace GAME_PARAMETERS
 
     namespace BANKS
@@ -94,6 +97,8 @@ namespace AK
     namespace BUSSES
     {
         static const AkUniqueID MASTER_AUDIO_BUS = 3803692087U;
+        static const AkUniqueID MUSIC_BUS = 3127962312U;
+        static const AkUniqueID SFX_BUS = 1502772432U;
     } // namespace BUSSES
 
     namespace AUX_BUSSES
