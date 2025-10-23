@@ -23,6 +23,8 @@ public class PauseManager : MonoBehaviour
     private void OnEnable()
     {
         input.onPauseToggle.AddListener(TogglePause);
+        isPaused = false;
+        onGameUnpaused?.RaiseEvent();
         Time.timeScale = 1;
     }
 
@@ -34,12 +36,13 @@ public class PauseManager : MonoBehaviour
     public void TogglePause()
     {
         isPaused = !isPaused;
+        Debug.Log($"PAUSE CALLED: {isPaused}");
         panel.SetActive(isPaused);
         if (isPaused)
         {
-            onGamePaused?.RaiseEvent();
             pauseScreen.SetActive(true);
             settingsScreen.SetActive(false);
+            onGamePaused?.RaiseEvent();
         }
         else
             onGameUnpaused?.RaiseEvent();
