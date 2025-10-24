@@ -1652,6 +1652,43 @@
 								</Local>
 							</Reference>
 						</ObjectList>
+						<ObjectList Name="RTPC">
+							<Reference>
+								<Local>
+									<RTPC Name="" ID="{DAE74507-00DC-4A02-894E-FCC82A63B4B6}" ShortID="453381316">
+										<PropertyList>
+											<Property Name="PropertyName" Type="string" Value="Volume"/>
+										</PropertyList>
+										<ReferenceList>
+											<Reference Name="ControlInput">
+												<ObjectRef Name="Music_Volume" ID="{E20A6395-6C29-4ED2-BE16-E7B92A370C0C}" WorkUnitID="{2A2501B1-80A0-4243-8C52-C6AFB5797720}"/>
+											</Reference>
+											<Reference Name="Curve">
+												<Custom>
+													<Curve Name="" ID="{FB5A8B54-B01C-4CA7-BF3C-64C33188AECA}">
+														<PropertyList>
+															<Property Name="Flags" Type="int32" Value="3"/>
+														</PropertyList>
+														<PointList>
+															<Point>
+																<XPos>0</XPos>
+																<YPos>-200</YPos>
+																<Flags>5</Flags>
+															</Point>
+															<Point>
+																<XPos>100</XPos>
+																<YPos>0</YPos>
+																<Flags>37</Flags>
+															</Point>
+														</PointList>
+													</Curve>
+												</Custom>
+											</Reference>
+										</ReferenceList>
+									</RTPC>
+								</Local>
+							</Reference>
+						</ObjectList>
 					</ObjectLists>
 				</MusicSwitchContainer>
 			</ChildrenList>
