@@ -16,13 +16,13 @@ public class ScreenHandler : MonoBehaviour
     void Start()
     {
         currentRes = new Vector2Int(Screen.currentResolution.width, Screen.currentResolution.height);
-        resolutionDropdown.value = -1;
+        int resValue = -1;
         for (int i = 0; i < resolutions.Count; i++)
         {
             resolutionDropdown.options.Add(new TMP_Dropdown.OptionData());
             resolutionDropdown.options[i].text = $"{resolutions[i].x}x{resolutions[i].y}";
             if (resolutions[i] == currentRes)
-                resolutionDropdown.value = i;
+                resValue = i;
         }
 
         if (resolutionDropdown.value == -1)
@@ -30,9 +30,11 @@ public class ScreenHandler : MonoBehaviour
             for (int i = 0; i < resolutions.Count; i++)
             {
                 if (resolutions[i] == defaultResolution)
-                    resolutionDropdown.value = i;
+                    resValue = i;
             }
         }
+
+        resolutionDropdown.value = resValue;
     }
 
     public void SetResolution()
