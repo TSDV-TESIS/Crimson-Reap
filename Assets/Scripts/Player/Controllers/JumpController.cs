@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+using Events;
 using FSM;
 using Player.Properties;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Player.Controllers
 {
@@ -12,6 +14,8 @@ namespace Player.Controllers
         private PlayerMovement _playerMovement;
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private UnityEvent<int> onWallJumpFromJump;
+        [SerializeField] private VoidEventChannelSO onJump;
 
         private Coroutine _changeToWallslideCheckCoroutine;
         private Coroutine _changeToFasterFallingCheckCoroutine;
@@ -22,13 +26,13 @@ namespace Player.Controllers
         {
             _timeInJump = 0f;
             _isJumpCancelled = false;
-            
+
             _changeToWallslideCheckCoroutine = null;
             _changeToFasterFallingCheckCoroutine = null;
-            
+
             _playerMovement ??= GetComponent<PlayerMovement>();
             _playerMovement.ShouldAddFasterFallingValues = false;
-            
+
             inputHandler?.OnPlayerShadowStep.AddListener(HandleShadowstep);
             inputHandler?.OnPlayerJumpCancelled.AddListener(OnJumpCancel);
             inputHandler?.OnPlayerJump.AddListener(OnJumpEnabled);
@@ -39,9 +43,9 @@ namespace Player.Controllers
         {
             _changeToWallslideCheckCoroutine = null;
             _changeToFasterFallingCheckCoroutine = null;
-           
+
             inputHandler?.OnPlayerShadowStep.RemoveListener(OnJumpCancel);
-            inputHandler?.OnPlayerJump.AddListener(OnJumpEnabled);
+            inputHandler?.OnPlayerJump.RemoveListener(OnJumpEnabled);
             inputHandler?.OnPlayerShadowStep.RemoveListener(HandleShadowstep);
             inputHandler?.OnPlayerAttack.RemoveListener(OnAttack);
         }
@@ -49,17 +53,24 @@ namespace Player.Controllers
         private void OnJumpEnabled()
         {
             _isJumpCancelled = false;
+
+            if (agent.MovementChecks.IsNearWall())
+            {
+                _playerMovement.WallJump(agent.MovementChecks.WallSlideDirection);
+                onWallJumpFromJump?.Invoke(agent.MovementChecks.WallSlideDirection);
+            }
         }
 
         private void Jump()
         {
             _playerMovement.Jump();
+            onJump?.RaiseEvent();
         }
-        
+
         private void OnJumpCancel()
         {
             if (_timeInJump >= playerMovementProperties.maxCancelTime) return;
-            
+
             _isJumpCancelled = true;
         }
 
@@ -112,11 +123,11 @@ namespace Player.Controllers
             {
                 if (_changeToWallslideCheckCoroutine != null) return;
                 _changeToWallslideCheckCoroutine = StartCoroutine(
-                    DelayedCheck(
-                        () => !agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection,
-                            _playerMovement.Velocity),
-                        agent.ChangeStateToWallSlide
-                    )
+                DelayedCheck(
+                () => !agent.MovementChecks.ShouldWallSlide(_playerMovement.MoveDirection,
+                _playerMovement.Velocity),
+                agent.ChangeStateToWallSlide
+                )
                 );
             }
 
@@ -124,9 +135,9 @@ namespace Player.Controllers
             {
                 if (_changeToFasterFallingCheckCoroutine != null) return;
                 _changeToFasterFallingCheckCoroutine = StartCoroutine(
-                    DelayedCheck(
-                        () => agent.MovementChecks.IsDoingDropdown(),
-                        agent.ChangeStateToFasterFalling)
+                DelayedCheck(
+                () => agent.MovementChecks.IsDoingDropdown(),
+                agent.ChangeStateToFasterFalling)
                 );
             }
         }
@@ -137,10 +148,8 @@ namespace Player.Controllers
 
             while (timeDoingAction < playerMovementProperties.maxJumpTimeDelayForActions)
             {
-                Debug.Log("WAITING!");
                 if (!isStillDoingAction())
                 {
-                    Debug.Log("BREAKING.");
                     yield break;
                 }
 

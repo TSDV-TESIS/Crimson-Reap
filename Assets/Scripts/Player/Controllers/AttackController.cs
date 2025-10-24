@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Events;
 using FSM;
 using Player.Properties;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Player.Controllers
         [SerializeField] private PlayerAnimationController animationController;
 
         [SerializeField] private GameObject attackObject;
+        [SerializeField] private VoidEventChannelSO onAttack;
 
         [Header("Attack properties")] [SerializeField]
         private PlayerAttackProperties attackProperties;
@@ -42,6 +44,7 @@ namespace Player.Controllers
         private IEnumerator HandleAttackCoroutine()
         {
             animationController.HandleAttack();
+            onAttack?.RaiseEvent();
             agent.AttackChecks.IsAttacking = true;
             attackObject.SetActive(true);
             float timer = 0;
@@ -53,7 +56,7 @@ namespace Player.Controllers
                 angleFromForward > attackProperties.minYAngle && angleFromForward < attackProperties.minYAngle + 90f;
 
             _playerMovement.Velocity = _mouseLook.CursorDir * attackProperties.displacementForce;
-            
+
             if ((agent.MovementChecks.IsGrounded() && (!isAngleAbleToGetOffGround || _playerMovement.Velocity.y < 0)) ||
                 !agent.AttackChecks.CanMoveOnYOnAttack())
             {

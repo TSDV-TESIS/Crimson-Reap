@@ -16,6 +16,8 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private string mainMenuScene;
     [SerializeField] private StringEventChannelSO onMainMenu;
 
+    [SerializeField] private VoidEventChannelSO onGamePaused;
+    [SerializeField] private VoidEventChannelSO onGameUnpaused;
     private bool isPaused = false;
 
     private void OnEnable()
@@ -35,9 +37,12 @@ public class PauseManager : MonoBehaviour
         panel.SetActive(isPaused);
         if (isPaused)
         {
+            onGamePaused?.RaiseEvent();
             pauseScreen.SetActive(true);
             settingsScreen.SetActive(false);
         }
+        else
+            onGameUnpaused?.RaiseEvent();
 
         Time.timeScale = isPaused ? 0 : 1;
     }
