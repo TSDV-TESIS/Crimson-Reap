@@ -100,8 +100,8 @@
 													<MusicFade Name="Source Fade-out" ID="{955FA9C9-D62A-4F07-ADDC-178EFD8F5A11}">
 														<PropertyList>
 															<Property Name="FadeCurve" Type="int16" Value="6"/>
-															<Property Name="FadeOffset" Type="Real64" Value="2.2"/>
-															<Property Name="FadeTime" Type="Real64" Value="4.5"/>
+															<Property Name="FadeOffset" Type="Real64" Value="0.9"/>
+															<Property Name="FadeTime" Type="Real64" Value="2"/>
 															<Property Name="FadeType" Type="int16" Value="1"/>
 														</PropertyList>
 													</MusicFade>
@@ -111,7 +111,7 @@
 														<PropertyList>
 															<Property Name="FadeCurve" Type="int16" Value="6"/>
 															<Property Name="FadeOffset" Type="Real64" Value="-0.6"/>
-															<Property Name="FadeTime" Type="Real64" Value="5.2"/>
+															<Property Name="FadeTime" Type="Real64" Value="2"/>
 														</PropertyList>
 													</MusicFade>
 												</DestinationFadeIn>
@@ -1433,7 +1433,7 @@
 						</MusicPlaylistContainer>
 						<MusicSegment Name="Drums Only Transition" ID="{CB2E4287-A732-4D07-A04D-D7FEE2E00898}" ShortID="1003536093">
 							<PropertyList>
-								<Property Name="EndPosition" Type="Real64" Value="8887.19136483297"/>
+								<Property Name="EndPosition" Type="Real64" Value="9129.18099041139"/>
 								<Property Name="OverrideClockSettings" Type="bool" Value="True"/>
 								<Property Name="Tempo" Type="Real64" Value="121"/>
 							</PropertyList>
@@ -1482,11 +1482,145 @@
 																	<Local>
 																		<MusicClip Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{33B46B08-15FF-4E90-85FE-99B55338AF46}">
 																			<PropertyList>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="8741.45833333333"/>
+																				<Property Name="BeginTrimOffset" Type="Real64" Value="3983.47107438017"/>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="7147.34302313771"/>
 																				<Property Name="FadeInMode" Type="int16" Value="0"/>
 																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																				<Property Name="PlayAt" Type="Real64" Value="-3983.47107438017"/>
 																			</PropertyList>
 																			<AudioSourceRef Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{69667A82-758B-4C06-AB3D-ED20AADC644F}"/>
+																			<PropertyCurveList>
+																				<PropertyCurve PropertyName="Highpass">
+																					<Curve Name="" ID="{82B5091B-26C7-4F27-B0A2-B13BB58561B6}">
+																						<PropertyList>
+																							<Property Name="Flags" Type="int32" Value="1"/>
+																						</PropertyList>
+																						<PointList>
+																							<Point>
+																								<XPos>3.98347</XPos>
+																								<YPos>0</YPos>
+																								<Flags>5</Flags>
+																							</Point>
+																							<Point>
+																								<XPos>7.14734</XPos>
+																								<YPos>0</YPos>
+																								<Flags>37</Flags>
+																							</Point>
+																						</PointList>
+																					</Curve>
+																				</PropertyCurve>
+																				<PropertyCurve PropertyName="Lowpass">
+																					<Curve Name="" ID="{18A8EDD7-E221-42EB-B1DE-E257FCD31769}">
+																						<PropertyList>
+																							<Property Name="Flags" Type="int32" Value="1"/>
+																						</PropertyList>
+																						<PointList>
+																							<Point>
+																								<XPos>3.98347</XPos>
+																								<YPos>0</YPos>
+																								<Flags>5</Flags>
+																							</Point>
+																							<Point>
+																								<XPos>7.14734</XPos>
+																								<YPos>0</YPos>
+																								<Flags>37</Flags>
+																							</Point>
+																						</PointList>
+																					</Curve>
+																				</PropertyCurve>
+																				<PropertyCurve PropertyName="Volume">
+																					<Curve Name="" ID="{377D3B2E-45C8-4C76-BE0E-71A08EEAD289}">
+																						<PropertyList>
+																							<Property Name="Flags" Type="int32" Value="3"/>
+																						</PropertyList>
+																						<PointList>
+																							<Point>
+																								<XPos>3.98347</XPos>
+																								<YPos>0</YPos>
+																								<Flags>5</Flags>
+																							</Point>
+																							<Point>
+																								<XPos>7.14734</XPos>
+																								<YPos>0</YPos>
+																								<Flags>37</Flags>
+																							</Point>
+																						</PointList>
+																					</Curve>
+																				</PropertyCurve>
+																			</PropertyCurveList>
+																		</MusicClip>
+																	</Local>
+																</Reference>
+																<Reference>
+																	<Local>
+																		<MusicClip Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{5F4B81AD-7060-4AE4-9A8A-433AF6833240}">
+																			<PropertyList>
+																				<Property Name="BeginTrimOffset" Type="Real64" Value="7147.34302313771"/>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="8738.27573491794"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																				<Property Name="PlayAt" Type="Real64" Value="-3983.47107438017"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{69667A82-758B-4C06-AB3D-ED20AADC644F}"/>
+																			<PropertyCurveList>
+																				<PropertyCurve PropertyName="Highpass">
+																					<Curve Name="" ID="{7A4F03EC-00B4-46CD-9740-4438DDFA5EB4}">
+																						<PropertyList>
+																							<Property Name="Flags" Type="int32" Value="1"/>
+																						</PropertyList>
+																						<PointList>
+																							<Point>
+																								<XPos>7.14734</XPos>
+																								<YPos>0</YPos>
+																								<Flags>5</Flags>
+																							</Point>
+																							<Point>
+																								<XPos>8.73828</XPos>
+																								<YPos>0</YPos>
+																								<Flags>37</Flags>
+																							</Point>
+																						</PointList>
+																					</Curve>
+																				</PropertyCurve>
+																				<PropertyCurve PropertyName="Lowpass">
+																					<Curve Name="" ID="{ABF28022-61AF-4538-942F-27392439FBFF}">
+																						<PropertyList>
+																							<Property Name="Flags" Type="int32" Value="1"/>
+																						</PropertyList>
+																						<PointList>
+																							<Point>
+																								<XPos>7.14734</XPos>
+																								<YPos>0</YPos>
+																								<Flags>5</Flags>
+																							</Point>
+																							<Point>
+																								<XPos>8.73828</XPos>
+																								<YPos>0</YPos>
+																								<Flags>37</Flags>
+																							</Point>
+																						</PointList>
+																					</Curve>
+																				</PropertyCurve>
+																				<PropertyCurve PropertyName="Volume">
+																					<Curve Name="" ID="{B8B58A6F-8D23-462E-8B0F-8EF5804AB0B3}">
+																						<PropertyList>
+																							<Property Name="Flags" Type="int32" Value="3"/>
+																						</PropertyList>
+																						<PointList>
+																							<Point>
+																								<XPos>7.14734</XPos>
+																								<YPos>0</YPos>
+																								<Flags>5</Flags>
+																							</Point>
+																							<Point>
+																								<XPos>8.73828</XPos>
+																								<YPos>0</YPos>
+																								<Flags>37</Flags>
+																							</Point>
+																						</PointList>
+																					</Curve>
+																				</PropertyCurve>
+																			</PropertyCurveList>
 																		</MusicClip>
 																	</Local>
 																</Reference>
@@ -1515,7 +1649,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<AudioFileSource Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{03860EB3-A259-477F-B0B4-95E4F95379F6}">
+										<AudioFileSource Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{6513B659-BF8F-4BAA-9DB6-FDA89D86CD50}">
 											<Language>SFX</Language>
 											<AudioFile>Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START.wav</AudioFile>
 											<MediaIDList>
@@ -1532,29 +1666,29 @@
 															<ObjectList Name="Clips">
 																<Reference>
 																	<Local>
-																		<MusicClip Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{3412A96F-38CF-49AA-9C43-8149847863B0}">
+																		<MusicClip Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{A2B7A179-83F4-434A-B1EC-735C5B3FCDE4}">
 																			<PropertyList>
-																				<Property Name="BeginTrimOffset" Type="Real64" Value="5966.94214876033"/>
-																				<Property Name="EndTrimOffset" Type="Real64" Value="6462.80991735536"/>
+																				<Property Name="BeginTrimOffset" Type="Real64" Value="7185.01933138062"/>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="7373.33455671126"/>
 																				<Property Name="FadeInMode" Type="int16" Value="0"/>
 																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
-																				<Property Name="PlayAt" Type="Real64" Value="1487.60330578512"/>
+																				<Property Name="PlayAt" Type="Real64" Value="-3493.36578096869"/>
 																			</PropertyList>
-																			<AudioSourceRef Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{03860EB3-A259-477F-B0B4-95E4F95379F6}"/>
+																			<AudioSourceRef Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{6513B659-BF8F-4BAA-9DB6-FDA89D86CD50}"/>
 																			<PropertyCurveList>
 																				<PropertyCurve PropertyName="Highpass">
-																					<Curve Name="" ID="{D2CB0EE1-F36C-4DFC-9042-E8B9230BDFA3}">
+																					<Curve Name="" ID="{6D45463F-1ACF-4EF5-B7D9-C9F25E166F3F}">
 																						<PropertyList>
 																							<Property Name="Flags" Type="int32" Value="1"/>
 																						</PropertyList>
 																						<PointList>
 																							<Point>
-																								<XPos>5.96694</XPos>
+																								<XPos>7.18502</XPos>
 																								<YPos>0</YPos>
 																								<Flags>5</Flags>
 																							</Point>
 																							<Point>
-																								<XPos>6.46281</XPos>
+																								<XPos>7.37333</XPos>
 																								<YPos>0</YPos>
 																								<Flags>37</Flags>
 																							</Point>
@@ -1562,18 +1696,18 @@
 																					</Curve>
 																				</PropertyCurve>
 																				<PropertyCurve PropertyName="Lowpass">
-																					<Curve Name="" ID="{F2B678AC-32EC-4FB9-8298-562B4269DAAA}">
+																					<Curve Name="" ID="{BF537E7B-11B8-4929-B2B2-4F9E08526688}">
 																						<PropertyList>
 																							<Property Name="Flags" Type="int32" Value="1"/>
 																						</PropertyList>
 																						<PointList>
 																							<Point>
-																								<XPos>5.96694</XPos>
+																								<XPos>7.18502</XPos>
 																								<YPos>0</YPos>
 																								<Flags>5</Flags>
 																							</Point>
 																							<Point>
-																								<XPos>6.46281</XPos>
+																								<XPos>7.37333</XPos>
 																								<YPos>0</YPos>
 																								<Flags>37</Flags>
 																							</Point>
@@ -1581,18 +1715,91 @@
 																					</Curve>
 																				</PropertyCurve>
 																				<PropertyCurve PropertyName="Volume">
-																					<Curve Name="" ID="{9DA8DA0D-E821-44C3-9977-ED31D4AF4785}">
+																					<Curve Name="" ID="{7AB124BE-F5E3-4C88-92A7-57A40D928B4E}">
 																						<PropertyList>
 																							<Property Name="Flags" Type="int32" Value="3"/>
 																						</PropertyList>
 																						<PointList>
 																							<Point>
-																								<XPos>5.96694</XPos>
+																								<XPos>7.18502</XPos>
 																								<YPos>0</YPos>
 																								<Flags>5</Flags>
 																							</Point>
 																							<Point>
-																								<XPos>6.46281</XPos>
+																								<XPos>7.37333</XPos>
+																								<YPos>0</YPos>
+																								<Flags>37</Flags>
+																							</Point>
+																						</PointList>
+																					</Curve>
+																				</PropertyCurve>
+																			</PropertyCurveList>
+																		</MusicClip>
+																	</Local>
+																</Reference>
+																<Reference>
+																	<Local>
+																		<MusicClip Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{69F8D1F1-6837-4058-848B-27BF12E5F322}">
+																			<PropertyList>
+																				<Property Name="BeginTrimOffset" Type="Real64" Value="7642.69033448151"/>
+																				<Property Name="EndTrimOffset" Type="Real64" Value="8555.01843365159"/>
+																				<Property Name="FadeInMode" Type="int16" Value="0"/>
+																				<Property Name="FadeOutMode" Type="int16" Value="0"/>
+																				<Property Name="PlayAt" Type="Real64" Value="-3799.71512786994"/>
+																			</PropertyList>
+																			<AudioSourceRef Name="Drums Only Transition 1 - 12 DRUMS ONLY TRANSITION START" ID="{6513B659-BF8F-4BAA-9DB6-FDA89D86CD50}"/>
+																			<PropertyCurveList>
+																				<PropertyCurve PropertyName="Highpass">
+																					<Curve Name="" ID="{743AA6B4-A174-4A1F-B537-B49E80DA50EB}">
+																						<PropertyList>
+																							<Property Name="Flags" Type="int32" Value="1"/>
+																						</PropertyList>
+																						<PointList>
+																							<Point>
+																								<XPos>7.64269</XPos>
+																								<YPos>0</YPos>
+																								<Flags>5</Flags>
+																							</Point>
+																							<Point>
+																								<XPos>8.55502</XPos>
+																								<YPos>0</YPos>
+																								<Flags>37</Flags>
+																							</Point>
+																						</PointList>
+																					</Curve>
+																				</PropertyCurve>
+																				<PropertyCurve PropertyName="Lowpass">
+																					<Curve Name="" ID="{5FD9F675-85E6-46D7-9389-CDDF271CB588}">
+																						<PropertyList>
+																							<Property Name="Flags" Type="int32" Value="1"/>
+																						</PropertyList>
+																						<PointList>
+																							<Point>
+																								<XPos>7.64269</XPos>
+																								<YPos>0</YPos>
+																								<Flags>5</Flags>
+																							</Point>
+																							<Point>
+																								<XPos>8.55502</XPos>
+																								<YPos>0</YPos>
+																								<Flags>37</Flags>
+																							</Point>
+																						</PointList>
+																					</Curve>
+																				</PropertyCurve>
+																				<PropertyCurve PropertyName="Volume">
+																					<Curve Name="" ID="{F931C38D-69C9-40B1-92DC-50B97A8EA988}">
+																						<PropertyList>
+																							<Property Name="Flags" Type="int32" Value="3"/>
+																						</PropertyList>
+																						<PointList>
+																							<Point>
+																								<XPos>7.64269</XPos>
+																								<YPos>0</YPos>
+																								<Flags>5</Flags>
+																							</Point>
+																							<Point>
+																								<XPos>8.55502</XPos>
 																								<YPos>0</YPos>
 																								<Flags>37</Flags>
 																							</Point>
@@ -1616,11 +1823,7 @@
 								<ObjectList Name="Cues">
 									<Reference>
 										<Local>
-											<MusicCue Name="Entry Cue" ID="{B8FDFCE9-34FC-43F1-84A7-9D4F11061D6F}">
-												<PropertyList>
-													<Property Name="TimeMs" Type="Real64" Value="2000"/>
-												</PropertyList>
-											</MusicCue>
+											<MusicCue Name="Entry Cue" ID="{B8FDFCE9-34FC-43F1-84A7-9D4F11061D6F}"/>
 										</Local>
 									</Reference>
 									<Reference>
@@ -1628,7 +1831,7 @@
 											<MusicCue Name="Exit Cue" ID="{80C3D7EC-2139-45CF-8293-E01EDA0D9560}">
 												<PropertyList>
 													<Property Name="CueType" Type="int16" Value="1"/>
-													<Property Name="TimeMs" Type="Real64" Value="7950.4132231405"/>
+													<Property Name="TimeMs" Type="Real64" Value="3966.94214876033"/>
 												</PropertyList>
 											</MusicCue>
 										</Local>
