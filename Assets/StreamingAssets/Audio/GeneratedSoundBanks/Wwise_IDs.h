@@ -55,7 +55,6 @@ namespace AK
                 static const AkUniqueID LEVEL_2 = 1290008370U;
                 static const AkUniqueID LEVEL_3 = 1290008371U;
                 static const AkUniqueID LEVEL_4 = 1290008372U;
-                static const AkUniqueID LEVEL_CLEAR = 4087184639U;
                 static const AkUniqueID LEVEL_END_MENU = 2726253275U;
                 static const AkUniqueID MAIN_MENU = 2005704188U;
                 static const AkUniqueID NONE = 748895195U;
