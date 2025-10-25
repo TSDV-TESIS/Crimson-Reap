@@ -23,8 +23,8 @@ public class PauseManager : MonoBehaviour
     {
         input.onPauseToggle.AddListener(TogglePause);
         isPaused = false;
-        onGameUnpaused?.RaiseEvent();
         TimeManager.Instance.PauseTime(isPaused);
+        onGameUnpaused?.RaiseEvent();
     }
 
     private void OnDisable()

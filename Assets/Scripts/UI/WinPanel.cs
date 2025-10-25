@@ -11,6 +11,7 @@ public class WinPanel : MonoBehaviour
     [SerializeField] private VoidEventChannelSO onChangeLevel;
     [SerializeField] private VoidEventChannelSO onLevelReset;
     [SerializeField] private FloatEventChannel onTimerFinish;
+    [SerializeField] private VoidEventChannelSO onGamePaused;
 
     [SerializeField] private GameObject panel;
     [SerializeField] private TieredTimes medals;
@@ -44,7 +45,8 @@ public class WinPanel : MonoBehaviour
     {
         panel.SetActive(true);
         leaderboardRequestHandler.HandleSetTime((int)(time * 1000));
-        Time.timeScale = 0;
+        TimeManager.Instance.PauseTime(true);
+        onGamePaused?.RaiseEvent();
         if (countDown != null)
             StopCoroutine(countDown);
 
@@ -66,13 +68,13 @@ public class WinPanel : MonoBehaviour
     {
         Debug.Log("NEXT LEVEL PRESSED");
         onChangeLevel?.RaiseEvent();
-        Time.timeScale = 1;
+        TimeManager.Instance.PauseTime(false);
     }
 
     public void ResetLevel()
     {
         Debug.Log("Restart LEVEL PRESSED");
         onLevelReset?.RaiseEvent();
-        Time.timeScale = 1;
+        TimeManager.Instance.PauseTime(false);
     }
 }
