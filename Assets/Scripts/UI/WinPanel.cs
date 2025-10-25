@@ -4,6 +4,7 @@ using Events.Scriptables;
 using TMPro;
 using UI.Leaderboard;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WinPanel : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class WinPanel : MonoBehaviour
     [SerializeField] private LeaderboardRequestHandler leaderboardRequestHandler;
     [SerializeField] private float countDownDuration = 3;
 
-    private string timePersonalBest = "timePersonalBest";
+    [SerializeField] private string levelPBKey;
 
     private string timeSuffix = "Level Cleared in: ";
     private string recordSuffix = "Best Time: ";
@@ -49,11 +50,11 @@ public class WinPanel : MonoBehaviour
 
         countDown = StartCoroutine(NextLevelCoroutine(time));
 
-        if (!PlayerPrefs.HasKey(timePersonalBest) || PlayerPrefs.GetFloat(timePersonalBest) > time)
-            PlayerPrefs.SetFloat(timePersonalBest, time);
+        if (!PlayerPrefs.HasKey(levelPBKey) || PlayerPrefs.GetFloat(levelPBKey) > time)
+            PlayerPrefs.SetFloat(levelPBKey, time);
 
         timeTMPro.text = timeSuffix + TimeFormatting.GetFormattedTime(time);
-        timePersonalBestTMPro.text = TimeFormatting.GetFormattedTime(PlayerPrefs.GetFloat(timePersonalBest));
+        timePersonalBestTMPro.text = TimeFormatting.GetFormattedTime(PlayerPrefs.GetFloat(levelPBKey));
     }
 
     private IEnumerator NextLevelCoroutine(float levelClearTime)
