@@ -29,7 +29,7 @@
 						</RTPCValue>
 					</RTPCValueList>
 					<CurrentStateList ShowAll="true">
-						<CurrentStateRef Name="Level_End_Menu" ID="{5D686081-5692-47F8-84B4-6AC5EEF52032}"/>
+						<CurrentStateRef Name="Main_Menu" ID="{AB68E3B4-7705-4D30-B7CA-B5DE19C4F94C}"/>
 					</CurrentStateList>
 					<CurrentSwitchList ShowAll="true">
 						<CurrentSwitchRef Name="Stone" ID="{CBE6C635-D5D6-4647-A62F-530489E060B3}"/>
@@ -68,9 +68,28 @@
 							<Position X="0" Y="0"/>
 						</Module>
 					</ModuleList>
-					<RTPCValueList ShowAll="true"/>
+					<RTPCValueList ShowAll="true">
+						<RTPCValue>
+							<GameParameterRef Name="Sfx_Volume" ID="{843A4C4C-F5C9-41EB-87CD-ED4EC442B9CD}"/>
+							<Value>50</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Master_Volume" ID="{6F31A864-89D1-4656-8E4B-040FAA5A7F79}"/>
+							<Value>50</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Player_Health" ID="{A0A779A7-07B7-4873-AAB9-54D6FC4C65C6}"/>
+							<Value>100</Value>
+						</RTPCValue>
+						<RTPCValue>
+							<GameParameterRef Name="Music_Volume" ID="{E20A6395-6C29-4ED2-BE16-E7B92A370C0C}"/>
+							<Value>50</Value>
+						</RTPCValue>
+					</RTPCValueList>
 					<CurrentStateList ShowAll="true"/>
-					<CurrentSwitchList ShowAll="true"/>
+					<CurrentSwitchList ShowAll="true">
+						<CurrentSwitchRef Name="Stone" ID="{CBE6C635-D5D6-4647-A62F-530489E060B3}"/>
+					</CurrentSwitchList>
 				</SoundcasterSession>
 			</ChildrenList>
 		</WorkUnit>
