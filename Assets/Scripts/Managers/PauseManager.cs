@@ -1,4 +1,3 @@
-using System;
 using Events;
 using Events.Scriptables;
 using Player;
@@ -23,7 +22,9 @@ public class PauseManager : MonoBehaviour
     private void OnEnable()
     {
         input.onPauseToggle.AddListener(TogglePause);
-        Time.timeScale = 1;
+        isPaused = false;
+        onGameUnpaused?.RaiseEvent();
+        TimeManager.Instance.PauseTime(isPaused);
     }
 
     private void OnDisable()
@@ -34,17 +35,18 @@ public class PauseManager : MonoBehaviour
     public void TogglePause()
     {
         isPaused = !isPaused;
+        Debug.Log($"PAUSE CALLED: {isPaused}");
         panel.SetActive(isPaused);
         if (isPaused)
         {
-            onGamePaused?.RaiseEvent();
             pauseScreen.SetActive(true);
             settingsScreen.SetActive(false);
+            onGamePaused?.RaiseEvent();
         }
         else
             onGameUnpaused?.RaiseEvent();
 
-        Time.timeScale = isPaused ? 0 : 1;
+        TimeManager.Instance.PauseTime(isPaused);
     }
 
     public void ToggleSettingsScreen()
