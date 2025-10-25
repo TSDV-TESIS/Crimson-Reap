@@ -26,11 +26,8 @@ public partial class PointSelfAnimationToPlayerAction : Action
     {
         float angle = Vector3.SignedAngle(Self.Value.transform.forward + PivotOffset.Value,
             Player.Value.transform.position - Self.Value.transform.position, -Self.Value.transform.right);
-        Debug.Log($"ANGLE {angle}");
         float clampedAngle = Mathf.Clamp(angle + _maxAngle, 0, _maxAngle * 2f);
-        Debug.Log($"Clamped {clampedAngle}");
         float percentage = clampedAngle / (_maxAngle * 2f);
-        Debug.Log($"Percentage {percentage}");
         SelfAnimator.Value.SetFloat(AttackAnglePercentage, percentage);
         return Status.Running;
     }

@@ -1,4 +1,5 @@
 using System;
+using Enemy;
 using Enemy.Attack;
 using Unity.Behavior;
 using UnityEngine;
@@ -21,10 +22,14 @@ public partial class CreateArrowAndManageVfxAction : Action
     private float _secondsPointing;
     private ArrowAttack _arrowAttack;
     private ArrowInArchMovement _arrowInArchMovement;
+    private EnemyHealthHandler _enemyHealthHandler;
 
     protected override Status OnStart()
     {
         Arrow.Value = Object.Instantiate(ArrowPrefab.Value, BowBase.Value.transform);
+        _enemyHealthHandler = Self.Value.GetComponent<EnemyHealthHandler>();
+        _enemyHealthHandler.GameObjectsToDisableOnDeath.Add(Arrow.Value);
+        
         _arrowAttack = Arrow.Value.GetComponent<ArrowAttack>();
         _arrowInArchMovement = Arrow.Value.GetComponent<ArrowInArchMovement>();
         _arrowInArchMovement.enabled = true;
@@ -47,9 +52,9 @@ public partial class CreateArrowAndManageVfxAction : Action
             return Status.Running;
         }
 
+        _enemyHealthHandler.GameObjectsToDisableOnDeath.Remove(Arrow.Value);
         _arrowAttack.SetLoop();
         _arrowInArchMovement.enabled = false;
-        Debug.Log($"FORWARD: {Arrow.Value.transform.forward}");
         ArrowDirection.Value = new Vector3(Arrow.Value.transform.forward.x, Arrow.Value.transform.forward.y, 0f).normalized;
         Arrow.Value.transform.parent = Self.Value.transform;
 

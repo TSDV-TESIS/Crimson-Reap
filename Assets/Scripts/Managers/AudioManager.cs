@@ -40,7 +40,6 @@ namespace Managers
 
         private void PlayEvent(AK.Wwise.Event anEvent)
         {
-            Debug.Log("PLAY EVENT!");
             anEvent.Post(gameObject);
         }
 
