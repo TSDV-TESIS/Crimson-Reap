@@ -150,6 +150,7 @@
 														<PropertyList>
 															<Property Name="Enabled" Type="bool" Value="True"/>
 															<Property Name="Max" Type="Real64" Value="429"/>
+															<Property Name="Min" Type="Real64" Value="-328"/>
 														</PropertyList>
 													</Modifier>
 												</ModifierInfo>
@@ -158,6 +159,11 @@
 										<Property Name="UseMaxSoundPerInstance" Type="bool">
 											<ValueList>
 												<Value>True</Value>
+											</ValueList>
+										</Property>
+										<Property Name="Volume" Type="Real64">
+											<ValueList>
+												<Value>-6</Value>
 											</ValueList>
 										</Property>
 									</PropertyList>
@@ -182,9 +188,11 @@
 											<ChildrenList>
 												<AudioFileSource Name="Jester_Footsteps_Wood__001" ID="{77B06C6C-37D0-4FA6-8C6F-EE26EB3F51DC}">
 													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0455351944873776"/>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.00845859053497943"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0307326610511636"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 														<Property Name="TrimBegin" Type="Real64" Value="0.00953062210200928"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.119477591306585"/>
 													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Jester_Footsteps_Wood__001.wav</AudioFile>
@@ -216,9 +224,10 @@
 											<ChildrenList>
 												<AudioFileSource Name="Jester_Footsteps_Wood__002" ID="{4FA4738A-3313-4639-8BD3-F5129E718A3D}">
 													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.128133919371458"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.00912820697028166"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0403760425710464"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.131108153292181"/>
 													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Jester_Footsteps_Wood__002.wav</AudioFile>
@@ -243,9 +252,10 @@
 											<ChildrenList>
 												<AudioFileSource Name="Jester_Footsteps_Wood__003" ID="{44FC26B6-CBAF-48A3-804B-45BFB9080704}">
 													<PropertyList>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.127074961360124"/>
-														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.008894053142164"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0498903227284367"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.124764210390946"/>
 													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Jester_Footsteps_Wood__003.wav</AudioFile>
@@ -270,10 +280,11 @@
 											<ChildrenList>
 												<AudioFileSource Name="Jester_Footsteps_Wood__004" ID="{683F49AD-73BB-438F-98A1-5108B67F2631}">
 													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.00953062210200927"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0540068585780525"/>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.00741597446826442"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0360323536912212"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
 														<Property Name="TrimBegin" Type="Real64" Value="0.0285918663060278"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.163885191615226"/>
 													</PropertyList>
 													<Language>SFX</Language>
 													<AudioFile>Jester_Footsteps_Wood__004.wav</AudioFile>
@@ -284,6 +295,47 @@
 											</ChildrenList>
 											<ActiveSourceList>
 												<ActiveSource Name="Jester_Footsteps_Wood__004" ID="{683F49AD-73BB-438F-98A1-5108B67F2631}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="Jester_Footsteps_Wood__005" ID="{F09E924E-9F43-4B5B-A439-A44806CB27E3}" ShortID="25595645">
+											<PropertyList>
+												<Property Name="Lowpass" Type="int16">
+													<ValueList>
+														<Value>52</Value>
+													</ValueList>
+												</Property>
+												<Property Name="Pitch" Type="int32">
+													<ValueList>
+														<Value>320</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="Jester_Footsteps_Wood__004" ID="{030E704D-3689-452B-951D-D407F987237F}">
+													<PropertyList>
+														<Property Name="FadeInDuration" Type="Real64" Value="0.00741597446826442"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0360323536912212"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+														<Property Name="TrimBegin" Type="Real64" Value="0.0180186281373035"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.18714631558642"/>
+													</PropertyList>
+													<Language>SFX</Language>
+													<AudioFile>Jester_Footsteps_Wood__004.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="396830825"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="Jester_Footsteps_Wood__004" ID="{030E704D-3689-452B-951D-D407F987237F}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>

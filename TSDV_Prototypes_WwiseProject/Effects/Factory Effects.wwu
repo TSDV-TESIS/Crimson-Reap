@@ -1682,7 +1682,10 @@
 							<PropertyList>
 								<Property Name="DryLevel" Type="Real32" Value="-3"/>
 								<Property Name="Voice1Pitch" Type="Real32" Value="-1200"/>
-								<Property Name="Voice2Pitch" Type="Real32" Value="100"/>
+								<Property Name="Voice2Enable" Type="bool" Value="True"/>
+								<Property Name="Voice2FilterType" Type="int32" Value="6"/>
+								<Property Name="Voice2Gain" Type="Real32" Value="-11"/>
+								<Property Name="Voice2Pitch" Type="Real32" Value="700"/>
 							</PropertyList>
 						</Effect>
 						<Effect Name="Secret_message" ID="{2F5DE612-1AAD-4A84-8FB4-3E66521C920E}" PluginName="Wwise Harmonizer" CompanyID="0" PluginID="138" PluginType="3">
