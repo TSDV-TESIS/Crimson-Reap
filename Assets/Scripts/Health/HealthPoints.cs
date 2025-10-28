@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Events;
+using Events.Scriptables;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
@@ -27,7 +28,7 @@ namespace Health
         [SerializeField] private IntEventChannelSO onInitializeHealthEvent;
         [SerializeField] private IntEventChannelSO onInitializeMaxHealthEvent;
         [SerializeField] private VoidEventChannelSO onDamageAvoidedEvent;
-        [SerializeField] private VoidEventChannelSO receiveLethalDamageEvent;
+        [SerializeField] private StringEventChannelSO receiveLethalDamageEvent;
 
         [Header("Internal events")]
         [SerializeField] private UnityEvent onHit;
@@ -35,6 +36,7 @@ namespace Health
         [SerializeField] private UnityEvent<int> onInternalResetEvent;
         [SerializeField] private UnityEvent<int> onInternalTakeDamageEvent;
         [SerializeField] private UnityEvent<int> onInternalInitializeMaxHealthEvent;
+        [SerializeField] private UnityEvent<string> onLethalDamageEvent;
 
         public int MaxHealth
         {
@@ -62,12 +64,12 @@ namespace Health
         private void OnEnable()
         {
             _hasBeenDead = false;
-            receiveLethalDamageEvent?.onEvent.AddListener(TakeLethalDamage);
+            receiveLethalDamageEvent?.onTypedEvent.AddListener(TakeLethalDamage);
         }
 
         private void OnDisable()
         {
-            receiveLethalDamageEvent?.onEvent.RemoveListener(TakeLethalDamage);
+            receiveLethalDamageEvent?.onTypedEvent.RemoveListener(TakeLethalDamage);
         }
 
         private void OnDestroy()
@@ -98,8 +100,9 @@ namespace Health
             RaiseInitMaxHpEvent();
         }
 
-        private void TakeLethalDamage()
+        private void TakeLethalDamage(string cause)
         {
+            onLethalDamageEvent?.Invoke(cause);
             TryTakeDamage(maxHealth);
         }
 

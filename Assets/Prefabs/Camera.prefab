@@ -370,7 +370,6 @@ GameObject:
   - component: {fileID: 714674851627225753}
   - component: {fileID: 6801341863220088174}
   - component: {fileID: 7550098221098950735}
-  - component: {fileID: 3498996683020621043}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -387,7 +386,7 @@ Transform:
   m_GameObject: {fileID: 2459574222428994903}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -32.915535, y: 1.420311, z: -11.392041}
+  m_LocalPosition: {x: -32.914986, y: 1.4882679, z: -11.392041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -542,20 +541,6 @@ MonoBehaviour:
     positionOffset: {x: 0, y: 0, z: 0}
   m_posOffsetData: {fileID: 0}
   listenerMask: 1
---- !u!114 &3498996683020621043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2459574222428994903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c14fbbd3ab9c4a945858d4cccf7cbfab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDefaultListener: 1
-  listenerId: 0
 --- !u!1 &2857721275876445937
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,12 +858,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61330dbe356cc944a93e12c93c9e9ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  properties: {fileID: 11400000, guid: 7b65555b26e931442b0a16564bef0fbb, type: 2}
   mainCamera: {fileID: 0}
   composer: {fileID: 3293087587073084945}
   shakeController: {fileID: 7614435106831715451}
   shakeSettings: {fileID: 11400000, guid: 446ab664b7d8edd49a948520f2a5a464, type: 2}
   onCameraShakeEventChannelSo: {fileID: 11400000, guid: e0d6c8c1282a08643984e3b80dc9bf17, type: 2}
+  onCameraZoomZoneEnter: {fileID: 0}
+  onCameraZoomZoneLeave: {fileID: 0}
 --- !u!114 &2149423328617229240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,11 +878,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   killCamProperties: {fileID: 11400000, guid: afcaa02b860d026409a18a1141f75c95, type: 2}
-  properties: {fileID: 11400000, guid: 3b3afe4b87793d441812a108d3662cf2, type: 2}
   mainCamera: {fileID: 2194785179866982604}
   composer: {fileID: 3293087587073084945}
   pivotController: {fileID: 0}
-  confiner: {fileID: 2040980753783285908}
   onLastEnemyKilled: {fileID: 11400000, guid: 28f1c62b15c308d488b10d247b81f6a7, type: 2}
   onWinDoorEnable: {fileID: 11400000, guid: 25b58448612f2044a84eaa70f96c0331, type: 2}
 --- !u!1001 &3483318472734490293

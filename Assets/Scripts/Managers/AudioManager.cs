@@ -1,5 +1,6 @@
 using System;
 using AK.Wwise;
+using Events;
 using Events.Scriptables;
 using UnityEngine;
 
@@ -40,7 +41,6 @@ namespace Managers
 
         private void PlayEvent(AK.Wwise.Event anEvent)
         {
-            Debug.Log("PLAY EVENT!");
             anEvent.Post(gameObject);
         }
 
