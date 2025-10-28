@@ -17,7 +17,7 @@ namespace Enemy.Attack
         [SerializeField] private VisualEffect arrowVFX;
         [SerializeField] private VisualEffect hitVFX;
         [SerializeField] private GameObject decalPrefab;
-
+        
         private CapsuleCollider _collider;
         private Coroutine _arrowDestroyCoroutine;
         private Coroutine _hitCoroutine;
@@ -41,12 +41,11 @@ namespace Enemy.Attack
                 transform.position += _velocity * _direction * Time.deltaTime;
         }
 
-        public void SetVelocityDirectionAndAttack(float velocity, Vector3 target)
+        public void SetVelocityDirectionAndAttack(float velocity, Vector3 direction)
         {
-            _direction = (target - transform.position).normalized;
+            _direction = direction.normalized;
             _velocity = velocity;
             _isTraveling = true;
-            transform.LookAt(target);
         }
 
         private void OnTriggerEnter(Collider other)

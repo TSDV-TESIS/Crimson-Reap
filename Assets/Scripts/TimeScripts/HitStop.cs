@@ -30,14 +30,14 @@ namespace TimeScripts
         private IEnumerator HitStopCoroutine(TimeFreezeProperties properties)
         {
             float timer = 0;
-            Time.timeScale = properties.slowDown;
+            TimeManager.Instance.TrySetTimeScale(properties.slowDown);
             while (timer < properties.duration)
             {
                 timer += Time.unscaledDeltaTime;
                 yield return null;
             }
 
-            Time.timeScale = 1;
+            TimeManager.Instance.TrySetTimeScale(1);
         }
     }
 }

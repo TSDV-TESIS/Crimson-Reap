@@ -209,7 +209,6 @@ namespace Player
         {
             Velocity.y = playerMovementProperties.wallJumpForce.y;
             Velocity.x = playerMovementProperties.wallJumpForce.x * Mathf.Sign(checksWallSlideDirection) * -1;
-            Debug.Log(Velocity.x);
             if (_velocityLock != null)
                 StopCoroutine(_velocityLock);
 
