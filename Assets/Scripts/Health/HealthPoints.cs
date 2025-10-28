@@ -106,7 +106,7 @@ namespace Health
         public bool TryTakeDamage(int damage)
         {
             if (_isInvincible) return false;
-            
+
             if (!canTakeDamage)
             {
                 onDamageAvoidedEvent?.RaiseEvent();
@@ -121,7 +121,7 @@ namespace Health
         public void TakeUnavoidableDamage(int damage)
         {
             if (_isInvincible) return;
-            
+
             CurrentHp -= damage;
 
             if (shouldFreeze)
@@ -134,7 +134,7 @@ namespace Health
                 onDeathEvent?.RaiseEvent();
                 onInternalDeathEvent?.Invoke();
             }
-            
+
             else
             {
                 onTakeDamageEvent?.RaiseEvent(CurrentHp);
@@ -146,9 +146,9 @@ namespace Health
         public IEnumerator StunTime()
         {
             yield return new WaitForSecondsRealtime(timeUntilFrameActivate);
-            Time.timeScale /= timeScaleDivision;
+            TimeManager.Instance.TrySetTimeScale(Time.timeScale / timeScaleDivision);
             yield return new WaitForSecondsRealtime(hitFrameTime);
-            Time.timeScale = 1;
+            TimeManager.Instance.TrySetTimeScale(1);
         }
 
 
