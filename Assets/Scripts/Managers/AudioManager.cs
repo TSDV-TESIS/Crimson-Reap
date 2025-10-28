@@ -1,5 +1,6 @@
 using System;
 using AK.Wwise;
+using Events;
 using Events.Scriptables;
 using UnityEngine;
 

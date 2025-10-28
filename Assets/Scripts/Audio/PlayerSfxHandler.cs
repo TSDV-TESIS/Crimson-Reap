@@ -50,9 +50,10 @@ public class PlayerSfxHandler : MonoBehaviour
         onHeal?.onIntEvent.AddListener(HandleLife);
     }
 
+    [ContextMenu("DASH")]
     private void HandleDashSFX()
     {
-        playEvent?.RaiseEvent(attackSFX);
+        playEvent?.RaiseEvent(dashSFX);
     }
 
     private void HandleJumpSFX()
