@@ -10,14 +10,13 @@ using Object = UnityEngine.Object;
 [NodeDescription(name: "Create Arrow", story: "Create new Arrow and set variables", category: "Action", id: "01194426f65f927733f15e2b599cd429")]
 public partial class CreateArrowAction : Action
 {
-    [SerializeReference] public BlackboardVariable<GameObject> Player;
     [SerializeReference] public BlackboardVariable<GameObject> Arrow;
     [SerializeReference] public BlackboardVariable<float> Velocity;
+    [SerializeReference] public BlackboardVariable<Vector3> ArrowDirection;  
     
     protected override Status OnStart()
     {
-        Arrow.Value.GetComponent<ArrowAttack>().SetVelocityDirectionAndAttack(Velocity, Player.Value.transform.position);
-        
+        Arrow.Value.GetComponent<ArrowAttack>().SetVelocityDirectionAndAttack(Velocity, ArrowDirection.Value);
         return Status.Success;
     }
 

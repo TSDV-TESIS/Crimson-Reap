@@ -23,7 +23,6 @@ namespace Enemy.Soul
         {
             GameObject soul = Instantiate(soulVfx, transform);
             soul.transform.position = deathPosition;
-            Debug.Log($"INSTANTIATING NEW SOUL IN POSITION {soul.transform.position}");
         }
     }
 }

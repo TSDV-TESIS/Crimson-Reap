@@ -1231,11 +1231,29 @@ MonoBehaviour:
   - rid: 4203723741480616649
   - rid: 4203723742633001360
   - rid: 9222008794035257493
+  - rid: 762285397260895053
+  - rid: 762285398319432555
   m_IsInitialised: 0
   m_IsStarted: 0
   references:
     version: 2
     RefIds:
+    - rid: 762285397260895053
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 4527415417962394207
+          m_Value1: 5198480701795755685
+        Name: BowBase
+        m_Value: {fileID: 6436991069151736455}
+    - rid: 762285398319432555
+      type: {class: 'BlackboardVariable`1[[UnityEngine.SkinnedMeshRenderer, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 15987153889570959304
+          m_Value1: 13107393545568138557
+        Name: BowSkinnedMesh
+        m_Value: {fileID: 1229419453492644375}
     - rid: 4203723288770249627
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -4431,9 +4449,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec6034832c0019344bb799e5b95926fb, type: 3}
+--- !u!137 &1229419453492644375 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 784875632856180223, guid: ec6034832c0019344bb799e5b95926fb, type: 3}
+  m_PrefabInstance: {fileID: 2011902046225231848}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &4331220948365245276 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2877836176585692340, guid: ec6034832c0019344bb799e5b95926fb, type: 3}
+  m_PrefabInstance: {fileID: 2011902046225231848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6436991069151736455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4809702589577059695, guid: ec6034832c0019344bb799e5b95926fb, type: 3}
   m_PrefabInstance: {fileID: 2011902046225231848}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &8275079152102090622 stripped
