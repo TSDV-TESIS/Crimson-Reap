@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6873406449746904153}
   - component: {fileID: 8498768594400214865}
   - component: {fileID: 6856778842549506679}
+  - component: {fileID: 6782776027304514620}
+  - component: {fileID: -1590798133177013960}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -79,3 +81,39 @@ MonoBehaviour:
   onPlayEventWithCallback: {fileID: 11400000, guid: fa2c8f82e1c2d0a42bd1757a0b86666b, type: 2}
   onSwitch: {fileID: 11400000, guid: 09e44adb9d646e24a9f56e9292ef254f, type: 2}
   onRTPC: {fileID: 11400000, guid: 5daf39f6afc06b547a527d006c78c235, type: 2}
+--- !u!114 &6782776027304514620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5210367297684731224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2c76b936263e34ab04fc7c53c44c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 1
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
+--- !u!114 &-1590798133177013960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5210367297684731224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c14fbbd3ab9c4a945858d4cccf7cbfab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  listenerId: 0

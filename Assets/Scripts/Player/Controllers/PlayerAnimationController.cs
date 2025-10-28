@@ -33,6 +33,7 @@ namespace Player.Controllers
         private static readonly int RunRotate = Animator.StringToHash("RunRotate");
         private static readonly int StopRunning = Animator.StringToHash("StopRunning");
         private static readonly int IsDeadByTime = Animator.StringToHash("IsDeadByTime");
+        private static readonly int IsDeadBySpikes = Animator.StringToHash("IsDeadBySpikes");
 
         private PlayerAgent _agent;
         private PlayerMovement _playerMovement;
@@ -168,6 +169,11 @@ namespace Player.Controllers
         {
             playerAnimator.SetTrigger(Dead);
             playerAnimator.SetBool(IsDeadByTime, true);
+        }
+
+        public void HandleDeathBySpikes()
+        {
+            playerAnimator.SetBool(IsDeadBySpikes, true);
         }
 
         private void HandleStopRunningCoroutine()

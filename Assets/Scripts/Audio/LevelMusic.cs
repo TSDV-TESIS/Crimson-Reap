@@ -37,8 +37,10 @@ public class LevelMusic : MonoBehaviour
     {
         playChannel.RaiseEvent(pauseEvent);
     }
+
     private void TriggerMusic()
     {
+        stopChannel.RaiseEvent(musicEvent);
         playChannel.RaiseEvent(musicEvent);
     }
 
@@ -46,6 +48,7 @@ public class LevelMusic : MonoBehaviour
     {
         playChannel.RaiseEvent(winEvent);
     }
+
     private void TriggerDeathMusic()
     {
         playChannel.RaiseEvent(deathEvent);

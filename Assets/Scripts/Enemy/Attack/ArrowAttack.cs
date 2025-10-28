@@ -17,11 +17,12 @@ namespace Enemy.Attack
         [SerializeField] private VisualEffect arrowVFX;
         [SerializeField] private VisualEffect hitVFX;
         [SerializeField] private GameObject decalPrefab;
-
+        
         private CapsuleCollider _collider;
         private Coroutine _arrowDestroyCoroutine;
         private Coroutine _hitCoroutine;
         private Coroutine _lightDimCoroutine;
+        private bool _canAttack;
 
         private bool _isTraveling;
         private float _velocity;
@@ -29,7 +30,7 @@ namespace Enemy.Attack
 
         private void OnEnable()
         {
-            _isTraveling = true;
+            _isTraveling = false;
             _collider ??= GetComponent<CapsuleCollider>();
             arrowVFX.SendEvent(properties.vfxStartEvent);
         }
@@ -40,28 +41,42 @@ namespace Enemy.Attack
                 transform.position += _velocity * _direction * Time.deltaTime;
         }
 
-        public void SetVelocityAndDirection(float velocity, Vector3 target)
+        public void SetVelocityDirectionAndAttack(float velocity, Vector3 direction)
         {
-            _direction = (target - transform.position).normalized;
+            _direction = direction.normalized;
             _velocity = velocity;
-            transform.LookAt(target);
+            _isTraveling = true;
         }
 
         private void OnTriggerEnter(Collider other)
         {
+            HandleTriggerAttack(other);
+
+            if (!_isTraveling) return;
+            
+            if ((properties.whatIsStoppableColliders & (1 << other.gameObject.layer)) != 0)
+            {
+                _isTraveling = false;
+                GlueAndDestroy(other.gameObject);
+            }
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            HandleTriggerAttack(other);
+        }
+
+        private void HandleTriggerAttack(Collider other)
+        {
+            if (!_isTraveling) return;
+            
             if (other.CompareTag("Player") && other.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageObject))
             {
                 takeDamageObject.TryTakeDamage(damage);
                 if (_hitCoroutine != null) StopCoroutine(_hitCoroutine);
 
                 _hitCoroutine = StartCoroutine(WaitPlayerHitVfx());
-                return;
-            }
-
-            if ((properties.whatIsStoppableColliders & (1 << other.gameObject.layer)) != 0)
-            {
                 _isTraveling = false;
-                GlueAndDestroy(other.gameObject);
             }
         }
 
@@ -108,6 +123,21 @@ namespace Enemy.Attack
                 pointLight.intensity = Mathf.Lerp(initialIntensity, 0, timer / dimDuration);
                 yield return null;
             }
+        }
+
+        public void StartCharge()
+        {
+            arrowVFX.SendEvent("Charge");
+        }
+
+        public void SetChargeValue(float value)
+        {
+            arrowVFX.SetFloat("Charge_Intensity", value);
+        }
+
+        public void SetLoop()
+        {
+            arrowVFX.SendEvent("loop");
         }
     }
 }

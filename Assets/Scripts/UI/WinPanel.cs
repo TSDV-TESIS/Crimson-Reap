@@ -4,12 +4,14 @@ using Events.Scriptables;
 using TMPro;
 using UI.Leaderboard;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class WinPanel : MonoBehaviour
 {
     [SerializeField] private VoidEventChannelSO onChangeLevel;
     [SerializeField] private VoidEventChannelSO onLevelReset;
     [SerializeField] private FloatEventChannel onTimerFinish;
+    [SerializeField] private VoidEventChannelSO onGamePaused;
 
     [SerializeField] private GameObject panel;
     [SerializeField] private TieredTimes medals;
@@ -18,7 +20,7 @@ public class WinPanel : MonoBehaviour
     [SerializeField] private LeaderboardRequestHandler leaderboardRequestHandler;
     [SerializeField] private float countDownDuration = 3;
 
-    private string timePersonalBest = "timePersonalBest";
+    [SerializeField] private string levelPBKey;
 
     private string timeSuffix = "Level Cleared in: ";
     private string recordSuffix = "Best Time: ";
@@ -43,17 +45,18 @@ public class WinPanel : MonoBehaviour
     {
         panel.SetActive(true);
         leaderboardRequestHandler.HandleSetTime((int)(time * 1000));
-        Time.timeScale = 0;
+        TimeManager.Instance.PauseTime(true);
+        onGamePaused?.RaiseEvent();
         if (countDown != null)
             StopCoroutine(countDown);
 
         countDown = StartCoroutine(NextLevelCoroutine(time));
 
-        if (!PlayerPrefs.HasKey(timePersonalBest) || PlayerPrefs.GetFloat(timePersonalBest) > time)
-            PlayerPrefs.SetFloat(timePersonalBest, time);
+        if (!PlayerPrefs.HasKey(levelPBKey) || PlayerPrefs.GetFloat(levelPBKey) > time)
+            PlayerPrefs.SetFloat(levelPBKey, time);
 
         timeTMPro.text = timeSuffix + TimeFormatting.GetFormattedTime(time);
-        timePersonalBestTMPro.text = TimeFormatting.GetFormattedTime(PlayerPrefs.GetFloat(timePersonalBest));
+        timePersonalBestTMPro.text = TimeFormatting.GetFormattedTime(PlayerPrefs.GetFloat(levelPBKey));
     }
 
     private IEnumerator NextLevelCoroutine(float levelClearTime)
@@ -65,13 +68,13 @@ public class WinPanel : MonoBehaviour
     {
         Debug.Log("NEXT LEVEL PRESSED");
         onChangeLevel?.RaiseEvent();
-        Time.timeScale = 1;
+        TimeManager.Instance.PauseTime(false);
     }
 
     public void ResetLevel()
     {
         Debug.Log("Restart LEVEL PRESSED");
         onLevelReset?.RaiseEvent();
-        Time.timeScale = 1;
+        TimeManager.Instance.PauseTime(false);
     }
 }

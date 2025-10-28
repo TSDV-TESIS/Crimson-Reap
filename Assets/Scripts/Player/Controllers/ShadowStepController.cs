@@ -16,6 +16,7 @@ namespace Player.Controllers
         [SerializeField] private PlayerMovementProperties playerMovementProperties;
         [SerializeField] private GameObject bloodStepCollider;
         [SerializeField] private Vector3 displacementIfBlocked = new Vector3(0.01f, 0.01f, 0);
+        [SerializeField] private VoidEventChannelSO onShadowStep;
 
         private PlayerMovement _playerMovement;
         private MouseLook _mouseLook;
@@ -46,6 +47,8 @@ namespace Player.Controllers
         private IEnumerator Shadowstep()
         {
             Debug.Log("START Shadowstep");
+            onShadowStep?.RaiseEvent();
+            
             float timer = 0;
             Vector2 direction = _mouseLook.CursorDir.normalized;
             bool changedToWallslide = false;

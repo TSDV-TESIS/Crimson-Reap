@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Events;
 using Events.Scriptables;
 using Sounds;
@@ -13,10 +14,11 @@ namespace Enemy
     [RequireComponent(typeof(BehaviorGraphAgent))]
     public class EnemyHealthHandler : MonoBehaviour
     {
+        [SerializeField] private GameObject[] objectsToDisable;
+        
         [SerializeField] private EnemyDeathProperties enemyDeathProperties;
         [SerializeField] private String isDeadVariableName = "IsDead";
         [SerializeField] private SoundCollisionHandler screamSoundCollisionHandler;
-        [SerializeField] private GameObject[] objectsToDisable;
 
         [Header("Events")]
         [SerializeField] private GameObjectEventChannelSO onEnemyEnabled;
@@ -25,11 +27,15 @@ namespace Enemy
         [SerializeField] private GameObjectEventChannelSO onEnemyDisabled;
         [SerializeField] private TimeStopEventChannelSO onHitStop;
 
+        [NonSerialized] public List<GameObject> GameObjectsToDisableOnDeath;
+        
         private Coroutine _disableCoroutine;
         private BehaviorGraphAgent _behaviorAgent;
 
         private void OnEnable()
         {
+            GameObjectsToDisableOnDeath = new List<GameObject>(objectsToDisable);
+            
             screamSoundCollisionHandler.SoundRadius = enemyDeathProperties.screamingRadius;
             _behaviorAgent ??= GetComponent<BehaviorGraphAgent>();
         }
@@ -49,8 +55,7 @@ namespace Enemy
 
         public void OnDeath()
         {
-            _behaviorAgent.GetVariable(isDeadVariableName, out BlackboardVariable isDeadVariable);
-            isDeadVariable.ObjectValue = true;
+            _behaviorAgent.SetVariableValue(isDeadVariableName, true);
             
             onEnemyDeath?.RaiseEvent(enemyDeathProperties.healthRewardOnDeath);
             onInternalDeath?.Invoke(gameObject.transform.position);
@@ -58,7 +63,7 @@ namespace Enemy
 
             onHitStop?.RaiseEvent(enemyDeathProperties.hitstopProperties);
 
-            foreach (GameObject obj in objectsToDisable)
+            foreach (GameObject obj in GameObjectsToDisableOnDeath)
             {
                 obj.SetActive(false);
             }
