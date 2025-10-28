@@ -893,6 +893,7 @@ GameObject:
   - component: {fileID: 5990451584755475820}
   - component: {fileID: 5929810191845268401}
   - component: {fileID: 483606759693865408}
+  - component: {fileID: 7152759952958382513}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -1581,7 +1582,7 @@ MonoBehaviour:
   onInitializeHealthEvent: {fileID: 11400000, guid: 33fe87b244882df48aff772321fe6d6d, type: 2}
   onInitializeMaxHealthEvent: {fileID: 11400000, guid: 4ac72940bde634c4585a3ff3c5336e83, type: 2}
   onDamageAvoidedEvent: {fileID: 0}
-  receiveLethalDamageEvent: {fileID: 11400000, guid: 5623fb62f8bf4b841b86bb8c9a902b25, type: 2}
+  receiveLethalDamageEvent: {fileID: 11400000, guid: 294714c72b111884f96f6e5aa0276f9a, type: 2}
   onHit:
     m_PersistentCalls:
       m_Calls: []
@@ -1610,6 +1611,21 @@ MonoBehaviour:
   onInternalInitializeMaxHealthEvent:
     m_PersistentCalls:
       m_Calls: []
+  onLethalDamageEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7419154463842292251}
+        m_TargetAssemblyTypeName: Player.Controllers.PlayerAnimationController, Assembly-CSharp
+        m_MethodName: HandleDeathBySpikes
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6540393279558681873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2168,6 +2184,20 @@ MonoBehaviour:
   onPlayerDeath: {fileID: 11400000, guid: 22935ebca27667842b100ca2831ca89e, type: 2}
   playerMaterial: {fileID: 2100000, guid: aeb953dbb4f9bb24b974b27d970ac785, type: 2}
   fireEffect: {fileID: 1212672894942375179}
+--- !u!114 &7152759952958382513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182945775304313054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 892b2b0b994ebfb4e985c7b1d510d79c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spikeDeathProperties: {fileID: 11400000, guid: 79a50bb6e3633b543b159379f01b9e31, type: 2}
+  onLethalDamageBySpikes: {fileID: 11400000, guid: 294714c72b111884f96f6e5aa0276f9a, type: 2}
 --- !u!1001 &307453012941626532
 PrefabInstance:
   m_ObjectHideFlags: 0
