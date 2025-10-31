@@ -24,6 +24,8 @@ namespace Player
         public UnityEvent onChangeFov;
         public UnityEvent onDropdown;
         public UnityEvent onDropdownStop;
+        public UnityEvent onNavigation;
+        public UnityEvent onCancel;
 
         public void OnMove(InputAction.CallbackContext context)
         {
@@ -121,6 +123,16 @@ namespace Player
         {
             if (context.performed) onDropdown?.Invoke();
             if (context.canceled) onDropdownStop?.Invoke();
+        }
+
+        public void HandleNavigation(InputAction.CallbackContext context)
+        {
+            onNavigation?.Invoke();
+        }
+
+        public void OnCancel(InputAction.CallbackContext context)
+        {
+            onCancel?.Invoke();
         }
     }
 }

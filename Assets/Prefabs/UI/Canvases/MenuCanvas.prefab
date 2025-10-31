@@ -454,7 +454,7 @@ RectTransform:
   - {fileID: 2459532283408077694}
   - {fileID: 8112389263040370194}
   - {fileID: 613539977022456297}
-  - {fileID: 5283494354624859095}
+  - {fileID: 7913426034343989764}
   m_Father: {fileID: 8541710811972301453}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1450,8 +1450,9 @@ GameObject:
   - component: {fileID: 176783703981814188}
   - component: {fileID: 5302715094474264926}
   - component: {fileID: 3284599509600685398}
+  - component: {fileID: 6646270249905447435}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: NameInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1470,12 +1471,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7015603082351627733}
-  m_Father: {fileID: 2031432040910065526}
+  m_Father: {fileID: 7913426034343989764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.07322918, y: 0.3698148}
   m_AnchorMax: {x: 0.32747918, y: 0.48200002}
-  m_AnchoredPosition: {x: 524.2547, y: 0}
-  m_SizeDelta: {x: 0.9674988, y: 0.07939911}
+  m_AnchoredPosition: {x: 0.28985596, y: 0.005859375}
+  m_SizeDelta: {x: 488.8815, y: 121.23049}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &176783703981814188
 CanvasRenderer:
@@ -1576,7 +1577,19 @@ MonoBehaviour:
   m_CharacterLimit: 8
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6646270249905447435}
+        m_TargetAssemblyTypeName: NameInput, Assembly-CSharp
+        m_MethodName: OnInputFieldEndEdit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -1616,6 +1629,21 @@ MonoBehaviour:
   isAlert: 0
   m_InputValidator: {fileID: 0}
   m_ShouldActivateOnSelect: 1
+--- !u!114 &6646270249905447435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126558114952576193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697a996f1a82fc74c84c94c2e5b03a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onLoadSceneHandler: {fileID: 11400000, guid: 228ea904a6a455444b88e8abdc87ee4e, type: 2}
+  playerName: {fileID: 11400000, guid: 205839ec3e0b23e49b39ab3c5a709145, type: 2}
+  firstLevelName: Level1
 --- !u!1 &7339924868075460971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1828,6 +1856,42 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &8227049024644572637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7913426034343989764}
+  m_Layer: 5
+  m_Name: NameInputPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &7913426034343989764
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8227049024644572637}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5283494354624859095}
+  m_Father: {fileID: 2031432040910065526}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -51.065277, y: -80.020004}
+  m_SizeDelta: {x: 0.9674988, y: 0.07940674}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &8493757713099555957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,23 +1936,23 @@ VideoPlayer:
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 0}
+  m_TargetTexture: {fileID: 8400000, guid: e603d1648ad27d54783670a42b795826, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: <noninit>
-  m_RenderMode: 0
+  m_RenderMode: 2
   m_AspectRatio: 2
   m_DataSource: 0
   m_TimeUpdateMode: 2
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 0
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
+  m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
@@ -2185,7 +2249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6afecb22f0e414c809b631f8371679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onLoadSceneHandler: {fileID: 11400000, guid: 228ea904a6a455444b88e8abdc87ee4e, type: 2}
-  playerName: {fileID: 11400000, guid: 205839ec3e0b23e49b39ab3c5a709145, type: 2}
-  firstLevelName: Level1
-  inputField: {fileID: 3284599509600685398}
+  inputPanel: {fileID: 8227049024644572637}
+  inputField: {fileID: 7126558114952576193}
+  onNewSelectedObject: {fileID: 11400000, guid: 7c1e8de36d6888e43a1116cc8ac42c4e, type: 2}
+  input: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
