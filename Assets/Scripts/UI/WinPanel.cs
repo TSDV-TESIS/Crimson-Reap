@@ -14,6 +14,7 @@ public class WinPanel : MonoBehaviour
     [SerializeField] private VoidEventChannelSO onGamePaused;
 
     [SerializeField] private GameObject panel;
+    [SerializeField] private LevelCompleteAnimation levelCompletePhase;
     [SerializeField] private TieredTimes medals;
     [SerializeField] private TextMeshProUGUI timeTMPro;
     [SerializeField] private TextMeshProUGUI timePersonalBestTMPro;
@@ -27,6 +28,7 @@ public class WinPanel : MonoBehaviour
     private string recordText = "New Personal Best!";
 
     private Coroutine countDown;
+    private Coroutine completePhase;
 
     private float levelClearTime;
 
@@ -44,6 +46,11 @@ public class WinPanel : MonoBehaviour
     private void HandleTimerFinish(float time)
     {
         panel.SetActive(true);
+        if (completePhase != null)
+            StopCoroutine(completePhase);
+
+        completePhase = StartCoroutine(levelCompletePhase.LevelCompleteStart(time));
+
         leaderboardRequestHandler.HandleSetTime((int)(time * 1000));
         TimeManager.Instance.PauseTime(true);
         onGamePaused?.RaiseEvent();
