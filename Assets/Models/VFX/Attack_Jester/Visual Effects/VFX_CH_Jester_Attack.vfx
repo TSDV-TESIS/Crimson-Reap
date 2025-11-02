@@ -13,17 +13,6 @@ MonoBehaviour:
   m_Name: VFXUI
   m_EditorClassIdentifier: 
   groupInfos:
-  - title: Event Controller
-    position:
-      serializedVersion: 2
-      x: 7394
-      y: -2271
-      width: 474
-      height: 251
-    contents:
-    - model: {fileID: 8926484042661615558}
-      id: 0
-      isStickyNote: 0
   - title: Attack Normal Event
     position:
       serializedVersion: 2
@@ -227,12 +216,15 @@ MonoBehaviour:
   - title: Event Controller
     position:
       serializedVersion: 2
-      x: 12158
-      y: -422
-      width: 474
+      x: 10722
+      y: -427
+      width: 1071
       height: 251
     contents:
     - model: {fileID: 8926484042661625718}
+      id: 0
+      isStickyNote: 0
+    - model: {fileID: 8926484042661626779}
       id: 0
       isStickyNote: 0
   stickyNoteInfos: []
@@ -246,9 +238,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: 6541
-    y: -2271
+    y: -737
     width: 8064
-    height: 5215
+    height: 3681
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -265,7 +257,6 @@ MonoBehaviour:
   m_Parent: {fileID: 0}
   m_Children:
   - {fileID: 8926484042661614759}
-  - {fileID: 8926484042661615558}
   - {fileID: 8926484042661622064}
   - {fileID: 8926484042661622709}
   - {fileID: 8926484042661622717}
@@ -372,6 +363,7 @@ MonoBehaviour:
   - {fileID: 8926484042661626703}
   - {fileID: 8926484042661626706}
   - {fileID: 8926484042661626710}
+  - {fileID: 8926484042661626779}
   m_UIPosition: {x: 0, y: 0}
   m_UICollapsed: 1
   m_UISuperCollapsed: 0
@@ -621,7 +613,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614760}
       inputSlot: {fileID: 8926484042661626013}
-    position: {x: 7107, y: 1179}
+    position: {x: 7133, y: 1201}
     expandedSlots: []
     expanded: 1
     supecollapsed: 0
@@ -660,54 +652,6 @@ MonoBehaviour:
   m_Direction: 1
   m_LinkedSlots:
   - {fileID: 8926484042661626013}
---- !u!114 &8926484042661615558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2461f61b3c026d54db1951a4e17ab20e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UIIgnoredErrors: []
-  m_Parent: {fileID: 114350483966674976}
-  m_Children: []
-  m_UIPosition: {x: 7419, y: -2212}
-  m_UICollapsed: 0
-  m_UISuperCollapsed: 0
-  m_InputSlots: []
-  m_OutputSlots: []
-  m_Label: 
-  m_Data: {fileID: 8926484042661615559}
-  m_InputFlowSlot:
-  - link: []
-  m_OutputFlowSlot:
-  - link: []
-  eventName: Impact_Attack
---- !u!114 &8926484042661615559
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f68759077adc0b143b6e1c101e82065e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UIIgnoredErrors: []
-  m_Parent: {fileID: 0}
-  m_Children: []
-  m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
-  m_UISuperCollapsed: 0
-  title: 
-  m_Owners:
-  - {fileID: 8926484042661615558}
 --- !u!114 &8926484042661622064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1379,7 +1323,7 @@ MonoBehaviour:
   m_UIIgnoredErrors: []
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
-  m_UIPosition: {x: 12183, y: -363}
+  m_UIPosition: {x: 10747, y: -368}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -1395,8 +1339,6 @@ MonoBehaviour:
     - context: {fileID: 8926484042661625844}
       slotIndex: 0
     - context: {fileID: 8926484042661625901}
-      slotIndex: 0
-    - context: {fileID: 8926484042661626386}
       slotIndex: 0
   eventName: Attack_Normal
 --- !u!114 &8926484042661625719
@@ -19084,7 +19026,7 @@ MonoBehaviour:
   m_Data: {fileID: 8926484042661626387}
   m_InputFlowSlot:
   - link:
-    - context: {fileID: 8926484042661625718}
+    - context: {fileID: 8926484042661626779}
       slotIndex: 0
   - link: []
   m_OutputFlowSlot:
@@ -30264,3 +30206,53 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
   m_LinkedSlots: []
+--- !u!114 &8926484042661626779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2461f61b3c026d54db1951a4e17ab20e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 114350483966674976}
+  m_Children: []
+  m_UIPosition: {x: 11344, y: -368}
+  m_UICollapsed: 0
+  m_UISuperCollapsed: 0
+  m_InputSlots: []
+  m_OutputSlots: []
+  m_Label: 
+  m_Data: {fileID: 8926484042661626780}
+  m_InputFlowSlot:
+  - link: []
+  m_OutputFlowSlot:
+  - link:
+    - context: {fileID: 8926484042661626386}
+      slotIndex: 0
+  eventName: Attack_sparks
+--- !u!114 &8926484042661626780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68759077adc0b143b6e1c101e82065e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  title: 
+  m_Owners:
+  - {fileID: 8926484042661626779}
