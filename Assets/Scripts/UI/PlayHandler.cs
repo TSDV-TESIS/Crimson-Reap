@@ -1,6 +1,4 @@
-using System;
 using Events.Scriptables;
-using Player;
 using UnityEngine;
 
 namespace UI
@@ -10,23 +8,13 @@ namespace UI
         [SerializeField] private GameObject inputPanel;
         [SerializeField] private GameObject inputField;
         [SerializeField] private GameObjectEventChannelSO onNewSelectedObject;
-        [SerializeField] private InputHandler input;
-
-        private void OnEnable()
-        {
-            input.onCancel.AddListener(HandleCancel);
-        }
+        [SerializeField] private PanelHandling panelHandler;
 
         public void OnClick()
         {
             inputPanel.SetActive(true);
+            panelHandler.SetPanel(inputPanel);
             onNewSelectedObject?.RaiseEvent(inputField);
-        }
-
-        private void HandleCancel()
-        {
-            inputPanel.SetActive(false);
-            onNewSelectedObject?.RaiseEvent(gameObject);
         }
     }
 }
