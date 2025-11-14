@@ -24,7 +24,9 @@ namespace Player
         public UnityEvent onChangeFov;
         public UnityEvent onDropdown;
         public UnityEvent onDropdownStop;
-        
+        public UnityEvent onNavigation;
+        public UnityEvent onCancel;
+
         public void OnMove(InputAction.CallbackContext context)
         {
             Vector2 movement = context.ReadValue<Vector2>();
@@ -56,7 +58,7 @@ namespace Player
         public void OnJump(InputAction.CallbackContext context)
         {
             if (context.performed) OnPlayerJump?.Invoke();
-            if(context.canceled) OnPlayerJumpCancelled?.Invoke();
+            if (context.canceled) OnPlayerJumpCancelled?.Invoke();
         }
 
         public void OnShadowStep(InputAction.CallbackContext context)
@@ -105,7 +107,8 @@ namespace Player
 
         public void OnPause(InputAction.CallbackContext context)
         {
-            onPauseToggle?.Invoke();
+            if (context.started)
+                onPauseToggle?.Invoke();
         }
 
         public void ChangeFov(InputAction.CallbackContext context)
@@ -118,8 +121,18 @@ namespace Player
 
         public void OnDropdownHandle(InputAction.CallbackContext context)
         {
-            if(context.performed) onDropdown?.Invoke();
-            if(context.canceled) onDropdownStop?.Invoke();
+            if (context.performed) onDropdown?.Invoke();
+            if (context.canceled) onDropdownStop?.Invoke();
+        }
+
+        public void HandleNavigation(InputAction.CallbackContext context)
+        {
+            onNavigation?.Invoke();
+        }
+
+        public void OnCancel(InputAction.CallbackContext context)
+        {
+            onCancel?.Invoke();
         }
     }
 }
