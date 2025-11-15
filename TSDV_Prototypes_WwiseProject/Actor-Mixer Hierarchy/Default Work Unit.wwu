@@ -176,7 +176,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="Jester_Footsteps_Wood__001" ID="{7FC06526-BC26-48A7-AEC0-A90D14118E1A}" ShortID="167571637">
+										<Sound Name="Footsteps_Wood_A_03" ID="{4767662B-1AFD-49D6-879D-1F163D11EE37}" ShortID="950839966">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -186,33 +186,19 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Jester_Footsteps_Wood__001" ID="{77B06C6C-37D0-4FA6-8C6F-EE26EB3F51DC}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.00845859053497943"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0307326610511636"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.00953062210200928"/>
-														<Property Name="TrimEnd" Type="Real64" Value="0.119477591306585"/>
-													</PropertyList>
+												<AudioFileSource Name="Footsteps_Wood_A_03" ID="{16BA8243-81C5-4C20-B9C2-5AEA96C90452}">
 													<Language>SFX</Language>
-													<AudioFile>Jester_Footsteps_Wood__001.wav</AudioFile>
+													<AudioFile>Footsteps_Wood_A_03.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="902185492"/>
+														<MediaID ID="43198473"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Jester_Footsteps_Wood__001" ID="{77B06C6C-37D0-4FA6-8C6F-EE26EB3F51DC}" Platform="Linked"/>
+												<ActiveSource Name="Footsteps_Wood_A_03" ID="{16BA8243-81C5-4C20-B9C2-5AEA96C90452}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Jester_Footsteps_Wood__002" ID="{C9DD9ABF-834D-45EC-A574-E87EF00FB333}" ShortID="988837677">
-											<PropertyList>
-												<Property Name="Pitch" Type="int32">
-													<ValueList>
-														<Value>530</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
+										<Sound Name="Footsteps_Wood_A_04" ID="{209244A0-7C6C-4F3E-A183-69B4168660CA}" ShortID="733700766">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -222,120 +208,237 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Jester_Footsteps_Wood__002" ID="{4FA4738A-3313-4639-8BD3-F5129E718A3D}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.00912820697028166"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0403760425710464"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimEnd" Type="Real64" Value="0.131108153292181"/>
-													</PropertyList>
+												<AudioFileSource Name="Footsteps_Wood_A_04" ID="{DDEA41B6-008B-4DBC-A30F-67B03B841656}">
 													<Language>SFX</Language>
-													<AudioFile>Jester_Footsteps_Wood__002.wav</AudioFile>
+													<AudioFile>Footsteps_Wood_A_04.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="329729844"/>
+														<MediaID ID="899645118"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Jester_Footsteps_Wood__002" ID="{4FA4738A-3313-4639-8BD3-F5129E718A3D}" Platform="Linked"/>
+												<ActiveSource Name="Footsteps_Wood_A_04" ID="{DDEA41B6-008B-4DBC-A30F-67B03B841656}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Jester_Footsteps_Wood__003" ID="{B8F46A8D-8383-4F3C-B5FD-E57F93BB0E62}" ShortID="49454637">
+										<Sound Name="Footsteps_Wood_A_01" ID="{537E315B-C3A5-4D7F-8203-0D1912F1F8C7}" ShortID="283645508">
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<Custom>
+														<Attenuation Name="Attenuation (Custom)" ID="{BA5151ED-4670-4780-817D-A6C0B4266C25}" ShortID="282480052">
+															<CurveUsageInfoList>
+																<VolumeDryUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																		<Curve Name="VolumeDry" ID="{B1458D19-5755-4661-9BDE-54FBDE7DC7EF}">
+																			<PropertyList>
+																				<Property Name="Flags" Type="int32" Value="3"/>
+																			</PropertyList>
+																			<PointList>
+																				<Point>
+																					<XPos>0</XPos>
+																					<YPos>0</YPos>
+																					<Flags>5</Flags>
+																				</Point>
+																				<Point>
+																					<XPos>100</XPos>
+																					<YPos>-200</YPos>
+																					<Flags>37</Flags>
+																				</Point>
+																			</PointList>
+																		</Curve>
+																	</CurveUsageInfo>
+																</VolumeDryUsage>
+																<VolumeWetGameUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+																</VolumeWetGameUsage>
+																<VolumeWetUserUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+																</VolumeWetUserUsage>
+																<LowPassFilterUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																</LowPassFilterUsage>
+																<HighPassFilterUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																</HighPassFilterUsage>
+																<SpreadUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																</SpreadUsage>
+																<FocusUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																</FocusUsage>
+																<ObstructionVolumeUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</ObstructionVolumeUsage>
+																<ObstructionLPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</ObstructionLPFUsage>
+																<ObstructionHPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</ObstructionHPFUsage>
+																<OcclusionVolumeUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</OcclusionVolumeUsage>
+																<OcclusionLPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</OcclusionLPFUsage>
+																<OcclusionHPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</OcclusionHPFUsage>
+																<DiffractionVolumeUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</DiffractionVolumeUsage>
+																<DiffractionLPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</DiffractionLPFUsage>
+																<DiffractionHPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</DiffractionHPFUsage>
+																<TransmissionVolumeUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</TransmissionVolumeUsage>
+																<TransmissionLPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</TransmissionLPFUsage>
+																<TransmissionHPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</TransmissionHPFUsage>
+															</CurveUsageInfoList>
+														</Attenuation>
+													</Custom>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
 												</Reference>
 												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+													<ObjectRef Name="SFX Bus" ID="{70817B05-BD3C-46E5-864B-573EA2B116B3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+												</Reference>
+												<Reference Name="UserAuxSend0">
+													<ObjectRef Name="Reverb" ID="{0888B9CD-0621-4596-B245-10BB75FE5CE4}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Jester_Footsteps_Wood__003" ID="{44FC26B6-CBAF-48A3-804B-45BFB9080704}">
+												<AudioFileSource Name="Footsteps_Wood_A_01" ID="{389BC04B-B06E-4E42-B3C8-4D90FD715C34}">
 													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.008894053142164"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0498903227284367"/>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.0519168865435356"/>
 														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimEnd" Type="Real64" Value="0.124764210390946"/>
+														<Property Name="TrimEnd" Type="Real64" Value="0.28510290237467"/>
 													</PropertyList>
 													<Language>SFX</Language>
-													<AudioFile>Jester_Footsteps_Wood__003.wav</AudioFile>
+													<AudioFile>Footsteps_Wood_A_01.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="268368201"/>
+														<MediaID ID="769644416"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Jester_Footsteps_Wood__003" ID="{44FC26B6-CBAF-48A3-804B-45BFB9080704}" Platform="Linked"/>
+												<ActiveSource Name="Footsteps_Wood_A_01" ID="{389BC04B-B06E-4E42-B3C8-4D90FD715C34}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Jester_Footsteps_Wood__004" ID="{E5380F4D-E713-4FC5-8526-6153F24C58FB}" ShortID="681606653">
+										<Sound Name="Footsteps_Wood_A_02" ID="{B5CED8CB-4AD3-4154-B4D8-EDE9B8DB2C57}" ShortID="764660629">
 											<ReferenceList>
+												<Reference Name="Attenuation">
+													<Custom>
+														<Attenuation Name="Attenuation (Custom)" ID="{3F59977B-8170-4F0E-A840-00BCC4F7F8F8}" ShortID="466610839">
+															<CurveUsageInfoList>
+																<VolumeDryUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
+																		<Curve Name="VolumeDry" ID="{4852851C-F6DC-45D4-8912-A4719D7E338A}">
+																			<PropertyList>
+																				<Property Name="Flags" Type="int32" Value="3"/>
+																			</PropertyList>
+																			<PointList>
+																				<Point>
+																					<XPos>0</XPos>
+																					<YPos>0</YPos>
+																					<Flags>5</Flags>
+																				</Point>
+																				<Point>
+																					<XPos>100</XPos>
+																					<YPos>-200</YPos>
+																					<Flags>37</Flags>
+																				</Point>
+																			</PointList>
+																		</Curve>
+																	</CurveUsageInfo>
+																</VolumeDryUsage>
+																<VolumeWetGameUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+																</VolumeWetGameUsage>
+																<VolumeWetUserUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseVolumeDry"/>
+																</VolumeWetUserUsage>
+																<LowPassFilterUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																</LowPassFilterUsage>
+																<HighPassFilterUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																</HighPassFilterUsage>
+																<SpreadUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																</SpreadUsage>
+																<FocusUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="None"/>
+																</FocusUsage>
+																<ObstructionVolumeUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</ObstructionVolumeUsage>
+																<ObstructionLPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</ObstructionLPFUsage>
+																<ObstructionHPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</ObstructionHPFUsage>
+																<OcclusionVolumeUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</OcclusionVolumeUsage>
+																<OcclusionLPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</OcclusionLPFUsage>
+																<OcclusionHPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</OcclusionHPFUsage>
+																<DiffractionVolumeUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</DiffractionVolumeUsage>
+																<DiffractionLPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</DiffractionLPFUsage>
+																<DiffractionHPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</DiffractionHPFUsage>
+																<TransmissionVolumeUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</TransmissionVolumeUsage>
+																<TransmissionLPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</TransmissionLPFUsage>
+																<TransmissionHPFUsage>
+																	<CurveUsageInfo Platform="Linked" CurveToUse="UseProject"/>
+																</TransmissionHPFUsage>
+															</CurveUsageInfoList>
+														</Attenuation>
+													</Custom>
+												</Reference>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
 												</Reference>
 												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+													<ObjectRef Name="SFX Bus" ID="{70817B05-BD3C-46E5-864B-573EA2B116B3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+												</Reference>
+												<Reference Name="UserAuxSend0">
+													<ObjectRef Name="Reverb" ID="{0888B9CD-0621-4596-B245-10BB75FE5CE4}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="Jester_Footsteps_Wood__004" ID="{683F49AD-73BB-438F-98A1-5108B67F2631}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.00741597446826442"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0360323536912212"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.0285918663060278"/>
-														<Property Name="TrimEnd" Type="Real64" Value="0.163885191615226"/>
-													</PropertyList>
+												<AudioFileSource Name="Footsteps_Wood_A_02" ID="{800B5141-A218-493A-AB29-06F59E3E5063}">
 													<Language>SFX</Language>
-													<AudioFile>Jester_Footsteps_Wood__004.wav</AudioFile>
+													<AudioFile>Footsteps_Wood_A_02.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="737932188"/>
+														<MediaID ID="571969104"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="Jester_Footsteps_Wood__004" ID="{683F49AD-73BB-438F-98A1-5108B67F2631}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Jester_Footsteps_Wood__005" ID="{F09E924E-9F43-4B5B-A439-A44806CB27E3}" ShortID="25595645">
-											<PropertyList>
-												<Property Name="Lowpass" Type="int16">
-													<ValueList>
-														<Value>52</Value>
-													</ValueList>
-												</Property>
-												<Property Name="Pitch" Type="int32">
-													<ValueList>
-														<Value>320</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="Jester_Footsteps_Wood__004" ID="{030E704D-3689-452B-951D-D407F987237F}">
-													<PropertyList>
-														<Property Name="FadeInDuration" Type="Real64" Value="0.00741597446826442"/>
-														<Property Name="FadeOutDuration" Type="Real64" Value="0.0360323536912212"/>
-														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
-														<Property Name="TrimBegin" Type="Real64" Value="0.0180186281373035"/>
-														<Property Name="TrimEnd" Type="Real64" Value="0.18714631558642"/>
-													</PropertyList>
-													<Language>SFX</Language>
-													<AudioFile>Jester_Footsteps_Wood__004.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="396830825"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="Jester_Footsteps_Wood__004" ID="{030E704D-3689-452B-951D-D407F987237F}" Platform="Linked"/>
+												<ActiveSource Name="Footsteps_Wood_A_02" ID="{800B5141-A218-493A-AB29-06F59E3E5063}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -347,20 +450,14 @@
 												<Value>20</Value>
 											</ValueList>
 										</Property>
-										<Property Name="Lowpass" Type="int16">
-											<ValueList>
-												<Value>20</Value>
-											</ValueList>
-										</Property>
 										<Property Name="Pitch" Type="int32">
 											<ValueList>
-												<Value>600</Value>
+												<Value>-70</Value>
 											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
 													<Modifier Name="" ID="{CCC46CC7-BB9B-4C78-BF0A-AAAC0514D359}">
 														<PropertyList>
-															<Property Name="Enabled" Type="bool" Value="True"/>
 															<Property Name="Max" Type="Real64" Value="505"/>
 														</PropertyList>
 													</Modifier>
@@ -370,7 +467,7 @@
 										<Property Name="RandomAvoidRepeatingCount" Type="int32" Value="3"/>
 										<Property Name="Volume" Type="Real64">
 											<ValueList>
-												<Value>-1</Value>
+												<Value>-8</Value>
 											</ValueList>
 											<ModifierList>
 												<ModifierInfo>
@@ -394,7 +491,7 @@
 										</Reference>
 									</ReferenceList>
 									<ChildrenList>
-										<Sound Name="Jester_Footsteps_Stone_01" ID="{9ECC1C67-8253-452F-A9AE-9E39A021A5AD}" ShortID="683563524">
+										<Sound Name="Footsteps_Stone_01" ID="{C400833F-4215-4F2E-A115-09D6EE2D9376}" ShortID="668148701">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -404,19 +501,24 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="StoneSteps_001" ID="{BAD54E3F-BDF1-4F31-97F7-25BD9688EA36}">
+												<AudioFileSource Name="Footsteps_Stone_01" ID="{0BF19F5B-2DEF-4F29-A01D-3352F69A9645}">
+													<PropertyList>
+														<Property Name="FadeOutDuration" Type="Real64" Value="0.162532456140351"/>
+														<Property Name="LoopBegin" Type="Real64" Value="0"/>
+														<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+													</PropertyList>
 													<Language>SFX</Language>
-													<AudioFile>StoneSteps_001.wav</AudioFile>
+													<AudioFile>Footsteps_Stone_01.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="35046546"/>
+														<MediaID ID="799890014"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="StoneSteps_001" ID="{BAD54E3F-BDF1-4F31-97F7-25BD9688EA36}" Platform="Linked"/>
+												<ActiveSource Name="Footsteps_Stone_01" ID="{0BF19F5B-2DEF-4F29-A01D-3352F69A9645}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Jester_Footsteps_Stone_02" ID="{5E889EEC-EF42-488C-A8D8-C204AD256C3E}" ShortID="578813492">
+										<Sound Name="Footsteps_Stone_02" ID="{BF052A1B-7DD4-4915-98C3-120E26F9D766}" ShortID="287315820">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -426,19 +528,19 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="StoneSteps_002" ID="{253106FA-A2F9-4E75-8B37-6B2226ADEA56}">
+												<AudioFileSource Name="Footsteps_Stone_02" ID="{9B1AE635-14E0-4F09-8DC4-E3C03AA85A8F}">
 													<Language>SFX</Language>
-													<AudioFile>StoneSteps_002.wav</AudioFile>
+													<AudioFile>Footsteps_Stone_02.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="635560830"/>
+														<MediaID ID="1019570732"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="StoneSteps_002" ID="{253106FA-A2F9-4E75-8B37-6B2226ADEA56}" Platform="Linked"/>
+												<ActiveSource Name="Footsteps_Stone_02" ID="{9B1AE635-14E0-4F09-8DC4-E3C03AA85A8F}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Jester_Footsteps_Stone_03" ID="{1E0B0F3C-AEF4-4C8C-90ED-C8F92AC8639E}" ShortID="445277318">
+										<Sound Name="Footsteps_Stone_03" ID="{F6853575-98D2-41E4-8E1F-14D3D6369FF4}" ShortID="625597136">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -448,19 +550,19 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="StoneSteps_003" ID="{9D2DC0EE-24B8-49C5-850A-55CAA2BF2728}">
+												<AudioFileSource Name="Footsteps_Stone_03" ID="{1DAEAD74-C5E0-4E3A-BAB1-EB0AF1DBFEFE}">
 													<Language>SFX</Language>
-													<AudioFile>StoneSteps_003.wav</AudioFile>
+													<AudioFile>Footsteps_Stone_03.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="241002637"/>
+														<MediaID ID="310396208"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="StoneSteps_003" ID="{9D2DC0EE-24B8-49C5-850A-55CAA2BF2728}" Platform="Linked"/>
+												<ActiveSource Name="Footsteps_Stone_03" ID="{1DAEAD74-C5E0-4E3A-BAB1-EB0AF1DBFEFE}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
-										<Sound Name="Jester_Footsteps_Stone_04" ID="{A900EA05-B78B-4FDD-8DE2-AC9AC4156D46}" ShortID="415454125">
+										<Sound Name="Footsteps_Stone_04" ID="{16ADE4A5-539C-468B-9801-1FA4FE7E754C}" ShortID="490137155">
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -470,67 +572,16 @@
 												</Reference>
 											</ReferenceList>
 											<ChildrenList>
-												<AudioFileSource Name="StoneSteps_004" ID="{0F08DD90-D99C-4706-9895-9BCF5BC8750C}">
+												<AudioFileSource Name="Footsteps_Stone_04" ID="{FFBDED37-16FE-4A89-9506-A7C6C45B6361}">
 													<Language>SFX</Language>
-													<AudioFile>StoneSteps_004.wav</AudioFile>
+													<AudioFile>Footsteps_Stone_04.wav</AudioFile>
 													<MediaIDList>
-														<MediaID ID="584093546"/>
+														<MediaID ID="174652563"/>
 													</MediaIDList>
 												</AudioFileSource>
 											</ChildrenList>
 											<ActiveSourceList>
-												<ActiveSource Name="StoneSteps_004" ID="{0F08DD90-D99C-4706-9895-9BCF5BC8750C}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Jester_Footsteps_Stone_05" ID="{44E019BE-8AA8-45C8-B61E-088AA2D60A0F}" ShortID="766531416">
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="StoneSteps_005" ID="{3948E2CB-946F-4CC7-9D2E-E43D40315A19}">
-													<Language>SFX</Language>
-													<AudioFile>StoneSteps_005.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="783340694"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="StoneSteps_005" ID="{3948E2CB-946F-4CC7-9D2E-E43D40315A19}" Platform="Linked"/>
-											</ActiveSourceList>
-										</Sound>
-										<Sound Name="Jester_Footsteps_Stone_06" ID="{3E9D8092-2EA9-4D64-A683-FD60FB9C15DB}" ShortID="217982958">
-											<PropertyList>
-												<Property Name="Weight" Type="Real64">
-													<ValueList>
-														<Value>18</Value>
-													</ValueList>
-												</Property>
-											</PropertyList>
-											<ReferenceList>
-												<Reference Name="Conversion">
-													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
-												</Reference>
-												<Reference Name="OutputBus">
-													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
-												</Reference>
-											</ReferenceList>
-											<ChildrenList>
-												<AudioFileSource Name="StoneSteps_006" ID="{027DD0FF-7193-40A1-ABB1-40F2AE4DF28B}">
-													<Language>SFX</Language>
-													<AudioFile>StoneSteps_006.wav</AudioFile>
-													<MediaIDList>
-														<MediaID ID="305562110"/>
-													</MediaIDList>
-												</AudioFileSource>
-											</ChildrenList>
-											<ActiveSourceList>
-												<ActiveSource Name="StoneSteps_006" ID="{027DD0FF-7193-40A1-ABB1-40F2AE4DF28B}" Platform="Linked"/>
+												<ActiveSource Name="Footsteps_Stone_04" ID="{FFBDED37-16FE-4A89-9506-A7C6C45B6361}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
@@ -982,7 +1033,7 @@
 								</Property>
 								<Property Name="Volume" Type="Real64">
 									<ValueList>
-										<Value>-9</Value>
+										<Value>-7</Value>
 									</ValueList>
 								</Property>
 							</PropertyList>
