@@ -16,6 +16,7 @@ namespace AK
         static const AkUniqueID PLAY_BOW_HIT_EXPLOSION = 1382688776U;
         static const AkUniqueID PLAY_BOW_HIT_WALL = 2208803663U;
         static const AkUniqueID PLAY_BUTTON_CLICK = 1149159311U;
+        static const AkUniqueID PLAY_BUTTON_ONHOVER = 951061720U;
         static const AkUniqueID PLAY_DEATH_KILLED = 3613662132U;
         static const AkUniqueID PLAY_DEATH_SPIKES = 1404038322U;
         static const AkUniqueID PLAY_DEATH_TIME = 2560480776U;
