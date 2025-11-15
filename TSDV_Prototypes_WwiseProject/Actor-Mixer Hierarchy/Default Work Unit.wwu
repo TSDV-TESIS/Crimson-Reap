@@ -1905,6 +1905,18 @@
 					</ReferenceList>
 					<ChildrenList>
 						<Sound Name="UI_Button" ID="{2432FE00-FA5D-415B-BFFD-60DBC2483EF6}" ShortID="989430701">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>20</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>-20</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -1915,6 +1927,10 @@
 							</ReferenceList>
 							<ChildrenList>
 								<AudioFileSource Name="UI_Button" ID="{2081DEF7-CFC0-4C03-A0AA-46E9F4EE5090}">
+									<PropertyList>
+										<Property Name="FadeInDuration" Type="Real64" Value="0.0278202850877193"/>
+										<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+									</PropertyList>
 									<Language>SFX</Language>
 									<AudioFile>UI_Button.wav</AudioFile>
 									<MediaIDList>
@@ -1926,6 +1942,96 @@
 								<ActiveSource Name="UI_Button" ID="{2081DEF7-CFC0-4C03-A0AA-46E9F4EE5090}" Platform="Linked"/>
 							</ActiveSourceList>
 						</Sound>
+						<RandomSequenceContainer Name="UI_OnHover" ID="{DD031375-FA47-460A-953F-8800A3469BE3}" ShortID="33550184">
+							<PropertyList>
+								<Property Name="Highpass" Type="int16">
+									<ValueList>
+										<Value>24</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Lowpass" Type="int16">
+									<ValueList>
+										<Value>16</Value>
+									</ValueList>
+								</Property>
+								<Property Name="Pitch" Type="int32">
+									<ValueList>
+										<Value>210</Value>
+									</ValueList>
+								</Property>
+								<Property Name="RandomAvoidRepeating" Type="bool" Value="False"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-10</Value>
+									</ValueList>
+								</Property>
+							</PropertyList>
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<Sound Name="UI_OnHover_01" ID="{329CA537-4D30-4D27-A3BD-65FADE101753}" ShortID="838827240">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="UI_OnHover_01" ID="{CD93AF62-6EEA-4552-8A0C-2D66A49D387B}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.0676924342105263"/>
+												<Property Name="FadeOutDuration" Type="Real64" Value="0.0639317434210527"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.0308376644736842"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>UI_OnHover_01.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="73833628"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="UI_OnHover_01" ID="{CD93AF62-6EEA-4552-8A0C-2D66A49D387B}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="UI_OnHover_02" ID="{8932B74C-BD66-4C6D-8DEE-D2D791D7DA40}" ShortID="417871112">
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="UI_OnHover_02" ID="{235E0235-0A38-4AAF-B9B8-0AABE27DD8EA}">
+											<PropertyList>
+												<Property Name="FadeInDuration" Type="Real64" Value="0.0441657894736842"/>
+												<Property Name="OverrideWavLoop" Type="bool" Value="True"/>
+												<Property Name="TrimBegin" Type="Real64" Value="0.0334317327668733"/>
+											</PropertyList>
+											<Language>SFX</Language>
+											<AudioFile>UI_OnHover_02.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="452026148"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="UI_OnHover_02" ID="{235E0235-0A38-4AAF-B9B8-0AABE27DD8EA}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+							</ChildrenList>
+						</RandomSequenceContainer>
 					</ChildrenList>
 				</ActorMixer>
 				<ActorMixer Name="Misc" ID="{C186F7F8-2AA8-491D-BA15-BEFB2088CC77}" ShortID="28356617">
