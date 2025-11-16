@@ -618,6 +618,11 @@
 								<Property Name="PlayMechanismSpecialTransitionsValue" Type="Real64" Value="2.5"/>
 								<Property Name="PlayMechanismStepOrContinuous" Type="int16" Value="0"/>
 								<Property Name="RandomOrSequence" Type="int16" Value="0"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>2</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -838,11 +843,6 @@
 												</ModifierInfo>
 											</ModifierList>
 										</Property>
-										<Property Name="Volume" Type="Real64">
-											<ValueList>
-												<Value>-6</Value>
-											</ValueList>
-										</Property>
 									</PropertyList>
 									<ReferenceList>
 										<Reference Name="Conversion">
@@ -854,6 +854,13 @@
 									</ReferenceList>
 									<ChildrenList>
 										<Sound Name="Jester_D_Spikes_01" ID="{97C613BD-E4F8-425E-99C1-FD085DE9FDEC}" ShortID="1039067690">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -876,6 +883,13 @@
 											</ActiveSourceList>
 										</Sound>
 										<Sound Name="Jester_D_Spikes_02" ID="{E298B280-249A-4658-8FD5-48CF490FB6E2}" ShortID="1011132826">
+											<PropertyList>
+												<Property Name="Inclusion" Type="bool">
+													<ValueList>
+														<Value>False</Value>
+													</ValueList>
+												</Property>
+											</PropertyList>
 											<ReferenceList>
 												<Reference Name="Conversion">
 													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
@@ -895,6 +909,50 @@
 											</ChildrenList>
 											<ActiveSourceList>
 												<ActiveSource Name="D_Spikes_02" ID="{7371E62C-A386-4B3C-B595-3654D93FA924}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="D_Spikes_03" ID="{2C866751-E38F-48D5-B3A9-A07F681F6A0D}" ShortID="68446594">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="D_Spikes_03" ID="{30CAFF33-A693-45C0-8757-C4499B8ABB80}">
+													<Language>SFX</Language>
+													<AudioFile>D_Spikes_03.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="912680398"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="D_Spikes_03" ID="{30CAFF33-A693-45C0-8757-C4499B8ABB80}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+										<Sound Name="D_Spikes_04" ID="{C624CB05-8962-483E-B88D-27471AC0CAE2}" ShortID="617030060">
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5BFF9DFB-AE53-428C-8311-39701EECE552}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8C5DB27B-8907-44B1-AB7B-D5374DE5398E}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="D_Spikes_04" ID="{DB2FBED0-BBE8-4389-BFA1-2F1EE9B3AC32}">
+													<Language>SFX</Language>
+													<AudioFile>D_Spikes_04.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="611181760"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="D_Spikes_04" ID="{DB2FBED0-BBE8-4389-BFA1-2F1EE9B3AC32}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
 									</ChildrenList>
