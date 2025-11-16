@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1609305990734889646}
   - component: {fileID: 3535959269812820565}
+  - component: {fileID: 5278789143856613494}
   m_Layer: 5
   m_Name: PauseUI
   m_TagString: Untagged
@@ -57,6 +58,21 @@ MonoBehaviour:
   onMainMenu: {fileID: 11400000, guid: 228ea904a6a455444b88e8abdc87ee4e, type: 2}
   onGamePaused: {fileID: 11400000, guid: d3a595e157dbbe04fa1acd1ce9f44c79, type: 2}
   onGameUnpaused: {fileID: 11400000, guid: f79dad6bbbc1c2e4ea48ef4cb61ef61f, type: 2}
+--- !u!114 &5278789143856613494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048210033814657975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e585c7dfa1621a6418ec4c98bc7c1378, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  input: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
+  onNewSelectedObject: {fileID: 11400000, guid: 7c1e8de36d6888e43a1116cc8ac42c4e, type: 2}
+  defaultObject: {fileID: 7093313515474507225}
 --- !u!1 &2891431208712609031
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +631,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96be535f81f5815438891e88fbdee3e5, type: 3}
+--- !u!1 &7093313515474507225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4104752028419772399, guid: 96be535f81f5815438891e88fbdee3e5, type: 3}
+  m_PrefabInstance: {fileID: 6523324661232802358}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8216377098847529320 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2918876025681458014, guid: 96be535f81f5815438891e88fbdee3e5, type: 3}
@@ -708,6 +729,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2579482117659627393, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: panelHandler
+      value: 
+      objectReference: {fileID: 5278789143856613494}
+    - target: {fileID: 2579482117659627393, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: disabledPreselectedGameObject
+      value: 
+      objectReference: {fileID: 5145154408674118912}
     - target: {fileID: 3002418226043442932, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -849,9 +878,49 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6381159434287888945, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.5686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381159434287888945, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.5686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381159434287888945, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.5686275
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381159434287888945, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381159434287888945, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381159434287888945, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3535959269812820565}
+    - target: {fileID: 6381159434287888945, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleSettingsScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6381159434287888945, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542551305231338943, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.34117648
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542551305231338943, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.34117648
+      objectReference: {fileID: 0}
+    - target: {fileID: 6542551305231338943, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.34117648
+      objectReference: {fileID: 0}
     - target: {fileID: 6552076907003934532, guid: 965affcffa3fb6447acdad2361e8533b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -1048,6 +1117,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96be535f81f5815438891e88fbdee3e5, type: 3}
+--- !u!1 &5145154408674118912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4104752028419772399, guid: 96be535f81f5815438891e88fbdee3e5, type: 3}
+  m_PrefabInstance: {fileID: 9191917845918253807}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6273987980196426161 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2918876025681458014, guid: 96be535f81f5815438891e88fbdee3e5, type: 3}
