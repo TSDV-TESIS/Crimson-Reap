@@ -113,7 +113,14 @@
 								<Action Name="" ID="{5BE75398-7E7F-491B-8227-9D6487163F57}" ShortID="717649038">
 									<ReferenceList>
 										<Reference Name="Target">
-											<ObjectRef Name="Attack" ID="{68326478-DA67-46E4-A978-9270AC4F418D}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+											<ObjectRef Name="Attack_Slash" ID="{68326478-DA67-46E4-A978-9270AC4F418D}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+								<Action Name="" ID="{A175BFC1-3477-4360-83FA-6F58B15F272A}" ShortID="809113630">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Attack_Fire" ID="{4DB8554E-C529-4EDC-87B2-02E4AF8FF90B}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -169,6 +176,17 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="UI_Button" ID="{2432FE00-FA5D-415B-BFFD-60DBC2483EF6}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Button_OnHover" ID="{3DF867D9-DA04-4127-9BA7-F4F0D5B49BC0}">
+							<ChildrenList>
+								<Action Name="" ID="{08E108E3-65B1-4A08-B826-8B8D17426E59}" ShortID="365652309">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="UI_OnHover" ID="{DD031375-FA47-460A-953F-8800A3469BE3}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -401,6 +419,15 @@
 						<Property Name="Color" Type="int16" Value="10"/>
 						<Property Name="OverrideColor" Type="bool" Value="True"/>
 					</PropertyList>
+					<ChildrenList>
+						<Action Name="" ID="{D124EE96-3B79-46A7-ABF9-0D374F399D66}" ShortID="117858780">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Woosh_LevelClear" ID="{BA5D6395-855C-4495-8AD7-B01B3763177A}" WorkUnitID="{EE9EEAFF-EF4B-4387-A450-583DDB994CCC}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
 				</Event>
 			</ChildrenList>
 		</WorkUnit>
