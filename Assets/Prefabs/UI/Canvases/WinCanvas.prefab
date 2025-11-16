@@ -228,6 +228,7 @@ MonoBehaviour:
   - {fileID: 9108178035572399525}
   - {fileID: 3482807593086560102}
   - {fileID: 6304262779043557232}
+  bestMedal: {fileID: 8519454304317987078}
   delayBetweenUnlocks: 0.25
 --- !u!114 &4912135325486923934
 MonoBehaviour:
@@ -2242,7 +2243,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 569338460, guid: bb8359b7c678f7d468c37bfad62c6dd1, type: 3}
+  m_Sprite: {fileID: -1139953717, guid: ea7a335915ae9bc49905001f55ecbe23, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -4947,34 +4948,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5985733381624000733}
     m_Modifications:
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.95100003
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.4847989
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.24800001
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 4.800003
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.40000153
-      objectReference: {fileID: 0}
     - target: {fileID: 1640107872806813902, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -4995,10 +4968,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3371980539931113873, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
+      propertyPath: m_fontSize
+      value: 26.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5301592880392400045, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_Name
       value: Silver
       objectReference: {fileID: 0}
+    - target: {fileID: 6162906569644128333, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
+      propertyPath: medalSprite
+      value: 
+      objectReference: {fileID: -604462273, guid: 1e091248907a25f4dae53de32b7d4914, type: 3}
     - target: {fileID: 6605282675247995630, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5141,7 +5122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7508862561241185527, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 1.9617805
+      value: 1.9617767
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5438,34 +5419,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5985733381624000733}
     m_Modifications:
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.96300006
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.51520115
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.261
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0.55092
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.27539062
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.7999954
-      objectReference: {fileID: 0}
     - target: {fileID: 1640107872806813902, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -5491,8 +5444,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3371980539931113873, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_margin.z
-      value: 6.4853516
+      propertyPath: m_fontSize
+      value: 26.05
       objectReference: {fileID: 0}
     - target: {fileID: 5301592880392400045, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_Name
@@ -5502,6 +5455,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6162906569644128333, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
+      propertyPath: medalSprite
+      value: 
+      objectReference: {fileID: -1139953717, guid: ea7a335915ae9bc49905001f55ecbe23, type: 3}
     - target: {fileID: 6605282675247995630, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -5789,17 +5746,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5032564591238851546}
     m_Modifications:
-    - target: {fileID: 2847376923509025527, guid: 22e56fc0d4bef804189f9954aa8c8b44, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4701611013477851498, guid: 22e56fc0d4bef804189f9954aa8c8b44, type: 3}
       propertyPath: m_Name
       value: RubyMedal
-      objectReference: {fileID: 0}
-    - target: {fileID: 4701611013477851498, guid: 22e56fc0d4bef804189f9954aa8c8b44, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5970629308263214971, guid: 22e56fc0d4bef804189f9954aa8c8b44, type: 3}
       propertyPath: m_Pivot.x
@@ -5880,18 +5829,6 @@ PrefabInstance:
     - target: {fileID: 5970629308263214971, guid: 22e56fc0d4bef804189f9954aa8c8b44, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082020546641654168, guid: 22e56fc0d4bef804189f9954aa8c8b44, type: 3}
-      propertyPath: m_Color.b
-      value: 0.034406234
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082020546641654168, guid: 22e56fc0d4bef804189f9954aa8c8b44, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9082020546641654168, guid: 22e56fc0d4bef804189f9954aa8c8b44, type: 3}
-      propertyPath: m_Color.r
-      value: 0.2830189
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6882,34 +6819,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5985733381624000733}
     m_Modifications:
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0.90000004
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.48860338
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.13582121
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 8.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 4.4501
-      objectReference: {fileID: 0}
-    - target: {fileID: 1252320007614369871, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.1000061
-      objectReference: {fileID: 0}
     - target: {fileID: 1640107872806813902, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -6930,10 +6839,18 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3371980539931113873, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
+      propertyPath: m_fontSize
+      value: 26.05
+      objectReference: {fileID: 0}
     - target: {fileID: 5301592880392400045, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_Name
       value: Gold
       objectReference: {fileID: 0}
+    - target: {fileID: 6162906569644128333, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
+      propertyPath: medalSprite
+      value: 
+      objectReference: {fileID: 569338460, guid: bb8359b7c678f7d468c37bfad62c6dd1, type: 3}
     - target: {fileID: 6605282675247995630, guid: ea3e008f2cacce1469ae697381f370a1, type: 3}
       propertyPath: m_IsActive
       value: 0

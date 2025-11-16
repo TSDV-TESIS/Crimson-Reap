@@ -5,6 +5,7 @@ using TMPro;
 using UI.Leaderboard;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class WinPanel : MonoBehaviour
 {
