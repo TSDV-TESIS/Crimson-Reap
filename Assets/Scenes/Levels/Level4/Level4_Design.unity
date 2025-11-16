@@ -1129,6 +1129,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8484198323794232275, guid: 3771efd27cbde864ab7e3fda2ad13ad6, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1707,6 +1711,10 @@ PrefabInstance:
       propertyPath: levelPBKey
       value: Level4
       objectReference: {fileID: 0}
+    - target: {fileID: 346127670568992802, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.3027649
+      objectReference: {fileID: 0}
     - target: {fileID: 459080703995305743, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1910,6 +1918,10 @@ PrefabInstance:
     - target: {fileID: 3388581458380239016, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
       propertyPath: loader
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3545309691864952927, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.46139526
       objectReference: {fileID: 0}
     - target: {fileID: 3869571800247884967, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2947,11 +2959,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8090787239752966486, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.9746146
+      value: 5.971202
       objectReference: {fileID: 0}
     - target: {fileID: 8090787239752966486, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.10508
+      value: 2.1050498
       objectReference: {fileID: 0}
     - target: {fileID: 8090787239752966486, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3171,7 +3183,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 761681918}
-  - component: {fileID: 761681917}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -3179,31 +3190,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &761681917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 761681916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c751a67ae411447b7af9b980abeae8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializationSettings: {fileID: 11400000, guid: 9548c2e7f63a88146994d6b7d9800cc7, type: 2}
-  basePath: 
-  language: 
-  defaultPoolSize: 0
-  lowerPoolSize: 0
-  streamingPoolSize: 0
-  memoryCutoffThreshold: 0
-  monitorPoolSize: 0
-  monitorQueuePoolSize: 0
-  callbackManagerBufferSize: 0
-  spatialAudioPoolSize: 0
-  maxSoundPropagationDepth: 0
-  engineLogging: 0
 --- !u!4 &761681918
 Transform:
   m_ObjectHideFlags: 0
