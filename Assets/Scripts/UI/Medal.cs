@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Security;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +6,7 @@ public class Medal : MonoBehaviour
 {
     [SerializeField] public int timeInMs;
     [SerializeField] private GameObject fill;
+    public Sprite medalSprite;
     [SerializeField] private TextMeshProUGUI timeText;
 
     [Header("Unlock Anim")]
