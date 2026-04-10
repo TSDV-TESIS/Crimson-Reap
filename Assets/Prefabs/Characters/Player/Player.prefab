@@ -806,6 +806,7 @@ GameObject:
   - component: {fileID: 5929810191845268401}
   - component: {fileID: 483606759693865408}
   - component: {fileID: 7152759952958382513}
+  - component: {fileID: 1457097204409720709}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -846,7 +847,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 9984
+    m_Bits: 2107136
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 129
@@ -2111,6 +2112,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spikeDeathProperties: {fileID: 11400000, guid: 79a50bb6e3633b543b159379f01b9e31, type: 2}
   onLethalDamageBySpikes: {fileID: 11400000, guid: 294714c72b111884f96f6e5aa0276f9a, type: 2}
+--- !u!114 &1457097204409720709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182945775304313054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e0e9e62c3e07946a9fa41f881ee78f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pushPower: 2
 --- !u!1001 &307453012941626532
 PrefabInstance:
   m_ObjectHideFlags: 0
