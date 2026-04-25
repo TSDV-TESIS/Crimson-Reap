@@ -807,6 +807,7 @@ GameObject:
   - component: {fileID: 483606759693865408}
   - component: {fileID: 7152759952958382513}
   - component: {fileID: 1457097204409720709}
+  - component: {fileID: 8569130212847043093}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -847,7 +848,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 2107136
+    m_Bits: 9984
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 129
@@ -1314,7 +1315,19 @@ MonoBehaviour:
           m_CallState: 2
     onUpdate:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8569130212847043093}
+          m_TargetAssemblyTypeName: DashWallBreaker, Assembly-CSharp
+          m_MethodName: Check
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onExit:
       m_PersistentCalls:
         m_Calls:
@@ -2125,6 +2138,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pushPower: 2
+--- !u!114 &8569130212847043093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182945775304313054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec855dfa6d94334292f29e10a7eb5eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRadius: 2
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 2097408
 --- !u!1001 &307453012941626532
 PrefabInstance:
   m_ObjectHideFlags: 0
