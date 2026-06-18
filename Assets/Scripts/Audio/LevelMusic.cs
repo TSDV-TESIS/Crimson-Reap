@@ -1,6 +1,7 @@
 using System;
 using Events;
 using Events.Scriptables;
+using Health;
 using Managers;
 using UnityEngine;
 
@@ -14,23 +15,30 @@ public class LevelMusic : MonoBehaviour
     [SerializeField] private AkWwiseEventChannelSO playChannel;
     [SerializeField] private AkWwiseEventChannelSO stopChannel;
 
-    [Header("LevelStates")]
-    [SerializeField] private VoidEventChannelSO onGamePaused;
+    [Header("LevelStates")] [SerializeField] private VoidEventChannelSO onGamePaused;
     [SerializeField] private VoidEventChannelSO onGameUnPaused;
     [SerializeField] private VoidEventChannelSO onPlayerWin;
-    [SerializeField] private VoidEventChannelSO onPlayerDeath;
+    [SerializeField] private DeathEventChannelSO onPlayerDeath;
 
     private void OnEnable()
     {
         onGamePaused.onEvent.AddListener(TriggerPauseMusic);
         onGameUnPaused.onEvent.AddListener(TriggerMusic);
         onPlayerWin.onEvent.AddListener(TriggerWin);
-        onPlayerDeath.onEvent.AddListener(TriggerDeathMusic);
+        onPlayerDeath.onTypedEvent.AddListener(TriggerDeathMusic);
     }
 
     void Start()
     {
         TriggerMusic();
+    }
+
+    private void OnDestroy()
+    {
+        onGamePaused.onEvent.RemoveListener(TriggerPauseMusic);
+        onGameUnPaused.onEvent.RemoveListener(TriggerMusic);
+        onPlayerWin.onEvent.RemoveListener(TriggerWin);
+        onPlayerDeath.onTypedEvent.RemoveListener(TriggerDeathMusic);
     }
 
     private void TriggerPauseMusic()
@@ -49,7 +57,7 @@ public class LevelMusic : MonoBehaviour
         playChannel.RaiseEvent(winEvent);
     }
 
-    private void TriggerDeathMusic()
+    private void TriggerDeathMusic(DeathCauses cause)
     {
         playChannel.RaiseEvent(deathEvent);
     }

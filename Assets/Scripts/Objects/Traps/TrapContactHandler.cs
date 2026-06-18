@@ -1,7 +1,4 @@
-using System;
-using Events;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Objects.Traps
 {

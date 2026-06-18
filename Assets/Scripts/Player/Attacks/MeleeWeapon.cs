@@ -47,7 +47,7 @@ namespace Player.Attacks
                     other.transform.position,
                     playerAttackProperties.attackOcclussion))
             {
-                takeDamageInterface.TryTakeDamage(playerAttackProperties.damage);
+                takeDamageInterface.TryTakeDamage(playerAttackProperties.damage, DeathCauses.External);
                 onHitStop?.RaiseEvent();
                 onHit?.Invoke();
                 _hittedEnemies.Add(other);

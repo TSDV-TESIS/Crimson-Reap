@@ -1500,7 +1500,7 @@ MonoBehaviour:
   initHealth: 100
   canTakeDamage: 1
   shouldFreeze: 0
-  onDeathEvent: {fileID: 11400000, guid: 22935ebca27667842b100ca2831ca89e, type: 2}
+  onDeathEvent: {fileID: 11400000, guid: 23f77a340fe29d949816e46eec845536, type: 2}
   onReviveEvent: {fileID: 11400000, guid: 759bf030b0f37734e82f041ac9950e9e, type: 2}
   onTakeDamageEvent: {fileID: 11400000, guid: 907783a8cffc33e4ebffa90d6b4df275, type: 2}
   onSumHealthEvent: {fileID: 11400000, guid: 84372648de01f7d41a1f7238606514f9, type: 2}
@@ -1508,7 +1508,7 @@ MonoBehaviour:
   onInitializeHealthEvent: {fileID: 11400000, guid: 33fe87b244882df48aff772321fe6d6d, type: 2}
   onInitializeMaxHealthEvent: {fileID: 11400000, guid: 4ac72940bde634c4585a3ff3c5336e83, type: 2}
   onDamageAvoidedEvent: {fileID: 0}
-  receiveLethalDamageEvent: {fileID: 11400000, guid: 294714c72b111884f96f6e5aa0276f9a, type: 2}
+  receiveLethalDamageEvent: {fileID: 11400000, guid: 69663b43d69bf0b4e81321d20275e38f, type: 2}
   onHit:
     m_PersistentCalls:
       m_Calls: []
@@ -1814,10 +1814,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   input: {fileID: 11400000, guid: b165bc5393b36f14d8538a3f4673158a, type: 2}
   playerMovementProperties: {fileID: 11400000, guid: 0675b82af8887e24ab9e719566907346, type: 2}
-  onPlayerDeath: {fileID: 11400000, guid: 22935ebca27667842b100ca2831ca89e, type: 2}
+  onPlayerDeath: {fileID: 11400000, guid: 23f77a340fe29d949816e46eec845536, type: 2}
   onPlayerRevive: {fileID: 11400000, guid: 759bf030b0f37734e82f041ac9950e9e, type: 2}
   onFrenziedStart: {fileID: 11400000, guid: ef4985810d9bd934abdba52e7ade37ad, type: 2}
   onFrenziedStop: {fileID: 11400000, guid: 6bf763bcfdc1da24da3f818394e46eb3, type: 2}
+  onPlayerSpawn: {fileID: 11400000, guid: 4f61a3d199f2b2b40bd6f342ead4f7b5, type: 2}
   playerTransform: {fileID: 11400000, guid: 33cff94758fa9be458f6c60e98048cb4, type: 2}
   onWalk:
     m_PersistentCalls:
@@ -1957,7 +1958,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b7622b8777fe24e939d70ef46262bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onPlayerDeath: {fileID: 11400000, guid: 22935ebca27667842b100ca2831ca89e, type: 2}
+  onPlayerDeath: {fileID: 11400000, guid: 23f77a340fe29d949816e46eec845536, type: 2}
+  onPlayerKilled: {fileID: 11400000, guid: db621f73f418b02479b056f22e926b4d, type: 2}
+  onPlayerTimeDeath: {fileID: 11400000, guid: f64c624a799e62649be931f0376f231f, type: 2}
+  onPlayerEnviromentDeath: {fileID: 11400000, guid: 9e74b5b257f60ad4e8ce3d441784e14d, type: 2}
   waitSeconds: 2
 --- !u!114 &1120912602510473844
 MonoBehaviour:
@@ -2092,7 +2096,7 @@ MonoBehaviour:
   shaderProperties: {fileID: 11400000, guid: 5195199fa8891264c8263e99905281d2, type: 2}
   lowHealthShaderMaterial: {fileID: 2100000, guid: 1c144114b57274741bb210720e875322, type: 2}
   onTakeDamage: {fileID: 11400000, guid: 907783a8cffc33e4ebffa90d6b4df275, type: 2}
-  onPlayerDeath: {fileID: 11400000, guid: 22935ebca27667842b100ca2831ca89e, type: 2}
+  onPlayerDeath: {fileID: 11400000, guid: 23f77a340fe29d949816e46eec845536, type: 2}
   onSumHealth: {fileID: 11400000, guid: 84372648de01f7d41a1f7238606514f9, type: 2}
   onEnemiesDied: {fileID: 11400000, guid: 28f1c62b15c308d488b10d247b81f6a7, type: 2}
 --- !u!114 &483606759693865408
@@ -2124,7 +2128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spikeDeathProperties: {fileID: 11400000, guid: 79a50bb6e3633b543b159379f01b9e31, type: 2}
-  onLethalDamageBySpikes: {fileID: 11400000, guid: 294714c72b111884f96f6e5aa0276f9a, type: 2}
+  onLethalDamageBySpikes: {fileID: 11400000, guid: 23f77a340fe29d949816e46eec845536, type: 2}
 --- !u!114 &1457097204409720709
 MonoBehaviour:
   m_ObjectHideFlags: 0

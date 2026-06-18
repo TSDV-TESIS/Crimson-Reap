@@ -14,7 +14,7 @@ namespace Player.Health
 
         [SerializeField] private VoidEventChannelSO onEnemiesDisabled;
         [SerializeField] private UnityEvent onDeathByTime;
-        
+
         private HealthPoints _healthPoints;
         private Coroutine _tickCoroutine;
 
@@ -42,7 +42,7 @@ namespace Player.Health
                 yield return new WaitForSeconds(healthTickProperties.secondsPerTick);
                 if (_shouldTick && !_healthPoints.IsDead())
                 {
-                    _healthPoints.TakeUnavoidableDamage(healthTickProperties.healthTakenPerTick);
+                    _healthPoints.TakeUnavoidableDamage(healthTickProperties.healthTakenPerTick, DeathCauses.Internal);
                     if (_healthPoints.IsDead())
                     {
                         onDeathByTime?.Invoke();

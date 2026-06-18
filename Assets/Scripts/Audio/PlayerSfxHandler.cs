@@ -13,24 +13,28 @@ public class PlayerSfxHandler : MonoBehaviour
     [SerializeField] private AK.Wwise.Event dashSFX;
     [SerializeField] private AK.Wwise.Event attackSFX;
     [SerializeField] private AK.Wwise.Event jumpSFX;
+    [SerializeField] private AK.Wwise.Event spikeDeath;
+    [SerializeField] private AK.Wwise.Event killedDeath;
+    [SerializeField] private AK.Wwise.Event timeDeath;
     [SerializeField] private AK.Wwise.RTPC healthRTPC;
 
-    [Header("WwiseEvents")]
-    [SerializeField] private AkWwiseEventChannelSO playEvent;
+    [Header("WwiseEvents")] [SerializeField] private AkWwiseEventChannelSO playEvent;
     [SerializeField] private AkWwiseEventChannelSO stopEvent;
     [SerializeField] private AkWwiseSwitchEventChannelSO switchEvent;
     [SerializeField] private AkWwiseRTPCEventChannelSO rtpcEvent;
 
-    [Header("PlayerEvents")]
+    [Header("PlayerEvents")] [SerializeField] private VoidEventChannelSO onPlayerSpawn;
     [SerializeField] private VoidEventChannelSO onDash;
     [SerializeField] private VoidEventChannelSO onJump;
     [SerializeField] private VoidEventChannelSO onAttack;
+    [SerializeField] private VoidEventChannelSO onKilledDeath;
+    [SerializeField] private VoidEventChannelSO onTimeDeath;
+    [SerializeField] private VoidEventChannelSO onSpikeDeath;
     [SerializeField] private StepsMaterialEventChannelSO onWalk;
     [SerializeField] private VoidEventChannelSO onStopWalking;
     [SerializeField] private IntEventChannelSO onTakeDamage;
     [SerializeField] private IntEventChannelSO onHeal;
-    [Header("VFX Properties")]
-    [SerializeField] private float stepsDelay;
+    [Header("VFX Properties")] [SerializeField] private float stepsDelay;
 
     private bool _isWalking = false;
 
@@ -39,8 +43,9 @@ public class PlayerSfxHandler : MonoBehaviour
 
     private FloorMaterials _currentFloorMaterial = FloorMaterials.NONE;
 
-    private void Start()
+    private void Awake()
     {
+        onPlayerSpawn?.onEvent.AddListener(HandleSpawn);
         onDash?.onEvent.AddListener(HandleDashSFX);
         onJump?.onEvent.AddListener(HandleJumpSFX);
         onAttack?.onEvent.AddListener(HandleAttackSFX);
@@ -48,6 +53,10 @@ public class PlayerSfxHandler : MonoBehaviour
         onStopWalking?.onEvent.AddListener(HandleStopWalk);
         onTakeDamage?.onIntEvent.AddListener(HandleLife);
         onHeal?.onIntEvent.AddListener(HandleLife);
+
+        onTimeDeath?.onEvent.AddListener(HandleTimeDeath);
+        onKilledDeath?.onEvent.AddListener(HandleKilled);
+        onSpikeDeath?.onEvent.AddListener(HandleEnviromentDeath);
     }
 
     [ContextMenu("DASH")]
@@ -100,6 +109,26 @@ public class PlayerSfxHandler : MonoBehaviour
     private void HandleLife(int currentHealth)
     {
         rtpcEvent?.RaiseEvent((healthRTPC, currentHealth));
+    }
+
+    private void HandleSpawn()
+    {
+        playEvent?.RaiseEvent(jumpSFX);
+    }
+
+    private void HandleTimeDeath()
+    {
+        playEvent?.RaiseEvent(timeDeath);
+    }
+
+    private void HandleKilled()
+    {
+        playEvent?.RaiseEvent(killedDeath);
+    }
+
+    private void HandleEnviromentDeath()
+    {
+        playEvent?.RaiseEvent(spikeDeath);
     }
 
     private IEnumerator StepCoolDown()
