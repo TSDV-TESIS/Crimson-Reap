@@ -14,7 +14,8 @@ namespace Player
         [SerializeField] private DeathEventChannelSO onPlayerDeath;
         [SerializeField] private VoidEventChannelSO onPlayerKilled;
         [SerializeField] private VoidEventChannelSO onPlayerTimeDeath;
-        [SerializeField] private VoidEventChannelSO onPlayerEnviromentDeath;
+        [SerializeField] private VoidEventChannelSO onPlayerSpikesDeath;
+        [SerializeField] private VoidEventChannelSO onPlayerAcidDeath;
 
         [SerializeField] private float waitSeconds = 0.5f;
         private HealthPoints _healthPoints;
@@ -39,11 +40,14 @@ namespace Player
         {
             _healthPoints.SetCanTakeDamage(false);
             _agent.StopFsm();
-            _controller.HandleDeath();
+            _controller.HandleDeath(cause);
             switch (cause)
             {
-                case DeathCauses.Environment:
-                    onPlayerEnviromentDeath?.onEvent.Invoke();
+                case DeathCauses.Spikes:
+                    onPlayerSpikesDeath?.onEvent.Invoke();
+                    break;
+                case DeathCauses.Acid:
+                    onPlayerAcidDeath?.onEvent.Invoke();
                     break;
                 case DeathCauses.External:
                     onPlayerKilled?.onEvent.Invoke();

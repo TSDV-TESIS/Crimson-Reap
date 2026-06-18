@@ -8,6 +8,7 @@ namespace Objects.Traps
     public class BaseTrap : MonoBehaviour
     {
         [SerializeField] private DeathEventChannelSO instaKill;
+        public DeathCauses deathCause;
         public UnityEvent onTrapContact;
 
         protected virtual void OnEnable()
@@ -22,7 +23,7 @@ namespace Objects.Traps
 
         protected virtual void KillPlayer()
         {
-            instaKill.RaiseEvent(DeathCauses.Environment);
+            instaKill.RaiseEvent(deathCause);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Player.Animations
 
         private void HandleShouldGoDown(DeathCauses cause)
         {
-            if (cause != DeathCauses.Environment)
+            if (cause != DeathCauses.Spikes && cause != DeathCauses.Acid)
                 return;
 
             _shouldGoDown = true;

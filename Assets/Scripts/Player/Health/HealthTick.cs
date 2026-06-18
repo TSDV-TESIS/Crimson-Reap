@@ -13,7 +13,6 @@ namespace Player.Health
         [SerializeField] private HealthTickProperties healthTickProperties;
 
         [SerializeField] private VoidEventChannelSO onEnemiesDisabled;
-        [SerializeField] private UnityEvent onDeathByTime;
 
         private HealthPoints _healthPoints;
         private Coroutine _tickCoroutine;
@@ -45,7 +44,6 @@ namespace Player.Health
                     _healthPoints.TakeUnavoidableDamage(healthTickProperties.healthTakenPerTick, DeathCauses.Internal);
                     if (_healthPoints.IsDead())
                     {
-                        onDeathByTime?.Invoke();
                         _shouldTick = false;
                     }
                 }

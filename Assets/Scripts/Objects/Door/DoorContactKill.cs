@@ -13,7 +13,7 @@ namespace Objects.Door
         private void OnTriggerEnter(Collider other)
         {
             if ((doorProperties.enemyLayer & (1 << other.gameObject.layer)) != 0)
-                other?.GetComponent<ITakeDamage>()?.TryTakeDamage(doorProperties.openDamage, DeathCauses.Environment);
+                other?.GetComponent<ITakeDamage>()?.TryTakeDamage(doorProperties.openDamage, DeathCauses.Door);
         }
 
         public void TurnOff()

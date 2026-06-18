@@ -1,9 +1,14 @@
+using System;
+
 namespace Health
 {
+    [Flags]
     public enum DeathCauses
     {
         External,
         Internal,
-        Environment
+        Spikes,
+        Acid,
+        Door
     }
 }

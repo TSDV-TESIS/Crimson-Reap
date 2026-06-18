@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Events;
 using Events.Scriptables;
+using Health;
 using Player.Properties;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -18,7 +19,7 @@ namespace Player.Controllers
         [SerializeField] private PlayerMovementProperties properties;
         [SerializeField] private PlayerAnimationProperties animationProperties;
         [SerializeField] private PlayerRotation playerRotation;
-        
+
         private static readonly int Walking = Animator.StringToHash("Velocity");
         private static readonly int Attack1 = Animator.StringToHash("Attack");
         private static readonly int Falling = Animator.StringToHash("IsFalling");
@@ -32,8 +33,9 @@ namespace Player.Controllers
         private static readonly int Knockback = Animator.StringToHash("Knockback");
         private static readonly int RunRotate = Animator.StringToHash("RunRotate");
         private static readonly int StopRunning = Animator.StringToHash("StopRunning");
-        private static readonly int IsDeadByTime = Animator.StringToHash("IsDeadByTime");
-        private static readonly int IsDeadBySpikes = Animator.StringToHash("IsDeadBySpikes");
+        private static readonly int TimeDeath = Animator.StringToHash("TimeDeath");
+        private static readonly int SpikeDeath = Animator.StringToHash("SpikeDeath");
+        private static readonly int AcidDeath = Animator.StringToHash("AcidDeath");
 
         private PlayerAgent _agent;
         private PlayerMovement _playerMovement;
@@ -102,9 +104,25 @@ namespace Player.Controllers
                 playerAnimator.SetTrigger(Interact);
         }
 
-        public void HandleDeath()
+        public void HandleDeath(DeathCauses cause)
         {
-            playerAnimator.SetTrigger(Dead);
+            switch (cause)
+            {
+                case DeathCauses.External:
+                    playerAnimator.SetTrigger(Dead);
+                    break;
+                case DeathCauses.Internal:
+                    playerAnimator.SetTrigger(TimeDeath);
+                    break;
+                case DeathCauses.Spikes:
+                    playerAnimator.SetTrigger(SpikeDeath);
+                    break;
+                case DeathCauses.Acid:
+                    playerAnimator.SetTrigger(AcidDeath);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(cause), cause, null);
+            }
         }
 
         public void HandleWalk(float velocity)
@@ -163,17 +181,6 @@ namespace Player.Controllers
         {
             _shouldResetMoveDirection = true;
             playerAnimator.SetBool(Falling, false);
-        }
-
-        public void HandleDeathByTime()
-        {
-            playerAnimator.SetTrigger(Dead);
-            playerAnimator.SetBool(IsDeadByTime, true);
-        }
-
-        public void HandleDeathBySpikes()
-        {
-            playerAnimator.SetBool(IsDeadBySpikes, true);
         }
 
         private void HandleStopRunningCoroutine()
