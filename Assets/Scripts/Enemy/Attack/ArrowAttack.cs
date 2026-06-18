@@ -17,7 +17,7 @@ namespace Enemy.Attack
         [SerializeField] private VisualEffect arrowVFX;
         [SerializeField] private VisualEffect hitVFX;
         [SerializeField] private GameObject decalPrefab;
-        
+
         private CapsuleCollider _collider;
         private Coroutine _arrowDestroyCoroutine;
         private Coroutine _hitCoroutine;
@@ -53,7 +53,7 @@ namespace Enemy.Attack
             HandleTriggerAttack(other);
 
             if (!_isTraveling) return;
-            
+
             if ((properties.whatIsStoppableColliders & (1 << other.gameObject.layer)) != 0)
             {
                 _isTraveling = false;
@@ -69,10 +69,10 @@ namespace Enemy.Attack
         private void HandleTriggerAttack(Collider other)
         {
             if (!_isTraveling) return;
-            
+
             if (other.CompareTag("Player") && other.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageObject))
             {
-                takeDamageObject.TryTakeDamage(damage);
+                takeDamageObject.TryTakeDamage(damage, DeathCauses.External);
                 if (_hitCoroutine != null) StopCoroutine(_hitCoroutine);
 
                 _hitCoroutine = StartCoroutine(WaitPlayerHitVfx());

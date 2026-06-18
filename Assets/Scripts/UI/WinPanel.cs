@@ -50,6 +50,7 @@ public class WinPanel : MonoBehaviour
         if (completePhase != null)
             StopCoroutine(completePhase);
 
+        levelCompletePhase.gameObject.SetActive(true);
         completePhase = StartCoroutine(levelCompletePhase.LevelCompleteStart(time));
 
         leaderboardRequestHandler.HandleSetTime((int)(time * 1000));

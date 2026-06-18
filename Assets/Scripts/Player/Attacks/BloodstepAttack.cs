@@ -8,11 +8,9 @@ namespace Player.Attacks
 {
     public class BloodstepAttack : MonoBehaviour
     {
-        [Header("Properties")] 
-        [SerializeField] private BloodStepProperties bloodStepProperties;
+        [Header("Properties")] [SerializeField] private BloodStepProperties bloodStepProperties;
 
-        [Header("Events")]
-        [SerializeField] private FloatEventChannel onHitStop;
+        [Header("Events")] [SerializeField] private FloatEventChannel onHitStop;
 
         public void OnTriggerEnter(Collider other)
         {
@@ -21,7 +19,7 @@ namespace Player.Attacks
 
             if (other.transform.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageInterface))
             {
-                takeDamageInterface.TryTakeDamage(bloodStepProperties.damage);
+                takeDamageInterface.TryTakeDamage(bloodStepProperties.damage, DeathCauses.External);
                 onHitStop?.RaiseEvent(bloodStepProperties.hitStopSeconds);
             }
         }

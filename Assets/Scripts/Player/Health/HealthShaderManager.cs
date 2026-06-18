@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Events;
+using Events.Scriptables;
 using Health;
 using Player.Properties;
 using UnityEngine;
@@ -16,17 +17,15 @@ namespace Player.Health
         private static readonly int VignetteIntensityParam = Shader.PropertyToID("_VignetteIntensity");
         private static readonly int VignettePowerParam = Shader.PropertyToID("_VignettePower");
         private static readonly int ColorBaseParam = Shader.PropertyToID("_Color_base");
-        
-        [Header("Properties")] 
-        [SerializeField] private LowHealthShaderProperties shaderProperties;
+
+        [Header("Properties")] [SerializeField] private LowHealthShaderProperties shaderProperties;
         [SerializeField] private Material lowHealthShaderMaterial;
 
-        [Header("Events")] 
-        [SerializeField] private IntEventChannelSO onTakeDamage;
-        [SerializeField] private VoidEventChannelSO onPlayerDeath;
+        [Header("Events")] [SerializeField] private IntEventChannelSO onTakeDamage;
+        [SerializeField] private DeathEventChannelSO onPlayerDeath;
         [SerializeField] private IntEventChannelSO onSumHealth;
         [SerializeField] private VoidEventChannelSO onEnemiesDied;
-        
+
         private HealthPoints _healthPoints;
         private float _lastHealthPercentage;
         private Coroutine _updateShaderCoroutine;
@@ -37,10 +36,10 @@ namespace Player.Health
             _lastHealthPercentage = 0f;
 
             ResetShaderValues();
-            
+
             onTakeDamage?.onIntEvent.AddListener(UpdateShaderValues);
             onSumHealth?.onIntEvent.AddListener(UpdateOnSumHealth);
-            onPlayerDeath?.onEvent.AddListener(StopShader);
+            onPlayerDeath?.onTypedEvent.AddListener(StopShader);
             onEnemiesDied?.onEvent.AddListener(ResetShaderValues);
         }
 
@@ -48,25 +47,25 @@ namespace Player.Health
         {
             onTakeDamage?.onIntEvent.RemoveListener(UpdateShaderValues);
             onSumHealth?.onIntEvent.RemoveListener(UpdateOnSumHealth);
-            onPlayerDeath?.onEvent.RemoveListener(StopShader);
+            onPlayerDeath?.onTypedEvent.RemoveListener(StopShader);
             onEnemiesDied?.onEvent.RemoveListener(ResetShaderValues);
             ResetShaderValues();
         }
 
         private void UpdateOnSumHealth(int newHealth)
         {
-            if(_updateShaderCoroutine != null) StopCoroutine(_updateShaderCoroutine);
+            if (_updateShaderCoroutine != null) StopCoroutine(_updateShaderCoroutine);
             float healthPercentageLeft = (float)_healthPoints.CurrentHp / _healthPoints.MaxHealth;
             float animationCurvePart = 1 - healthPercentageLeft;
 
             UpdateIntensityValue(animationCurvePart);
-            
+
             _lastHealthPercentage = animationCurvePart;
         }
 
-        private void StopShader()
+        private void StopShader(DeathCauses cause)
         {
-            if(_updateShaderCoroutine != null) StopCoroutine(_updateShaderCoroutine);
+            if (_updateShaderCoroutine != null) StopCoroutine(_updateShaderCoroutine);
             ResetShaderValues();
             lowHealthShaderMaterial.SetFloat(BreathFrequencyParam, 0f);
         }
@@ -87,7 +86,7 @@ namespace Player.Health
             float animationCurvePart = 1 - healthPercentageLeft;
             if (Math.Abs(_lastHealthPercentage - animationCurvePart) < shaderProperties.animationChangePercentage) return;
 
-            if(_updateShaderCoroutine != null) StopCoroutine(_updateShaderCoroutine);
+            if (_updateShaderCoroutine != null) StopCoroutine(_updateShaderCoroutine);
             _updateShaderCoroutine = StartCoroutine(UpdateShaderCoroutine(_lastHealthPercentage, animationCurvePart));
 
             _lastHealthPercentage = animationCurvePart;
@@ -103,7 +102,7 @@ namespace Player.Health
 
                 float animationCurvePart = Mathf.Lerp(animationStart, animationEnd, timePart);
                 UpdateIntensityValue(animationCurvePart);
-                
+
                 timeUpdating += Time.deltaTime;
                 yield return null;
             }

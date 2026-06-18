@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using Events;
+using Events.Scriptables;
+using Health;
 using Player.Properties;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,22 +13,19 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        [Header("Input Handler")] [SerializeField]
-        private InputHandler input;
+        [Header("Input Handler")] [SerializeField] private InputHandler input;
 
-        [Header("Movement Properties")] [SerializeField]
-        private PlayerMovementProperties playerMovementProperties;
+        [Header("Movement Properties")] [SerializeField] private PlayerMovementProperties playerMovementProperties;
 
-        [Header("Events")] [SerializeField] private VoidEventChannelSO onPlayerDeath;
+        [Header("Events")] [SerializeField] private DeathEventChannelSO onPlayerDeath;
         [SerializeField] private VoidEventChannelSO onPlayerRevive;
         [SerializeField] private VoidEventChannelSO onFrenziedStart;
         [SerializeField] private VoidEventChannelSO onFrenziedStop;
+        [SerializeField] private VoidEventChannelSO onPlayerSpawn;
 
-        [Header("Save properties")] [SerializeField]
-        private PlayerTransform playerTransform;
+        [Header("Save properties")] [SerializeField] private PlayerTransform playerTransform;
 
-        [Header("Unity Events")] [SerializeField]
-        private UnityEvent<float> onWalk;
+        [Header("Unity Events")] [SerializeField] private UnityEvent<float> onWalk;
 
         [SerializeField] private UnityEvent onStop;
 
@@ -38,8 +37,9 @@ namespace Player
 
         private Vector3 _moveDirection;
         [NonSerialized] public bool ShouldAddFasterFallingValues;
-        
+
         public Vector3 MoveDirection => _moveDirection;
+
         public float MaxSpeed
         {
             get => playerMovementProperties.maxSpeed;
@@ -55,16 +55,21 @@ namespace Player
             if (playerTransform != null) playerTransform.playerTransform = transform;
 
             input.OnPlayerMove.AddListener(HandleMove);
-            onPlayerDeath.onEvent.AddListener(HandleDeath);
+            onPlayerDeath.onTypedEvent.AddListener(HandleDeath);
             onPlayerRevive.onEvent.AddListener(HandleRevive);
             Velocity = new Vector2(playerMovementProperties.maxSpeed, 0);
+        }
+
+        private void Start()
+        {
+            onPlayerSpawn.onEvent.Invoke();
         }
 
         private void OnDisable()
         {
             input.OnPlayerMove.RemoveListener(HandleMove);
 
-            onPlayerDeath.onEvent.RemoveListener(HandleDeath);
+            onPlayerDeath.onTypedEvent.RemoveListener(HandleDeath);
             onPlayerRevive.onEvent.RemoveListener(HandleRevive);
         }
 
@@ -104,7 +109,7 @@ namespace Player
                     moveDirection.magnitude * acceleration * Time.deltaTime,
                     -maxSpeed, maxSpeed
                 );
-                
+
                 Velocity = velocityMagnitude * moveDirection;
             });
         }
@@ -236,7 +241,7 @@ namespace Player
             _canWalk = canWalk;
         }
 
-        private void HandleDeath()
+        private void HandleDeath(DeathCauses cause)
         {
             SetCanWalk(false);
         }

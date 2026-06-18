@@ -1,11 +1,9 @@
-using System;
 using System.Collections;
 using Events;
 using Events.Scriptables;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace Health
 {
@@ -19,8 +17,7 @@ namespace Health
         [SerializeField] private bool canTakeDamage = true;
         [SerializeField] private bool shouldFreeze = false;
 
-        [Header("events")]
-        [SerializeField] private VoidEventChannelSO onDeathEvent;
+        [Header("events")] [SerializeField] private DeathEventChannelSO onDeathEvent;
         [SerializeField] private VoidEventChannelSO onReviveEvent;
         [SerializeField] private IntEventChannelSO onTakeDamageEvent;
         [SerializeField] private IntEventChannelSO onSumHealthEvent;
@@ -28,22 +25,21 @@ namespace Health
         [SerializeField] private IntEventChannelSO onInitializeHealthEvent;
         [SerializeField] private IntEventChannelSO onInitializeMaxHealthEvent;
         [SerializeField] private VoidEventChannelSO onDamageAvoidedEvent;
-        [SerializeField] private StringEventChannelSO receiveLethalDamageEvent;
+        [SerializeField] private DeathEventChannelSO receiveLethalDamageEvent;
 
-        [Header("Internal events")]
-        [SerializeField] private UnityEvent onHit;
+        [Header("Internal events")] [SerializeField] private UnityEvent onHit;
         [SerializeField] private UnityEvent onInternalDeathEvent;
         [SerializeField] private UnityEvent<int> onInternalResetEvent;
         [SerializeField] private UnityEvent<int> onInternalTakeDamageEvent;
         [SerializeField] private UnityEvent<int> onInternalInitializeMaxHealthEvent;
-        [SerializeField] private UnityEvent<string> onLethalDamageEvent;
+        [SerializeField] private UnityEvent<DeathCauses> onLethalDamageEvent;
 
         public int MaxHealth
         {
             get { return maxHealth; }
         }
 
-        public VoidEventChannelSO OnDeathEvent
+        public DeathEventChannelSO OnDeathEvent
         {
             get { return onDeathEvent; }
         }
@@ -74,8 +70,7 @@ namespace Health
 
         private void OnDestroy()
         {
-            if (onDeathEvent != null)
-                onDeathEvent.onEvent?.RemoveAllListeners();
+            onDeathEvent?.onTypedEvent?.RemoveAllListeners();
         }
 
         public void SetCanTakeDamage(bool value)
@@ -100,13 +95,13 @@ namespace Health
             RaiseInitMaxHpEvent();
         }
 
-        private void TakeLethalDamage(string cause)
+        private void TakeLethalDamage(DeathCauses cause)
         {
             onLethalDamageEvent?.Invoke(cause);
-            TryTakeDamage(maxHealth);
+            TryTakeDamage(maxHealth, cause);
         }
 
-        public bool TryTakeDamage(int damage)
+        public bool TryTakeDamage(int damage, DeathCauses cause)
         {
             if (_isInvincible) return false;
 
@@ -116,12 +111,12 @@ namespace Health
                 return false;
             }
 
-            TakeUnavoidableDamage(damage);
+            TakeUnavoidableDamage(damage, cause);
 
             return true;
         }
 
-        public void TakeUnavoidableDamage(int damage)
+        public void TakeUnavoidableDamage(int damage, DeathCauses cause)
         {
             if (_isInvincible) return;
 
@@ -134,7 +129,7 @@ namespace Health
             {
                 _hasBeenDead = true;
                 onTakeDamageEvent?.RaiseEvent(0);
-                onDeathEvent?.RaiseEvent();
+                onDeathEvent?.RaiseEvent(cause);
                 onInternalDeathEvent?.Invoke();
             }
 

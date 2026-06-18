@@ -1,19 +1,19 @@
 using System;
 using Events.Scriptables;
+using Health;
 using UnityEngine;
 
 namespace Player.Animations
 {
-
     public class SpikesDeathVelocity : MonoBehaviour
     {
         [SerializeField] private SpikeDeathProperties spikeDeathProperties;
-        [SerializeField] private StringEventChannelSO onLethalDamageBySpikes;
+        [SerializeField] private DeathEventChannelSO onLethalDamageBySpikes;
 
         private bool _shouldGoDown;
         private float _timeWaiting;
         private float _timeInserting;
-    
+
         void OnEnable()
         {
             _timeWaiting = 0f;
@@ -27,8 +27,11 @@ namespace Player.Animations
             onLethalDamageBySpikes?.onTypedEvent.RemoveListener(HandleShouldGoDown);
         }
 
-        private void HandleShouldGoDown(string _)
+        private void HandleShouldGoDown(DeathCauses cause)
         {
+            if (cause != DeathCauses.Spikes && cause != DeathCauses.Acid)
+                return;
+
             _shouldGoDown = true;
         }
 
@@ -36,13 +39,13 @@ namespace Player.Animations
         {
             if (!_shouldGoDown) return;
 
-            if(_timeWaiting <= spikeDeathProperties.timeToInsertInSpike)
+            if (_timeWaiting <= spikeDeathProperties.timeToInsertInSpike)
             {
                 _timeWaiting += Time.deltaTime;
                 return;
             }
 
-            if(_timeInserting <= spikeDeathProperties.timeInserting)
+            if (_timeInserting <= spikeDeathProperties.timeInserting)
             {
                 var vector3 = transform.position;
                 vector3.y -= spikeDeathProperties.downVelocity * Time.deltaTime;
@@ -50,7 +53,6 @@ namespace Player.Animations
 
                 _timeInserting += Time.deltaTime;
             }
-
         }
     }
 }

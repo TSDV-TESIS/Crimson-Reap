@@ -1,6 +1,5 @@
-using System;
-using Events;
 using Events.Scriptables;
+using Health;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,8 +7,10 @@ namespace Objects.Traps
 {
     public class BaseTrap : MonoBehaviour
     {
-        [SerializeField] private StringEventChannelSO instaKill;
+        [SerializeField] private DeathEventChannelSO instaKill;
+        public DeathCauses deathCause;
         public UnityEvent onTrapContact;
+
         protected virtual void OnEnable()
         {
             onTrapContact.AddListener(KillPlayer);
@@ -22,7 +23,7 @@ namespace Objects.Traps
 
         protected virtual void KillPlayer()
         {
-            instaKill.RaiseEvent("Spike");
+            instaKill.RaiseEvent(deathCause);
         }
     }
 }

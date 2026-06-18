@@ -13,6 +13,7 @@ namespace Enemy.Attack
         [SerializeField] private EnemyGeneralProperties properties;
 
         private SoundCollisionHandler _handler;
+
         private void OnEnable()
         {
             _handler ??= attackSoundObject.GetComponent<SoundCollisionHandler>();
@@ -29,7 +30,7 @@ namespace Enemy.Attack
         {
             if (other.CompareTag("Player") && other.TryGetComponent<ITakeDamage>(out ITakeDamage takeDamageObject))
             {
-                takeDamageObject.TryTakeDamage(damage);
+                takeDamageObject.TryTakeDamage(damage, DeathCauses.External);
             }
         }
     }
