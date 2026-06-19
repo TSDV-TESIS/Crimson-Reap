@@ -6,5 +6,6 @@ namespace Player
     public class PlayerName : ScriptableObject
     {
         public string playerName;
+        public bool isInitialized;
     }
 }
