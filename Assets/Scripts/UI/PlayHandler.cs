@@ -1,20 +1,46 @@
+using System;
+using Events;
 using Events.Scriptables;
+using Player;
 using UnityEngine;
 
 namespace UI
 {
     public class PlayHandler : MonoBehaviour
     {
-        [SerializeField] private GameObject inputPanel;
-        [SerializeField] private GameObject inputField;
+        [SerializeField] private StringEventChannelSO onLoadSceneHandler;
         [SerializeField] private GameObjectEventChannelSO onNewSelectedObject;
-        [SerializeField] private PanelHandling panelHandler;
+        [SerializeField] private PlayerName player;
+        [SerializeField] private CinematicHandler videoPlayer;
+        [SerializeField] private string level;
+        [SerializeField] private VoidEventChannelSO onCinematicEnd;
+
+        private void OnEnable()
+        {
+            onCinematicEnd?.onEvent.AddListener(StartLevel);
+        }
+
+        private void OnDisable()
+        {
+            onCinematicEnd?.onEvent.RemoveListener(StartLevel);
+        }
 
         public void OnClick()
         {
-            inputPanel.SetActive(true);
-            panelHandler.SetPanel(inputPanel);
-            onNewSelectedObject?.RaiseEvent(inputField);
+            if (player.isInitialized)
+            {
+                StartLevel();
+                return;
+            }
+
+            onNewSelectedObject?.RaiseEvent(videoPlayer.gameObject);
+            videoPlayer.Play();
+            player.isInitialized = true;
+        }
+
+        void StartLevel()
+        {
+            onLoadSceneHandler?.RaiseEvent(level);
         }
     }
 }
