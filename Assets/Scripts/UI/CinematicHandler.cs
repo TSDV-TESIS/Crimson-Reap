@@ -34,8 +34,8 @@ public class CinematicHandler : MonoBehaviour
 
     public void OnCinematicSkip()
     {
+        playerName.isInitialized = true;
         onCinematicEnd?.RaiseEvent();
-        //playerName.isInitialized = true;
     }
 
     private void OnCinematicNaturalFinish(VideoPlayer source)

@@ -30,6 +30,7 @@ public class CinematicPlayerEntry : MonoBehaviour
     {
         if (playerInfo.isInitialized)
         {
+            inputHandler.TogglePlayerLock(false);
             gameObject.SetActive(false);
             return;
         }

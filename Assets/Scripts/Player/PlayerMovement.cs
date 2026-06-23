@@ -201,6 +201,12 @@ namespace Player
             _characterController.Move(displacement);
         }
 
+        public void Stop()
+        {
+            Velocity.x = 0;
+            _canWalk = false;
+        }
+
         private void SetZPosition()
         {
             if (transform.position.z != 0)
