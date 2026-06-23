@@ -1,5 +1,6 @@
 using System;
 using Events;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -9,7 +10,7 @@ using UnityEngine.Video;
 public class CinematicHandler : MonoBehaviour
 {
     [SerializeField] private VoidEventChannelSO onCinematicEnd;
-
+    [SerializeField] private PlayerName playerName;
     private VideoPlayer videoPlayer;
     private RawImage rawImage;
 
@@ -34,6 +35,7 @@ public class CinematicHandler : MonoBehaviour
     public void OnCinematicSkip()
     {
         onCinematicEnd?.RaiseEvent();
+        //playerName.isInitialized = true;
     }
 
     private void OnCinematicNaturalFinish(VideoPlayer source)
