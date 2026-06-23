@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Triplanar_Metal 1
-  m_Shader: {fileID: -6465566751694194690, guid: db1c0a98d38aec2479bb462cfaaf73ac, type: 3}
+  m_Name: M_Droste
+  m_Shader: {fileID: -6465566751694194690, guid: 8f9b3c33157864648943411a73e347f4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -68,20 +68,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _T_ASM:
-        m_Texture: {fileID: 2800000, guid: 78c9b8b52bde8a6429e55942f2b67421, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _T_BaseColor:
-        m_Texture: {fileID: 2800000, guid: b45e367177283ec468e38e74a0d839fb, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _T_Matcap:
-        m_Texture: {fileID: 2800000, guid: a5c1c3da968d7304682e9dd1df32020c, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _T_Normal:
-        m_Texture: {fileID: 2800000, guid: 73e1dab960e1c0d43b04fce686f3f48b, type: 3}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: bb8359b7c678f7d468c37bfad62c6dd1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -101,9 +89,7 @@ Material:
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Alpha_Clip: 0
-    - _Alpha_power: 2.01
-    - _Blend: 1
+    - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
     - _ClearCoatMask: 0
@@ -119,41 +105,30 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _Normal_Intensity: 2
     - _OcclusionStrength: 1
-    - _Opacity: 1
     - _Parallax: 0.005
-    - _Power_Curvature: 0.73
-    - _Power_Metallic: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _SmoothStep_Edge_1: 0.09
-    - _SmoothStep_Edge_2: 0.41
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
-    - _Smoothness_Intensity: 0
     - _SpecularHighlights: 1
+    - _Speed: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _Step_Value_Curvature: 0.25
     - _Surface: 0
-    - _Tiling: 1
-    - _Use_Matcap: 1
+    - _TimeInput: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _edge1: 1
-    - _edge2: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Cuvature_Color: {r: 0.80392164, g: 0.80392164, b: 0.8078432, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Main_Color: {r: 0.45361215, g: 0, b: 0.754717, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _UV: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &7189587258237852661
+--- !u!114 &713825967739315381
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
