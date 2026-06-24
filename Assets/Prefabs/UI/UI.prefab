@@ -888,7 +888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ef2df9a00feb2408c282614d1f6dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldStartHided: 0
   timeSlider: {fileID: 0}
   tickProperties: {fileID: 0}
   onTakeDamage: {fileID: 11400000, guid: 907783a8cffc33e4ebffa90d6b4df275, type: 2}
@@ -1127,6 +1126,11 @@ PrefabInstance:
 --- !u!224 &5710297127132402157 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5852905872367613647, guid: be396b2ab1bb00848943870b8263b3a0, type: 3}
+  m_PrefabInstance: {fileID: 2163625690194110242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6264918852510319886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5257891657158451756, guid: be396b2ab1bb00848943870b8263b3a0, type: 3}
   m_PrefabInstance: {fileID: 2163625690194110242}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4930907293971633944
@@ -1629,6 +1633,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6608977492074018666, guid: 04283b793c644e54b91dde47bdb8542e, type: 3}
+      propertyPath: goSignObject
+      value: 
+      objectReference: {fileID: 6264918852510319886}
     - target: {fileID: 6945172299787405635, guid: 04283b793c644e54b91dde47bdb8542e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
