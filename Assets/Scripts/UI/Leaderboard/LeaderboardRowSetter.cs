@@ -15,7 +15,7 @@ namespace UI.Leaderboard
             numberText.text = position.ToString();
             nameText.text = userName;
             TimeSpan t = TimeSpan.FromMilliseconds(timestamp);
-            timeText.text = string.Format("{0:D2}m:{1:D2}s:{2:D3}ms",
+            timeText.text = string.Format("{0:D2}:{1:D2}:{2:D3}",
             t.Minutes,
             t.Seconds,
             t.Milliseconds);
