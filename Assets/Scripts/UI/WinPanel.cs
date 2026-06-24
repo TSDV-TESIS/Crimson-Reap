@@ -6,8 +6,6 @@ using Player;
 using TMPro;
 using UI.Leaderboard;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 public class WinPanel : MonoBehaviour
 {
@@ -17,6 +15,7 @@ public class WinPanel : MonoBehaviour
     [SerializeField] private VoidEventChannelSO onGamePaused;
 
     [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject goSignObject;
     [SerializeField] private LevelCompleteAnimation levelCompletePhase;
     [SerializeField] private TieredTimes medals;
     [SerializeField] private TextMeshProUGUI timeTMPro;
@@ -51,6 +50,7 @@ public class WinPanel : MonoBehaviour
     private void HandleTimerFinish(float time)
     {
         panel.SetActive(true);
+        goSignObject.SetActive(false);
         if (completePhase != null)
             StopCoroutine(completePhase);
 
