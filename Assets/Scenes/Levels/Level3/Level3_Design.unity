@@ -2519,6 +2519,10 @@ PrefabInstance:
       propertyPath: timeInMs
       value: 15000
       objectReference: {fileID: 0}
+    - target: {fileID: 1234823667071641774, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1253510003188404463, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2693,6 +2697,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3869571800247884967, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3892571557477153787, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3949237283212773107, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
@@ -2951,6 +2959,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6264918852510319886, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6294923947987944779, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2989,6 +3001,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6317015201814369165, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781274874816776402, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6869827900171512364, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
@@ -3250,6 +3266,10 @@ PrefabInstance:
     - target: {fileID: 8674793784246388168, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -5.840088
+      objectReference: {fileID: 0}
+    - target: {fileID: 8796980503110278705, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8868594102583694212, guid: bb1e495a18126e64fb441c85a9be2fae, type: 3}
       propertyPath: level
@@ -4369,10 +4389,26 @@ PrefabInstance:
       propertyPath: field of view
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 828797055896231073, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8307d2b313af75e49969549c74d5e524, type: 3}
+    - target: {fileID: 828797055896231073, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 828797055896231073, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1141217652961215939, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1565628660}
+    - target: {fileID: 3560840105016231315, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4062856488794909883, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4544,6 +4580,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7689937009444582769, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
       insertIndex: -1
       addedObject: {fileID: 797573915}
+    - targetCorrespondingSourceObject: {fileID: 8039370825042894411, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 797573917}
   m_SourcePrefab: {fileID: 100100000, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
 --- !u!1 &797573914 stripped
 GameObject:
@@ -4564,6 +4603,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDefaultListener: 1
   listenerId: 0
+--- !u!1 &797573916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8039370825042894411, guid: 4772cd4a128cef74fa473132927ab988, type: 3}
+  m_PrefabInstance: {fileID: 797573913}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &797573917
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 797573916}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d5c4633a927aff749a7d58107f29ea37, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &803905919
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4883,7 +4949,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 909206773}
-  - component: {fileID: 909206772}
   m_Layer: 0
   m_Name: WwiseGlobal
   m_TagString: Untagged
@@ -4891,31 +4956,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &909206772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909206771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5c751a67ae411447b7af9b980abeae8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializationSettings: {fileID: 11400000, guid: 9548c2e7f63a88146994d6b7d9800cc7, type: 2}
-  basePath: 
-  language: 
-  defaultPoolSize: 0
-  lowerPoolSize: 0
-  streamingPoolSize: 0
-  memoryCutoffThreshold: 0
-  monitorPoolSize: 0
-  monitorQueuePoolSize: 0
-  callbackManagerBufferSize: 0
-  spatialAudioPoolSize: 0
-  maxSoundPropagationDepth: 0
-  engineLogging: 0
 --- !u!4 &909206773
 Transform:
   m_ObjectHideFlags: 0
